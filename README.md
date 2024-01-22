@@ -3,4 +3,4 @@
 
 Backend is built with PHP framework Laravel.
 
-<i>For XAMPP: DB_DATABASE=headhunter_backend</i>
+<i>For XAMPP: DB_DATABASE=headhunter_database</i>
