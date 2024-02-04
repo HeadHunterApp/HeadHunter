@@ -10,6 +10,7 @@ class VegzettsegController extends Controller
     public function index(){
         
         return Vegzettseg::all();
+        //komment
     }
 
     public function show($id){
