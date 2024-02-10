@@ -18,15 +18,17 @@ class SzakmaiIsmeretController extends Controller
 
     public function store(Request $request){
         $szakmaiismeret = new SzakmaiIsmeret();
-        $szakmaiismeret->megnevezes = $request->input('megnevezes');
-        $szakmaiismeret->szint = $request->input('szint');
+        // $szakmaiismeret->megnevezes = $request->input('megnevezes');
+        // $szakmaiismeret->szint = $request->input('szint');
+        $szakmaiismeret->fill($request->all());
         $szakmaiismeret->save();
     }
 
     public function update(Request $request, $id){
         $szakmaiismeret = SzakmaiIsmeret::findOrFail($id);
-        $szakmaiismeret->megnevezes = $request->input('megnevezes');
-        $szakmaiismeret->szint = $request->input('szint');
+        // $szakmaiismeret->megnevezes = $request->input('megnevezes');
+        // $szakmaiismeret->szint = $request->input('szint');
+        $szakmaiismeret->fill($request->all());
         $szakmaiismeret->save();
     }
 
