@@ -18,21 +18,23 @@ class MunkaltatoController extends Controller
 
     public function store(Request $request){
         $munkaltato = new Munkaltato();
-        $munkaltato->cegnev = $request->input('cegnev');
-        $munkaltato->szekhely = $request->input('szekhely');
-        $munkaltato->kapcsolattarto = $request->input('kapcsolattarto');
-        $munkaltato->telefonszam = $request->input('telefonszam');
-        $munkaltato->email = $request->input('email');
+        // $munkaltato->cegnev = $request->input('cegnev');
+        // $munkaltato->szekhely = $request->input('szekhely');
+        // $munkaltato->kapcsolattarto = $request->input('kapcsolattarto');
+        // $munkaltato->telefonszam = $request->input('telefonszam');
+        // $munkaltato->email = $request->input('email');
+        $munkaltato->fill($request->all());
         $munkaltato->save();
     }
 
     public function update(Request $request, $id){
         $munkaltato = Munkaltato::findOrFail($id);
-        $munkaltato->cegnev = $request->input('cegnev');
-        $munkaltato->szekhely = $request->input('szekhely');
-        $munkaltato->kapcsolattarto = $request->input('kapcsolattarto');
-        $munkaltato->telefonszam = $request->input('telefonszam');
-        $munkaltato->email = $request->input('email');
+        // $munkaltato->cegnev = $request->input('cegnev');
+        // $munkaltato->szekhely = $request->input('szekhely');
+        // $munkaltato->kapcsolattarto = $request->input('kapcsolattarto');
+        // $munkaltato->telefonszam = $request->input('telefonszam');
+        // $munkaltato->email = $request->input('email');
+        $munkaltato->fill($request->all());
         $munkaltato->save();
     }
 

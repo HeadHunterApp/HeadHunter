@@ -9,13 +9,15 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index(){
-        $users=response()->json(User::all());
-        return $users;
+        // $users=response()->json(User::all());
+        // return $users;
+        return User::all();
     }
 
     public function show($id){
-        $user=response()->json(User::find($id));
-        return $user;
+        //$user=response()->json(User::find($id));
+        //return $user;
+        return User::findOrFail($id);
     }
 
     public function store(Request $request){
@@ -29,7 +31,7 @@ class UserController extends Controller
     }
 
     public function update(Request $request, $id){
-        $user=User::find($id);
+        $user=User::findOrFail($id);
         $user->nev=$request->nev;
         $user->email=$request->email;
         $user->jelszo=Hash::make($request->jelszo);
@@ -38,7 +40,7 @@ class UserController extends Controller
     }
 
     public function destroy($id){
-        $user=User::find($id);
+        $user=User::findOrFail($id);
         $user->delete();
     }
 }

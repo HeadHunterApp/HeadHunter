@@ -8,16 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Nyelvtudas extends Model
 {
     use HasFactory;
-    protected function setKeysForSaveQuery($query)
-    {
-        $query
-            ->where('nyelv', '=', $this
-            ->getAttribute('nyelv'))
-            ->where('szint', '=', $this
-            ->getAttribute('szint'));
+    // protected function setKeysForSaveQuery($query)
+    // {
+    //     $query
+    //         ->where('nyelv', '=', $this
+    //         ->getAttribute('nyelv'))
+    //         ->where('szint', '=', $this
+    //         ->getAttribute('szint'));
 
-        return $query;
-    }
+    //     return $query;
+    // }
+
+    protected $primarykey=['nyelv', 'szint'];
+
     protected $fillable = [
         'nyelv',
         'szint',
