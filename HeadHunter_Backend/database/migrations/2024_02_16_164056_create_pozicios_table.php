@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('nyelvtudas', function (Blueprint $table) {
-            $table->primary(['nyelv', 'szint']); 
-            $table->string('nyelv', 20);
-            $table->string('szint', 20);
-            $table->string('megnevezes', 20);
+        Schema::create('pozicios', function (Blueprint $table) {
+            $table->string('pozicio', 20)->primary();
             //$table->timestamps();
+            $table->foreignId('terulet')->references('megnevezes')->on('terulets');
         });
     }
 
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('nyelvtudas');
+        Schema::dropIfExists('pozicios');
     }
 };

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('ismeret_ID');
             $table->string('megnevezes', 40);
             $table->string('szint', 40);
-            $table->timestamps();
+            //$table->timestamps();
         });
     }
 
