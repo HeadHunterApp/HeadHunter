@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('kapcsolattarto', 50);
             $table->string('telefonszam', 15);
             $table->string('email')->unique();
-            $table->timestamps();
+            //$table->timestamps();
         });
     }
 
