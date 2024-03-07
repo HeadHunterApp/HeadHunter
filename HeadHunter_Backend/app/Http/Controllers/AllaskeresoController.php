@@ -13,8 +13,8 @@ class AllaskeresoController extends Controller
     }
 
     public function show($id){
-        $allaskereso = User::where('user_ID', $id)->first(['nev', 'email']);
-        $allaskereso = Allaskereso::where('user_ID', $id)->first();
+        $allaskereso = User::where('user_id', $id)->first(['nev', 'email']);
+        $allaskereso = Allaskereso::where('user_id', $id)->first();
         return $allaskereso;
     }
 

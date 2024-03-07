@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('fejvadasz_terulets', function (Blueprint $table) {
-            $table->primary('fejvadasz','terulet');
-            $table->foreignId('fejvadasz')->references('user_ID')->on('fejvadaszs');
-            $table->foreignId('terulet')->references('megnevezes')->on('terulets');
+            $table->foreignId('fejvadasz')->references('user_id')->on('fejvadaszs');
+            $table->string('terulet');
+            $table->primary(['fejvadasz','terulet']);
+            $table->foreign('terulet')->references('megnevezes')->on('terulets');
         });
     }
 

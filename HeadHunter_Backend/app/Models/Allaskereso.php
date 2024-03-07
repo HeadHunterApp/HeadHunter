@@ -10,8 +10,10 @@ class Allaskereso extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = "user_id";
+
     protected $fillable = [
-        'user_ID',
+        'user_id',
         'nem',
         'szul_ido',
         'telefonszam',

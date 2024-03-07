@@ -8,28 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Allas extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'allas_ID';
+    protected $primaryKey = 'allas_id';
     protected $fillable = [
         'munkaltato',
         'megnevezes',
-        'pozicio',
         'terulet',
+        'pozicio',
         'statusz',
         'leiras',
         'datum',
         'fejvadasz',
     ];
-
-    protected function setKeysForSaveQuery($query)
-    {
-        $query
-            ->where('pozicio', '=', $this->
-            getAttribute('pozicio'))
-            ->where('terulet', '=', $this->
-            getAttribute('megnevezes'));
-
-
-        return $query;
-    }
-
 }

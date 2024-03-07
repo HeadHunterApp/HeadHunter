@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('szakmai_ismerets', function (Blueprint $table) {
-            $table->id('ismeret_ID');
+            $table->id('ismeret_id');
             $table->string('megnevezes', 40);
             $table->string('szint', 40);
             //$table->timestamps();

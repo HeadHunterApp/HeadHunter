@@ -12,16 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('allas', function (Blueprint $table) {
-            $table->id('allas_ID');
-            $table->foreignId('munkaltato')->references('munkaltato_ID')->on('munkaltatos');
+            $table->id('allas_id');
+            $table->foreignId('munkaltato')->references('munkaltato_id')->on('munkaltatos');
             $table->string('megnevezes', 30);
-            $table->primary('terulet', 'pozicio');
-            $table->foreignId('terulet')->references('megnevezes')->on('terulets');
-            $table->foreignId('pozicio')->references('pozicio')->on('pozicios');
+            $table->string('terulet');
+            $table->string('pozicio', 20);
+            //$table->foreign('terulet')->references('megnevezes')->on('terulet');
+            $table->foreign(['terulet', 'pozicio'])->references(['terulet', 'pozicio'])->on('pozicios');
             $table->string('statusz', 40);
             $table->longText('leiras');
             $table->date('datum');
-            $table->foreignId('fejvadasz')->references('user_ID')->on('fejvadaszs');
+            //inkább timestamp kéne, és abból kellene a dátum részt kiszedni
+            $table->foreignId('fejvadasz')->references('user_id')->on('fejvadaszs');
         });
     }
 
