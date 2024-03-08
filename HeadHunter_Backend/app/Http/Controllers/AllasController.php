@@ -30,7 +30,7 @@ class AllasController extends Controller
  
     public function show ($id)
     {
-        $allas = Allas::where('allas_ID', $id)->first();
+        $allas = Allas::where('allas_id', $id)->first();
         return $allas;
     }
 

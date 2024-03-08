@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id('user_id');
             $table->string('nem', 5);
             $table->date('szul_ido');
-            $table->integer('telefonszam', 11);
-            $table->integer('fax', 10);
+            $table->string('telefonszam', 12);
+            $table->string('fax', 11);
             $table->string('allampolgarsag', 20);
             $table->boolean('jogositvany');
             $table->longText('szoc_keszseg', 150);

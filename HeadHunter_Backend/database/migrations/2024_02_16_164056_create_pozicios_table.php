@@ -12,9 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pozicios', function (Blueprint $table) {
-            $table->string('pozicio', 20)->primary();
+            $table->primary(['terulet', 'pozicio']);
+            $table->string('terulet');
+            $table->string('pozicio', 20);
+            $table->foreign('terulet')->references('megnevezes')->on('terulets');
             //$table->timestamps();
-            $table->foreignId('terulet')->references('megnevezes')->on('terulets');
         });
     }
 

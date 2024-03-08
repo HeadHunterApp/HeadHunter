@@ -8,8 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Pozicio extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'pozicio';
+    protected function setKeysForSaveQuery($query)
+    {
+        $query
+            ->where('terulet', '=', $this->
+            getAttribute('megnevezes'))
+            ->where('pozicio', '=', $this->
+            getAttribute('pozicio'));
+        return $query;
+    }    
+
     protected $fillable = [
         'terulet',
+        'pozicio',
     ];
 }
