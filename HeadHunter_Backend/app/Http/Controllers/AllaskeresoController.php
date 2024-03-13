@@ -14,7 +14,7 @@ class AllaskeresoController extends Controller
 
     public function show($id){
         $allaskereso = User::where('user_id', $id)->first(['nev', 'email']);
-        $allaskereso = Allaskereso::where('user_id', $id)->first();
+        $allaskereso = Allaskereso::where('user_id', $id)->findOrFail();
         return $allaskereso;
     }
 

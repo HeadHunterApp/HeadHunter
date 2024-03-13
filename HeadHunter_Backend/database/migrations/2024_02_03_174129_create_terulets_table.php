@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('terulets', function (Blueprint $table) {
             $table->string('megnevezes')->primary();
-            //$table->timestamps();
         });
     }
 

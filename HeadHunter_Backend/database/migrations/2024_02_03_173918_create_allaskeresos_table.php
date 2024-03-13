@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('allampolgarsag', 20);
             $table->boolean('jogositvany');
             $table->longText('szoc_keszseg', 150);
+            $table->timestamps();
         });
     }
 

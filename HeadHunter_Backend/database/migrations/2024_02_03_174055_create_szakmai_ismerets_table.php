@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('szakmai_ismerets', function (Blueprint $table) {
             $table->id('ismeret_id');
             $table->string('megnevezes', 40);
-            $table->string('szint', 40);
-            //$table->timestamps();
+            $table->string('szint', 20);
         });
     }
 

@@ -18,14 +18,13 @@ class PozicioController extends Controller
 
     public function store(Request $request){
         $pozi = new Pozicio();
-        $pozi->terulet = $request->input('terulet');
-      
+        $pozi->fill($request->all());
         $pozi->save();
     }
 
     public function update(Request $request, $id){
         $pozi = Pozicio::findOrFail($id);
-        $pozi->terulet = $request->input('terulet');
+        $pozi->fill($request->all());
         $pozi->save();
     }
 

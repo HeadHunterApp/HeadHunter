@@ -13,33 +13,30 @@ class NyelvtudasController extends Controller
         return Nyelvtudas::all();
     }
 
-    public function show($nyelv, $szint){
-        $nyelvtudas = Nyelvtudas::where('nyelv', $nyelv)
+    public function show($nyelvkod){
+        /*$nyelvtudas = Nyelvtudas::where('nyelv', $nyelv)
         ->where('szint','=', $szint)
-        ->get();
-        return $nyelvtudas;
+        ->get(); - összetett kulcsok felszámolása*/
+        return Nyelvtudas::findOrFail($nyelvkod);
 
     }
 
     public function store(Request $request){
         $nyelvtudas = new Nyelvtudas();
-        // $nyelvtudas->nyelv = $request->nyelv;
-        // $nyelvtudas->szint = $request->szint;
-        // $nyelvtudas->megnevezes = $request->megnevezes;
         $nyelvtudas->fill($request->all());
         $nyelvtudas->save();
     }
 
-    public function update(Request $request, $nyelv, $szint){
-        $nyelvtudas = $this->show($nyelv, $szint);
-        // $nyelvtudas->nyelv = $request->nyelv;
-        // $nyelvtudas->szint = $request->szint;
-        // $nyelvtudas->megnevezes = $request->megnevezes;
+    public function update(Request $request, $nyelvkod){
+        //$nyelvtudas = $this->show($nyelv, $szint); - összetett kulcsok felszámolása
+        $nyelvtudas = Nyelvtudas::findOrFail($nyelvkod);
         $nyelvtudas->fill($request->all());
         $nyelvtudas->save();
     }
 
-    public function destroy($nyelv, $szint){
-        $this->show($nyelv, $szint)->delete();
+    public function destroy($nyelvkod){
+        //$this->show($nyelv, $szint)->delete(); - összetett kulcsok felszámolása
+        $nyelvtudas = Nyelvtudas::findOrFail($nyelvkod);
+        $nyelvtudas->delete();
     }
 }

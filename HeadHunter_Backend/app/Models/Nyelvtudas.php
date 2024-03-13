@@ -8,20 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Nyelvtudas extends Model
 {
     use HasFactory;
-    // protected function setKeysForSaveQuery($query)
-    // {
-    //     $query
-    //         ->where('nyelv', '=', $this
-    //         ->getAttribute('nyelv'))
-    //         ->where('szint', '=', $this
-    //         ->getAttribute('szint'));
 
-    //     return $query;
-    // }
-
-    protected $primarykey=['nyelv', 'szint'];
-
+    //protected $primarykey=['nyelv', 'szint']; - összetett kulcsok felszámolása
+    protected $primarykey='nyelvkod';
     protected $fillable = [
+        'nyelvkod',
         'nyelv',
         'szint',
         'megnevezes',

@@ -12,7 +12,7 @@ class Allas extends Model
     protected $fillable = [
         'munkaltato',
         'megnevezes',
-        'terulet',
+        //'terulet', - összetett kulcsok felszámolása
         'pozicio',
         'statusz',
         'leiras',
