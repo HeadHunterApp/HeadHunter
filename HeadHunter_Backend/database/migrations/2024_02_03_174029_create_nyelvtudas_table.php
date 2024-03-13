@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('nyelvtudas', function (Blueprint $table) {
-            $table->primary(['nyelv', 'szint']); 
+            //$table->primary(['nyelv', 'szint']);  - összetett kulcsok felszámolása
+            $table->string('nyelvkod', 4)->primary();
             $table->string('nyelv', 20);
             $table->string('szint', 20);
             $table->string('megnevezes', 20);
-            //$table->timestamps();
         });
     }
 

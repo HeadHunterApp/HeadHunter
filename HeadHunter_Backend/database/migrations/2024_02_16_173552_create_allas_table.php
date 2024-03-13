@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('allas', function (Blueprint $table) {
+        Schema::create('allass', function (Blueprint $table) {
             $table->id('allas_id');
             $table->foreignId('munkaltato')->references('munkaltato_id')->on('munkaltatos');
             $table->string('megnevezes', 30);
-            $table->string('terulet');
-            $table->string('pozicio', 20);
-            //$table->foreign('terulet')->references('megnevezes')->on('terulet');
-            $table->foreign(['terulet', 'pozicio'])->references(['terulet', 'pozicio'])->on('pozicios');
+            $table->string('pozicio', 6);
+            $table->foreign('pozicio')->references('pozkod')->on('pozicios');
+            //$table->foreign(['terulet', 'pozicio'])->references(['terulet', 'pozicio'])->on('pozicios'); - összetett kulcsok felszámolása
             $table->string('statusz', 40);
             $table->longText('leiras');
             $table->date('datum');

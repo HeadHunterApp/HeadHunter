@@ -19,7 +19,7 @@ class AllasController extends Controller
         $allas->munkaltato = $request->munkaltato;
         $allas->megnevezes = $request->megnevezes;
         $allas->pozicio=$request->pozicio;
-        $allas->terulet=$request->terulet;
+        //$allas->terulet=$request->terulet;
         $allas->statusz=$request->statusz;
         $allas->leiras=$request->leiras;
         $allas->datum=$request->datum;

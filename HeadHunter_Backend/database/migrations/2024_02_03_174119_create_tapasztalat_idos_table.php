@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('tapasztalat_idos', function (Blueprint $table) {
             $table->id('tapasztalat_id');
             $table->string('leiras', 20);
-            //$table->timestamps();
         });
     }
 

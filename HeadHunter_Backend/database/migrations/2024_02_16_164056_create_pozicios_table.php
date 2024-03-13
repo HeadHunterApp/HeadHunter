@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pozicios', function (Blueprint $table) {
-            $table->primary(['terulet', 'pozicio']);
+            //$table->primary(['terulet', 'pozicio']); - összetett kulcsok felszámolása
+            $table->string('pozkod', 6)->primary();
             $table->string('terulet');
             $table->string('pozicio', 20);
             $table->foreign('terulet')->references('megnevezes')->on('terulets');
@@ -23,8 +24,14 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
+
+    
     public function down(): void
     {
+        Schema::table('terulets', function (Blueprint $terulet) {
+            $terulet->dropForeign(['terulet']);
+        });
+        
         Schema::dropIfExists('pozicios');
     }
 };

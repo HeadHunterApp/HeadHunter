@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pozicio extends Model
 {
     use HasFactory;
-    protected function setKeysForSaveQuery($query)
+    /*protected function setKeysForSaveQuery($query)
     {
         $query
             ->where('terulet', '=', $this->
@@ -16,9 +16,11 @@ class Pozicio extends Model
             ->where('pozicio', '=', $this->
             getAttribute('pozicio'));
         return $query;
-    }    
+    }  - összetett kulcsok felszámolása   */
 
+    protected $primaryKey = 'pozkod';
     protected $fillable = [
+        'pozkod',
         'terulet',
         'pozicio',
     ];

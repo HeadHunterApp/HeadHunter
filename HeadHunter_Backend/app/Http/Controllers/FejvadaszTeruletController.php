@@ -37,6 +37,6 @@ class FejvadaszTeruletController extends Controller
 
     public function destroy($fejvadasz,$terulet)
    {
-    $this->show($fejvadasz, $terulet);
+    $this->show($fejvadasz, $terulet)->delete();
    }
 }
