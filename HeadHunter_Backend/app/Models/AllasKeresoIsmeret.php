@@ -5,23 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AllasIsmeret extends Model
+class AllasKeresoIsmeret extends Model
 {
     use HasFactory;
     protected function setKeysForSaveQuery($query)
     {
         $query
-            ->where('allas', '=', $this->
-            getAttribute('allas_id'))
-            ->where('szamai_ismeret', '=', $this->
-            getAttribute('ismeret_id'));
+            ->where('allaskereso', '=', $this->
+            getAttribute('user_id'))
+            ->where('szakmai_ismeret', '=', $this->
+            getAttribute('ismered_id'));
 
 
         return $query;
     }
     protected $fillable = [
-        'allas',
-        'szakmai_ismeret',
-        'elvaras_szint',
+        'allaskereso',
+        'szakmai_ismeret'
+        
     ];
 }

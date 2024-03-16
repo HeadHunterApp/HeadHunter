@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('nyelvtudas', function (Blueprint $table) {
+        Schema::create('nyelvtudass', function (Blueprint $table) {
             //$table->primary(['nyelv', 'szint']);  - összetett kulcsok felszámolása
             $table->string('nyelvkod', 4)->primary();
             $table->string('nyelv', 20);

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AllasIsmeret extends Model
+class AllasNyelvtudas extends Model
 {
     use HasFactory;
     protected function setKeysForSaveQuery($query)
@@ -13,15 +13,15 @@ class AllasIsmeret extends Model
         $query
             ->where('allas', '=', $this->
             getAttribute('allas_id'))
-            ->where('szamai_ismeret', '=', $this->
-            getAttribute('ismeret_id'));
+            ->where('nyelvtudas', '=', $this->
+            getAttribute('nyelvkod'));
 
 
         return $query;
     }
     protected $fillable = [
         'allas',
-        'szakmai_ismeret',
-        'elvaras_szint',
+        'nyelvtudas'
+        
     ];
 }
