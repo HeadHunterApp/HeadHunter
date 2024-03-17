@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('allas_kereso_ismerets', function (Blueprint $table) {
-            $table->foreignId('allaskereso')->references('allas_id')->on('allass');
+        Schema::create('allaskereso_ismerets', function (Blueprint $table) {
+            $table->foreignId('allaskereso')->references('user_id')->on('allaskeresos');
             $table->foreignId('szakmai_ismeret')->references('ismeret_id')->on('szakmai_ismerets');
             $table->primary(['allaskereso','szakmai_ismeret']);
         });
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('allas_kereso_ismerets');
+        Schema::dropIfExists('allaskereso_ismerets');
     }
 };
