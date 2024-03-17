@@ -13,9 +13,13 @@ class FejvadaszController extends Controller
     }
 
     public function show($id){
-        $fejvadasz = User::where('user_id', $id)->first(['nev', 'email']);
         $fejvadasz = Fejvadasz::where('user_id', $id)->first();
-        return $fejvadasz;
+        $user = User::where('user_id', $id)->first(['nev', 'email']);
+        $result = [
+            'fejvadasz'=> $fejvadasz,
+            'user' => $user,
+        ];
+        return $result;
     }
 
     public function store(Request $request){

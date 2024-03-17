@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AllasKeresoIsmeret extends Model
+class AllaskeresoIsmeret extends Model
 {
     use HasFactory;
     protected function setKeysForSaveQuery($query)

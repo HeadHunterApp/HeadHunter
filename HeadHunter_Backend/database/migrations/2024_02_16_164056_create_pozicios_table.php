@@ -28,9 +28,7 @@ return new class extends Migration
     
     public function down(): void
     {
-        Schema::table('terulets', function (Blueprint $terulet) {
-            $terulet->dropForeign(['terulet']);
-        });
+        
         
         Schema::dropIfExists('pozicios');
     }

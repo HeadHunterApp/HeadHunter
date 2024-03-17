@@ -13,7 +13,7 @@ class AllasIsmeret extends Model
         $query
             ->where('allas', '=', $this->
             getAttribute('allas_id'))
-            ->where('szamai_ismeret', '=', $this->
+            ->where('szakmai_ismeret', '=', $this->
             getAttribute('ismeret_id'));
 
 

@@ -2,34 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Allaskereso;
+use App\Models\AllaskeresoIsmeret;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class AllasKeresoIsmeretController extends Controller
+class AllaskeresoIsmeretController extends Controller
 {
     public function index(){
         return AllaskeresoIsmeret::all();
     }
 
-    public function show($id){
-        $allaskeresoismeret = User::where('user_id', $id)->first(['nev', 'email']);
-        $allaskeresoismeret= Allaskereso::where('user_id', $id)->findOrFail();
-        return $allaskeresoismeret;
+    public function show($allasker,$ismeret){
+        $akism = AllaskeresoIsmeret::where('allaskereso', $allasker)
+        ->where('szakmai_ismeret','=', $ismeret)
+        ->firstOrFail();
+        return $akism;
+    }
+
+    public function showallasker($allasker){
+        $akism = AllaskeresoIsmeret::where('allaskereso', $allasker)->get();
+        return $akism;
     }
 
     public function store(Request $request){
-        $allaskereso=new Allaskereso();
-        $allaskereso->fill($request->all());     
-        $allaskereso->save();
+        $akism = new AllaskeresoIsmeret();
+        $akism->fill($request->all());
+        $akism->save();
     }
 
-    public function update(Request $request, $id){
-        $allaskereso=Allaskereso::findOrFail($id);
-        $allaskereso->fill($request->all());     
-        $allaskereso->save();
+    public function update(Request $request, $allasker, $ismeret){
+        $akism = AllaskeresoIsmeret::where('allaskereso', $allasker)
+        ->where('szakmai_ismeret','=', $ismeret)
+        ->firstOrFail();
+        $akism->fill($request->all());
+        $akism->save();
     }
 
-    public function destroy($id){
-        $allaskereso=Allaskereso::findOrFail($id);
-        $allaskereso->delete();
+    public function destroy($allasker,$ismeret){
+        $akism = AllaskeresoIsmeret::where('allaskereso', $allasker)
+        ->where('szakmai_ismeret','=', $ismeret)
+        ->firstOrFail();
+        $akism->delete();
     }
 }

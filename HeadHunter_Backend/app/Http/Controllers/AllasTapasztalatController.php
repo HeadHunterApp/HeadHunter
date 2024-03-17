@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AllasTapasztalat;
 use Illuminate\Http\Request;
 
 class AllasTapasztalatController extends Controller
