@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('allas_vegzettsegs', function (Blueprint $table) {
             $table->foreignId('allas')->references('allas_id')->on('allass');
-            $table->foreignId('vegzettseg')->references('sorszam')->on('vegzettsegs');
+            $table->foreignId('vegzettseg')->references('vegzettseg_id')->on('vegzettsegs');
             $table->primary('allas');
         });
     }

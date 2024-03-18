@@ -14,9 +14,8 @@ return new class extends Migration
         Schema::create('pozicios', function (Blueprint $table) {
             //$table->primary(['terulet', 'pozicio']); - összetett kulcsok felszámolása
             $table->string('pozkod', 6)->primary();
-            $table->string('terulet');
+            $table->foreignId('terulet')->references('terulet_id')->on('terulets');
             $table->string('pozicio', 20);
-            $table->foreign('terulet')->references('megnevezes')->on('terulets');
             //$table->timestamps();
         });
     }
