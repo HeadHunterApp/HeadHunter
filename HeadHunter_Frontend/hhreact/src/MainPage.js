@@ -15,8 +15,6 @@ const MainPage = () => {
       <Header />
       <RightSide/>
       <LeftSide/>
-      <Header />
-      <Navigation />
       <Footer />
     </div>
   );
