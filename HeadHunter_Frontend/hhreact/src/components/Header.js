@@ -1,4 +1,5 @@
 import React from 'react';
+import Navigation from './Navigation';
 
 const Header = () => {
   return (
@@ -7,12 +8,7 @@ const Header = () => {
           <input type="text" placeholder="Keresés..." />
           <button type="button">Keres</button>
         </div>
-        <nav>
-          <ul class="">
-            <li><a href="#">Álláskereső</a></li>
-            <li><a href="#">Álláslehetőségek</a></li>
-          </ul>
-        </nav>
+       <Navigation/>
       </header>
   );
 };
