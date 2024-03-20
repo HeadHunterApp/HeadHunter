@@ -22,9 +22,20 @@ class Allaskereso extends Model
         'jogositvany',
         'szoc_keszseg',
     ];
+    public static $rules = [
+        'user_id' => 'required',
+        'nem' => 'required|in:férfi,nö',
+        'szul_ido' => 'required|date',
+        'telefonszam' => 'nullable|string',
+        'fax' => 'nullable|string',
+        'allampolgarsag' => 'nullable|string',
+        'jogositvany' => 'nullable|boolean',
+        'szoc_keszseg' => 'nullable|longtext',
+    ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
 }

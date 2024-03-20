@@ -41,4 +41,5 @@ class MunkaltatoController extends Controller
     public function destroy($id){
         Munkaltato::findOrFail($id)->delete();
     }
+    
 }

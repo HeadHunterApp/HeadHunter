@@ -15,8 +15,8 @@ return new class extends Migration
             $table->foreignId('user_id')->references('user_id')->on('users')->primary();
             $table->string('nem', 5);
             $table->date('szul_ido');
-            $table->string('telefonszam', 12);
-            $table->string('fax', 11);
+            $table->string('telefonszam', 12)->nullable();
+            $table->string('fax', 11)->nullable();
             $table->string('allampolgarsag', 20);
             $table->boolean('jogositvany');
             $table->longText('szoc_keszseg', 150);
