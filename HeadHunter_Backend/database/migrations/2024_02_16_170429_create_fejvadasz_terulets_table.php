@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('fejvadasz_terulets', function (Blueprint $table) {
             $table->foreignId('fejvadasz')->references('user_id')->on('fejvadaszs');
-            $table->string('terulet');
+            $table->foreignId('terulet')->references('terulet_id')->on('terulets');
             $table->primary(['fejvadasz','terulet']);
-            $table->foreign('terulet')->references('megnevezes')->on('terulets');
         });
     }
 

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('allaskereso_tanulmanys', function (Blueprint $table) {
             $table->foreignId('allaskereso')->references('user_id')->on('allaskeresos');
             $table->string('intezmeny', 50);
-            $table->foreignId('vegzettseg')->references('sorszam')->on('vegzettsegs');
+            $table->foreignId('vegzettseg')->references('vegzettseg_id')->on('vegzettsegs');
             $table->primary(['allaskereso','intezmeny','vegzettseg']);
             $table->date('kezdes');
             $table->date('vegzes')->nullable();

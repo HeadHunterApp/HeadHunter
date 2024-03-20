@@ -14,7 +14,7 @@ class FejvadaszTerulet extends Model
             ->where('fejvadasz', '=', $this->
             getAttribute('user_id'))
             ->where('terulet', '=', $this->
-            getAttribute('megnevezes'));
+            getAttribute('terulet_id'));
 
 
         return $query;

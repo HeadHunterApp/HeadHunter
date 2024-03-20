@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Terulet extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'megnevezes';
+    protected $primaryKey = 'terulet_id';
     protected $fillable = [
         'megnevezes',
     ];
