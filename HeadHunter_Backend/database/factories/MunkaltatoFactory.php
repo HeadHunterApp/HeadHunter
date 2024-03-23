@@ -17,7 +17,11 @@ class MunkaltatoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'cegnev' => fake()->name(),
+            'szekhely' => fake()->address(),
+            'kapcsolattarto' => fake()->name(),
+            'telefonszam' => substr(fake()->phoneNumber(), 12),
+            'email' => fake()->unique()->email(),
         ];
     }
 }
