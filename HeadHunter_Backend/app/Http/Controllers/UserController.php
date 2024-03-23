@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -25,8 +26,11 @@ class UserController extends Controller
         $user->nev=$request->nev;
         $user->email=$request->email;
         $user->jelszo=Hash::make($request->jelszo);
-        //jogosultsághoz magában a requestben kell megadni értékként a feltételt!
-        $user->jogosultsag=$request->jogosultsag;
+        if(Route::currentRouteName() === 'admin.headhunters.new') {
+            $user->jogosultsag = 'fejvadász';
+        }else{
+            $user->jogosultsag = 'álláskereső';
+        }
         $user->save();
     }
 
@@ -35,7 +39,6 @@ class UserController extends Controller
         $user->nev=$request->nev;
         $user->email=$request->email;
         $user->jelszo=Hash::make($request->jelszo);
-        $user->jogosultsag=$request->jogosultsag;
         $user->save();
     }
 

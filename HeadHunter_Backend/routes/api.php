@@ -41,33 +41,65 @@ Route::middleware('auth')->group(function () {
     // bejelentkezett felhasználók
 
     Route::middleware(['admin'])->group(function () {
-        // adminisztrátorok végpontjai
+        //allas
+        Route::get('/admin/jobs/all', [AllasController::class, 'index']);
+        Route::get('/admin/jobs/{allas_id}', [AllasController::class, 'show']);
+        Route::post('/admin/jobs/new', [AllasController::class, 'store']);
+        Route::put('/admin/jobs/modification/{allas_id}', [AllasController::class, 'update']);
+        Route::delete('/admin/jobs/delete/{allas_id}', [AllasController::class, 'destroy']);
+        //fejvadasz
+        Route::get('/admin/headhunters/all', [FejvadaszController::class, 'index']);
+        Route::get('/admin/headhunters/{user_id}', [FejvadaszController::class, 'show']);
+        Route::post('/admin/headhunters/new', [FejvadaszController::class, 'store']);
+        Route::put('/admin/headhunters/modification/{user_id}', [FejvadaszController::class, 'update']);
+        Route::delete('/admin/headhunters/delete/{user_id}', [FejvadaszController::class, 'destroy']);
+        //allaskereso
+        Route::get('/admin/jobseekers/all', [AllaskeresoController::class, 'index']);
+        Route::get('/admin/jobseekers/{user_id}', [AllaskeresoController::class, 'show']);
+        Route::post('/admin/jobseekers/new', [AllaskeresoController::class, 'store']);
+        Route::put('/admin/jobseekers/modification/{user_id}', [AllaskeresoController::class, 'update']);
+        Route::delete('/admin/jobseekers/delete/{user_id}', [AllaskeresoController::class, 'destroy']);
+        //munkaltato
+        Route::get('/admin/employers/all', [MunkaltatoController::class, 'index']);
+        Route::get('/admin/employers/{munkaltato_id}', [MunkaltatoController::class, 'show']);
+        Route::post('/admin/employers/new', [MunkaltatoController::class, 'store']);
+        Route::put('/admin/employers/modification/{munkaltato_id}', [MunkaltatoController::class, 'update']);
+        Route::delete('/admin/employers/delete/{munkaltato_id}', [MunkaltatoController::class, 'destroy']);
     });
     Route::middleware(['headhunter'])->group(function () {
-        // fejvadászok végpontjai
+        //allas
+        Route::get('/hunter/jobs/all', [AllasController::class, 'index']);
+        Route::get('/hunter/jobs/{allas_id}', [AllasController::class, 'show']);
+        Route::post('/hunter/jobs/new', [AllasController::class, 'store']);
+        Route::put('/hunter/jobs/modification/{allas_id}', [AllasController::class, 'update']);
+        //fejvadasz
+        Route::get('/hunter/headhunters/profile', [FejvadaszController::class, 'showsigned']);
+        //allaskereso
+        Route::get('/hunter/jobseekers/all', [AllaskeresoController::class, 'index']);
+        Route::get('/hunter/jobseekers/{user_id}', [AllaskeresoController::class, 'show']);
+        //munkaltato
+        Route::get('/hunter/employers/all', [MunkaltatoController::class, 'index']);
+        Route::get('/hunter/employers/{munkaltato_id}', [MunkaltatoController::class, 'show']);
+        Route::post('/hunter/employers/new', [MunkaltatoController::class, 'store']);
+        Route::put('/hunter/employers/modification/{munkaltato_id}', [MunkaltatoController::class, 'update']);
     });
     Route::middleware(['jobseeker'])->group(function () {
-        // álláskeresők végpontjai
+        //allas
+        Route::get('/seeker/jobs/all', [AllasController::class, 'index']);
+        Route::get('/seeker/jobs/{allas_id}', [AllasController::class, 'show']);
+        //fejvadasz
+        //allaskereso
+        Route::get('/seeker/jobseekers/profile', [AllaskeresoController::class, 'showsigned']);
+
+
     });
 });
 
 
-//all
-//allas
-Route::get('/jobs/all', [AllasController::class, 'index']);
-Route::get('/jobs/{allas_id}', [AllasController::class, 'show']);
-
-//csak admin
-//allas
-Route::delete('/admin/jobs/delete/{allas_id}', [AllasController::class, 'destroy']);
-//allaskereso
-Route::post('/admin/jobseekers/new', [AllaskeresoController::class, 'store']);
-Route::put('/admin/jobseekers/modification/{user_id}', [AllaskeresoController::class, 'update']);
-Route::delete('/admin/jobseekers/delete/{user_id}', [AllaskeresoController::class, 'destroy']);
 //fejvadasz
 Route::apiResource('/admin/headhunters', FejvadaszController::class);
 //munkaltato
-Route::delete('/admin/employers/delete/{munkaltato_id}', [MunkaltatoController::class, 'destroy']);
+
 //terulet
 Route::apiResource('/admin/fields', TeruletController::class);
 //pozicio
@@ -78,23 +110,4 @@ Route::apiResource('/admin/skills', SzakmaiIsmeretController::class);
 Route::apiResource('/admin/edu-attainments', VegzettsegController::class);
 //nyelvtudas
 Route::apiResource('/admin/languages', NyelvtudasController::class);
-
-//fejvadász és admin
-//allas
-Route::post('/jobs/new', [AllasController::class, 'store']);
-Route::put('/jobs/modification/{allas_id}', [AllasController::class, 'update']);
-//allaskereso
-Route::get('/jobseekers/all', [AllaskeresoController::class, 'index']);
-Route::get('/jobseekers/{user_id}', [AllaskeresoController::class, 'show']);
-//munkaltato
-Route::get('/employers/all', [MunkaltatoController::class, 'index']);
-Route::get('/employers/{munkaltato_id}', [MunkaltatoController::class, 'show']);
-Route::post('/employers/new', [MunkaltatoController::class, 'store']);
-Route::put('/employers/modification/{munkaltato_id}', [MunkaltatoController::class, 'update']);
-//terulet
-
-//admin és álláskereső
-
-
-//auth: hogy adom meg, hogy a user csak a saját magához kapcsolódó adatokat érje el?
 

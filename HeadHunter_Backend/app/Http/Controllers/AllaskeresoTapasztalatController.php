@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AllaskeresoTapasztalat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AllaskeresoTapasztalatController extends Controller
 {
@@ -12,38 +13,50 @@ class AllaskeresoTapasztalatController extends Controller
     }
 
     public function show($allasker, $cegnev, $pozicio){
-        $akism = AllaskeresoTapasztalat::where('allaskereso', $allasker)
+        $aktap = AllaskeresoTapasztalat::where('allaskereso', $allasker)
         ->where('cegnev','=', $cegnev)
         ->where('pozicio','=', $pozicio)
         ->firstOrFail();
-        return $akism;
+        return $aktap;
     }
 
     public function showallasker($allasker){
-        $akism = AllaskeresoTapasztalat::where('allaskereso', $allasker)->get();
-        return $akism;
+        $aktap = AllaskeresoTapasztalat::where('allaskereso', $allasker)->get();
+        if ($aktap->isEmpty()) {
+            return response()->json(['message' => 'Korábbi munkahely nem került megadásra'], 404);
+        }
+        return $aktap;
+    }
+
+    public function showsigned(){
+        $signed = Auth::user()->user_id;
+        $aktap = AllaskeresoTapasztalat::where('allaskereso', $signed)->get();
+        if ($aktap->isEmpty()) {
+            return response()->json(['message' => 'Még egyetlen korábbi munkahelyet sem adtál meg'], 404);
+        }
+        return $aktap;
     }
 
     public function store(Request $request){
-        $akism = new AllaskeresoTapasztalat();
-        $akism->fill($request->all());
-        $akism->save();
+        $aktap = new AllaskeresoTapasztalat();
+        $aktap->fill($request->all());
+        $aktap->save();
     }
 
     public function update(Request $request, $allasker, $cegnev, $pozicio){
-        $akism = AllaskeresoTapasztalat::where('allaskereso', $allasker)
+        $aktap = AllaskeresoTapasztalat::where('allaskereso', $allasker)
         ->where('cegnev','=', $cegnev)
         ->where('pozicio','=', $pozicio)
         ->firstOrFail();
-        $akism->fill($request->all());
-        $akism->save();
+        $aktap->fill($request->all());
+        $aktap->save();
     }
 
     public function destroy($allasker, $cegnev, $pozicio){
-        $akism = AllaskeresoTapasztalat::where('allaskereso', $allasker)
+        $aktap = AllaskeresoTapasztalat::where('allaskereso', $allasker)
         ->where('cegnev','=', $cegnev)
         ->where('pozicio','=', $pozicio)
         ->firstOrFail();
-        $akism->delete();
+        $aktap->delete();
     }
 }

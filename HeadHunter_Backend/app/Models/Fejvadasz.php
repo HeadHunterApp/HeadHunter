@@ -17,6 +17,12 @@ class Fejvadasz extends Model
         'fenykep',
     ];
 
+    public static $rules = [
+        'user_id' => 'required',
+        'telefonszam' => 'nullable|string',
+        'fenykep' => 'nullable|string',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
