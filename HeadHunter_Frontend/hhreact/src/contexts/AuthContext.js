@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
 
     //bejelentkezett felhasználó adatainak lekérdezése
     const getUser = async () => {
-        const { data } = await axios.get("/api/user");
+        const { data } = await axios.get("/user");
         setUser(data);
     };
     const logout = async () => {
@@ -73,4 +73,4 @@ export const AuthProvider = ({ children }) => {
 };
 export default function useAuthContext() {
     return useContext(AuthContext);
-}
+} 

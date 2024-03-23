@@ -19,7 +19,7 @@ return new class extends Migration
             //  $table->timestamp('email_verified_at')->nullable();
             //később még betehetjük az e-mail cím verifikálást
             $table->string('jelszo');
-            $table->string('jogosultsag', 12);
+            $table->string('jogosultsag', 255);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('munkaltatos', function (Blueprint $table) {
             $table->id('munkaltato_id');
-            $table->string('cegnev', 40);
-            $table->string('szekhely', 50);
+            $table->string('cegnev', 60);
+            $table->string('szekhely', 80);
             $table->string('kapcsolattarto', 40);
             $table->string('telefonszam', 12)->nullable();
-            $table->string('email, 40')->unique();
+            $table->string('email', 40)->unique();
             $table->timestamps();
         });
+        
     }
 
     /**

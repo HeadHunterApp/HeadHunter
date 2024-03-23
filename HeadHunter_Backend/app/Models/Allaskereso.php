@@ -12,6 +12,11 @@ class Allaskereso extends Model
 
     protected $primaryKey = "user_id";
 
+    const NEMEK = [
+        'nő',
+        'férfi'
+    ];
+
     protected $fillable = [
         'user_id',
         'nem',

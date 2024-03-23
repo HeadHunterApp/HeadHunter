@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('allaskeresos', function (Blueprint $table) {
+            $table->id('allaskereso_id');
             $table->foreignId('user_id')->references('user_id')->on('users')->primary();
             $table->string('nem', 5);
             $table->date('szul_ido');
             $table->string('telefonszam', 12)->nullable();
-            $table->string('fax', 11)->nullable();
-            $table->string('allampolgarsag', 20);
+            $table->string('fax', 12)->nullable();
+            $table->string('allampolgarsag', 20)->default('magyar');
             $table->boolean('jogositvany');
             $table->longText('szoc_keszseg', 150);
             $table->timestamps();

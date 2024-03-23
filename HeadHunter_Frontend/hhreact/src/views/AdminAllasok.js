@@ -5,7 +5,7 @@ import "../styles/Fooldal.css";
 import "../styles/Admin_allasok.css";
 import AllasKartya from '../components/AllasKartya';
 
-const Admin_Allasok = () => {
+const AdminAllasok = () => {
   return (
     <div>
       <Header />
@@ -19,4 +19,4 @@ const Admin_Allasok = () => {
   );
 };
 
-export default Admin_Allasok;
+export default AdminAllasok;

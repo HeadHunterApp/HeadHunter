@@ -17,7 +17,9 @@ class FejvadaszFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'telefonszam'=> substr(fake()->phoneNumber(), 12),
+            'fenykep' => fake()->imageUrl(),
+            'user_id' => 1,
         ];
     }
 }
