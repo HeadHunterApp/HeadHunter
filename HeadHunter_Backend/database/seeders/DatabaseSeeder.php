@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
          \App\Models\Allaskereso::factory(10)->create();
          \App\Models\Fejvadasz::factory(10)->create();
          \App\Models\Munkaltato::factory(10)->create();
+         \App\Models\Nyelvtudas::factory(10)->create();
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
