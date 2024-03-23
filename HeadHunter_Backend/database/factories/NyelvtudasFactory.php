@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Nyelvtudas;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,10 @@ class NyelvtudasFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+/*             'nyelvkod' => Nyelvtudas::NYELVKOD[array_rand(Nyelvtudas::NYELVKOD)],
+            'nyelv' => substr(fake()->word(),20),
+            'szint' => substr(fake()->word(),20),
+            'megnevezes' => substr(fake()->word(),20), */
         ];
     }
 }

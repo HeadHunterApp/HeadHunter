@@ -11,11 +11,19 @@ class Nyelvtudas extends Model
 
     //protected $primarykey=['nyelv', 'szint']; - összetett kulcsok felszámolása
     protected $primarykey='nyelvkod';
+/*      NYELVKOD = nyelvrövid kódja + [
+        'A1',
+        'A2',
+        'B1',
+        'B2',
+        'C1',
+        'C2'
+    ]; */
     protected $fillable = [
         'nyelvkod',
         'nyelv',
         'szint',
         'megnevezes',
     ];
-    
+    public $timestamps = false; 
 }
