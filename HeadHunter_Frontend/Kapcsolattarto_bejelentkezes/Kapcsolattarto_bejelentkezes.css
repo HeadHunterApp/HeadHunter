@@ -1,0 +1,134 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 0;
+}
+
+.sticky-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  z-index: 1000;
+}
+
+.container {
+  max-width: 1200px;
+  margin-top: 200px; /* Adjust margin to accommodate sticky header and search bar */
+  padding: 20px;
+}
+
+header {
+  background-color: teal;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+.profil {
+  text-align: right;
+  padding: 0 20px;
+}
+
+.search-bar {
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.search-bar input[type="text"] {
+  padding: 10px;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.search-bar button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+  background-color: #555;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+  text-align: center;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 10px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+.profil a {
+  color: white;
+  text-decoration: none;
+}
+
+.profil a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footer-details {
+  display: flex;
+  justify-content: center;
+}
+
+.footer-details div {
+  margin: 0 10px;
+}
+
+.footer-details div i {
+  margin-right: 5px;
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-side,
+.right-side {
+  flex: 1;
+}
+
+.left-side {
+  height: 30vh;
+  border: #555 1px solid;
+  margin: 20px 20px;
+}
+
+.right-side {
+  height: 30vh;
+  border: #555 1px solid;
+  margin: 20px 20px;
+}
+
+.middle {
+  text-align: center;
+}
