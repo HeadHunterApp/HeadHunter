@@ -6,6 +6,7 @@ use App\Models\Allaskereso;
 use App\Models\AllaskeresoIsmeret;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AllaskeresoIsmeretController extends Controller
 {
@@ -22,6 +23,18 @@ class AllaskeresoIsmeretController extends Controller
 
     public function showallasker($allasker){
         $akism = AllaskeresoIsmeret::where('allaskereso', $allasker)->get();
+        if ($akism->isEmpty()) {
+            return response()->json(['message' => 'Szakmai ismeret nem került megadásra'], 404);
+        }
+        return $akism;
+    }
+
+    public function showsigned(){
+        $signed = Auth::user()->user_id;
+        $akism = AllaskeresoIsmeret::where('allaskereso', $signed)->get();
+        if ($akism->isEmpty()) {
+            return response()->json(['message' => 'Még egyetlen szakmai ismeretet sem adtál meg'], 404);
+        }
         return $akism;
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FejvadaszTerulet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FejvadaszTeruletController extends Controller
 {
@@ -20,11 +21,28 @@ class FejvadaszTeruletController extends Controller
         $fejvadaszterulet->terulet = $request->terulet;
         $fejvadaszterulet->save();
     }
-
  
     public function show ($fejvadasz,$terulet)
     {
-        $fejvadaszterulet = FejvadaszTerulet::where('fejvadasz', $fejvadasz)->where('terulet', $terulet)->first();
+        $fejvadaszterulet = FejvadaszTerulet::where('fejvadasz', $fejvadasz)->where('terulet', $terulet)->firstOrFail();
+        return $fejvadaszterulet;
+    }
+
+    public function showfejv($fejvadasz)
+    {
+        $fejvadaszterulet = FejvadaszTerulet::where('fejvadasz', $fejvadasz)->get();
+        if ($fejvadaszterulet->isEmpty()) {
+            return response()->json(['message' => 'Jelenleg egyetlen terület sincs hozzárendelve ehhez a fejvadászhoz'], 404);
+        }
+        return $fejvadaszterulet;
+    }
+
+    public function showsigned(){
+        $signed = Auth::user()->user_id;
+        $fejvadaszterulet = FejvadaszTerulet::where('fejvadasz', $signed)->get();
+        if ($fejvadaszterulet->isEmpty()) {
+            return response()->json(['message' => 'Még egyetlen területet sem rendeltek hozzád'], 404);
+        }
         return $fejvadaszterulet;
     }
 

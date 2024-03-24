@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AllaskeresoNyelvtudas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AllaskeresoNyelvtudasController extends Controller
 {
@@ -21,8 +22,21 @@ class AllaskeresoNyelvtudasController extends Controller
 
     public function showallasker($allasker){
         $aknyelv = AllaskeresoNyelvtudas::where('allaskereso', $allasker)->get();
+        if ($aknyelv->isEmpty()) {
+            return response()->json(['message' => 'Nyelvtudás nem került megadásra'], 404);
+        }
         return $aknyelv;
     }
+
+    public function showsigned(){
+        $signed = Auth::user()->user_id;
+        $aknyelv = AllaskeresoNyelvtudas::where('allaskereso', $signed)->get();
+        if ($aknyelv->isEmpty()) {
+            return response()->json(['message' => 'Még nem adtál meg a nyelvtudásodra vonatkozó adatot'], 404);
+        }
+        return $aknyelv;
+    }
+
 
     public function store(Request $request){
         $aknyelv = new AllaskeresoNyelvtudas();

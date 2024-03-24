@@ -22,7 +22,7 @@ return new class extends Migration
             $table->longText('leiras');
             $table->date('datum');
             //inkább timestamp kéne, és abból kellene a dátum részt kiszedni
-            $table->foreignId('fejvadasz')->references('user_id')->on('fejvadaszs');
+            $table->foreignId('fejvadasz')->references('user_id')->on('fejvadaszs')->nullable();
         });
     }
 
