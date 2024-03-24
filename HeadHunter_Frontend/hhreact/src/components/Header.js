@@ -1,17 +1,17 @@
 import React from 'react';
 import Navigation from './Navigation';
-
+import LoginModalForm from './LoginModalForm';
 const Header = () => {
-  
   return (
     <header>
         <div className="search-bar">
+
           <input type="text" placeholder="Keresés..." />
-          <button type="button">Keres</button>
-          <button type="button" className='bejelentkezes'>Bejelentkezés</button>
-          <button type="button" className='regisztracio'>Regisztráció</button>
+          <LoginModalForm/>        
+          <LoginModalForm/>
+
         </div>
-       <Navigation />
+       <Navigation/>
       </header>
   );
 };
