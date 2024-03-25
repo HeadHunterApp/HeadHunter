@@ -73,3 +73,7 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #007f7f;
 }
+.button-container {
+  display: inline-block;
+  margin: 10px;
+}

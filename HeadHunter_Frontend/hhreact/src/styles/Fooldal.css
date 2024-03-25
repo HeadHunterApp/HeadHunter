@@ -19,6 +19,7 @@ header {
 }
 
 .search-bar {
+    display: flex;
     margin-top: 20px;
     text-align: center;
 }

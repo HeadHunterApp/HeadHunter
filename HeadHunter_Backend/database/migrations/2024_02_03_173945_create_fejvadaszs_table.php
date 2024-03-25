@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Fejvadasz;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +18,11 @@ return new class extends Migration
             $table->string('fenykep', 150);
             $table->timestamps();
         });
+        Fejvadasz::create([
+            'user_id' => 1,
+            'telefonszam' => '+36201234567',
+            'fenykep' => 'jpg',
+        ]);
     }
 
     /**

@@ -37,7 +37,7 @@ const Regisztral = () => {
   };
 
   return (
-    <div className="container">
+    <div >
       <header className="header">
         <h1>Regisztrácó </h1>
       </header>
@@ -46,11 +46,32 @@ const Regisztral = () => {
           <label>teljes név:</label>
           <input
             type="text"
-            name="név"
+            name="nev"
             value={formData.nev}
             onChange={handleInputChange}
           />
         </div>
+        <div className="form-group">
+        <label>
+        <input
+          type="radio"
+          value="ferfi"
+          checked={formData.nem === "ferfi"}
+          onChange={handleInputChange}
+        />
+        Férfi
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          value="nő"
+          checked={formData.nem === "nő"}
+          onChange={handleInputChange}
+        />
+        Nő
+      </label>
+      </div>
         <div className="form-group">
           <label>email cím:</label>
           <input

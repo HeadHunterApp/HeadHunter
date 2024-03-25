@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-/* import { Link } from "react-router-dom"; */
- import  useAuthContext  from "../contexts/AuthContext";
+import  useAuthContext  from "../contexts/AuthContext";
 
-export default function Bejelentkezes() {
+const Bejelentkezes = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -23,7 +22,7 @@ export default function Bejelentkezes() {
 
     return (
         <div className="m-auto" style={{ maxWidth: "400px" }}>
-            <h1 className="text-center">Bejelentkezés</h1>
+            <h1 className="header">Bejelentkezés</h1>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3 mt-3">
                     <label htmlFor="email" className="form-label">
@@ -77,14 +76,15 @@ export default function Bejelentkezes() {
                         Login
                     </button>
 
-                    <p>
+{/*                     <p>
                         Még nincs felhaszálóneve?
                         <Link className="nav-link text-info" to="/regisztracio">
                             Regisztráció
                         </Link>
-                    </p>
+                    </p> */}
                 </div> 
             </form> 
         </div>
     );
 } 
+export default Bejelentkezes;
