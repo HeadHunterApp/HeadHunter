@@ -12,7 +12,7 @@ const Fooldal = () => {
       <Header />
       <main>
         <RightSide />
-        {/* <Regisztral/> */}
+      
         <LeftSide />
       </main>
       <Footer />

@@ -5,7 +5,6 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 
 import { AuthProvider } from "./contexts/AuthContext";
-import Regisztral from "./components/RegisztralForm";
 import Fooldal from "./views/FoOldal";
 
 

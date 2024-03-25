@@ -37,7 +37,7 @@ const Regisztral = () => {
   };
 
   return (
-    <div >
+    <div>
       <header className="header">
         <h1>Regisztrácó </h1>
       </header>
@@ -52,26 +52,27 @@ const Regisztral = () => {
           />
         </div>
         <div className="form-group">
-        <label>
-        <input
-          type="radio"
-          value="ferfi"
-          checked={formData.nem === "ferfi"}
-          onChange={handleInputChange}
-        />
-        Férfi
-      </label>
-
-      <label>
-        <input
-          type="radio"
-          value="nő"
-          checked={formData.nem === "nő"}
-          onChange={handleInputChange}
-        />
-        Nő
-      </label>
-      </div>
+          <div className="nem">
+            <label className="nem-label"> Férfi</label>
+            <input
+              type="radio"
+              value="ferfi"
+              checked={formData.nem === "ferfi"}
+              name="nem"
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="nem">
+            <label className="nem-label">Nő</label>
+            <input
+              type="radio"
+              value="nő"
+              checked={formData.nem === "nő"}
+              name="nem"
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
         <div className="form-group">
           <label>email cím:</label>
           <input
@@ -88,8 +89,6 @@ const Regisztral = () => {
             name="jelszo"
             value={formData.jelszo}
             onChange={handleInputChange}
-
-            
           />
         </div>
         <div className="form-group">

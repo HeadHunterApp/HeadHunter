@@ -33,7 +33,9 @@ class LoginModalForm extends React.Component {
       <div className="button-container">
         {/* Button to open the popup form */}
         <button className="open-button" onClick={this.toggleLoginModal}>Bejelentkezés</button>
-
+        <button className="open-button" onClick={this.toggleRegistryModal}>
+            Regisztráció
+          </button>
         {/* The form */}
         <div className={this.state.isLoginOpen ? 'modal open' : 'modal'}>
           <div className="modal-content">
@@ -44,7 +46,7 @@ class LoginModalForm extends React.Component {
         </div>
       </div>
         {/* Button to open the popup form */}
-        <button className="open-button" onClick={this.toggleRegistryModal}>Regisztráció</button>
+        
 
         {/* The form */}
         <div className={this.state.isRegistryOpen ? 'modal open' : 'modal'}>
