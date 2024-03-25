@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AllasIsmeret;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AllasIsmeretController extends Controller
 {
@@ -43,5 +44,13 @@ class AllasIsmeretController extends Controller
         ->where('szakmai_ismeret','=', $ismeret)
         ->firstOrFail();
         $allasism->delete();
+    }
+
+    public function detailedAllasIsm($allas_id){
+        return DB::table('allas_ismerets as ai')
+            ->join('szakmai_ismerets as si', 'ai.szakmai_ismeret', '=', 'si.ismeret_id')
+            ->select('si.megnevezes', 'si.szint')
+            ->where('ai.allas', $allas_id)
+            ->get();
     }
 }
