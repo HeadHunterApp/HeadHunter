@@ -14,6 +14,10 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Regisztral.css */
+.password-input {
+    width: 85%;
+}
 
 .header {
     background-color: teal;
