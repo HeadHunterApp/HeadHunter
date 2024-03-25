@@ -12,4 +12,6 @@ class Terulet extends Model
     protected $fillable = [
         'megnevezes',
     ];
+
+    public $timestamps = false; 
 }

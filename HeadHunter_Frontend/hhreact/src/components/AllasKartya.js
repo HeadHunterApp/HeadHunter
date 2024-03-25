@@ -1,16 +1,19 @@
 import React from "react";
-const AllasKartya =()=>{
+const AllasKartya =(allas)=>{
 return(
 <div className="job-card">
           <div className="job-info">
             <img src="https://via.placeholder.com/50" alt="Profile Picture" />
             <div className="details">
-              <h2>Álláshirdetés 1</h2>
+              <h2>{allas.munkaltato} </h2>
               <p>
-                Leírás: Lorem ipsum dolor sit amet, consectetur adipiscing
-                elit. Integer nec odio. Praesent libero.
+                {allas.megnevezes}
               </p>
-              <p>Hely: City, Country</p>
+              <p>{allas.pozicio}</p>
+              <p>{allas.statusz}</p>
+              <p>{allas.leiras}</p>
+              <p>{allas.datum}</p>
+              <p>{allas.fejvadasz}</p>
             </div>
           </div>
           <div className="actions">

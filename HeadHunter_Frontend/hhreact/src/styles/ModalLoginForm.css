@@ -51,11 +51,10 @@ label {
   display: block;
 }
 
-input[type="text"],
-input[type="password"] {
+input[type="text"] {
   width: 100%;
   padding: 10px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   border: 1px solid #ccc;
   border-radius: 5px;
 }
@@ -72,4 +71,9 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: #007f7f;
+}
+.button-container {
+  display: flex;
+  /*   margin: 10px; */
+  gap: 1rem;
 }

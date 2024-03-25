@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Pozicio;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,6 +19,12 @@ return new class extends Migration
             $table->string('pozicio', 20);
             //$table->timestamps();
         });
+
+        Pozicio::create([
+            'pozkod' => 100,
+            'terulet' => 1,
+            'pozicio' => 'fejlesztő'
+        ]);
     }
 
     /**
