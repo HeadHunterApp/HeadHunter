@@ -41,9 +41,6 @@ class AllaskeresoTapasztalat extends Model
         $this->attributes['vegzes'] = $formatteddate;
     }
 
-    protected $hidden = [
-        'created_at',
-        'updated_at',
-    ];
+    public $timestamps = false;
     
 }

@@ -23,17 +23,6 @@ return new class extends Migration
             $table->longText('erintett_targytev', 250)->nullable();
         });
 
-        //tesztadatok
-
-        AllaskeresoTanulmany::create([
-            'allaskereso' => 3,
-            'intezmeny' => 'Budapesti Műszaki és Gazdaságtudományi Egyetem',
-            'szak' => 'Mérnökinformatikus',
-            'vegzettseg' => 5,
-            'kezdes' => '2019/09/01',
-            'vegzes' => '2023/07/01',
-            'erintett_targytev' => 'HTML, CSS, Javascript, JQuery, REACT, C#',
-        ]);
     }
 
     /**

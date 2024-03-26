@@ -24,8 +24,5 @@ class FejvadaszTerulet extends Model
         'terulet',
     ];
 
-    protected $hidden = [
-        'created_at',
-        'updated_at',
-    ];
+    public $timestamps = false;
 }

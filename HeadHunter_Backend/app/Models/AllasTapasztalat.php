@@ -15,8 +15,5 @@ class AllasTapasztalat extends Model
         'tapasztalat_ido',
     ];
 
-    protected $hidden = [
-        'created_at',
-        'updated_at',
-    ];
+    public $timestamps = false;
 }
