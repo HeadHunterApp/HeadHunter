@@ -8,7 +8,6 @@ const Header = () => {
 
           <input type="text" placeholder="Keresés..." />
           <LoginModalForm/>        
-    
 
         </div>
        <Navigation/>
