@@ -70,6 +70,16 @@ class AllaskeresoTanulmanyController extends Controller
         $aktan->save();
     }
 
+    public function updatesigned(Request $request, $intezmeny, $szak){
+        $signed = Auth::user()->user_id;
+        $aktan = AllaskeresoTanulmany::where('allaskereso', $signed)
+        ->where('intezmeny','=', $intezmeny)
+        ->where('szak','=', $szak)
+        ->firstOrFail();
+        $aktan->fill($request->all());
+        $aktan->save();
+    }
+
     public function destroy($allasker, $intezmeny, $szak){
         $aktan = AllaskeresoTanulmany::where('allaskereso', $allasker)
         ->where('intezmeny','=', $intezmeny)
