@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AllasVegzettseg;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AllasVegzettsegController extends Controller
 {
@@ -30,5 +31,13 @@ class AllasVegzettsegController extends Controller
 
     public function destroy($allas){
         AllasVegzettseg::findOrFail($allas)->delete();
+    }
+
+    public function detailedAllasVegz($allas_id){
+        return DB::table('allas_vegzettsegs as av')
+            ->join('vegzettsegs as v', 'av.vegzettseg','=','v.vegzettseg_id')
+            ->select('v.megnevezes')
+            ->where('av.allas', $allas_id)
+            ->get();
     }
 }

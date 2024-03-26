@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AllasNyelvtudas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AllasNyelvtudasController extends Controller
 {
@@ -43,5 +44,13 @@ class AllasNyelvtudasController extends Controller
         ->where('nyelvtudas','=', $nyelvkod)
         ->firstOrFail();
         $allasism->delete();
+    }
+
+    public function detailedAllasNyelv($allas_id){
+        return DB::table('allas_nyelvtudass as an')
+            ->join('nyelvtudass as nt', 'an.nyelvtudas','=','nt.nyelvkod')
+            ->select('nt.nyelv', 'nt.megnevezes')
+            ->where('an.allas', $allas_id)
+            ->get();
     }
 }

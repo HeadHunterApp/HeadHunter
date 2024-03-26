@@ -22,7 +22,10 @@ class AllaskeresoIsmeretController extends Controller
     }
 
     public function showallasker($allasker){
-        $akism = AllaskeresoIsmeret::where('allaskereso', $allasker)->get();
+        $akism = AllaskeresoIsmeret::join('SzakmaiIsmeret as si', 'AllaskeresoIsmeret.szakmai_ismeret', '=', 'si.ismeret_id')
+        ->where('allaskereso', $allasker)
+        ->select('si.megnevezes', 'si.szint')
+        ->get();
         if ($akism->isEmpty()) {
             return response()->json(['message' => 'Szakmai ismeret nem került megadásra'], 404);
         }
@@ -31,7 +34,10 @@ class AllaskeresoIsmeretController extends Controller
 
     public function showsigned(){
         $signed = Auth::user()->user_id;
-        $akism = AllaskeresoIsmeret::where('allaskereso', $signed)->get();
+        $akism = AllaskeresoIsmeret::join('SzakmaiIsmeret as si', 'AllaskeresoIsmeret.szakmai_ismeret', '=', 'si.ismeret_id')
+        ->where('allaskereso', $signed)
+        ->select('si.megnevezes', 'si.szint')
+        ->get();
         if ($akism->isEmpty()) {
             return response()->json(['message' => 'Még egyetlen szakmai ismeretet sem adtál meg'], 404);
         }

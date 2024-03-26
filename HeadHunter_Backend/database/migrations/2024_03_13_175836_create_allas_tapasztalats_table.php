@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('allas_tapasztalats', function (Blueprint $table) {
             $table->foreignId('allas')->references('allas_id')->on('allass');
+            $table->string('pozicio', 6);
+            $table->foreign('pozicio')->references('pozkod')->on('pozicios');
             $table->foreignId('tapasztalat')->references('tapasztalat_id')->on('tapasztalat_idos');
             $table->primary('allas');
         });

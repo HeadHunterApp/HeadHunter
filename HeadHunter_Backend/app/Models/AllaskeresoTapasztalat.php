@@ -32,15 +32,13 @@ class AllaskeresoTapasztalat extends Model
         'vegzes'
     ];
     
+    //I preferred Carbon, not casting
 
-    public function setKezdesAttribute($value)
+    public function setDateAttributes($value)
     {
-        $this->attributes['kezdes'] = Carbon::parse($value)->format('Y/m');
-    }
-
-    public function setVegzesAttribute($value)
-    {
-        $this->attributes['vegzes'] = Carbon::parse($value)->format('Y/m');
+        $formatteddate = Carbon::parse($value)->format('Y/m');
+        $this->attributes['kezdes'] = $formatteddate;
+        $this->attributes['vegzes'] = $formatteddate;
     }
     
 }

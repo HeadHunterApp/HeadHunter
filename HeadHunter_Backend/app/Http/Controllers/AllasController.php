@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Allas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AllasController extends Controller
 {
@@ -28,7 +30,7 @@ class AllasController extends Controller
     }
 
  
-    public function show ($id)
+    public function show($id)
     {
         $allas = Allas::where('allas_id', $id)->first();
         return $allas;
@@ -45,4 +47,29 @@ class AllasController extends Controller
         Allas::findOrFail($id)->delete();
     }    
   
+    public function detailedAllas($allas_id){
+        $query = DB::table('allas as al')
+            ->join('munkaltatos as m', 'al.munkaltato','=','m.munkaltato_id')
+            ->join('pozicios as p', 'al.pozicio','=','p.pozkod')
+            ->join('terulets as t', 'p.terulet','=','t.terulet_id')
+            ->join('users as u', 'al.fejvadasz','=','u.user_id')
+            ->select(
+                'al.allas_id',
+                'm.cegnev',
+                'al.megnevezes',
+                't.megnevezes',
+                'p.pozicio',
+                'al.leiras',
+                'al.statusz',
+                'al.datum'
+                )
+            ->where('al.allas_id',$allas_id)
+            ->get();
+            if (Auth::check() && (Auth::user()->jogosultsag === 'admin' || Auth::user()->jogosultsag === 'fejvadasz')) {
+                $query->addSelect('al.fejvadasz_id', 'u.nev');
+            }
+            return $query;
+    }
+    
+
 }

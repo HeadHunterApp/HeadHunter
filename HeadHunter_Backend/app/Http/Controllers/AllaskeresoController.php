@@ -18,10 +18,18 @@ class AllaskeresoController extends Controller
     public function show($id){
         $allaskereso = Allaskereso::findOrFail($id);
         $user = User::where('user_id', $id)->first(['nev', 'email']);
-        $result = [
-            'allaskereso'=> $allaskereso,
-            'user' => $user,
-        ];
+        if (Auth::check() && (Auth::user()->jogosultsag === 'admin' || Auth::user()->jogosultsag === 'fejvadasz')) {
+            $result = [
+                'user_id' => $user->user_id,
+                'user' => $user,
+                'allaskereso' => $allaskereso
+            ];
+        } else {
+            $result = [
+                'user' => $user,
+                'allaskereso'=> $allaskereso
+            ];
+        }
         return $result;
     }
 
@@ -30,8 +38,8 @@ class AllaskeresoController extends Controller
         $allaskereso = Allaskereso::findOrFail($signed);
         $user = User::where('user_id', $signed)->first(['nev', 'email']);
         $result = [
-            'allaskereso'=> $allaskereso,
             'user' => $user,
+            'allaskereso'=> $allaskereso
         ];
         return $result;
     }
