@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\AllaskeresoTapasztalat;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,6 +21,16 @@ return new class extends Migration
             $table->date('kezdes');
             $table->date('vegzes')->nullable();
         });
+        
+        //tesztadatok
+
+        AllaskeresoTapasztalat::create([
+            'allaskereso' => 3,
+            'cegnev' => 'Magyar Telekom Nyrt.',
+            'pozicio' => 'INFFRO',
+            'kezdes' => '2023/01/04',
+            'vegzes' => '2024/02/01',
+        ]);
     }
 
     /**

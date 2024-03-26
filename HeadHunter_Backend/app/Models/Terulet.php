@@ -13,5 +13,8 @@ class Terulet extends Model
         'megnevezes',
     ];
 
-    public $timestamps = false; 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

@@ -24,6 +24,10 @@ class Pozicio extends Model
         'terulet',
         'pozicio',
     ];
-    public $timestamps = false; 
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     
 }

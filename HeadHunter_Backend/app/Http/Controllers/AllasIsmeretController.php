@@ -47,10 +47,14 @@ class AllasIsmeretController extends Controller
     }
 
     public function detailedAllasIsm($allas_id){
-        return DB::table('allas_ismerets as ai')
+        $allasism=DB::table('allas_ismerets as ai')
             ->join('szakmai_ismerets as si', 'ai.szakmai_ismeret', '=', 'si.ismeret_id')
             ->select('si.megnevezes', 'si.szint')
             ->where('ai.allas', $allas_id)
             ->get();
+        if ($allasism->isEmpty()) {
+                return response()->json(['message' => 'Ehhez az álláshoz nem adtak meg szakmai tudásra vonatkozó elvárást'], 404);
+        }
+        return $allasism;
     }
 }

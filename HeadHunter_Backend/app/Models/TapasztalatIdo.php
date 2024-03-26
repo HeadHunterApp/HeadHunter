@@ -12,4 +12,9 @@ class TapasztalatIdo extends Model
     protected $fillable = [
         'leiras',
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

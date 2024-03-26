@@ -25,5 +25,9 @@ class Nyelvtudas extends Model
         'szint',
         'megnevezes',
     ];
-    public $timestamps = false; 
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

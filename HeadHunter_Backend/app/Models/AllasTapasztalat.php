@@ -14,4 +14,9 @@ class AllasTapasztalat extends Model
         'pozicio',
         'tapasztalat_ido',
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\AllaskeresoNyelvtudas;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,6 +22,36 @@ return new class extends Migration
             $table->string('olvasas', 15)->nullable();
             $table->string('beszed', 15)->nullable();
         });
+        
+        //tesztadatok
+
+        AllaskeresoNyelvtudas::create([
+            'allaskereso' => 3,
+            'nyelvtudas' => 'ENB2',
+            'nyelvvizsga' => true,
+            'iras' => 'B2',
+            'olvasas' => 'B2',
+            'beszed' => 'B2',
+        ]);
+
+        AllaskeresoNyelvtudas::create([
+            'allaskereso' => 3,
+            'nyelvtudas' => 'DEB2',
+            'nyelvvizsga' => false,
+            'iras' => 'középszint',
+            'olvasas' => 'középszint',
+            'beszed' => 'alapszint',
+        ]);
+
+        AllaskeresoNyelvtudas::create([
+            'allaskereso' => 4,
+            'nyelvtudas' => 'DEA2',
+            'nyelvvizsga' => false,
+            'iras' => 'alapszint',
+            'olvasas' => 'alapszint',
+            'beszed' => 'középszint',
+        ]);
+
     }
 
     /**

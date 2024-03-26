@@ -23,4 +23,9 @@ class FejvadaszTerulet extends Model
         'fejvadasz',
         'terulet',
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }
