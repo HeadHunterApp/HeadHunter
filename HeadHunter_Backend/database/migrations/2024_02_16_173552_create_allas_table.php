@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('statusz', 40);
             $table->longText('leiras');
             $table->date('datum');
-            //inkább timestamp kéne, és abból kellene a dátum részt kiszedni
             $table->foreignId('fejvadasz')->references('user_id')->on('fejvadaszs')->nullable();
         });
     }

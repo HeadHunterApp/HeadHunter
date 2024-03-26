@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Allas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AllasController extends Controller
@@ -47,10 +48,11 @@ class AllasController extends Controller
     }    
   
     public function detailedAllas($allas_id){
-        return DB::table('allas as al')
+        $query = DB::table('allas as al')
             ->join('munkaltatos as m', 'al.munkaltato','=','m.munkaltato_id')
             ->join('pozicios as p', 'al.pozicio','=','p.pozkod')
             ->join('terulets as t', 'p.terulet','=','t.terulet_id')
+            ->join('users as u', 'al.fejvadasz','=','u.user_id')
             ->select(
                 'al.allas_id',
                 'm.cegnev',
@@ -63,6 +65,10 @@ class AllasController extends Controller
                 )
             ->where('al.allas_id',$allas_id)
             ->get();
+            if (Auth::check() && (Auth::user()->jogosultsag === 'admin' || Auth::user()->jogosultsag === 'fejvadasz')) {
+                $query->addSelect('al.fejvadasz_id', 'u.nev');
+            }
+            return $query;
     }
     
 

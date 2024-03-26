@@ -21,7 +21,16 @@ class AllaskeresoTanulmanyController extends Controller
     }
 
     public function showallasker($allasker){
-        $aktan = AllaskeresoTanulmany::where('allaskereso', $allasker)->get();
+        $aktan = AllaskeresoTanulmany::where('allaskereso', $allasker)
+            ->select(
+                'intezmeny',
+                'vegzettseg',
+                'szak',
+                'kezdes',
+                'vegzes',
+                'erintett_targytev'
+            )
+            ->get();
         if ($aktan->isEmpty()) {
             return response()->json(['message' => 'Tanulmányokra vonatkozó adat nem került megadásra'], 404);
         }
@@ -30,7 +39,16 @@ class AllaskeresoTanulmanyController extends Controller
 
     public function showsigned(){
         $signed = Auth::user()->user_id;
-        $aktan = AllaskeresoTanulmany::where('allaskereso', $signed)->get();
+        $aktan = AllaskeresoTanulmany::where('allaskereso', $signed)
+            ->select(
+                'intezmeny',
+                'vegzettseg',
+                'szak',
+                'kezdes',
+                'vegzes',
+                'erintett_targytev'
+            )
+            ->get();
         if ($aktan->isEmpty()) {
             return response()->json(['message' => 'Még nem adtad meg, hol végezted a tanulmányaidat'], 404);
         }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AllaskeresoTapasztalat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AllaskeresoTapasztalatController extends Controller
 {
@@ -21,7 +22,17 @@ class AllaskeresoTapasztalatController extends Controller
     }
 
     public function showallasker($allasker){
-        $aktap = AllaskeresoTapasztalat::where('allaskereso', $allasker)->get();
+        $aktap = DB::table('allaskereso_tapasztalats as akt')
+        ->join('pozicios as p', 'at.pozicio','=','p.pozkod')
+        ->join('terulets as t', 'p.terulet','=','t.terulet_id')
+        ->select(
+            'akt.cegnev',
+            't.megnevezes',
+            'p.pozicio',
+            'ti.leiras',
+            'akt.kezdes',
+            'akt.vegzes')
+        ->where('allaskereso', $allasker)->get();
         if ($aktap->isEmpty()) {
             return response()->json(['message' => 'Korábbi munkahely nem került megadásra'], 404);
         }
@@ -30,7 +41,18 @@ class AllaskeresoTapasztalatController extends Controller
 
     public function showsigned(){
         $signed = Auth::user()->user_id;
-        $aktap = AllaskeresoTapasztalat::where('allaskereso', $signed)->get();
+        $aktap = DB::table('allaskereso_tapasztalats as akt')
+            ->join('pozicios as p', 'at.pozicio','=','p.pozkod')
+            ->join('terulets as t', 'p.terulet','=','t.terulet_id')
+            ->select(
+                'akt.cegnev',
+                't.megnevezes',
+                'p.pozicio',
+                'ti.leiras',
+                'akt.kezdes',
+                'akt.vegzes')
+            ->where('allaskereso', $signed)
+            ->get();
         if ($aktap->isEmpty()) {
             return response()->json(['message' => 'Még egyetlen korábbi munkahelyet sem adtál meg'], 404);
         }
