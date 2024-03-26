@@ -8,7 +8,11 @@ const Header = () => {
 
           <input type="text" placeholder="Keresés..." />
           <LoginModalForm/>        
+<<<<<<< Updated upstream
           <LoginModalForm/>
+=======
+      
+>>>>>>> Stashed changes
 
         </div>
        <Navigation/>
