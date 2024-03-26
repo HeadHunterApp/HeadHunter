@@ -34,10 +34,14 @@ class AllasVegzettsegController extends Controller
     }
 
     public function detailedAllasVegz($allas_id){
-        return DB::table('allas_vegzettsegs as av')
+        $allasvegz=DB::table('allas_vegzettsegs as av')
             ->join('vegzettsegs as v', 'av.vegzettseg','=','v.vegzettseg_id')
             ->select('v.megnevezes')
             ->where('av.allas', $allas_id)
             ->get();
+        if ($allasvegz->isEmpty()) {
+            return response()->json(['message' => 'Ehhez az álláshoz nem adtak meg iskolai végzettségre vonatkozó elvárást'], 404);
+        }
+        return $allasvegz;
     }
 }

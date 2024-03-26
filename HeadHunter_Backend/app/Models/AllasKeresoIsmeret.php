@@ -24,4 +24,9 @@ class AllaskeresoIsmeret extends Model
         'szakmai_ismeret'
         
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

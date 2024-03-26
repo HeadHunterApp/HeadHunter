@@ -13,4 +13,9 @@ class SzakmaiIsmeret extends Model
         'megnevezes',
         'szint',
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

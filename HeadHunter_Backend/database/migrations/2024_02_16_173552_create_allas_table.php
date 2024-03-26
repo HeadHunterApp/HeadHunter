@@ -23,14 +23,18 @@ return new class extends Migration
             $table->longText('leiras');
             $table->date('datum');
             $table->foreignId('fejvadasz')->references('user_id')->on('fejvadaszs')->nullable();
+            $table->timestamps();
         });
+
+        //tesztadatok
+
         Allas::create([
             'munkaltato' => 1,
-            'megnevezes' => 'softver fejlesztő',
-            'pozicio' => 100,
+            'megnevezes' => 'szoftver fejlesztő',
+            'pozicio' => 'INFFRO',
             'statusz' => 'nyitott',
             'leiras' => 'Applikáció fejlesztőként feladatod lesz cégünk jelenlegi, React Native nyelven írt iOS, illetve.',
-            'datum' => date('2024-03-20'),
+            'datum' => '2024-03-20',
             'fejvadasz' => 1,
         ]);
     }

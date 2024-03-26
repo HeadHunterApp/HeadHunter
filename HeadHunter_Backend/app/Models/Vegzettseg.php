@@ -12,4 +12,9 @@ class Vegzettseg extends Model
     protected $fillable = [
         'megnevezes',
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

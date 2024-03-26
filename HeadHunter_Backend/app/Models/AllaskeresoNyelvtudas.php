@@ -27,4 +27,9 @@ class AllaskeresoNyelvtudas extends Model
         'olvasas',
         'beszed',
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

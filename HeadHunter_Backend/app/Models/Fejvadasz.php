@@ -17,6 +17,11 @@ class Fejvadasz extends Model
         'fenykep',
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     public static $rules = [
         'user_id' => 'required',
         'telefonszam' => 'nullable|string',

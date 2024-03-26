@@ -16,8 +16,8 @@ class AllaskeresoTanulmany extends Model
             getAttribute('user_id'))
             ->where('intezmeny', '=', $this->
             getAttribute('intezmeny'))
-            ->where('vegzettseg', '=', $this->
-            getAttribute('sorszam'));
+            ->where('szak', '=', $this->
+            getAttribute('szak'));
 
 
         return $query;
@@ -28,8 +28,8 @@ class AllaskeresoTanulmany extends Model
     protected $fillable = [
         'allaskereso',
         'intezmeny',
-        'vegzettseg',
         'szak',
+        'vegzettseg',
         'kezdes',
         'vegzes',
         'erintett_targytev'
@@ -43,4 +43,9 @@ class AllaskeresoTanulmany extends Model
         $this->attributes['kezdes'] = $formatteddate;
         $this->attributes['vegzes'] = $formatteddate;
     }
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

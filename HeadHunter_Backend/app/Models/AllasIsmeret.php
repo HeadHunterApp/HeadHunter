@@ -24,4 +24,9 @@ class AllasIsmeret extends Model
         'szakmai_ismeret',
         'elvaras_szint',
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

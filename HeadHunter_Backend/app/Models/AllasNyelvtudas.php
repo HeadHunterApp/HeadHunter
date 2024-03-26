@@ -24,4 +24,9 @@ class AllasNyelvtudas extends Model
         'nyelvtudas'
         
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }
