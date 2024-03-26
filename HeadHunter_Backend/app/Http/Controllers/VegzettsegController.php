@@ -16,6 +16,8 @@ class VegzettsegController extends Controller
         return Vegzettseg::findOrFail($id);
     }
 
+    //currently only fix data, maybe modifiable in the future (then routes needed)
+
     public function store(Request $request){
         $vegzettseg = new Vegzettseg();
         $vegzettseg->megnevezes = $request->input('megnevezes');

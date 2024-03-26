@@ -16,6 +16,10 @@ class TapasztalatIdoController extends Controller
         return TapasztalatIdo::findOrFail($id);
     }
 
+    
+    //currently only fix data, maybe modifiable in the future (then routes needed)
+
+
     public function store(Request $request){
         $tapasztalatido = new TapasztalatIdo();
         $tapasztalatido->leiras = $request->input('leiras');

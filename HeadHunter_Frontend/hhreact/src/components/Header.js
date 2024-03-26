@@ -4,15 +4,10 @@ import LoginModalForm from './LoginModalForm';
 const Header = () => {
   return (
     <header>
-        <div className="search-bar">
+        <div className="search-bar" >
 
           <input type="text" placeholder="Keresés..." />
           <LoginModalForm/>        
-<<<<<<< Updated upstream
-          <LoginModalForm/>
-=======
-      
->>>>>>> Stashed changes
 
         </div>
        <Navigation/>

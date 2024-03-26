@@ -19,16 +19,24 @@ header {
 }
 
 .search-bar {
+    display: flex;
     margin-top: 20px;
     text-align: center;
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-.search-bar input[type="text"] {
+/* .search-bar input[type="text"] {
     padding: 10px;
     width: 200px;
     border: 1px solid #ccc;
     border-radius: 5px;
-}
+} */
 
 .search-bar button {
     padding: 10px 20px;

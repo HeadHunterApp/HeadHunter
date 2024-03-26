@@ -22,4 +22,5 @@ class Allas extends Model
         'datum',
         'fejvadasz',
     ];
+    public $timestamps = false; 
 }

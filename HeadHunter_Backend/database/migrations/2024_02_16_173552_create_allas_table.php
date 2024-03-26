@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Allas;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,9 +22,17 @@ return new class extends Migration
             $table->string('statusz', 40);
             $table->longText('leiras');
             $table->date('datum');
-            //inkább timestamp kéne, és abból kellene a dátum részt kiszedni
-            $table->foreignId('fejvadasz')->references('user_id')->on('fejvadaszs');
+            $table->foreignId('fejvadasz')->references('user_id')->on('fejvadaszs')->nullable();
         });
+        Allas::create([
+            'munkaltato' => 1,
+            'megnevezes' => 'softver fejlesztő',
+            'pozicio' => 100,
+            'statusz' => 'nyitott',
+            'leiras' => 'Applikáció fejlesztőként feladatod lesz cégünk jelenlegi, React Native nyelven írt iOS, illetve.',
+            'datum' => date('2024-03-20'),
+            'fejvadasz' => 1,
+        ]);
     }
 
     /**

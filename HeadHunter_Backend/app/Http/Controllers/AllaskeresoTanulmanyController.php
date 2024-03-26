@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AllaskeresoTanulmany;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AllaskeresoTanulmanyController extends Controller
 {
@@ -12,38 +13,68 @@ class AllaskeresoTanulmanyController extends Controller
     }
 
     public function show($allasker, $intezmeny, $vegzettseg){
-        $akism = AllaskeresoTanulmany::where('allaskereso', $allasker)
+        $aktan = AllaskeresoTanulmany::where('allaskereso', $allasker)
         ->where('intezmeny','=', $intezmeny)
         ->where('vegzettseg','=', $vegzettseg)
         ->firstOrFail();
-        return $akism;
+        return $aktan;
     }
 
     public function showallasker($allasker){
-        $akism = AllaskeresoTanulmany::where('allaskereso', $allasker)->get();
-        return $akism;
+        $aktan = AllaskeresoTanulmany::where('allaskereso', $allasker)
+            ->select(
+                'intezmeny',
+                'vegzettseg',
+                'szak',
+                'kezdes',
+                'vegzes',
+                'erintett_targytev'
+            )
+            ->get();
+        if ($aktan->isEmpty()) {
+            return response()->json(['message' => 'Tanulmányokra vonatkozó adat nem került megadásra'], 404);
+        }
+        return $aktan;
+    }
+
+    public function showsigned(){
+        $signed = Auth::user()->user_id;
+        $aktan = AllaskeresoTanulmany::where('allaskereso', $signed)
+            ->select(
+                'intezmeny',
+                'vegzettseg',
+                'szak',
+                'kezdes',
+                'vegzes',
+                'erintett_targytev'
+            )
+            ->get();
+        if ($aktan->isEmpty()) {
+            return response()->json(['message' => 'Még nem adtad meg, hol végezted a tanulmányaidat'], 404);
+        }
+        return $aktan;
     }
 
     public function store(Request $request){
-        $akism = new AllaskeresoTanulmany();
-        $akism->fill($request->all());
-        $akism->save();
+        $aktan = new AllaskeresoTanulmany();
+        $aktan->fill($request->all());
+        $aktan->save();
     }
 
     public function update(Request $request, $allasker, $intezmeny, $vegzettseg){
-        $akism = AllaskeresoTanulmany::where('allaskereso', $allasker)
+        $aktan = AllaskeresoTanulmany::where('allaskereso', $allasker)
         ->where('intezmeny','=', $intezmeny)
         ->where('vegzettseg','=', $vegzettseg)
         ->firstOrFail();
-        $akism->fill($request->all());
-        $akism->save();
+        $aktan->fill($request->all());
+        $aktan->save();
     }
 
     public function destroy($allasker, $intezmeny, $vegzettseg){
-        $akism = AllaskeresoTanulmany::where('allaskereso', $allasker)
+        $aktan = AllaskeresoTanulmany::where('allaskereso', $allasker)
         ->where('intezmeny','=', $intezmeny)
         ->where('vegzettseg','=', $vegzettseg)
         ->firstOrFail();
-        $akism->delete();
+        $aktan->delete();
     }
 }
