@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Allas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,9 +10,15 @@ use Illuminate\Support\Facades\DB;
 
 class AllasController extends Controller
 {
-    public function index(){
+   /*  itt lévő indexet itthagyom !!
+   public function index(){
         $allas = response()->json(Allas::all());
         return $allas;
+    } */
+    public function index()
+    {
+        $jobs = Allas::all();
+        return response()->json($jobs);
     }
 
 

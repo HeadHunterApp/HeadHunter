@@ -25,6 +25,7 @@ return new class extends Migration
             $table->foreignId('fejvadasz')->references('user_id')->on('fejvadaszs')->nullable();
             $table->timestamps();
         });
+<<<<<<< Updated upstream
 
         //tesztadatok
 
@@ -34,9 +35,79 @@ return new class extends Migration
             'pozicio' => 'INFFRO',
             'statusz' => 'nyitott',
             'leiras' => 'Applikáció fejlesztőként feladatod lesz cégünk jelenlegi, React Native nyelven írt iOS, illetve.',
+=======
+       
+        Allas::create([
+            'munkaltato' => 1,
+            'megnevezes' => 'Szoftvermérnök',
+            'pozicio' => 100,
+            'statusz' => 'nyitott',
+            'leiras' => 'Izgalmas lehetőség egy webfejlesztő számára, aki tapasztalattal rendelkezik React-ban. A jelöltnek profinak kell lennie HTML-ben, CSS-ben és JavaScript-ben. A frontend keretrendszerek és az UI/UX tervezési elvek is nagyon kívánatosak.',
+>>>>>>> Stashed changes
             'datum' => '2024-03-20',
             'fejvadasz' => 1,
         ]);
+        
+        Allas::create([
+            'munkaltato' => 1,
+            'megnevezes' => 'Adattudós',
+            'pozicio' => 100,
+            'statusz' => 'nyitott',
+            'leiras' => 'Csatlakozzon adattudományi csapatunkhoz, hogy cutting-edge projekteken dolgozzon. Olyan személyeket keresünk, akik jártasak az adatelemzésben, a gépi tanulásban és az adatvizualizációban. Az R vagy Python programozási nyelvek ismerete előnyös.',
+            'datum' => '2024-03-20',
+            'fejvadasz' => 1,
+        ]);
+        
+        Allas::create([
+            'munkaltato' => 1,
+            'megnevezes' => 'Termékmenedzser',
+            'pozicio' => 100,
+            'statusz' => 'nyitott',
+            'leiras' => 'Vezesse a termékfejlesztést és az innovációs kezdeményezéseket. Olyan személyeket keresünk, akik erős vezetői készségekkel rendelkeznek, és tapasztalattal rendelkeznek a termék életciklusának kezelésében. Kiváló kommunikációs és problémamegoldó képességek elengedhetetlenek ennek a szerepnek.',
+            'datum' => '2024-03-20',
+            'fejvadasz' => 1,
+        ]);
+        
+        Allas::create([
+            'munkaltato' => 1,
+            'megnevezes' => 'UX/UI Tervező',
+            'pozicio' => 100,
+            'statusz' => 'nyitott',
+            'leiras' => 'Keresünk egy kreatív UX/UI tervezőt, aki javítja a felhasználói élményt. Az ideális jelöltnek erős portfólióval kell rendelkeznie, amely bemutatja tervezői készségeit, valamint tapasztalattal kell rendelkeznie drótvázak és prototípusok készítésében. A felhasználói kutatási módszerek ismerete előny.',
+            'datum' => '2024-03-20',
+            'fejvadasz' => 1,
+        ]);
+        
+        Allas::create([
+            'munkaltato' => 1,
+            'megnevezes' => 'Marketing Szakértő',
+            'pozicio' => 100,
+            'statusz' => 'nyitott',
+            'leiras' => 'Vezesse a marketingkampányokat és -stratégiákat termékeinkhez. A jelöltnek mélyrehatóan kell ismernie a digitális marketingcsatornákat és az analitikát. A tartalom létrehozásának, az SEO-nak és a közösségi média marketingnek való tapasztalata nagyra értékelhető.',
+            'datum' => '2024-03-20',
+            'fejvadasz' => 1,
+        ]);
+        
+        Allas::create([
+            'munkaltato' => 1,
+            'megnevezes' => 'Frontend Fejlesztő',
+            'pozicio' => 100,
+            'statusz' => 'nyitott',
+            'leiras' => 'Lehetőség egy frontend fejlesztőnek felhasználói felületek készítésére. Olyan jelölteket keresünk, akik jártasak a frontend technológiákban, mint például az HTML, CSS és JavaScript keretrendszerek, például a React vagy az Angular. A reszponzív tervezés és a böngészőkompatibilitás is fontos.',
+            'datum' => '2024-03-20',
+            'fejvadasz' => 1,
+        ]);
+        
+        Allas::create([
+            'munkaltato' => 1,
+            'megnevezes' => 'Backend Mérnök',
+            'pozicio' => 100,
+            'statusz' => 'nyitott',
+            'leiras' => 'Csatlakozzon backend mérnöki csapatunkhoz, hogy skálázható rendszereket fejlesszen. Az ideális jelöltnek jártassága kell, hogy legyen backend technológiákban, például a Node.js, Python vagy Java terén. Tapasztalat szükséges adatbázis-kezelési rendszerekben és API fejlesztésben.',
+            'datum' => '2024-03-20',
+            'fejvadasz' => 1,
+        ]);
+        
     }
 
     /**
