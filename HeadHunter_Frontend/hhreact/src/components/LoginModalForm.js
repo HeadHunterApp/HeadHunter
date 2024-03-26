@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/ModalLoginForm.css'; // Import CSS file for styling
+import '../styles/ModalLoginForm.css'; // ImporCSS   styling
 import Regisztral from './RegisztralForm';
 import Bejelentkezes from './Bejelentkezes';
 

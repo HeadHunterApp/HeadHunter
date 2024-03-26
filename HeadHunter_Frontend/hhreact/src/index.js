@@ -5,7 +5,8 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 
 import { AuthProvider } from "./contexts/AuthContext";
-import Fooldal from "./views/FoOldal";
+import Fooldal from "./pages/FoOldal";
+import AllasKereses from"./pages/AllasKereses";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -13,7 +14,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <Fooldal/>
+        <AllasKereses/>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
