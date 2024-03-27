@@ -22,15 +22,6 @@ return new class extends Migration
             $table->date('vegzes')->nullable();
         });
         
-        //tesztadatok
-
-        AllaskeresoTapasztalat::create([
-            'allaskereso' => 3,
-            'cegnev' => 'Magyar Telekom Nyrt.',
-            'pozicio' => 'INFFRO',
-            'kezdes' => '2023/01/04',
-            'vegzes' => '2024/02/01',
-        ]);
     }
 
     /**

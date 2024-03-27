@@ -17,13 +17,7 @@ return new class extends Migration
             $table->foreignId('vegzettseg')->references('vegzettseg_id')->on('vegzettsegs');
             $table->primary('allas');
         });
-         
-        //tesztadatok
-
-        AllasVegzettseg::create([
-            'allas' => 1,
-            'vegzettseg' => 3,
-        ]);
+        
     }
 
     /**

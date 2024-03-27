@@ -71,5 +71,20 @@ class AllasController extends Controller
             return $query;
     }
     
+    public function shortAllasAll(){
+        $query = DB::table('allas as al')
+            ->join('munkaltatos as m', 'al.munkaltato','=','m.munkaltato_id')
+            ->join('pozicios as p', 'al.pozicio','=','p.pozkod')
+            ->join('terulets as t', 'p.terulet','=','t.terulet_id')
+            ->join('users as u', 'al.fejvadasz','=','u.user_id')
+            ->select(
+                'm.cegnev',
+                'al.megnevezes',
+                'al.leiras',
+                'al.statusz',
+                )
+            ->get();
+            return $query;
+    }
 
 }

@@ -26,17 +26,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        //tesztadatok
-
-        Allas::create([
-            'munkaltato' => 1,
-            'megnevezes' => 'szoftver fejlesztő',
-            'pozicio' => 'INFFRO',
-            'statusz' => 'nyitott',
-            'leiras' => 'Applikáció fejlesztőként feladatod lesz cégünk jelenlegi, React Native nyelven írt iOS, illetve.',
-            'datum' => '2024-03-20',
-            'fejvadasz' => 1,
-        ]);
     }
 
     /**
