@@ -8,13 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class AllaskeresoNyelvtudas extends Model
 {
     use HasFactory;
+
+    protected $table = 'allaskereso_nyelvtudass';
+
+
     protected function setKeysForSaveQuery($query)
     {
         $query
-            ->where('allaskereso', '=', $this->
-            getAttribute('user_id'))
-            ->where('nyelvtudas', '=', $this->
-            getAttribute('nyelvkod'));
+            ->where('allaskereso', '=', $this->getAttribute('user_id'))
+            ->where('nyelvtudas', '=', $this->getAttribute('nyelvkod'));
 
 
         return $query;

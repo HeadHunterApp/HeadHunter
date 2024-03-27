@@ -37,8 +37,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//allaskereső oldalhoz route:
-Route::get('/allas', [AllasController::class, 'index']);
 Route::get('/token', function () {
     return request()->session()->token();
 });
@@ -46,6 +44,18 @@ Route::get('/token', function () {
 Route::get('/dashboard', function () {
     return '{}';
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+//regisztrációhoz bejelentkezés nélkül:
+Route::post('/guest/jobseekers/new', [AllaskeresoController::class, 'store']);
+//álláskereső oldalhoz route bejelentkezés nélkül:
+//allas
+Route::get('/guest/jobs/all', [AllasController::class, 'shortAllasAll']);
+Route::get('/guest/jobs/{allas_id}', [AllasController::class, 'detailedAllas']);
+//allas-kapcsolódók
+Route::get('/guest/jobs/{allas_id}/skills', [AllasIsmeretController::class, 'detailedAllasIsm']);
+Route::get('/guest/jobs/{allas_id}/languages', [AllasNyelvtudasController::class, 'detailedAllasNyelv']);
+Route::get('/guest/jobs/{allas_id}/edu-atts', [AllasVegzettsegController::class, 'detailedAllasVegz']);
+Route::get('/guest/jobs/{allas_id}/exps', [AllasTapasztalatController::class, 'detailedAllasTap']);
 
 Route::middleware('auth')->group(function () {
     // bejelentkezett felhasználók
@@ -244,7 +254,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/seeker/jobs/{allas_id}/exps', [AllasTapasztalatController::class, 'detailedAllasTap']);
         //allaskereso
         Route::get('/seeker/jobseekers/profile', [AllaskeresoController::class, 'showsigned']);
-        Route::post('/seeker/jobseekers/new', [AllaskeresoController::class, 'store']);
         Route::put('/seeker/jobseekers/profile/modification', [AllaskeresoController::class, 'updatesigned']);
         //allaskereso-ismeret
         Route::get('/seeker/jobseekers/profile/skills', [AllaskeresoIsmeretController::class, 'showsigned']);

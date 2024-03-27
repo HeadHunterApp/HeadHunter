@@ -25,6 +25,7 @@ class AllaskeresoIsmeretController extends Controller
         $akism = AllaskeresoIsmeret::join('SzakmaiIsmeret as si', 'AllaskeresoIsmeret.szakmai_ismeret', '=', 'si.ismeret_id')
         ->where('allaskereso', $allasker)
         ->select('si.megnevezes', 'si.szint')
+        //select elágazás adminhoz, hogy lássa az id-ket!
         ->get();
         if ($akism->isEmpty()) {
             return response()->json(['message' => 'Szakmai ismeret nem került megadásra'], 404);

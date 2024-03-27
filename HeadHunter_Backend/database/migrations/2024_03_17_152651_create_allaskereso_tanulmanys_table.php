@@ -16,11 +16,11 @@ return new class extends Migration
             $table->foreignId('allaskereso')->references('user_id')->on('allaskeresos');
             $table->string('intezmeny', 50);
             $table->string('szak', 50);
-            $table->primary(['allaskereso','intezmeny','szak']);
             $table->foreignId('vegzettseg')->references('vegzettseg_id')->on('vegzettsegs');
             $table->date('kezdes');
             $table->date('vegzes')->nullable();
             $table->longText('erintett_targytev', 250)->nullable();
+            $table->primary(['allaskereso','intezmeny','szak']);
         });
 
     }

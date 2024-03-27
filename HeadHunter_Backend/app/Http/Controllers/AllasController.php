@@ -10,17 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class AllasController extends Controller
 {
-   /*  itt lévő indexet itthagyom !!
-   public function index(){
+      public function index(){
         $allas = response()->json(Allas::all());
         return $allas;
-    } */
-    public function index()
-    {
-        $jobs = Allas::all();
-        return response()->json($jobs);
     }
-
 
     public function store(Request $request)
     {

@@ -9,22 +9,10 @@ use Illuminate\Database\Eloquent\Model;
 class AllaskeresoTanulmany extends Model
 {
     use HasFactory;
-    protected function setKeysForSaveQuery($query)
-    {
-        $query
-            ->where('allaskereso', '=', $this->
-            getAttribute('user_id'))
-            ->where('intezmeny', '=', $this->
-            getAttribute('intezmeny'))
-            ->where('szak', '=', $this->
-            getAttribute('szak'));
 
+    protected $primaryKey = ['allaskereso', 'intezmeny', 'vegzettseg'];
+    public $timestamps = false;
 
-        return $query;
-    }
-
-    protected $primaryKey=['allaskereso','intezmeny','vegzettseg'];
-    
     protected $fillable = [
         'allaskereso',
         'intezmeny',
@@ -44,5 +32,12 @@ class AllaskeresoTanulmany extends Model
         $this->attributes['vegzes'] = $formatteddate;
     }
 
-    public $timestamps = false;
+    protected function setKeysForSaveQuery($query)
+    {
+        $query
+            ->where('allaskereso', '=', $this->getAttribute('user_id'))
+            ->where('intezmeny', '=', $this->getAttribute('intezmeny'))
+            ->where('szak', '=', $this->getAttribute('szak'));
+        return $query;
+    }
 }

@@ -25,7 +25,7 @@ return new class extends Migration
             $table->foreignId('fejvadasz')->references('user_id')->on('fejvadaszs')->nullable();
             $table->timestamps();
         });
-
+/*
         Allas::create([
             'munkaltato' => 1,
             'megnevezes' => 'Szoftvermérnök',
@@ -95,7 +95,7 @@ return new class extends Migration
             'datum' => '2024-03-20',
             'fejvadasz' => 1,
         ]);
-        
+     */   
     }
 
     /**

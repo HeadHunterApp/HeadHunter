@@ -26,6 +26,7 @@ class Allaskereso extends Model
         'allampolgarsag',
         'jogositvany',
         'szoc_keszseg',
+        'fenykep',
     ];
 
     protected $hidden = [
