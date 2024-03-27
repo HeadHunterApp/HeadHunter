@@ -19,22 +19,7 @@ return new class extends Migration
             $table->timestamps();
         });
         
-        //tesztadatok
-
-        //----FONTOS!!! USER_ID=1 MINDIG AZ ADMIN, MÁS SZÁMOKAT HASZNÁLJATOK!!!----
-
-        Fejvadasz::create([
-            'user_id' => 2,
-            'telefonszam' => '+36201234567',
-            'fenykep' => 'jpg',
-        ]);
-
         
-        Fejvadasz::create([
-            'user_id' => 5,
-            'telefonszam' => '+36201239876',
-            'fenykep' => 'masikjpg',
-        ]);
     }
 
     /**

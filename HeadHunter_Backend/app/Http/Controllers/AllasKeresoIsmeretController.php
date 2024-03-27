@@ -58,6 +58,16 @@ class AllaskeresoIsmeretController extends Controller
         $akism->save();
     }
 
+    public function updatesigned(Request $request, $ismeret){
+        $signed = Auth::user()->user_id;
+        $akism = AllaskeresoIsmeret::where('allaskereso', $signed)
+        ->where('szakmai_ismeret','=', $ismeret)
+        ->firstOrFail();
+        $akism->fill($request->all());
+        $akism->save();
+    }
+
+
     public function destroy($allasker,$ismeret){
         $akism = AllaskeresoIsmeret::where('allaskereso', $allasker)
         ->where('szakmai_ismeret','=', $ismeret)

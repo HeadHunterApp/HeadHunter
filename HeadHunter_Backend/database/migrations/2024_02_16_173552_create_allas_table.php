@@ -25,25 +25,13 @@ return new class extends Migration
             $table->foreignId('fejvadasz')->references('user_id')->on('fejvadaszs')->nullable();
             $table->timestamps();
         });
-<<<<<<< Updated upstream
 
-        //tesztadatok
-
-        Allas::create([
-            'munkaltato' => 1,
-            'megnevezes' => 'szoftver fejlesztő',
-            'pozicio' => 'INFFRO',
-            'statusz' => 'nyitott',
-            'leiras' => 'Applikáció fejlesztőként feladatod lesz cégünk jelenlegi, React Native nyelven írt iOS, illetve.',
-=======
-       
         Allas::create([
             'munkaltato' => 1,
             'megnevezes' => 'Szoftvermérnök',
             'pozicio' => 100,
             'statusz' => 'nyitott',
-            'leiras' => 'Izgalmas lehetőség egy webfejlesztő számára, aki tapasztalattal rendelkezik React-ban. A jelöltnek profinak kell lennie HTML-ben, CSS-ben és JavaScript-ben. A frontend keretrendszerek és az UI/UX tervezési elvek is nagyon kívánatosak.',
->>>>>>> Stashed changes
+            'leiras' => 'Izga
             'datum' => '2024-03-20',
             'fejvadasz' => 1,
         ]);

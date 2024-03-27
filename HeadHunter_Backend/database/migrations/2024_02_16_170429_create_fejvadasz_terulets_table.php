@@ -18,12 +18,6 @@ return new class extends Migration
             $table->primary(['fejvadasz','terulet']);
         });        
         
-        //tesztadatok
-
-        FejvadaszTerulet::create([
-            'fejvadasz' => 2,
-            'terulet' => 1,
-        ]);
     }
 
     /**

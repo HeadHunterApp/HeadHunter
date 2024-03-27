@@ -20,13 +20,6 @@ return new class extends Migration
             //$table->timestamps();
         });
 
-        //tesztadatok
-
-        Pozicio::create([
-            'pozkod' => 'INFFRO',
-            'terulet' => 1,
-            'pozicio' => 'frontend fejlesztő'
-        ]);
     }
 
     /**

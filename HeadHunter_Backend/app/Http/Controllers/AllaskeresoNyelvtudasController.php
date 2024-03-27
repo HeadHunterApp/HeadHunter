@@ -77,6 +77,15 @@ class AllaskeresoNyelvtudasController extends Controller
         $aknyelv->save();
     }
 
+    public function updatesigned(Request $request, $nyelvtudas){
+        $signed = Auth::user()->user_id;
+        $aknyelv = AllaskeresoNyelvtudas::where('allaskereso', $signed)
+        ->where('nyelvtudas','=', $nyelvtudas)
+        ->firstOrFail();
+        $aknyelv->fill($request->all());
+        $aknyelv->save();
+    }
+
     public function destroy($allasker,$nyelvtudas){
         $aknyelv = AllaskeresoNyelvtudas::where('allaskereso', $allasker)
         ->where('nyelvtudas','=', $nyelvtudas)

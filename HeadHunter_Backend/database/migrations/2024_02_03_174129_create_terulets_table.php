@@ -17,11 +17,6 @@ return new class extends Migration
             $table->string('megnevezes');
         });
 
-        //tesztadatok
-
-        Terulet::create([
-            'megnevezes' => 'informatika',
-        ]);
     }
 
     /**
