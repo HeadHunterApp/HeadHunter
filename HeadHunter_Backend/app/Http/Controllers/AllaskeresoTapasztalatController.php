@@ -74,6 +74,16 @@ class AllaskeresoTapasztalatController extends Controller
         $aktap->save();
     }
 
+    public function updatesigned(Request $request, $cegnev, $pozicio){
+        $signed = Auth::user()->user_id;
+        $aktap = AllaskeresoTapasztalat::where('allaskereso', $signed)
+        ->where('cegnev','=', $cegnev)
+        ->where('pozicio','=', $pozicio)
+        ->firstOrFail();
+        $aktap->fill($request->all());
+        $aktap->save();
+    }
+
     public function destroy($allasker, $cegnev, $pozicio){
         $aktap = AllaskeresoTapasztalat::where('allaskereso', $allasker)
         ->where('cegnev','=', $cegnev)

@@ -15,14 +15,11 @@ return new class extends Migration
         Schema::create('fejvadaszs', function (Blueprint $table) {
             $table->foreignId('user_id')->references('user_id')->on('users')->primary();
             $table->string('telefonszam', 12)->nullable();
-            $table->string('fenykep', 150);
+            $table->string('fenykep', 150)->nullable();
             $table->timestamps();
         });
-        Fejvadasz::create([
-            'user_id' => 1,
-            'telefonszam' => '+36201234567',
-            'fenykep' => 'jpg',
-        ]);
+        
+        
     }
 
     /**

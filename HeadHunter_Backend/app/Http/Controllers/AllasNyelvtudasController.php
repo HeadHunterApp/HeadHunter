@@ -14,43 +14,47 @@ class AllasNyelvtudasController extends Controller
     }
 
     public function show($allas,$nyelvkod){
-        $allasism = AllasNyelvtudas::where('allas', $allas)
+        $allasnyelv = AllasNyelvtudas::where('allas', $allas)
         ->where('nyelvtudas','=', $nyelvkod)
         ->firstOrFail();
-        return $allasism;
+        return $allasnyelv;
     }
 
     public function showallas($allas){
-        $allasism = AllasNyelvtudas::where('allas', $allas)->get();
-        return $allasism;
+        $allasnyelv = AllasNyelvtudas::where('allas', $allas)->get();
+        return $allasnyelv;
     }
 
     public function store(Request $request){
-        $allasism = new AllasNyelvtudas();
-        $allasism->fill($request->all());
-        $allasism->save();
+        $allasnyelv = new AllasNyelvtudas();
+        $allasnyelv->fill($request->all());
+        $allasnyelv->save();
     }
 
     public function update(Request $request, $allas, $nyelvkod){
-        $allasism = AllasNyelvtudas::where('allas', $allas)
+        $allasnyelv = AllasNyelvtudas::where('allas', $allas)
         ->where('nyelvtudas','=', $nyelvkod)
         ->firstOrFail();
-        $allasism->fill($request->all());
-        $allasism->save();
+        $allasnyelv->fill($request->all());
+        $allasnyelv->save();
     }
 
     public function destroy($allas,$nyelvkod){
-        $allasism = AllasNyelvtudas::where('allas', $allas)
+        $allasnyelv = AllasNyelvtudas::where('allas', $allas)
         ->where('nyelvtudas','=', $nyelvkod)
         ->firstOrFail();
-        $allasism->delete();
+        $allasnyelv->delete();
     }
 
     public function detailedAllasNyelv($allas_id){
-        return DB::table('allas_nyelvtudass as an')
+        $allasnyelv=DB::table('allas_nyelvtudass as an')
             ->join('nyelvtudass as nt', 'an.nyelvtudas','=','nt.nyelvkod')
             ->select('nt.nyelv', 'nt.megnevezes')
             ->where('an.allas', $allas_id)
             ->get();
+        if ($allasnyelv->isEmpty()) {
+                return response()->json(['message' => 'Ehhez az álláshoz nem adtak meg nyelvtudásra vonatkozó elvárást'], 404);
+        }
+        return $allasnyelv;
     }
 }

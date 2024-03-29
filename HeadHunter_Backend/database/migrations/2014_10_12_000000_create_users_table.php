@@ -23,6 +23,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        //FIX ADAT
         //only one user with jogosultsag='admin'
 
         User::create([
@@ -31,6 +32,8 @@ return new class extends Migration
             'jelszo' => 'admin123',
             'jogosultsag' => 'admin',
         ]);
+
+        
     }
 
 

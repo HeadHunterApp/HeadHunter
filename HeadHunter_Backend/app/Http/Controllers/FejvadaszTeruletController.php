@@ -31,6 +31,7 @@ class FejvadaszTeruletController extends Controller
     public function showfejv($fejvadasz)
     {
         $fejvadaszterulet = FejvadaszTerulet::where('fejvadasz', $fejvadasz)->get();
+        //lekérdezés az adatok megjelenítéséhez!
         if ($fejvadaszterulet->isEmpty()) {
             return response()->json(['message' => 'Jelenleg egyetlen terület sincs hozzárendelve ehhez a fejvadászhoz'], 404);
         }
@@ -40,6 +41,7 @@ class FejvadaszTeruletController extends Controller
     public function showsigned(){
         $signed = Auth::user()->user_id;
         $fejvadaszterulet = FejvadaszTerulet::where('fejvadasz', $signed)->get();
+        //lekérdezés az adatok megjelenítéséhez!
         if ($fejvadaszterulet->isEmpty()) {
             return response()->json(['message' => 'Még egyetlen területet sem rendeltek hozzád'], 404);
         }

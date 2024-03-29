@@ -24,4 +24,6 @@ class AllaskeresoIsmeret extends Model
         'szakmai_ismeret'
         
     ];
+
+    public $timestamps = false;
 }

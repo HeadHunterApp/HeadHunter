@@ -23,4 +23,6 @@ class FejvadaszTerulet extends Model
         'fejvadasz',
         'terulet',
     ];
+
+    public $timestamps = false;
 }

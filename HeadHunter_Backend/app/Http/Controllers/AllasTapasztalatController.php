@@ -34,12 +34,16 @@ class AllasTapasztalatController extends Controller
     }
 
     public function detailedAllasTap($allas_id){
-        return DB::table('allas_tapasztalats as at')
+        $allastap=DB::table('allas_tapasztalats as at')
             ->join('tapasztalat_idos as ti', 'at.tapasztalat_ido','=','ti.tapasztalat_id')
             ->join('pozicios as p', 'at.pozicio','=','p.pozkod')
             ->join('terulets as t', 'p.terulet','=','t.terulet_id')
             ->select('t.megnevezes', 'p.pozicio', 'ti.leiras')
             ->where('ai.allas', $allas_id)
             ->get();
+        if ($allastap->isEmpty()) {
+                return response()->json(['message' => 'Ehhez az álláshoz nem adtak meg korábbi munkatapasztalatra vonatkozó elvárást'], 404);
+        }
+        return $allastap;
     }
 }

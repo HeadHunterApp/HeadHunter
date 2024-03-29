@@ -13,4 +13,5 @@ class AllasVegzettseg extends Model
         'allas',
         'vegzettseg',
     ];
+    public $timestamps = false;
 }

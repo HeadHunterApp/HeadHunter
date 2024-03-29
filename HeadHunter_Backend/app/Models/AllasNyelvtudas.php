@@ -24,4 +24,6 @@ class AllasNyelvtudas extends Model
         'nyelvtudas'
         
     ];
+
+    public $timestamps = false;
 }

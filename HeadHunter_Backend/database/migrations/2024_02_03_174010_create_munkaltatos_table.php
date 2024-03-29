@@ -21,13 +21,7 @@ return new class extends Migration
             $table->string('email', 40)->unique();
             $table->timestamps();
         });
-        Munkaltato::create([
-            'cegnev' => 'Valami Kft.', 
-            'szekhely' => '1081 Budapest, II. János Pál pápa tér 2.', 
-            'kapcsolattarto' => 'Valaki József',
-            'telefonszam' => '+36201234567',
-            'email' => 'valami@valami.hu'
-        ]);
+        
         
     }
 

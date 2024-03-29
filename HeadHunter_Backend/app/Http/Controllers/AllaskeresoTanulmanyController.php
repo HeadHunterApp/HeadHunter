@@ -12,10 +12,10 @@ class AllaskeresoTanulmanyController extends Controller
         return AllaskeresoTanulmany::all();
     }
 
-    public function show($allasker, $intezmeny, $vegzettseg){
+    public function show($allasker, $intezmeny, $szak){
         $aktan = AllaskeresoTanulmany::where('allaskereso', $allasker)
         ->where('intezmeny','=', $intezmeny)
-        ->where('vegzettseg','=', $vegzettseg)
+        ->where('szak','=', $szak)
         ->firstOrFail();
         return $aktan;
     }
@@ -24,8 +24,8 @@ class AllaskeresoTanulmanyController extends Controller
         $aktan = AllaskeresoTanulmany::where('allaskereso', $allasker)
             ->select(
                 'intezmeny',
-                'vegzettseg',
                 'szak',
+                'vegzettseg',
                 'kezdes',
                 'vegzes',
                 'erintett_targytev'
@@ -42,8 +42,8 @@ class AllaskeresoTanulmanyController extends Controller
         $aktan = AllaskeresoTanulmany::where('allaskereso', $signed)
             ->select(
                 'intezmeny',
-                'vegzettseg',
                 'szak',
+                'vegzettseg',
                 'kezdes',
                 'vegzes',
                 'erintett_targytev'
@@ -61,19 +61,29 @@ class AllaskeresoTanulmanyController extends Controller
         $aktan->save();
     }
 
-    public function update(Request $request, $allasker, $intezmeny, $vegzettseg){
+    public function update(Request $request, $allasker, $intezmeny, $szak){
         $aktan = AllaskeresoTanulmany::where('allaskereso', $allasker)
         ->where('intezmeny','=', $intezmeny)
-        ->where('vegzettseg','=', $vegzettseg)
+        ->where('szak','=', $szak)
         ->firstOrFail();
         $aktan->fill($request->all());
         $aktan->save();
     }
 
-    public function destroy($allasker, $intezmeny, $vegzettseg){
+    public function updatesigned(Request $request, $intezmeny, $szak){
+        $signed = Auth::user()->user_id;
+        $aktan = AllaskeresoTanulmany::where('allaskereso', $signed)
+        ->where('intezmeny','=', $intezmeny)
+        ->where('szak','=', $szak)
+        ->firstOrFail();
+        $aktan->fill($request->all());
+        $aktan->save();
+    }
+
+    public function destroy($allasker, $intezmeny, $szak){
         $aktan = AllaskeresoTanulmany::where('allaskereso', $allasker)
         ->where('intezmeny','=', $intezmeny)
-        ->where('vegzettseg','=', $vegzettseg)
+        ->where('szak','=', $szak)
         ->firstOrFail();
         $aktan->delete();
     }
