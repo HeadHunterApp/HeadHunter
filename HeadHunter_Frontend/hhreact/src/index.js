@@ -1,13 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-// import MainPage from "./MainPage"; // Change import statement
-import "./index.css";
-import Regisztral from "./components/RegisztralForm";
-
 import { AuthProvider } from "./contexts/AuthContext";
-import Fooldal from "./pages/FoOldal";
-import AllasKereses from"./pages/AllasKereses";
+import "./styles/index.css";
+import App from "./App";
 
 
 
@@ -16,8 +12,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-
-        <AllasKereses/>
+        <App/>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>

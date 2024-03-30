@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import useAuthContext from "../contexts/AuthContext";
-import "../styles/BejelentkezesForm.css";
+import "../styles/components/BejelentkezesForm.css";
 const Bejelentkezes = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

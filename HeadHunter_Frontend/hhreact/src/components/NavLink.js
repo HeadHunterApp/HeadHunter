@@ -1,8 +1,8 @@
 import React from 'react';
 
-const NavLink = () => {
+const NavLink = (props) => {
   return (
-        <li><a className='navLink' href="#">valami</a></li>
+        <li><a className='navLink' href={props.link}>{props.title}</a></li>
   );
 };
 

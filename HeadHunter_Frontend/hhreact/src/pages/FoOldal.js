@@ -1,22 +1,13 @@
 import React from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import RightSide from "../components/RightSide";
-import LeftSide from "../components/LeftSide";
-import "../styles/Fooldal.css";
-import '../styles/Admin_allasok.css';
+import "../styles/layouts/Fooldal.css";
+import MainCard from "../components/MainCard";
 
 const Fooldal = () => {
   return (
-    <div>
-      <Header />
-      <main>
-        <RightSide />
-        
-        <LeftSide />
-      </main>
-      <Footer />
-    </div>
+      <div className="maincard-container">
+        <MainCard title='Álláskeresőknek' picture='/pics/fooldal/people-1979261_1280.jpg' />
+        <MainCard title='Munkáltatóknak' picture='/pics/fooldal/laptop-3196481_1280.jpg' />
+      </div>
   );
 };
 
