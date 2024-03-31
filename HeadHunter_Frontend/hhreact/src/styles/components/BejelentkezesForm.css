@@ -9,3 +9,6 @@
     width: 100%;
   }
   
+  .form-container {
+    max-width: 400px;
+  }

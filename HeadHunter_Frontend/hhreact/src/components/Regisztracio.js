@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useAuthContext from "../contexts/AuthContext";
+import '../styles/components/Regisztral.css';
 
 export default function Regisztracio(){
     const [name, setName] = useState("");
@@ -24,11 +25,11 @@ export default function Regisztracio(){
     };
 
     return(
-        <div className=" m-auto" style={{ maxWidth: "400px" }}>
-            <h1 className="text-center">Regisztráció</h1>
+        <div className="form-group">
+            <h1>Regisztráció</h1>
             <form onSubmit={handleSubmit}>
-                <div className="mb-3 mt-3">
-                    <label htmlFor="name" className="form-label">
+                <div>
+                    <label htmlFor="name">
                         Név:
                     </label>
                     <input
@@ -50,8 +51,8 @@ export default function Regisztracio(){
                         )}
                     </div>
                 </div>
-                <div className="mb-3 mt-3">
-                    <label htmlFor="email" className="form-label">
+                <div>
+                    <label htmlFor="email">
                         Email:
                     </label>
                     <input
@@ -74,7 +75,7 @@ export default function Regisztracio(){
                     </div>
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="pwd" className="form-label">
+                    <label htmlFor="pwd">
                         Jelszó:
                     </label>
                     <input
@@ -97,7 +98,7 @@ export default function Regisztracio(){
                     </div>
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="pwd2" className="form-label">
+                    <label htmlFor="pwd2">
                         Jelszó újra:
                     </label>
                     <input

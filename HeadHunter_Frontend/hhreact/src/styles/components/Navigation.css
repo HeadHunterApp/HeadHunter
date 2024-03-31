@@ -1,22 +1,19 @@
-
 nav ul {
     list-style-type: none;
     padding: 0;
-    margin-top: 20px;
+    margin-top: 60px;
+    margin-bottom: 0;
     text-align: center;
 }
 
 nav ul li {
     display: inline;
-    margin: 0 10px;
-}
-
-nav ul li a {
+    margin: 0 20px;
     color: white;
     text-decoration: none;
 }
 
-nav ul li a:hover {
+nav ul li:hover {
     text-shadow: -3px -1px 16px rgba(0,0,0,0.95);
-
+    cursor: pointer;
 }

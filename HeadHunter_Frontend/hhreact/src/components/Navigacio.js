@@ -1,5 +1,6 @@
 import React from "react";
 import useAuthContext from "../contexts/AuthContext";
+import "../styles/components/Navigation.css";
 import NavLink from "./NavLink";
 
 export default function Navigacio() {
@@ -19,9 +20,9 @@ export default function Navigacio() {
             </>
           ) : (
             <>
-              <NavLink link="/bejelentkezes" title="Bejelentkezés" />
+              <NavLink link="/allaskereses" title="Álláskeresés" />
              
-              <NavLink link="/regisztracio" title="Regisztráció" />
+              {/*<NavLink link="/regisztracio" title="Regisztráció" />*/}
              
             </>
           )}

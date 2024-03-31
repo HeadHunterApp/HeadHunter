@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../styles/components/Kereses.css";
+import "../styles/pages/Kereses.css";
 import AllasKartya2 from '../components/AllasKartya2';
 
 const Allaskereses = () => {
