@@ -29,7 +29,7 @@ return new class extends Migration
         User::create([
             'nev' => 'Admin', 
             'email' => 'admin@headhunter.com', 
-            'jelszo' => 'admin123',
+            'jelszo' => bcrypt('admin123'),
             'jogosultsag' => 'admin',
         ]);
 
