@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import "../styles/components/Kereses.css";
 import AllasKartya2 from '../components/AllasKartya2';
 
 const Allaskereses = () => {
@@ -47,23 +46,23 @@ const Allaskereses = () => {
 
   return (
     <div>
-      <Header />
-      <main>
-        <div className="search-bar">
-          <input 
-            type="text" 
-            placeholder="Keresés..." 
+        
+        <div className="search-bar" >
+          <input type="text" placeholder="Keresés..."
             value={searchQuery} 
-            onChange={handleSearchChange} 
-          />
-          <button onClick={handleSearch}>Search</button> {/* kereső gomb */}
+            onChange={handleSearchChange}
+            />
+          <img className="search-bar-button"
+            src="/pics/kereso/search_icon.png"
+            alt="Keresés"
+            value={searchQuery}
+            onClick={handleSearch}
+          /> {/* kereső gomb */}
         </div>
         {/*mappal kiirja a talált állásokat */}
         {searchedJobs.map((job) => (
           <AllasKartya2 key={job.allas_id} job={job} />
         ))}
-      </main>
-      <Footer />
     </div>
   );
 };

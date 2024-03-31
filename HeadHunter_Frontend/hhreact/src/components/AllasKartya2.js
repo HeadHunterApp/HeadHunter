@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/AllasKartya.css';
+import '../styles/components/AllasKartya.css';
 
 const AllasKartya2 = ({ job }) => {
   return (

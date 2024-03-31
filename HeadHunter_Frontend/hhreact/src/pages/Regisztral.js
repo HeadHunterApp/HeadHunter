@@ -1,17 +1,11 @@
 import React from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import RegistrationForm from "../components/RegisztralForm";
- import '../styles/Regisztral.css';
+import '../styles/layouts/Regisztral.css';
+import RegisztralForm from "../components/RegisztralForm";
 
 const Regisztral = () => {
   return (
     <div>
-      <main>
-   
-      </main>
-<RegistrationForm/>
-      <Footer />
+      <RegisztralForm />
     </div>
   );
 };
