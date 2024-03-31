@@ -12,4 +12,6 @@ class TapasztalatIdo extends Model
     protected $fillable = [
         'leiras',
     ];
+
+    public $timestamps = false;
 }

@@ -14,4 +14,6 @@ class AllasTapasztalat extends Model
         'pozicio',
         'tapasztalat_ido',
     ];
+
+    public $timestamps = false;
 }

@@ -26,7 +26,14 @@ class Allaskereso extends Model
         'allampolgarsag',
         'jogositvany',
         'szoc_keszseg',
+        'fenykep',
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+    
     public static $rules = [
         'user_id' => 'required',
         'nem' => 'required|in:férfi,nö',

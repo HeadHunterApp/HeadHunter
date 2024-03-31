@@ -24,4 +24,6 @@ class AllasIsmeret extends Model
         'szakmai_ismeret',
         'elvaras_szint',
     ];
+
+    public $timestamps = false;
 }

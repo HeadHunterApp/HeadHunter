@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/ModalLoginForm.css'; 
+import '../styles/components/ModalLoginForm.css'; 
 import Regisztral from './RegisztralForm';
 import Bejelentkezes from './Bejelentkezes';
 
@@ -14,7 +14,7 @@ class LoginModalForm extends React.Component {
     };
   }
 
-  // Function to toggle the modal state
+  // modal state toggle funkció
   toggleRegistryModal = () => {
     this.setState(prevState => ({
       isRegistryOpen: !prevState.isRegistryOpen
@@ -31,12 +31,12 @@ class LoginModalForm extends React.Component {
     return (
       <div>
       <div className="button-container">
-        {/* Button to open the popup form */}
+        {/* gomb ami megnyitja a modalt */}
         <button className="open-button" onClick={this.toggleLoginModal}>Bejelentkezés</button>
         <button className="open-button" onClick={this.toggleRegistryModal}>
             Regisztráció
           </button>
-        {/* The form */}
+        {/* form */}
         <div className={this.state.isLoginOpen ? 'modal open' : 'modal'}>
           <div className="modal-content">
             <span className="close" onClick={this.toggleLoginModal}>&times;</span>
@@ -45,7 +45,7 @@ class LoginModalForm extends React.Component {
           </div>
         </div>
       </div>
-        {/* Button to open the popup form */}
+        {/* gomb ami megnyitja a popupot*/}
         
 
         {/* The form */}

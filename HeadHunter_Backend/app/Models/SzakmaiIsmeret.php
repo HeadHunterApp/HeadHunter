@@ -13,4 +13,5 @@ class SzakmaiIsmeret extends Model
         'megnevezes',
         'szint',
     ];
+    public $timestamps = false;
 }

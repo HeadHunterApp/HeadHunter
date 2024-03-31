@@ -25,6 +25,7 @@ class AllaskeresoIsmeretController extends Controller
         $akism = AllaskeresoIsmeret::join('SzakmaiIsmeret as si', 'AllaskeresoIsmeret.szakmai_ismeret', '=', 'si.ismeret_id')
         ->where('allaskereso', $allasker)
         ->select('si.megnevezes', 'si.szint')
+        //select elágazás adminhoz, hogy lássa az id-ket!
         ->get();
         if ($akism->isEmpty()) {
             return response()->json(['message' => 'Szakmai ismeret nem került megadásra'], 404);
@@ -57,6 +58,16 @@ class AllaskeresoIsmeretController extends Controller
         $akism->fill($request->all());
         $akism->save();
     }
+
+    public function updatesigned(Request $request, $ismeret){
+        $signed = Auth::user()->user_id;
+        $akism = AllaskeresoIsmeret::where('allaskereso', $signed)
+        ->where('szakmai_ismeret','=', $ismeret)
+        ->firstOrFail();
+        $akism->fill($request->all());
+        $akism->save();
+    }
+
 
     public function destroy($allasker,$ismeret){
         $akism = AllaskeresoIsmeret::where('allaskereso', $allasker)

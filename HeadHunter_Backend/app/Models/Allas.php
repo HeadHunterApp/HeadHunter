@@ -22,5 +22,9 @@ class Allas extends Model
         'datum',
         'fejvadasz',
     ];
-    public $timestamps = false; 
+    
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

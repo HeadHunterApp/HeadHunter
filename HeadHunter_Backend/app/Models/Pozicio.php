@@ -24,6 +24,7 @@ class Pozicio extends Model
         'terulet',
         'pozicio',
     ];
-    public $timestamps = false; 
+
+    public $timestamps = false;
     
 }

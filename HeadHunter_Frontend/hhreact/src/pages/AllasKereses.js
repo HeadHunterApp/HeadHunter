@@ -1,27 +1,44 @@
-import React, { useState } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import "../styles/Fooldal.css";
-import "../styles/Admin_allasok.css";
+import React, { useState, useEffect } from "react";
+import "../styles/components/Kereses.css";
 import AllasKartya2 from '../components/AllasKartya2';
-import allasadat from '../tesztadatok/allasadat'; // Import jobData
 
-const AllasKereses = () => {
+const Allaskereses = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchedJobs, setSearchedJobs] = useState(allasadat); // Initial state with all jobs
+  const [searchedJobs, setSearchedJobs] = useState([]);
 
-  // Function to handle search input change
+  useEffect(() => {
+    // minden adat a backendből
+    fetchJobs();
+  }, []);
+
+  // a jobdatat szedi ki
+  const fetchJobs = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/allas');
+      if (!response.ok) {
+        throw new Error('Failed to fetch job data');
+      }
+      const data = await response.json();
+      // alals id és fejvadássz kizárása talán nem is fontos :D
+      const filteredData = data.map(({ allas_id, fejvadasz, ...rest }) => rest);
+      setSearchedJobs(filteredData);
+    } catch (error) {
+      console.error('Error fetching job data:', error);
+    }
+  };
+
+  // keresés változtatást kezeli
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
 
-  // Function to handle search button click
+  // kereső gomb kattintás kezelő
   const handleSearch = () => {
     if (searchQuery.trim() === "") {
-      setSearchedJobs(allasadat); // Reset to all jobs if search query is empty
+      fetchJobs(); // resetel minden állásra ha üres a mező
     } else {
-      const filteredJobs = allasadat.filter(job =>
-        job.title.toLowerCase().includes(searchQuery.toLowerCase())
+      const filteredJobs = searchedJobs.filter(job =>
+        job.megnevezes.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setSearchedJobs(filteredJobs);
     }
@@ -29,25 +46,25 @@ const AllasKereses = () => {
 
   return (
     <div>
-      <Header />
-      <main>
-        <div className="search-bar">
-          <input 
-            type="text" 
-            placeholder="Keresés..." 
+        
+        <div className="search-bar" >
+          <input type="text" placeholder="Keresés..."
             value={searchQuery} 
-            onChange={handleSearchChange} 
-          />
-          <button onClick={handleSearch}>Search</button> {/* Search button */}
+            onChange={handleSearchChange}
+            />
+          <img className="search-bar-button"
+            src="/pics/kereso/search_icon.png"
+            alt="Keresés"
+            value={searchQuery}
+            onClick={handleSearch}
+          /> {/* kereső gomb */}
         </div>
-        {/* Display searched job opportunities */}
-        {searchedJobs.length > 0 && searchedJobs.map(job => (
-          <AllasKartya2 key={job.id} job={job} />
+        {/*mappal kiirja a talált állásokat */}
+        {searchedJobs.map((job) => (
+          <AllasKartya2 key={job.allas_id} job={job} />
         ))}
-      </main>
-      <Footer />
     </div>
   );
 };
 
-export default AllasKereses;
+export default Allaskereses;

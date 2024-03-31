@@ -20,11 +20,6 @@ return new class extends Migration
             //$table->timestamps();
         });
 
-        Pozicio::create([
-            'pozkod' => 100,
-            'terulet' => 1,
-            'pozicio' => 'fejlesztő'
-        ]);
     }
 
     /**

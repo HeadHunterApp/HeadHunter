@@ -40,5 +40,7 @@ class AllaskeresoTapasztalat extends Model
         $this->attributes['kezdes'] = $formatteddate;
         $this->attributes['vegzes'] = $formatteddate;
     }
+
+    public $timestamps = false;
     
 }

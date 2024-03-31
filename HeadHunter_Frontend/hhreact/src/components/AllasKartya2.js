@@ -1,29 +1,20 @@
-import React from "react";
+import React from 'react';
+import '../styles/components/AllasKartya.css';
 
-const AllasKartya = ({ job }) => {
+const AllasKartya2 = ({ job }) => {
   return (
     <div className="job-card">
-      <div className="job-info">
-        {/* Assuming there's no image property in the job object */}
-        {/* If there is, adjust accordingly */}
-        <div className="details">
-          <h2>{job.title}</h2>
-          <p>{job.description}</p>
-          {/* Assuming there's no location property in the job object */}
-          {/* If there is, adjust accordingly */}
-          {/* <p>Hely: {job.location}</p> */}
-        </div>
+      <div className="job-title">
+        <h2>{job.megnevezes}</h2>
       </div>
-      <div className="actions">
-        <button>
-          <i className="fas fa-edit"></i> Edit
-        </button>
-        <button>
-          <i className="fas fa-trash-alt"></i> Delete
-        </button>
+      <div className="job-description">
+        <p>{job.leiras}</p>
+      </div>
+      <div className="apply-button">
+        <button>Jelentkezés</button>
       </div>
     </div>
   );
 };
 
-export default AllasKartya;
+export default AllasKartya2;

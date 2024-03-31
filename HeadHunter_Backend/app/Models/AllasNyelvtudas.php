@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class AllasNyelvtudas extends Model
 {
     use HasFactory;
+
+    protected $table = 'allas_nyelvtudass';
+
     protected function setKeysForSaveQuery($query)
     {
         $query
@@ -24,4 +27,6 @@ class AllasNyelvtudas extends Model
         'nyelvtudas'
         
     ];
+
+    public $timestamps = false;
 }

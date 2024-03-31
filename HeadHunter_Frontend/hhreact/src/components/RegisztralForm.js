@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../styles/Regisztral.css";
 
-const Regisztral = () => {
+const RegisztralForm = () => {
   const [formData, setFormData] = useState({
     nev: "",
     email: "",
@@ -157,4 +157,4 @@ const Regisztral = () => {
   );
 };
 
-export default Regisztral;
+export default RegisztralForm;

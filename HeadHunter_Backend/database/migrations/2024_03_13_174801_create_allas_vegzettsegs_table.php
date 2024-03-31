@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\AllasVegzettseg;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,6 +17,7 @@ return new class extends Migration
             $table->foreignId('vegzettseg')->references('vegzettseg_id')->on('vegzettsegs');
             $table->primary('allas');
         });
+        
     }
 
     /**

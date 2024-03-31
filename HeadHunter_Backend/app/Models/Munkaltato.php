@@ -18,4 +18,9 @@ class Munkaltato extends Model
         'telefonszam',
         'email',
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }
