@@ -21,11 +21,15 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
         \App\Http\Middleware\CorsMiddleware::class,
         //\App\Http\Middleware\CorsToken::class,
 >>>>>>> Stashed changes
+=======
+        \App\Http\Middleware\CorsMiddleware::class,
+>>>>>>> main
     ];
 
     /**
