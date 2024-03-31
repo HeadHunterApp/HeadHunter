@@ -1,12 +1,10 @@
 import React from 'react';
-import LeftSide from './LeftSide';
-import RightSide from './RightSide';
+import Fooldal from "../pages/Fooldal";
 
 const Main = () => {
   return (
     <main className="main">
-      <LeftSide />
-      <RightSide />
+      <Fooldal />
     </main>
   );
 };

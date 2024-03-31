@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import "../styles/Fooldal.css";
-import "../styles/Admin_allasok.css";
+import "../styles/components/Kereses.css";
 import AllasKartya2 from '../components/AllasKartya2';
-import allasadat from '../tesztadatok/allasadat'; // Import jobData
 
-const AllasKereses = () => {
+const Allaskereses = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchedJobs, setSearchedJobs] = useState([]);
 
@@ -50,28 +46,25 @@ const AllasKereses = () => {
 
   return (
     <div>
-      <Header />
-      <main>
-        <div className="search-bar">
-          <input 
-            type="text" 
-            placeholder="Keresés..." 
+        
+        <div className="search-bar" >
+          <input type="text" placeholder="Keresés..."
             value={searchQuery} 
-            onChange={handleSearchChange} 
-          />
-          <button onClick={handleSearch}>Search</button> {/* kereső gomb */}
+            onChange={handleSearchChange}
+            />
+          <img className="search-bar-button"
+            src="/pics/kereso/search_icon.png"
+            alt="Keresés"
+            value={searchQuery}
+            onClick={handleSearch}
+          /> {/* kereső gomb */}
         </div>
-        {/* Display searched job opportunities */}
-        {searchedJobs.length > 0 && searchedJobs.map(job => (
-          <AllasKartya2 key={job.id} job={job} />
         {/*mappal kiirja a talált állásokat */}
         {searchedJobs.map((job) => (
           <AllasKartya2 key={job.allas_id} job={job} />
         ))}
-      </main>
-      <Footer />
     </div>
   );
 };
 
-export default AllasKereses;
+export default Allaskereses;
