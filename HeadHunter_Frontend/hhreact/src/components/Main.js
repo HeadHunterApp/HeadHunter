@@ -1,5 +1,5 @@
 import React from 'react';
-import Fooldal from '../pages/FoOldal';
+import Fooldal from '../pages/Fooldal';
 
 const Main = () => {
   return (

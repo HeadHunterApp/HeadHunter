@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useAuthContext from "../contexts/AuthContext";
+import '../styles/components/Regisztral.css';
 
 export default function Regisztracio() {
     const [formData, setFormData] = useState({

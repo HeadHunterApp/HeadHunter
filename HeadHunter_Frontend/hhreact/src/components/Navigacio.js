@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useAuthContext from "../contexts/AuthContext";
+import "../styles/components/Navigation.css";
 import NavLink from "./NavLink";
 import CustomModal from "./Modal/CustomModal";
 import Regisztracio from "./Regisztracio";
@@ -37,6 +38,10 @@ export default function Navigacio() {
                   Bejelentkezes
                 </button>
               </li>
+              <NavLink link="/allaskereses" title="Álláskeresés" />
+             
+              {/*<NavLink link="/regisztracio" title="Regisztráció" />*/}
+             
             </>
           )}
         </ul>
