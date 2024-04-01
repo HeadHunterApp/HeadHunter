@@ -1,13 +1,17 @@
 import React from 'react';
-/* import LoginModalForm from './LoginModalForm'; */
-import Navigacio from './Navigacio';
+import "../styles/components/Header.css";
+import LoginModalForm from './felhasznalo-kezeles/FelhasznaloModal';
+import Navigacio from './menu/Navigacio';
 
 const Header = () => {
   return (
     <header>
-      {/* <LoginModalForm/> 
-      {/* <Navigation /> */}
-      <Navigacio/>
+      <div className="left-column">
+        <Navigacio/>
+      </div>
+      <div className="right-column">
+        <LoginModalForm/>
+      </div>
     </header>);
 };
 

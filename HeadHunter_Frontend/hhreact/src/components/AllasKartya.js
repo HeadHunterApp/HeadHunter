@@ -1,4 +1,7 @@
 import React from "react";
+
+/*  ----  EZ TÖRÖLHETŐ? !!!MARCI!!!  -----  */
+
 const AllasKartya =(allas)=>{
 return(
 <div className="job-card">
