@@ -1,14 +1,15 @@
 import React from "react";
-import Navigacio from "../components/Navigacio";
 import { Outlet } from "react-router-dom";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 
 export default function VendegLayout() {
   return (
     <>
-      <Navigacio />
-    
+      <Header />
+
       <Outlet />
-      
+      <Footer />
     </>
   );
 }

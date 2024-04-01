@@ -34,6 +34,7 @@ const RegisztralForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    loginReg(formData, "/guest/jobseekers/new");
   };
 
   return (
@@ -73,7 +74,7 @@ const RegisztralForm = () => {
             />
           </div>
         </div>
-        <div className="form-group">
+  <div className="form-group">
           <label>email cím:</label>
           <input
             type="text"
@@ -81,7 +82,7 @@ const RegisztralForm = () => {
             value={formData.email}
             onChange={handleInputChange}
           />
-        </div>
+        </div>      
         <div className="form-group">
           <label>jelszó:</label>
           <input

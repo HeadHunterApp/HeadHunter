@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <header>
       {/* <LoginModalForm/> */}
-      <Navigation />
+      {/* <Navigation /> */}
       <Navigacio/>
     </header>);
 };

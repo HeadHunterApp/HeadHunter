@@ -1,130 +1,190 @@
 import React, { useState } from "react";
 import useAuthContext from "../contexts/AuthContext";
 
-export default function Regisztracio(){
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [password_confirmation, setPasswordConfirmation] = useState("");
-
-    const {loginReg, errors} = useAuthContext();
-
+export default function Regisztracio() {
+    const [formData, setFormData] = useState({
+        nev: "",
+        email: "",
+        jelszo: "",
+        nem: "",
+        szul_ido: "",
+        telefonszam: "",
+        fax: "",
+        allampolgarsag: "magyar",
+        jogositvany: false,
+        szoc_keszseg: "",
+      });
     
-    const handleSubmit = async (e) => {
+      const {loginReg, errors} = useAuthContext();
+      const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+          ...formData,
+          [name]: value,
+        });
+      };
+    
+      const handleCheckboxChange = (e) => {
+        const { name, checked } = e.target;
+        setFormData({
+          ...formData,
+          [name]: checked,
+        });
+      };
+    
+      const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(formData);
+        loginReg(formData, "/guest/jobseekers/new");
+      };
+    
 
-        //Összegyűjtjük egyetlen objektumban az űrlap adatokat
-        const adat = {
-            name: name,
-            email: email,
-            password: password,
-            password_confirmation: password_confirmation,
-        };
-        loginReg(adat, "/guest/jobseekers/new");
-    };
-
-    return(
-        <div className=" m-auto" style={{ maxWidth: "400px" }}>
-            <h1 className="text-center">Regisztráció</h1>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-3 mt-3">
-                    <label htmlFor="name" className="form-label">
-                        Név:
-                    </label>
-                    <input
-                        type="text"
-                        value={name}
-                        onChange={(e) => {
-                            setName(e.target.value);
-                        }}
-                        className="form-control"
-                        id="name"
-                        placeholder="Név"
-                        name="name"
-                    />
-                    <div>
-                        {errors.name && (
-                            <span className="text-danger">
-                                {errors.name[0]}
-                            </span>
-                        )}
-                    </div>
-                </div>
-                <div className="mb-3 mt-3">
-                    <label htmlFor="email" className="form-label">
-                        Email:
-                    </label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => {
-                            setEmail(e.target.value);
-                        }}
-                        className="form-control"
-                        id="email"
-                        placeholder="email"
-                        name="email"
-                    />
-                    <div>
-                        {errors.email && (
-                            <span className="text-danger">
-                                {errors.email[0]}
-                            </span>
-                        )}
-                    </div>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="pwd" className="form-label">
-                        Jelszó:
-                    </label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => {
-                            setPassword(e.target.value);
-                        }}
-                        className="form-control"
-                        id="pwd"
-                        placeholder="jelszó"
-                        name="pwd"
-                    />
-                    <div>
-                        {errors.password && (
-                            <span className="text-danger">
-                                {errors.password[0]}
-                            </span>
-                        )}
-                    </div>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="pwd2" className="form-label">
-                        Jelszó újra:
-                    </label>
-                    <input
-                        type="password"
-                        value={password_confirmation}
-                        onChange={(e) => {
-                            setPasswordConfirmation(e.target.value);
-                        }}
-                        className="form-control"
-                        id="pwd2"
-                        placeholder="jelszó újra"
-                        name="pwd2"
-                    />
-                    <div>
-                        {errors.password_confirmation && (
-                            <span className="text-danger">
-                                {errors.password_confirmation[0]}
-                            </span>
-                        )}
-                    </div>
-                </div>
-
-                <button type="submit" className="btn btn-primary w-100">
-                    Regisztrálok
-                </button>
-            </form>
+  return (
+    <div className=" m-auto" style={{ maxWidth: "400px" }}>
+      <h1 className="text-center">Regisztráció</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3 mt-3">
+        <label>Név:</label>
+          <input
+            type="text"
+            name="nev"
+            value={formData.nev}
+            onChange={handleInputChange}
+          />
+          <div>
+            {errors.name && (
+              <span className="text-danger">{errors.name[0]}</span>
+            )}
+          </div>
         </div>
-    )
+         <div className="form-group">
+          <div className="nem">
+            <label className="nem-label"> Férfi</label>
+            <input
+              type="radio"
+              value="ferfi"
+              checked={formData.nem === "ferfi"}
+              name="nem"
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="nem">
+            <label className="nem-label">Nő</label>
+            <input
+              type="radio"
+              value="nő"
+              checked={formData.nem === "nő"}
+              name="nem"
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label>email cím:</label>
+          <input
+            type="text"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+          />
+         
+          <div>
+            {errors.email && (
+              <span className="text-danger">{errors.email[0]}</span>
+            )}
+          </div>
+        </div>
+        <div className="mb-3">
+        <label>Jelszó:</label>
+          <input
+            type="password"
+            name="jelszo"
+            value={formData.jelszo}
+            onChange={handleInputChange}
+          />
+          <div>
+            {errors.password && (
+              <span className="text-danger">{errors.password[0]}</span>
+            )}
+          </div>
+        </div>
+        <div className="mb-3">
+          <label htmlFor="pwd2" className="form-label">
+            Jelszó újra:
+          </label>
+          <input
+            type="password"
+            name="jelszo2"
+            value={formData.jelszo}
+            onChange={handleInputChange}
+          />
+          <div>
+            {errors.password_confirmation && (
+              <span className="text-danger">
+                {errors.password_confirmation[0]}
+              </span>
+            )}
+          </div>
+        </div>
+        <div className="form-group">
+        <label>Születési idő:</label>
+          <input
+            type="date"
+            name="szul_ido"
+            value={formData.szul_ido}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+        <label>Telefon szám:</label>
+          <input
+            type="text"
+            name="telefonszam"
+            value={formData.telefonszam}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+        <label>fax:</label>
+          <input
+            type="text"
+            name="fax"
+            value={formData.fax}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+        <label>Állampolgárság:</label>
+          <input
+            type="text"
+            name="allampolgarsag"
+            value={formData.allampolgarsag}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+        <label>Jogosítvány:</label>
+          <input
+            type="checkbox"
+            name="jogositvany"
+            checked={formData.jogositvany}
+            onChange={handleCheckboxChange}
+          />
+        </div>
+        <div className="form-group">
+          <label>Szociális készség:</label>
+          <input
+            type="text"
+            name="szoc_keszseg"
+            checked={formData.szocKeszseg}
+            onChange={handleCheckboxChange}
+          />
+        </div>
 
+        <button type="submit" className="">
+          Regisztrálok
+        </button>
+      </form>
+    </div>
+  );
 }

@@ -1,6 +1,6 @@
 /* Modal Popup */
 .modal {
-  display: none; /* Hidden by default */
+  /* display: none;  *//* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
@@ -30,7 +30,7 @@
 .close {
   color: #aaa;
   float: right;
-  font-size: 28px;
+  font-size: 15px;
   font-weight: bold;
 }
 
