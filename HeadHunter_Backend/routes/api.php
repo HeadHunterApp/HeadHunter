@@ -12,6 +12,7 @@ use App\Http\Controllers\AllasTapasztalatController;
 use App\Http\Controllers\AllasVegzettsegController;
 use App\Http\Controllers\FejvadaszController;
 use App\Http\Controllers\FejvadaszTeruletController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\MunkaltatoController;
 use App\Http\Controllers\NyelvtudasController;
 use App\Http\Controllers\PozicioController;
@@ -36,6 +37,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
 
 Route::get('/token', function () {
     return request()->session()->token();
@@ -240,6 +243,8 @@ Route::middleware('auth')->group(function () {
         //tapasztalat_ido
         Route::get('/hunter/experiences/all', [NyelvtudasController::class, 'index']);
         Route::get('/hunter/experiences/{tapasztalat_id}', [NyelvtudasController::class, 'show']);
+        //file megjelenítés,feltöltés:
+        Route::post('/hunter/file-upload', [FileController::class, 'store'])->name('file_store');
         //lekérdezések:
 
     });
@@ -289,6 +294,8 @@ Route::middleware('auth')->group(function () {
         //tapasztalat_ido
         Route::get('/seeker/experiences/all', [NyelvtudasController::class, 'index']);
         Route::get('/seeker/experiences/{tapasztalat_id}', [NyelvtudasController::class, 'show']);
+        //file megjelenítés,feltöltés:
+        Route::post('/seeker/file-upload', [FileController::class, 'store'])->name('file_store');
         //lekérdezések:
 
     });

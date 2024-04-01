@@ -7,6 +7,7 @@ export default function Regisztracio() {
         nev: "",
         email: "",
         jelszo: "",
+        jelszo2: "",
         nem: "",
         szul_ido: "",
         telefonszam: "",
@@ -116,7 +117,7 @@ export default function Regisztracio() {
           <input
             type="password"
             name="jelszo2"
-            value={formData.jelszo}
+            value={formData.jelszo2}
             onChange={handleInputChange}
           />
           <div>

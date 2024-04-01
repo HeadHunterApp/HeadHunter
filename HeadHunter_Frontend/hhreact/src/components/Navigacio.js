@@ -24,9 +24,15 @@ export default function Navigacio() {
                   Kijelentkezés
                 </button>
               </li>
+              <li className="navbar-item">
+                <button className="nav-link" /*onClick={logout}*/>
+                  Profil
+                </button>
+              </li>
             </>
           ) : (
             <>
+            <NavLink link="/allaskereses" title="Álláskeresés" />
               <li className="navbar-item">
                 <button className="nav-link" onClick={() => setIsRegOpen(true)}>
                   Regisztracio
@@ -38,7 +44,7 @@ export default function Navigacio() {
                   Bejelentkezes
                 </button>
               </li>
-              <NavLink link="/allaskereses" title="Álláskeresés" />
+
              
               {/*<NavLink link="/regisztracio" title="Regisztráció" />*/}
              
