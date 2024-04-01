@@ -12,3 +12,7 @@
   .form-container {
     max-width: 400px;
   }
+
+.form-control{
+  max-width: 390px;
+}

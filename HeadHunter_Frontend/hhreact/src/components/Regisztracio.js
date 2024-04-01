@@ -42,10 +42,10 @@ export default function Regisztracio() {
     
 
   return (
-    <div className=" m-auto" style={{ maxWidth: "400px" }}>
-      <h1 className="text-center">Regisztráció</h1>
+    <div className="registal" >
+      <h1 className="regisztracio">Regisztráció</h1>
       <form onSubmit={handleSubmit}>
-        <div className="mb-3 mt-3">
+        <div className="form-group">
         <label>Név:</label>
           <input
             type="text"
@@ -61,8 +61,8 @@ export default function Regisztracio() {
         </div>
          <div className="form-group">
           <div className="nem">
-            <label className="nem-label"> Férfi</label>
-            <input
+            <label className="nem-label1"> Férfi</label>
+            <input 
               type="radio"
               value="ferfi"
               checked={formData.nem === "ferfi"}
@@ -82,7 +82,7 @@ export default function Regisztracio() {
           </div>
         </div>
         <div className="form-group">
-          <label>email cím:</label>
+          <label>Email:</label>
           <input
             type="text"
             name="email"
@@ -96,7 +96,7 @@ export default function Regisztracio() {
             )}
           </div>
         </div>
-        <div className="mb-3">
+        <div className="form-group">
         <label>Jelszó:</label>
           <input
             type="password"
@@ -110,8 +110,8 @@ export default function Regisztracio() {
             )}
           </div>
         </div>
-        <div className="mb-3">
-          <label htmlFor="pwd2" className="form-label">
+        <div className="form-group">
+          <label >
             Jelszó újra:
           </label>
           <input
@@ -147,7 +147,7 @@ export default function Regisztracio() {
           />
         </div>
         <div className="form-group">
-        <label>fax:</label>
+        <label>Fax:</label>
           <input
             type="text"
             name="fax"

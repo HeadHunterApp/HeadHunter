@@ -1,14 +1,15 @@
   /* Regisztral.css */
-  .password-input {
-    width: 85%;
+ /*  .password-input {
+    width: 100%;
   }
   .registration-form {
     padding: 20px;
-  }
+  } */
   
+
   .form-group {
-    margin-bottom: 20px;
-    width: 100%;
+    /* margin-bottom: 20px; */
+    width: 95%;
   }
   
   .form-group label {
@@ -17,6 +18,7 @@
     /*  margin-bottom: 5px; */
     color: black;
     text-align: left;
+    margin-left: 10px;
   }
   
   .form-group input {
@@ -46,11 +48,14 @@
     background-color: #008080;
   }
   
+
   .nem {
-    display: grid;
-    grid-template-columns: 0.2fr 1fr;
-    align-items: start;
+    display: flex;
+    align-items: center;
     color: black;
     margin-bottom: 5px;
-  }
+}
+.nem-label {
+  margin-right: 15px; 
+}
   

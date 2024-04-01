@@ -15,41 +15,45 @@ export default function Navigacio() {
     <nav className="">
       <div className="">
         <ul className="">
-          <NavLink link="/" title="Kezdőlap" />
-
-          {user ? (
-            <>
-              <li className="navbar-item">
-                <button className="nav-link" onClick={logout}>
-                  Kijelentkezés
-                </button>
+          <div className="left-column">
+            <li>
+              <NavLink link="/" title="Kezdőlap" />
+            </li>
+            {!user && (
+              <li>
+                <NavLink link="/allaskereses" title="Álláskeresés" />
               </li>
-              <li className="navbar-item">
-                <button className="nav-link" /*onClick={logout}*/>
-                  Profil
-                </button>
-              </li>
-            </>
-          ) : (
-            <>
-            <NavLink link="/allaskereses" title="Álláskeresés" />
-              <li className="navbar-item">
-                <button className="nav-link" onClick={() => setIsRegOpen(true)}>
-                  Regisztracio
-                </button>
-              </li>
-
-              <li className="navbar-item">
-                <button className="nav-link" onClick={() => setIsBejOpen(true)}>
-                  Bejelentkezes
-                </button>
-              </li>
-
-             
-              {/*<NavLink link="/regisztracio" title="Regisztráció" />*/}
-             
-            </>
-          )}
+            )}
+          </div>
+          <div className="right-column">
+            {user ? (
+              <>
+                <li>
+                  <button className="open-button" onClick={logout}>
+                    Kijelentkezés
+                  </button>
+                </li>
+                <li>
+                  <button className="open-button">
+                    Profil
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <button className="open-button" onClick={() => setIsBejOpen(true)}>
+                    Bejelentkezes
+                  </button>
+                </li>
+                <li>
+                  <button className="open-button" onClick={() => setIsRegOpen(true)}>
+                    Regisztracio
+                  </button>
+                </li>
+              </>
+            )}
+          </div>
         </ul>
 
         <CustomModal isOpen={isRegOpen} onClose={() => setIsRegOpen(false)}>
