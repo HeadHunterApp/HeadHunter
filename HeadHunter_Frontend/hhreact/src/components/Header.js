@@ -5,7 +5,8 @@ import Navigacio from './Navigacio';
 const Header = () => {
   return (
     <header>
-      <LoginModalForm/>
+      {/* <LoginModalForm/> */}
+      {/* <Navigation /> */}
       <Navigacio/>
     </header>);
 };
