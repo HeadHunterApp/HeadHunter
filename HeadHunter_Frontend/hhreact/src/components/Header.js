@@ -1,13 +1,11 @@
 import React from 'react';
-import Navigation from './Navigation';
-//import LoginModalForm from './LoginModalForm';
+import LoginModalForm from './LoginModalForm';
 import Navigacio from './Navigacio';
 
 const Header = () => {
   return (
     <header>
-      {/* <LoginModalForm/> */}
-      <Navigation />
+      <LoginModalForm/>
       <Navigacio/>
     </header>);
 };

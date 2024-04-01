@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/layouts/Fooldal.css";
+import "../styles/pages/Fooldal.css";
 import MainCard from "../components/MainCard";
 
 const Fooldal = () => {
