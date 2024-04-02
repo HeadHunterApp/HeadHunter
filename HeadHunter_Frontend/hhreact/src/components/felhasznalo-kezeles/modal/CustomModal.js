@@ -1,5 +1,5 @@
 import { createPortal } from "react-dom";
-import "../../styles/components/ModalLoginForm.css";
+import '../../../styles/components/felhasznalo-kezeles/FelhasznaloModal.css';
 const CustomModal = (props) => {
   return createPortal(
     <>

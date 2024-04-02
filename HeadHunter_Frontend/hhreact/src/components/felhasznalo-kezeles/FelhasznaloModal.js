@@ -1,9 +1,10 @@
 import React from 'react';
-import '../styles/components/FelhasznaloModal.css'; 
-import Regisztracio from './Regisztracio';
+import '../../styles/components/felhasznalo-kezeles/FelhasznaloModal.css';
 import Bejelentkezes from './Bejelentkezes';
+import Regisztracio from './Regisztracio';
+//import useAuthContext from "../contexts/AuthContext";
 
-class FelhasznaloModal extends React.Component {
+/* class FelhasznaloModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,28 +27,28 @@ class FelhasznaloModal extends React.Component {
 
   render() {
     return (
-      <div className="button-container">
+      <div className="button-container"> */
         {/*     ---- IDE KELLENE BEÉPÍTENI A BEJELENTKEZÉS-ELLENŐRZŐ RÉSZT ---- */}
 
         {/* gomb ami megnyitja a modalt */}
-          <button className="open-button" onClick={this.toggleLoginModal}>
+          {/* <button className="open-button" onClick={this.toggleLoginModal}>
             Bejelentkezés
           </button>
           <button className="open-button" onClick={this.toggleRegistryModal}>
             Regisztráció
-          </button>
+          </button> */}
           {/*     ---- IDE KELLENE BEÉPÍTENI A CUSTOMMODAL RÉSZT, AMIT JÓ LENNE MAGYARRA ÁTNEVEZNI ---- */}
 
         {/* form */}
-          <div className={this.state.isLoginOpen ? 'modal open' : 'modal'}>
+          {/* <div className={this.state.isLoginOpen ? 'modal open' : 'modal'}>
               <div className="modal-content">
                 <span className="close" onClick={this.toggleLoginModal}>&times;</span>
                 <Bejelentkezes/>
               </div>
-          </div>
+          </div> */}
         {/* gomb ami megnyitja a popupot*/}
         {/* form */}
-          <div className={this.state.isRegistryOpen ? 'modal open' : 'modal'}>
+          {/* <div className={this.state.isRegistryOpen ? 'modal open' : 'modal'}>
             <div className="modal-content">
               <span className="close" onClick={this.toggleRegistryModal}>&times;</span>
               <Regisztracio/>
@@ -56,6 +57,6 @@ class FelhasznaloModal extends React.Component {
       </div>
     );
   }
-}
+} */}
 
-export default FelhasznaloModal;
+/* export default FelhasznaloModal; */

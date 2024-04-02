@@ -10,7 +10,7 @@ const Header = () => {
         <Navigacio/>
       </div>
       <div className="right-column">
-        <LoginModalForm/>
+      {/*   <LoginModalForm/> */}
       </div>
     </header>);
 };
