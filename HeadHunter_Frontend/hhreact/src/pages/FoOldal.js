@@ -1,12 +1,14 @@
 import React from "react";
 import "../styles/pages/Fooldal.css";
-import MainCard from "../components/MainCard";
+import MenuKartya from "../components/menu/MenuKartya";
+
+/*  ----  LINKEKHEZ A ROUTE MÉG HIÁNYZIK  -----  */
 
 const Fooldal = () => {
   return (
       <div className="maincard-container">
-        <MainCard title='Álláskeresőknek' picture='/pics/fooldal/people-1979261_1280.jpg' />
-        <MainCard title='Munkáltatóknak' picture='/pics/fooldal/laptop-3196481_1280.jpg' />
+        <MenuKartya link="/allaskeresoknek" title='Álláskeresőknek' picture='/pics/fooldal/people-1979261_1280.jpg' />
+        <MenuKartya link="/munkaltatoknak" title='Munkáltatóknak' picture='/pics/fooldal/laptop-3196481_1280.jpg' />
       </div>
   );
 };

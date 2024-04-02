@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import "../styles/pages/Kereses.css";
 import AllasKartya2 from '../components/AllasKartya2';
 
+/*  ----  EZT LEHET KOMPONENSSÉ KELLENE MAJD TENNI, ÉS AZ EREDMÉNYMEGJELENÍTŐS RÉSZE LENNE A PAGE,
+      EZT PEDIG CSAK MEGHÍVNÁNK OTT  -----  */
+
+
+      
 const Allaskereses = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchedJobs, setSearchedJobs] = useState([]);
@@ -14,7 +19,10 @@ const Allaskereses = () => {
   // a jobdatat szedi ki
   const fetchJobs = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/allas');
+
+      /*  ----  IDE NEM CSAK AZ API UTÁNI RÉSZ KELL AZ AXIOS MIATT? VAGY AZ NEM KEZELI LE EZT A RÉSZT?  -----  */
+
+      const response = await fetch('http://localhost:8000/api/guest/jobs/all');
       if (!response.ok) {
         throw new Error('Failed to fetch job data');
       }

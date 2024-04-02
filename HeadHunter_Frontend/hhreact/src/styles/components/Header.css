@@ -1,0 +1,12 @@
+.left-column {
+    display: flex;
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.right-column li {
+    margin-bottom: 10px;
+}

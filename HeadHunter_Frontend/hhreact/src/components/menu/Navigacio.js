@@ -1,32 +1,33 @@
 import React, { useState } from "react";
-import useAuthContext from "../contexts/AuthContext";
-import "../styles/components/Navigation.css";
+import "../styles/components/menu/Navigacio.css";
 import NavLink from "./NavLink";
-import CustomModal from "./Modal/CustomModal";
-import Regisztracio from "./Regisztracio";
-import Bejelentkezes from "./Bejelentkezes";
+
+/*  ---- EZ A FELHASZNALOMODALBA KELL ----
+import useAuthContext from "../contexts/AuthContext";
+*/
 
 export default function Navigacio() {
+  
+/*  ---- EZ CSAK AKKOR KELL, HA NEM A CLASST HASZNÁLJUK, DE AKKOR IS A FELHASZNALOMODALBA ----
+
   const [isRegOpen, setIsRegOpen] = useState(false);
   const [isBejOpen, setIsBejOpen] = useState(false);
   const { user, logout } = useAuthContext();
+*/
+
+/*  ----  LINKEKHEZ A ROUTE MÉG HIÁNYZIK  -----  */
 
   return (
-    <nav className="">
-      <div className="">
-        <ul className="">
-          <div className="center">
-            <li>
-              <NavLink link="/" title="Kezdőlap" />
-            </li>
-            {!user && (
-              <li>
+    <nav>
+      <ul>
+        <NavLink link="/" title="Kezdőlap" />
+        {!user && (
                 <NavLink link="/allaskereses" title="Álláskeresés" />
-              </li>
-            )}
-          </div>
-          <div className="right-column">
-            {user ? (
+          )}
+
+          {/*
+             ---- EZT A RÉSZT KELLENE ÁTÉPÍTENI, EGYESÍTENI A FELHASZNALOMODALLAL ----
+          {user ? (
               <>
                 <li>
                   <button className="open-button" onClick={logout}>
@@ -53,8 +54,6 @@ export default function Navigacio() {
                 </li>
               </>
             )}
-          </div>
-        </ul>
 
         <CustomModal isOpen={isRegOpen} onClose={() => setIsRegOpen(false)}>
           <Regisztracio />
@@ -63,7 +62,10 @@ export default function Navigacio() {
         <CustomModal isOpen={isBejOpen} onClose={() => setIsBejOpen(false)}>
           <Bejelentkezes />
         </CustomModal>
-      </div>
+        
+        */}
+
+      </ul>
     </nav>
   );
 }
