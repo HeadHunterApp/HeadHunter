@@ -15,7 +15,7 @@ export default function Navigacio() {
     <nav className="">
       <div className="">
         <ul className="">
-          <div className="left-column">
+          <div className="center">
             <li>
               <NavLink link="/" title="Kezdőlap" />
             </li>

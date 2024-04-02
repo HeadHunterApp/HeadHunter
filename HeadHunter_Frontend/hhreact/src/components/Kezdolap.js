@@ -6,8 +6,8 @@ export default function Kezdolap(){
 
     return (
         <div>
-            <h1>Kezdőlap</h1>
-            <p>Bejelentkezett felhasználó: {user?.name}</p>
+            <h1>Bejelentkezett felhasználó: {user?.name}</h1>
+         
         </div>
     );
 }
