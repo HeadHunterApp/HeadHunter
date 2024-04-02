@@ -3,11 +3,11 @@ import "../../styles/components/menu/Navigacio.css";
 import NavLink from "../../components/menu/NavLink";
 
  /* ---- EZ A FELHASZNALOMODALBA KELL ---- */
-import useAuthContext from "../../contexts/AuthContext";
+/* import useAuthContext from "../../contexts/AuthContext";
 import CustomModal from "../felhasznalo-kezeles/modal/CustomModal";
 import Regisztracio from "../felhasznalo-kezeles/Regisztracio";
 import Bejelentkezes from "../felhasznalo-kezeles/Bejelentkezes";
-
+ */
 
 export default function Navigacio() {
   
@@ -19,21 +19,19 @@ export default function Navigacio() {
 
 
 /*  ----  LINKEKHEZ A ROUTE MÉG HIÁNYZIK  -----  */
-const [isRegOpen, setIsRegOpen] = useState(false);
-const [isBejOpen, setIsBejOpen] = useState(false);
-const { user, logout } = useAuthContext();
+
 
   return (
     <nav>
       <ul>
         <NavLink link="/" title="Kezdőlap" />
-        {!user && ( 
+       {/*  {!user && (  */}
                 <NavLink link="/allaskereses" title="Álláskeresés" />
-           )}
+         {/*   )} */}
 
           
             {/*  ---- EZT A RÉSZT KELLENE ÁTÉPÍTENI, EGYESÍTENI A FELHASZNALOMODALLAL ---- */}
-          {user ? (
+          {/* {user ? (
               <>
                 <li>
                   <button className="open-button" onClick={logout}>
@@ -69,7 +67,7 @@ const { user, logout } = useAuthContext();
           <Bejelentkezes />
         </CustomModal>
         
-      
+       */}
 
       </ul>
     </nav>

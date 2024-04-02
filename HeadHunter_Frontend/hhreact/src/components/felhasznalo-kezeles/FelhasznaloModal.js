@@ -1,9 +1,60 @@
-import React from 'react';
-import '../../styles/components/felhasznalo-kezeles/FelhasznaloModal.css';
-import Bejelentkezes from './Bejelentkezes';
-import Regisztracio from './Regisztracio';
-//import useAuthContext from "../contexts/AuthContext";
+import React, { useState } from "react";
+import "../../styles/components/felhasznalo-kezeles/FelhasznaloModal.css"; 
+/* import '../../styles/components/menu/Navigacio.css'; */
+import Bejelentkezes from "./Bejelentkezes";
+import Regisztracio from "./Regisztracio";
+import useAuthContext from "../../contexts/AuthContext";
+import CustomModal from "./modal/CustomModal";
 
+export default function FelhasznaloModal() {
+  const [isRegOpen, setIsRegOpen] = useState(false);
+  const [isBejOpen, setIsBejOpen] = useState(false);
+  const { user, logout } = useAuthContext();
+
+  return(
+    <div>
+    <ul>
+       {user ? (
+              <>
+              
+                <li>
+                  <button className="open-button" onClick={logout}>
+                    Kijelentkezés
+                  </button>
+                </li>
+                <li>
+                  <button className="open-button">
+                    Profil
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <button className="open-button" onClick={() => setIsBejOpen(true)}>
+                    Bejelentkezes
+                  </button>
+                </li>
+                <li>
+                  <button className="open-button" onClick={() => setIsRegOpen(true)}>
+                    Regisztracio
+                  </button>
+                </li>
+              </>
+            )}
+
+        <CustomModal isOpen={isRegOpen} onClose={() => setIsRegOpen(false)}>
+          <Regisztracio />
+        </CustomModal>
+
+        <CustomModal isOpen={isBejOpen} onClose={() => setIsBejOpen(false)}>
+          <Bejelentkezes />
+        </CustomModal>
+        </ul>
+    </div>
+  )
+
+}
 /* class FelhasznaloModal extends React.Component {
   constructor(props) {
     super(props);
@@ -28,27 +79,44 @@ import Regisztracio from './Regisztracio';
   render() {
     return (
       <div className="button-container"> */
-        {/*     ---- IDE KELLENE BEÉPÍTENI A BEJELENTKEZÉS-ELLENŐRZŐ RÉSZT ---- */}
+{
+  /*     ---- IDE KELLENE BEÉPÍTENI A BEJELENTKEZÉS-ELLENŐRZŐ RÉSZT ---- */
+}
 
-        {/* gomb ami megnyitja a modalt */}
-          {/* <button className="open-button" onClick={this.toggleLoginModal}>
+{
+  /* gomb ami megnyitja a modalt */
+}
+{
+  /* <button className="open-button" onClick={this.toggleLoginModal}>
             Bejelentkezés
           </button>
           <button className="open-button" onClick={this.toggleRegistryModal}>
             Regisztráció
-          </button> */}
-          {/*     ---- IDE KELLENE BEÉPÍTENI A CUSTOMMODAL RÉSZT, AMIT JÓ LENNE MAGYARRA ÁTNEVEZNI ---- */}
+          </button> */
+}
+{
+  /*     ---- IDE KELLENE BEÉPÍTENI A CUSTOMMODAL RÉSZT, AMIT JÓ LENNE MAGYARRA ÁTNEVEZNI ---- */
+}
 
-        {/* form */}
-          {/* <div className={this.state.isLoginOpen ? 'modal open' : 'modal'}>
+{
+  /* form */
+}
+{
+  /* <div className={this.state.isLoginOpen ? 'modal open' : 'modal'}>
               <div className="modal-content">
                 <span className="close" onClick={this.toggleLoginModal}>&times;</span>
                 <Bejelentkezes/>
               </div>
-          </div> */}
-        {/* gomb ami megnyitja a popupot*/}
-        {/* form */}
-          {/* <div className={this.state.isRegistryOpen ? 'modal open' : 'modal'}>
+          </div> */
+}
+{
+  /* gomb ami megnyitja a popupot*/
+}
+{
+  /* form */
+}
+{
+  /* <div className={this.state.isRegistryOpen ? 'modal open' : 'modal'}>
             <div className="modal-content">
               <span className="close" onClick={this.toggleRegistryModal}>&times;</span>
               <Regisztracio/>
@@ -57,6 +125,7 @@ import Regisztracio from './Regisztracio';
       </div>
     );
   }
-} */}
+} */
+}
 
 /* export default FelhasznaloModal; */
