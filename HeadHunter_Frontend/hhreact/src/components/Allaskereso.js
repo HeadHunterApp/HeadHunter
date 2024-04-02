@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import AllasKartya from "./AllasKartya";
 
+/*  ----  EZ TÖRÖLHETŐ?  !!!MARCI!!!  -----  */
+
+
 const Allaskereso = () =>{
     const [allasok, setAllasok] = useState([{munkaltato: "elso allas"}]);
     const [toltes, setToltes] =useState(false)

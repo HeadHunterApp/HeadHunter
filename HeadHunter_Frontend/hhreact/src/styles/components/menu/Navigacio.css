@@ -1,0 +1,24 @@
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 60px;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.navlink {
+  display: inline;
+  margin: 0 20px;
+  color: white;
+  text-decoration: none;
+}
+
+.navlink:hover {
+  text-shadow: -3px -1px 16px rgba(0, 0, 0, 0.95);
+  cursor: pointer;
+}
+nav ul {
+  display: flex;
+  justify-content: space-between;
+}
+

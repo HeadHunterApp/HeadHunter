@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const NavLink = (props) => {
   return (
-    <li>
-      <Link className="navLink" to={props.link}>
+    <li className="navlink">
+      <Link to={props.link}>
         {props.title}
       </Link>
     </li>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import useAuthContext from "../contexts/AuthContext";
-import '../styles/components/Regisztral.css';
+import '../styles/components/felhasznalo-kezeles/Regisztracio.css';
+import useAuthContext from "../../contexts/AuthContext";
 
 export default function Regisztracio() {
     const [formData, setFormData] = useState({
@@ -42,7 +42,7 @@ export default function Regisztracio() {
     
 
   return (
-    <div className="registal" >
+    <div className="regisztral" >
       <h1 className="regisztracio">Regisztráció</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">

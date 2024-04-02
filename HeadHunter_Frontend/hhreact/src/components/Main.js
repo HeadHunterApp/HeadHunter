@@ -1,5 +1,8 @@
 import React from 'react';
-import Fooldal from '../pages/FoOldal';
+import Fooldal from '../pages/Fooldal';
+
+
+/* -----  SZERINTEM EZT AZ EGÉSZET MAJD TÖRÖLNI LEHET ----  */
 
 const Main = () => {
   return (
