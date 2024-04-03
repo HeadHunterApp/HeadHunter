@@ -43,6 +43,7 @@ class Allaskereso extends Model
         'allampolgarsag' => 'nullable|string',
         'jogositvany' => 'nullable|boolean',
         'szoc_keszseg' => 'nullable|longtext',
+        'fenykep' => 'nullable|string',
     ];
 
     public function user()

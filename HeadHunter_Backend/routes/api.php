@@ -178,6 +178,8 @@ Route::middleware('auth')->group(function () {
         //tapasztalat_ido
         Route::get('/admin/experiences/all', [NyelvtudasController::class, 'index']);
         Route::get('/admin/experiences/{tapasztalat_id}', [NyelvtudasController::class, 'show']);
+        //file feltöltés:
+        Route::post('/admin/file-upload', [FileController::class, 'store'])->name('file_store');
         //lekérdezések:
 
     });
@@ -243,7 +245,7 @@ Route::middleware('auth')->group(function () {
         //tapasztalat_ido
         Route::get('/hunter/experiences/all', [NyelvtudasController::class, 'index']);
         Route::get('/hunter/experiences/{tapasztalat_id}', [NyelvtudasController::class, 'show']);
-        //file megjelenítés,feltöltés:
+        //file feltöltés:
         Route::post('/hunter/file-upload', [FileController::class, 'store'])->name('file_store');
         //lekérdezések:
 
@@ -294,7 +296,7 @@ Route::middleware('auth')->group(function () {
         //tapasztalat_ido
         Route::get('/seeker/experiences/all', [NyelvtudasController::class, 'index']);
         Route::get('/seeker/experiences/{tapasztalat_id}', [NyelvtudasController::class, 'show']);
-        //file megjelenítés,feltöltés:
+        //file feltöltés:
         Route::post('/seeker/file-upload', [FileController::class, 'store'])->name('file_store');
         //lekérdezések:
 

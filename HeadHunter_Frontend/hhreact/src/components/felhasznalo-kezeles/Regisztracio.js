@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../styles/components/felhasznalo-kezeles/Regisztracio.css';
+import '../../styles/components/felhasznalo-kezeles/Regisztracio.css';
 import useAuthContext from "../../contexts/AuthContext";
 
 export default function Regisztracio() {

@@ -109,3 +109,7 @@ button[type="submit"]:hover {
   width: 8.5rem;
   transition : 1000ms;
 }
+
+.right-column ul {
+  list-style-type: none;
+}

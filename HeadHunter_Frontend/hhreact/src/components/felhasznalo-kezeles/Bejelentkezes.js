@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import useAuthContext from "../../contexts/AuthContext"
-import '../styles/components/felhasznalo-kezeles/Bejelentkezes.css';
+import useAuthContext from "../../contexts/AuthContext";
+import '../../styles/components/felhasznalo-kezeles/Bejelentkezes.css';
 
 export default function Bejelentkezes(){
     const [email, setEmail] = useState("");
