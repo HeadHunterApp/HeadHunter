@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 return new class extends Migration
 {
@@ -14,11 +15,12 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id('user_id');
-            $table->string('nev', 40);
-            $table->string('email', 40)->unique();
+            $table->string('name', 255);
+            $table->string('email', 255)->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('jelszo');
+            $table->string('password');
             $table->string('jogosultsag', 255);
+            $table->string('fenykep', 150)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -27,9 +29,9 @@ return new class extends Migration
         //only one user with jogosultsag='admin'
 
         User::create([
-            'nev' => 'Admin', 
+            'name' => 'Admin', 
             'email' => 'admin@headhunter.com', 
-            'jelszo' => bcrypt('admin123'),
+            'password' => Hash::make('Admin123.'),
             'jogosultsag' => 'admin',
         ]);
 

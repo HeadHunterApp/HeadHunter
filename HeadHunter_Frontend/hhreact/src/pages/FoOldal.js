@@ -1,6 +1,8 @@
 import React from "react";
-import "../styles/pages/Fooldal.css";
+import "../styles/Fooldal.css";
 import MenuKartya from "../components/menu/MenuKartya";
+
+
 
 /*  ----  LINKEKHEZ A ROUTE MÉG HIÁNYZIK  -----  */
 

@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
@@ -22,13 +23,13 @@ class RegisteredUserController extends Controller
     {
         return view('auth.register');
     }
-
+ 
     /**
      * Handle an incoming registration request.
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request): Response
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -37,16 +38,16 @@ class RegisteredUserController extends Controller
         ]);
 
         $user = User::create([
-            'nev' => $request->name,
+            'name' => $request->name,
             'email' => $request->email,
-            'jelszo' => Hash::make($request->password),
-            'jogosultsag' => 'álláskereső'
+            'password' => Hash::make($request->password),
+            //'jogosultsag' => 'álláskereső',
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return response()->noContent();
     }
 }

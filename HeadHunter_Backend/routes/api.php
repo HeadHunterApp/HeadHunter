@@ -44,9 +44,7 @@ Route::get('/token', function () {
     return request()->session()->token();
 });
 
-Route::get('/dashboard', function () {
-    return '{}';
-})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 //regisztrációhoz bejelentkezés nélkül:
 Route::post('/guest/jobseekers/new', [AllaskeresoController::class, 'store']);

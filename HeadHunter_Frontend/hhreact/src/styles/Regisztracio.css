@@ -50,3 +50,23 @@
   margin-right: 15px; 
 }
   
+.regisztracio{
+     background-color: #008080;
+    border-radius: 5px;
+    max-width: 100%;
+    text-align: center;
+    padding: 15px;
+    color: white;
+  
+}
+
+.colse{
+  border-radius: 2px;
+}
+
+.regisztral{
+
+    max-width: 400px;
+    padding-top: 5px;
+
+}

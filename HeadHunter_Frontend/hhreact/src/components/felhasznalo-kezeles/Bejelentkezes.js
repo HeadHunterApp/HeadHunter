@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import useAuthContext from "../../contexts/AuthContext";
-import '../../styles/components/felhasznalo-kezeles/Bejelentkezes.css';
+import '../../styles/Bejelentkezes.css';
 
 export default function Bejelentkezes(){
     const [email, setEmail] = useState("");
@@ -19,7 +19,7 @@ export default function Bejelentkezes(){
 
     return (
         <div className="form-container">
-            <h1>Bejelentkezés</h1>
+            <h1 className="form-bejelentkezes">Bejelentkezés</h1>
             <form onSubmit={handleSubmit}>
                 <div className="bejelentkezes_input">
                     <label htmlFor="email" className="form-label">

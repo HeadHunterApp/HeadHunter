@@ -25,4 +25,9 @@ class FejvadaszTerulet extends Model
     ];
 
     public $timestamps = false;
+
+    public function terulet()
+    {
+        return $this->hasOne(Terulet::class, 'terulet', 'terulet_id');
+    }
 }

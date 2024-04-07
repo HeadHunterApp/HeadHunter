@@ -14,7 +14,7 @@ class Fejvadasz extends Model
     protected $fillable = [
         'user_id',
         'telefonszam',
-        'fenykep',
+       
     ];
 
     protected $hidden = [
@@ -25,11 +25,16 @@ class Fejvadasz extends Model
     public static $rules = [
         'user_id' => 'required',
         'telefonszam' => 'nullable|string',
-        'fenykep' => 'nullable|string',
+      
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function fejvadaszTerulet()
+    {
+        return $this->hasOne(FejvadaszTerulet::class, 'fejvadasz', 'user_id');
     }
 }

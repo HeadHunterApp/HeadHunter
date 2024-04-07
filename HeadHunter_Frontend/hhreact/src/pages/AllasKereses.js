@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../styles/pages/Kereses.css";
+import "../styles/Kereses.css";
 import AllasKartya2 from '../components/AllasKartya2';
 
 /*  ----  EZT LEHET KOMPONENSSÉ KELLENE MAJD TENNI, ÉS AZ EREDMÉNYMEGJELENÍTŐS RÉSZE LENNE A PAGE,
