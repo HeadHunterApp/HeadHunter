@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../styles/components/menu/Navigacio.css";
+import "../../styles/Navigacio.css";
 import NavLink from "../../components/menu/NavLink";
 
  /* ---- EZ A FELHASZNALOMODALBA KELL ---- */
@@ -26,7 +26,7 @@ export default function Navigacio() {
       <ul>
         <NavLink link="/" title="Kezdőlap" />
        {/*  {!user && (  */}
-                <NavLink link="/allaskereses" title="Álláskeresés" />
+                <NavLink link="allaskereses" title="Álláskeresés" />
          {/*   )} */}
 
           

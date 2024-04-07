@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/pages/Admin_allasok.css";
+import "../styles/Admin_allasok.css";
 import AllasKartya from '../components/AllasKartya';
 
 /*  ----  EZ NEM FOG KELLENI, MERT AZ ALLASKERESES EREDMÉNYÉT FOGJA MEGJELENÍTENI AZ ADMINNÁL,

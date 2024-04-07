@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import "../../styles/components/felhasznalo-kezeles/FelhasznaloModal.css"; 
+import '../../styles/FelhasznaloModal.css'; 
 /* import '../../styles/components/menu/Navigacio.css'; */
 import Bejelentkezes from "./Bejelentkezes";
 import Regisztracio from "./Regisztracio";
 import useAuthContext from "../../contexts/AuthContext";
 import CustomModal from "./modal/CustomModal";
+import { Link } from "react-router-dom";
 
 export default function FelhasznaloModal() {
   const [isRegOpen, setIsRegOpen] = useState(false);
@@ -23,9 +24,9 @@ export default function FelhasznaloModal() {
                   </button>
                 </li>
                 <li>
-                  <button className="open-button">
+                  <Link className="open-button" to={"profil"}>
                     Profil
-                  </button>
+                  </Link>
                 </li>
               </>
             ) : (

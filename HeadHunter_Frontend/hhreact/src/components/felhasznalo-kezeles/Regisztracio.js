@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import '../../styles/components/felhasznalo-kezeles/Regisztracio.css';
+import '../../styles/Regisztracio.css';
 import useAuthContext from "../../contexts/AuthContext";
 
 export default function Regisztracio() {
     const [formData, setFormData] = useState({
-        nev: "",
+        name: "",
         email: "",
-        jelszo: "",
-        jelszo2: "",
-        nem: "",
+        password: "",
+        password_confirmation: "",
+      /*   nem: "",
         szul_ido: "",
         telefonszam: "",
         fax: "",
         allampolgarsag: "magyar",
         jogositvany: false,
-        szoc_keszseg: "",
+        szoc_keszseg: "", */
       });
     
       const {loginReg, errors} = useAuthContext();
@@ -37,7 +37,7 @@ export default function Regisztracio() {
       const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
-        loginReg(formData, "/guest/jobseekers/new");
+        loginReg(formData, "/register");
       };
     
 
@@ -49,8 +49,8 @@ export default function Regisztracio() {
         <label>Név:</label>
           <input
             type="text"
-            name="nev"
-            value={formData.nev}
+            name="name"
+            value={formData.name}
             onChange={handleInputChange}
           />
           <div>
@@ -59,7 +59,7 @@ export default function Regisztracio() {
             )}
           </div>
         </div>
-         <div className="form-group">
+         {/* <div className="form-group">
           <div className="nem">
             <label className="nem-label1"> Férfi</label>
             <input 
@@ -80,7 +80,7 @@ export default function Regisztracio() {
               onChange={handleInputChange}
             />
           </div>
-        </div>
+        </div> */}
         <div className="form-group">
           <label>Email:</label>
           <input
@@ -100,8 +100,8 @@ export default function Regisztracio() {
         <label>Jelszó:</label>
           <input
             type="password"
-            name="jelszo"
-            value={formData.jelszo}
+            name="password"
+            value={formData.password}
             onChange={handleInputChange}
           />
           <div>
@@ -116,8 +116,8 @@ export default function Regisztracio() {
           </label>
           <input
             type="password"
-            name="jelszo2"
-            value={formData.jelszo2}
+            name="password_confirmation"
+            value={formData.password_confirmation}
             onChange={handleInputChange}
           />
           <div>
@@ -128,7 +128,7 @@ export default function Regisztracio() {
             )}
           </div>
         </div>
-        <div className="form-group">
+       {/*  <div className="form-group">
         <label>Születési idő:</label>
           <input
             type="date"
@@ -182,7 +182,7 @@ export default function Regisztracio() {
             onChange={handleCheckboxChange}
           />
         </div>
-
+ */}
         <button type="submit" className="">
           Regisztrálok
         </button>

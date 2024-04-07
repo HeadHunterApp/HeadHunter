@@ -28,10 +28,12 @@ class FejvadaszController extends Controller
     public function showsigned(){
         $signed = Auth::user()->user_id;
         $fejvadasz = Fejvadasz::findOrFail($signed);
-        $user = User::where('user_id', $signed)->first(['user_id', 'nev', 'email']);
+        $user = $fejvadasz->user;
+        //$user = User::where('user_id', $signed)->first(['user_id', 'nev', 'email']);
         $result = [
             'user' => $user,
-            'fejvadasz'=> $fejvadasz
+            'fejvadasz'=> $fejvadasz,
+            'terulet_nev' => $fejvadasz->fejvadaszTerulet->terulet->megnevezes
         ];
         return $result;
     }

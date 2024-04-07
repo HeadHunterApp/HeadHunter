@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
-import {getProfilFejvadasz, postFotoFeltolt} from '../api/profil';
+import {getProfilAllaskereso, postFotoFeltolt} from '../api/profil';
 
-const FejvadaszProfil = ({ user, onSubmit }) => {
+const AllaskeresoProfil = ({ user, onSubmit }) => {
     const [name, setName] = useState(user.name);
     const [email, setEmail] = useState(user.email);
-    const [telefonszam, setTelefonszam] = useState(user.telefonszam)
     //const [foto, setFoto] = useState(user.fenykep);
     const [terulet, setTerulet] = useState("");
     
     useEffect(()=>{
-      getProfilFejvadasz().then((response)=>{
-        setTerulet(response.terulet_nev) //backendben is így kerüljön elnevezésre
+      getProfilAllaskereso().then((response)=>{
+        setTerulet(response.terulet) //backendben is így kerüljön elnevezésre
       })
     },[])
   
@@ -50,15 +49,6 @@ const FejvadaszProfil = ({ user, onSubmit }) => {
           />
         </div>
         <div>
-          <label htmlFor="telefonszam">Telefonszám:</label>
-          <input
-            type="text"
-            id="telefonszam"
-            value={telefonszam}
-            onChange={(e) => setTelefonszam(e.target.value)}
-          />
-        </div>
-        <div>
           <label htmlFor="fenykep">Fénykép:</label>
           <input
             type="file"
@@ -80,4 +70,4 @@ const FejvadaszProfil = ({ user, onSubmit }) => {
     );
   };
   
-  export default FejvadaszProfil;
+  export default AllaskeresoProfil;

@@ -42,19 +42,18 @@ export const AuthProvider = ({children}) => {
     const loginReg = async ({...adat}, vegpont) => {
         await csrf()
         console.log(token);
-        adat.token = token;
+        adat._token = token;
         console.log(adat);
-         await csrf(); 
-
+    
          
-        const config = {
-           headers: {
+      /*   const config = {
+          /*  headers: {
                'X-CSRF-TOKEN': token
-           }
-        };
-
+           } };*/
+         
+console.log(vegpont)
         try {
-            await axios.post(vegpont, adat, config);
+            await axios.post(vegpont, adat);
             console.log("siker");
             await getUser();
             navigate("/");

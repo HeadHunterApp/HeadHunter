@@ -1,4 +1,5 @@
 import React from "react";
+import '..styles/AllasKartya.css'
 
 /*  ----  EZ TÖRÖLHETŐ? !!!MARCI!!!  -----  */
 

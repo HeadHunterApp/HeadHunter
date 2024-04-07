@@ -22,23 +22,24 @@ class UserController extends Controller
         //return $user;
         return User::findOrFail($id);
     }
-/*
+
     public function store(Request $request){
         $user=new User();
-        $user->nev=$request->nev;
+        $user->name=$request->name;
         $user->email=$request->email;
-        $user->jelszo=Hash::make($request->jelszo);
-        if(Route::currentRouteName() === 'admin.headhunters.new') {
+        $user->password=Hash::make($request->password);
+        $user->fenykep=$request->fenykep;
+        /* if(Route::currentRouteName() === 'admin.headhunters.new') {
             $user->jogosultsag = 'fejvadász';
         }else{
             $user->jogosultsag = 'álláskereső';
-        }
+        } */
         $user->save();
         //event(new Registered($user));
         //Auth::login($user);
         //return redirect(RouteServiceProvider::HOME);
     }
-*/
+
 /*
     public function update(Request $request, $id){
         $user=User::findOrFail($id);
