@@ -23,19 +23,17 @@ export default function Bejelentkezes(){
             <form onSubmit={handleSubmit}>
                 <div className="bejelentkezes_input">
                     <label htmlFor="email" className="form-label">
-                        Email:
+                        E-mail:
                     </label>
                     <input
                         type="email"
-                        // value beállítása a state értékére
                         value={email}
-                        // state értékének módosítása ha változik a beviteli mező tartalma
                         onChange={(e) => {
                             setEmail(e.target.value);
                         }}
                         className="form-control"
                         id="email"
-                        placeholder="email"
+                        placeholder="adja meg az e-mail címét"
                         name="email"
                     />
                 </div>
@@ -56,7 +54,7 @@ export default function Bejelentkezes(){
                         }}
                         className="form-control"
                         id="pwd"
-                        placeholder="jelszó"
+                        placeholder="adja meg a jelszavát"
                         name="pwd"
                     />
                     <div>

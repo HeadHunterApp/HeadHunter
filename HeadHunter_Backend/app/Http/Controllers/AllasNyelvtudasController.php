@@ -29,6 +29,7 @@ class AllasNyelvtudasController extends Controller
         $allasnyelv = new AllasNyelvtudas();
         $allasnyelv->fill($request->all());
         $allasnyelv->save();
+        return response()->json(['message' => 'Sikeres mentés'], 200);
     }
 
     public function update(Request $request, $allas, $nyelvkod){
@@ -37,6 +38,7 @@ class AllasNyelvtudasController extends Controller
         ->firstOrFail();
         $allasnyelv->fill($request->all());
         $allasnyelv->save();
+        return response()->json(['message' => 'Sikeres mentés'], 200);
     }
 
     public function destroy($allas,$nyelvkod){

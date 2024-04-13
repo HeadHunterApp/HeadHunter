@@ -33,12 +33,12 @@ export default function FelhasznaloModal() {
               <>
                 <li>
                   <button className="open-button" onClick={() => setIsBejOpen(true)}>
-                    Bejelentkezes
+                    Bejelentkezés
                   </button>
                 </li>
                 <li>
                   <button className="open-button" onClick={() => setIsRegOpen(true)}>
-                    Regisztracio
+                    Regisztráció
                   </button>
                 </li>
               </>

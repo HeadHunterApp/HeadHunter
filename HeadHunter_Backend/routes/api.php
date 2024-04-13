@@ -39,15 +39,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+//regisztrációhoz bejelentkezés nélkül alábbi route HELYETT a Breeze - RegistredUserController kezeli
+//Route::post('/guest/jobseekers/new', [AllaskeresoController::class, 'store']);
 
-Route::get('/token', function () {
-    return request()->session()->token();
-});
-
-
-
-//regisztrációhoz bejelentkezés nélkül:
-Route::post('/guest/jobseekers/new', [AllaskeresoController::class, 'store']);
 //álláskereső oldalhoz route bejelentkezés nélkül:
 //allas
 Route::get('/guest/jobs/all', [AllasController::class, 'shortAllasAll']);

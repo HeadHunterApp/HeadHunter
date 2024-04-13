@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id('user_id');
-            $table->string('name', 255);
-            $table->string('email', 255)->unique();
+            $table->string('nev', 50);
+            $table->string('email', 40)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('jogosultsag', 255);
+            $table->string('jogosultsag', 12);
             $table->string('fenykep', 150)->nullable();
             $table->rememberToken();
             $table->timestamps();
@@ -29,7 +29,7 @@ return new class extends Migration
         //only one user with jogosultsag='admin'
 
         User::create([
-            'name' => 'Admin', 
+            'nev' => 'Admin', 
             'email' => 'admin@headhunter.com', 
             'password' => Hash::make('Admin123.'),
             'jogosultsag' => 'admin',

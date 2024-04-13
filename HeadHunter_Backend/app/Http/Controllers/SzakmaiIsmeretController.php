@@ -22,6 +22,7 @@ class SzakmaiIsmeretController extends Controller
         // $szakmaiismeret->szint = $request->input('szint');
         $szakmaiismeret->fill($request->all());
         $szakmaiismeret->save();
+        return response()->json(['message' => 'Sikeres mentés'], 200);
     }
 
     public function update(Request $request, $id){
@@ -30,6 +31,7 @@ class SzakmaiIsmeretController extends Controller
         // $szakmaiismeret->szint = $request->input('szint');
         $szakmaiismeret->fill($request->all());
         $szakmaiismeret->save();
+        return response()->json(['message' => 'Sikeres mentés'], 200);
     }
 
     public function destroy($id){

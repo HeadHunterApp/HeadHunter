@@ -25,6 +25,7 @@ class MunkaltatoController extends Controller
         // $munkaltato->email = $request->input('email');
         $munkaltato->fill($request->all());
         $munkaltato->save();
+        return response()->json(['message' => 'Új munkáltató rögzítve'], 200);
     }
 
     public function update(Request $request, $id){
@@ -36,6 +37,7 @@ class MunkaltatoController extends Controller
         // $munkaltato->email = $request->input('email');
         $munkaltato->fill($request->all());
         $munkaltato->save();
+        return response()->json(['message' => 'Munkáltató adatai sikeresen frissítve'], 200); 
     }
 
     public function destroy($id){

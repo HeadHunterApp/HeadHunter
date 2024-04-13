@@ -21,12 +21,14 @@ class AllasVegzettsegController extends Controller
         $allasvegz = new AllasVegzettseg();
         $allasvegz->fill($request->all());
         $allasvegz->save();
+        return response()->json(['message' => 'Sikeres mentés'], 200);
     }
 
     public function update(Request $request, $allas){
         $allasvegz = AllasVegzettseg::findOrFail($allas);
         $allasvegz->fill($request->all());
         $allasvegz->save();
+        return response()->json(['message' => 'Sikeres mentés'], 200);
     }
 
     public function destroy($allas){

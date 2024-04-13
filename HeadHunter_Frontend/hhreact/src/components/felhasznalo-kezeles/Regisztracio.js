@@ -4,7 +4,7 @@ import useAuthContext from "../../contexts/AuthContext";
 
 export default function Regisztracio() {
     const [formData, setFormData] = useState({
-        name: "",
+        nev: "",
         email: "",
         password: "",
         password_confirmation: "",
@@ -26,6 +26,7 @@ export default function Regisztracio() {
         });
       };
     
+      /*
       const handleCheckboxChange = (e) => {
         const { name, checked } = e.target;
         setFormData({
@@ -33,6 +34,7 @@ export default function Regisztracio() {
           [name]: checked,
         });
       };
+      */
     
       const handleSubmit = (e) => {
         e.preventDefault();
@@ -49,13 +51,13 @@ export default function Regisztracio() {
         <label>Név:</label>
           <input
             type="text"
-            name="name"
-            value={formData.name}
+            name="nev"
+            value={formData.nev}
             onChange={handleInputChange}
           />
           <div>
-            {errors.name && (
-              <span className="text-danger">{errors.name[0]}</span>
+            {errors.nev && (
+              <span className="text-danger">{errors.nev[0]}</span>
             )}
           </div>
         </div>
@@ -82,7 +84,7 @@ export default function Regisztracio() {
           </div>
         </div> */}
         <div className="form-group">
-          <label>Email:</label>
+          <label>E-mail:</label>
           <input
             type="text"
             name="email"

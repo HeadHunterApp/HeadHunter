@@ -27,6 +27,7 @@ class AllaskeresoTapasztalatController extends Controller
         ->join('terulets as t', 'p.terulet','=','t.terulet_id')
         ->select(
             'akt.cegnev',
+            'akt.ceg_cim',
             't.megnevezes',
             'p.pozicio',
             'ti.leiras',
@@ -46,6 +47,7 @@ class AllaskeresoTapasztalatController extends Controller
             ->join('terulets as t', 'p.terulet','=','t.terulet_id')
             ->select(
                 'akt.cegnev',
+                'akt.ceg_cim',
                 't.megnevezes',
                 'p.pozicio',
                 'ti.leiras',
@@ -63,6 +65,7 @@ class AllaskeresoTapasztalatController extends Controller
         $aktap = new AllaskeresoTapasztalat();
         $aktap->fill($request->all());
         $aktap->save();
+        return response()->json(['message' => 'Sikeres mentés'], 200);
     }
 
     public function update(Request $request, $allasker, $cegnev, $pozicio){
@@ -72,6 +75,7 @@ class AllaskeresoTapasztalatController extends Controller
         ->firstOrFail();
         $aktap->fill($request->all());
         $aktap->save();
+        return response()->json(['message' => 'Munkatapasztalatok frissítve'], 200);
     }
 
     public function updatesigned(Request $request, $cegnev, $pozicio){
@@ -82,6 +86,7 @@ class AllaskeresoTapasztalatController extends Controller
         ->firstOrFail();
         $aktap->fill($request->all());
         $aktap->save();
+        return response()->json(['message' => 'Adatait sikeresen frissítve'], 200);
     }
 
     public function destroy($allasker, $cegnev, $pozicio){
