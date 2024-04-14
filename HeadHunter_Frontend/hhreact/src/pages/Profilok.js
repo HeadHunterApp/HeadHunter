@@ -7,10 +7,9 @@ export default function Profilok(){
     const { user} = useAuthContext();
     return(
         <div>
-        <FejvadaszProfil/>
-             {user.jogosultsagok === "admin" && <AdminProfil/>}
-            {user.jogosultsagok === "fejvadász" && <FejvadaszProfil/>}
-            {user.jogosultsagok === "álláskereső" && <AllaskeresoProfil/>} 
+             {user.jogosultsag === "admin" && <AdminProfil/>}
+            {user.jogosultsag === "fejvadász" && <FejvadaszProfil/>}
+            {user.jogosultsag === "álláskereső" && <AllaskeresoProfil/>} 
         </div>
     )
 }

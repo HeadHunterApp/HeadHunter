@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
       await axios.post(vegpont, adat);
       console.log("siker");
       await getUser();
-      navigate("/");
+      navigate("/kezdolap");
     } catch (error) {
       console.log(error);
       if (error.response.status === 422) {

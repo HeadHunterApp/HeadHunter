@@ -2,19 +2,20 @@ import React, { useState } from "react";
 import '../../styles/Regisztracio.css';
 import useAuthContext from "../../contexts/AuthContext";
 
-export default function Regisztracio() {
+export default function Regisztracio({onClose}) {
     const [formData, setFormData] = useState({
         nev: "",
         email: "",
         password: "",
         password_confirmation: "",
-      /*   nem: "",
+        nem: "",
         szul_ido: "",
-        telefonszam: "",
+        /* telefonszam: "",
         fax: "",
         allampolgarsag: "magyar",
         jogositvany: false,
-        szoc_keszseg: "", */
+        szoc_keszseg: "",  */
+        cim:"",
       });
     
       const {loginReg, errors} = useAuthContext();
@@ -40,6 +41,8 @@ export default function Regisztracio() {
         e.preventDefault();
         console.log(formData);
         loginReg(formData, "/register");
+
+        onClose();
       };
     
 
@@ -61,8 +64,11 @@ export default function Regisztracio() {
             )}
           </div>
         </div>
-         {/* <div className="form-group">
+
+         <div className="form-group">
+         <p className="pnem">Neme:</p>
           <div className="nem">
+          
             <label className="nem-label1"> Férfi</label>
             <input 
               type="radio"
@@ -82,7 +88,25 @@ export default function Regisztracio() {
               onChange={handleInputChange}
             />
           </div>
-        </div> */}
+        </div> 
+        <div className="form-group">
+        <label>Születési idő:</label>
+          <input
+            type="date"
+            name="szul_ido"
+            value={formData.szul_ido}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+        <label>Lakcím:</label>
+          <input
+            type="text"
+            name="cim"
+            value={formData.cim}
+            onChange={handleInputChange}
+          />
+        </div>
         <div className="form-group">
           <label>E-mail:</label>
           <input
@@ -130,16 +154,9 @@ export default function Regisztracio() {
             )}
           </div>
         </div>
-       {/*  <div className="form-group">
-        <label>Születési idő:</label>
-          <input
-            type="date"
-            name="szul_ido"
-            value={formData.szul_ido}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
+
+
+        {/* <div className="form-group">
         <label>Telefon szám:</label>
           <input
             type="text"
@@ -183,8 +200,8 @@ export default function Regisztracio() {
             checked={formData.szocKeszseg}
             onChange={handleCheckboxChange}
           />
-        </div>
- */}
+        </div> */}
+ 
         <button type="submit" className="">
           Regisztrálok
         </button>

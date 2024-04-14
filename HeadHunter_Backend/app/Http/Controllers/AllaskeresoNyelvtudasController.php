@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+use function PHPUnit\Framework\isEmpty;
+
 class AllaskeresoNyelvtudasController extends Controller
 {
     public function index(){
@@ -43,7 +45,8 @@ class AllaskeresoNyelvtudasController extends Controller
 
     public function showsigned(){
         $signed = Auth::user()->user_id;
-        $aknyelv = DB::table('allaskereso_nyelvtudas as akny')
+        //$signed = 3;
+        $aknyelv = DB::table('allaskereso_nyelvtudass as akny')
         ->join('nyelvtudass as nt', 'akny.nyelvtudas','=','nt.nyelvkod')
         ->where('allaskereso', $signed)
         ->select(
@@ -56,9 +59,9 @@ class AllaskeresoNyelvtudasController extends Controller
             'akny.beszed'
             )
         ->get();
-        if ($aknyelv->isEmpty()) {
-            return response()->json(['message' => 'Még nem adtál meg a nyelvtudásodra vonatkozó adatot'], 404);
-        }
+        //if ($aknyelv->isEmpty()) {
+        //    return response()->json(['message' => 'Még nem adtál meg a nyelvtudásodra vonatkozó adatot'], 404);
+        //}
         return $aknyelv;
 
 /*         $result = [
@@ -70,8 +73,10 @@ class AllaskeresoNyelvtudasController extends Controller
 
 
     public function store(Request $request){
+        $signed = Auth::user()->user_id;
         $aknyelv = new AllaskeresoNyelvtudas();
         $aknyelv->fill($request->all());
+        $aknyelv->allaskereso = $signed;
         $aknyelv->save();
         return response()->json(['message' => 'Sikeres mentés'], 200);
     }
@@ -85,13 +90,22 @@ class AllaskeresoNyelvtudasController extends Controller
         return response()->json(['message' => 'Nyelvtudásra vonatkozó adatok frissítve'], 200);
     }
 
-    public function updatesigned(Request $request, $nyelvtudas){
+    public function updatesigned(Request $request){
         $signed = Auth::user()->user_id;
+        //$signed = 3;
         $aknyelv = AllaskeresoNyelvtudas::where('allaskereso', $signed)
-        ->where('nyelvtudas','=', $nyelvtudas)
-        ->firstOrFail();
-        $aknyelv->fill($request->all());
-        $aknyelv->save();
+        ->where('nyelvtudas','=', $request->nyelvtudas)
+        ->first();
+        if(!$aknyelv)
+        {
+            return $this->store($request);
+        }
+        else
+        {
+            $aknyelv->fill($request->all());
+            $aknyelv->save();
+        }
+        
         return response()->json(['message' => 'Adatait sikeresen frissítve'], 200);
 
     }

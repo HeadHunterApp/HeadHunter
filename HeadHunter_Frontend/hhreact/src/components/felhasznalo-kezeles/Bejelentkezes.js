@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import useAuthContext from "../../contexts/AuthContext";
 import '../../styles/Bejelentkezes.css';
 
-export default function Bejelentkezes(){
+export default function Bejelentkezes({onClose}){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const {loginReg, errors} = useAuthContext();
@@ -15,6 +15,7 @@ export default function Bejelentkezes(){
             _token: errors.token
         };
         loginReg(adat, "/login");
+        onClose();
     };
 
     return (

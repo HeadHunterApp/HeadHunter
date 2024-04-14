@@ -9,7 +9,7 @@ export default function VendegLayout() {
       <Header />
 
       <Outlet />
-      <Footer />
+     <Footer /> 
     </>
   );
 }
