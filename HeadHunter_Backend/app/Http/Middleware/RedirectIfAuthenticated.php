@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
+//egyelőre ezt se használjuk, de ha fogjuk, akkor redirectet módosítani kell!
+
 class RedirectIfAuthenticated
 {
     /**

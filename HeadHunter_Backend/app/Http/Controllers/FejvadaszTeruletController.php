@@ -20,6 +20,7 @@ class FejvadaszTeruletController extends Controller
         $fejvadaszterulet->fejvadasz = $request->fejvadasz;
         $fejvadaszterulet->terulet = $request->terulet;
         $fejvadaszterulet->save();
+        return response()->json(['message' => 'Fejvadászhoz tartozó terület rögzítve'], 200);
     }
  
     public function show ($fejvadasz,$terulet)
@@ -53,6 +54,7 @@ class FejvadaszTeruletController extends Controller
         $fejvadaszterulet = $this->show($fejvadasz,$terulet);
         $fejvadaszterulet->fill($request->all());
         $fejvadaszterulet->save();
+        return response()->json(['message' => 'Fejvadászhoz tartozó területek sikeresen frissítve'], 200);
     }
 
     public function destroy($fejvadasz,$terulet)

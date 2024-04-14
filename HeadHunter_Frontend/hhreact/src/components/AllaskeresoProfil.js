@@ -11,7 +11,7 @@ const AllaskeresoProfil = ({ onSubmit }) => {
     const handleSubmit = (e) => {
       e.preventDefault();
       
-      onSubmit({ name, email, terulet});
+      onSubmit({ nev, email, terulet});
     };
 
     const fenykepFeltoltes = (event) =>{

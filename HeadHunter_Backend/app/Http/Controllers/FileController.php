@@ -14,12 +14,12 @@ class FileController extends Controller
         $request->validate([
             'file'=> 'required|mimes:pdf,xls,csv,png,jpg|max:2048' 
         ]);
-        $fileName = $request->file->getClientOruóiginalName();
+        $fileName = $request->file->getClientOriginalName();
 
         $request->file->move(public_path('uploads'), $fileName);
 
         return back()
-            ->with('success', 'You have succesfully uploaded the file')
+            ->with('success', 'Fájl sikeresen feltöltve')
             ->with('file', $fileName);
     }
 }

@@ -49,6 +49,8 @@ class AllaskeresoIsmeretController extends Controller
         $akism = new AllaskeresoIsmeret();
         $akism->fill($request->all());
         $akism->save();
+        return response()->json(['message' => 'Sikeres mentés'], 200);
+
     }
 
     public function update(Request $request, $allasker, $ismeret){
@@ -57,6 +59,7 @@ class AllaskeresoIsmeretController extends Controller
         ->firstOrFail();
         $akism->fill($request->all());
         $akism->save();
+        return response()->json(['message' => 'Szakmai ismeretek frissítve'], 200);
     }
 
     public function updatesigned(Request $request, $ismeret){
@@ -66,6 +69,7 @@ class AllaskeresoIsmeretController extends Controller
         ->firstOrFail();
         $akism->fill($request->all());
         $akism->save();
+        return response()->json(['message' => 'Adatait sikeresen frissítve'], 200);
     }
 
 

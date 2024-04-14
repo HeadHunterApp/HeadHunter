@@ -1,9 +1,10 @@
 /* import { useState } from "react";
 import { getProfilAdmin, postFotoFeltolt } from "../api/profil";
 
+//ez egyébként nem is kell
 
     const AdminProfil = ({ user, onSubmit }) => {
-        const [name, setName] = useState(user.name);
+        const [nev, setNev] = useState(user.nev);
         const [email, setEmail] = useState(user.email);
         const [password, setPassword] = useState("");
         const [jogosultsag, setJogosultság] = useState(user.password);
@@ -13,7 +14,7 @@ import { getProfilAdmin, postFotoFeltolt } from "../api/profil";
             getProfilAdmin(user.user_id)
             .then(response => {
                 // Folytatni a mentési folyamatot a válasz alapján
-                onSubmit({ name, email, password, jogosultsag });
+                onSubmit({ nev, email, password, jogosultsag });
             })
             .catch(error => {
                 console.error("Hiba történt a profil lekérésekor:", error);
@@ -37,12 +38,12 @@ import { getProfilAdmin, postFotoFeltolt } from "../api/profil";
     return(
         <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name">Név:</label>
+          <label htmlFor="nev">Név:</label>
           <input
             type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            id="nev"
+            value={nev}
+            onChange={(e) => setNev(e.target.value)}
           />
         </div>
         <div>

@@ -4,76 +4,68 @@ import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
+export const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+  });
 
-export const AuthProvider = ({children}) => {
-    const navigate = useNavigate();
-    const [user, setUser] = useState(null);
-    const [errors, setErrors] = useState({
-        name: "",
-        email: "",
-        password: "",
-        password_confirmation: "",
+  let token = "";
+  const csrf = () =>
+    axios.get("/token").then((response) => {
+      console.log(response);
+      token = response.data;
     });
 
-    let token = "";
-    const csrf = ()=>
-        axios.get("/token").then((response) => {
-            console.log(response);
-            token = response.data;
-        });
-    
-        
+  const getUser = async () => {
+    const { data } = await axios.get("/api/user");
+    setUser(data);
+  };
 
-    
-    const getUser = async () => {
-        const {data} = await axios.get("/api/user");
-        setUser(data);
-    };
+  const logout = async () => {
+    await csrf();
+    console.log(token);
+    axios.post("/logout", { _token: token }).then((resp) => {
+      setUser(null);
+      console.log(resp);
+    });
+  };
 
-    const logout = async () => {
-        await csrf()
-        console.log(token)
-        axios.post("/logout", {_token:token}).then((resp) => {
-           setUser(null);
-           console.log(resp); 
-        });
-    };
+  const loginReg = async ({ ...adat }, vegpont) => {
+    await csrf();
+    console.log(token);
+    adat._token = token;
+    console.log(adat);
 
-    const loginReg = async ({...adat}, vegpont) => {
-        await csrf()
-        console.log(token);
-        adat._token = token;
-        console.log(adat);
-    
-         
-      /*   const config = {
+    /*   const config = {
           /*  headers: {
                'X-CSRF-TOKEN': token
            } };*/
-         
-console.log(vegpont)
-        try {
-            await axios.post(vegpont, adat);
-            console.log("siker");
-            await getUser();
-            navigate("/");
-        }catch (error){
-            console.log(error);
-            if(error.response.status === 422) {
-                setErrors(error.response.data.errors)
-            }
-        }
-    };
 
-    return (
-        <AuthContext.Provider 
-        value={{logout,loginReg,errors,getUser, user}}>
-            {children}
-        </AuthContext.Provider>
-    )
-      
+    console.log(vegpont);
+    try {
+      await axios.post(vegpont, adat);
+      console.log("siker");
+      await getUser();
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 422) {
+        setErrors(error.response.data.errors);
+      }
+    }
+  };
 
+  return (
+    <AuthContext.Provider value={{ logout, loginReg, errors, getUser, user }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+export default function useAuthContext() {
+  return useContext(AuthContext);
 }
-export default function useAuthContext(){
-    return useContext(AuthContext);
-} 

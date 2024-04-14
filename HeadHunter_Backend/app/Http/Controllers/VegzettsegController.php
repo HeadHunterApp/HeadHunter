@@ -18,7 +18,7 @@ class VegzettsegController extends Controller
 
     //currently only fix data, maybe modifiable in the future (then routes needed)
 
-    public function store(Request $request){
+/*    public function store(Request $request){
         $vegzettseg = new Vegzettseg();
         $vegzettseg->megnevezes = $request->input('megnevezes');
         $vegzettseg->save();
@@ -33,4 +33,5 @@ class VegzettsegController extends Controller
     public function destroy($id){
         Vegzettseg::findOrFail($id)->delete();
     }
+    */
 }

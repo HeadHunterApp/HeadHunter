@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {getProfilFejvadasz, postFotoFeltolt, putProfilFejvadász} from '../api/profil';
 
 const FejvadaszProfil = ({ user, onSubmit }) => {
-    const [name, setName] = useState(user.name);
+    const [nev, setNev] = useState(user.nev);
     const [email, setEmail] = useState(user.email);
     const [telefonszam, setTelefonszam] = useState(user.telefonszam)
     //const [foto, setFoto] = useState(user.fenykep);
@@ -30,7 +30,7 @@ const FejvadaszProfil = ({ user, onSubmit }) => {
     const handleSubmit = (e) => {
       e.preventDefault();
       
-      onSubmit({ name, email, terulet});
+      onSubmit({ nev, email, terulet});
     };
 
     const fenykepFeltoltes = (event) =>{
@@ -44,12 +44,12 @@ const FejvadaszProfil = ({ user, onSubmit }) => {
     return (
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name">Név:</label>
+          <label htmlFor="nev">Név:</label>
           <input
             type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            id="nev"
+            value={nev}
+            onChange={(e) => setNev(e.target.value)}
           />
         </div>
         <div>

@@ -27,6 +27,7 @@ class AllaskeresoTapasztalat extends Model
     protected $fillable = [
         'allaskereso',
         'cegnev',
+        'ceg_cim',
         'pozicio',
         'kezdes',
         'vegzes'

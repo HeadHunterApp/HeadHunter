@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('allaskereso_tapasztalats', function (Blueprint $table) {
             $table->foreignId('allaskereso')->references('user_id')->on('allaskeresos');
             $table->string('cegnev', 40);
+            $table->string('ceg_cim', 120);
             $table->string('pozicio', 6);
             $table->foreign('pozicio')->references('pozkod')->on('pozicios');
             $table->primary(['allaskereso','cegnev','pozicio']);
