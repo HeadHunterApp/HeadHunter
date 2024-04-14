@@ -53,6 +53,14 @@ class AllaskeresoTanulmanyController extends Controller
             return response()->json(['message' => 'Még nem adtad meg, hol végezted a tanulmányaidat'], 404);
         }
         return $aktan;
+
+        $vegeDatum = $aktan->vegzes ?? date('Y-m-d');
+        $result = [
+            'idotartam' => $vegeDatum - $aktan->kezdes,
+
+        ];
+
+        return $result;
     }
 
     public function store(Request $request){

@@ -18,7 +18,14 @@ class AllaskeresoTapasztalatController extends Controller
         ->where('cegnev','=', $cegnev)
         ->where('pozicio','=', $pozicio)
         ->firstOrFail();
-        return $aktap;
+        $vegeDatum = $aktap->vegzes ?? date('Y-m-d');
+        $result = [
+            'idotartam' => $vegeDatum - $aktap->kezdes,
+            'allaskeresotapasztalat'=> $aktap,
+            'terulet'=> $aktap->terulet
+        ];
+
+        return $result;
     }
 
     public function showallasker($allasker){

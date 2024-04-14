@@ -60,6 +60,12 @@ class AllaskeresoNyelvtudasController extends Controller
             return response()->json(['message' => 'Még nem adtál meg a nyelvtudásodra vonatkozó adatot'], 404);
         }
         return $aknyelv;
+
+/*         $result = [
+            'nyelvtudas'=> $aknyelv,
+            'allaskeresonyelkod' => $aknyelv->allaskeresoNyelvtudas->nyelvkod->megnevezes
+        ];
+        return $result; */
     }
 
 

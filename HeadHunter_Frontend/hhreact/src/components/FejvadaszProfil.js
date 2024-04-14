@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {getProfilFejvadasz, postFotoFeltolt} from '../api/profil';
+import {getProfilFejvadasz, postFotoFeltolt, putProfilFejvadász} from '../api/profil';
 
 const FejvadaszProfil = ({ user, onSubmit }) => {
     const [name, setName] = useState(user.name);
@@ -10,9 +10,21 @@ const FejvadaszProfil = ({ user, onSubmit }) => {
     
     useEffect(()=>{
       getProfilFejvadasz().then((response)=>{
-        setTerulet(response.terulet_nev) //backendben is így kerüljön elnevezésre
+        setName(response.name);
+        setEmail(response.email);
+        setTelefonszam(response.telefonszam);
+        setTerulet(response.terulet_nev); //backendben is így kerüljön elnevezésre
       })
     },[])
+
+    useEffect(()=>{
+      putProfilFejvadász().then((response)=>{
+        setName(response.name);
+        setEmail(response.email);
+        setTelefonszam(response.telefonszam)
+        setTerulet(response.terulet_nev);
+      })
+    })
   
   
     const handleSubmit = (e) => {

@@ -1,18 +1,12 @@
-import React, { useEffect, useState } from "react";
-import {getProfilAllaskereso, postFotoFeltolt} from '../api/profil';
+import React from "react";
+import { postFotoFeltolt} from '../api/profil';
+import SzemelyesAdatok from "./SzemelyesAdatok";
+import SzakmaiTapasztalat from "./SzakmaiTapasztalat";
+import Nyelvismeret from "./NyelvIsmeret";
+import OktatasKepzes from "./OktatasKepzes";
 
-const AllaskeresoProfil = ({ user, onSubmit }) => {
-    const [name, setName] = useState(user.name);
-    const [email, setEmail] = useState(user.email);
-    //const [foto, setFoto] = useState(user.fenykep);
-    const [terulet, setTerulet] = useState("");
-    
-    useEffect(()=>{
-      getProfilAllaskereso().then((response)=>{
-        setTerulet(response.terulet) //backendben is így kerüljön elnevezésre
-      })
-    },[])
-  
+const AllaskeresoProfil = ({ onSubmit }) => {
+     
   
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -30,42 +24,36 @@ const AllaskeresoProfil = ({ user, onSubmit }) => {
   
     return (
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Név:</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="email">E-mail:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="fenykep">Fénykép:</label>
+       <div>
+          <label htmlFor="fenykep">Fénykép:</label> 
           <input
             type="file"
             id="fenykep"
             onChange={fenykepFeltoltes}
           />
         </div>
+        <div className="temakor">SZEMÉLYES ADATOK:</div> 
         <div>
-          <label htmlFor="terulet">Terület:</label>
-          <input
-            type="text"
-            id="terulet"
-            value={terulet}
-            onChange={(e) => setTerulet(e.target.value)}
-          />
+         <SzemelyesAdatok/>
         </div>
+       
+        <div className="temakor">SZAKMAI TAPASZTALAT</div>
+        <div >
+          <SzakmaiTapasztalat/>
+        </div>
+
+        <div className="temakor">OKTATÁS ÉS KÉPZÉS</div> 
+        <div >
+          <OktatasKepzes/>
+        </div>
+        <div className="temakor">NYELV ISMERET: </div>
+        <div >
+            <Nyelvismeret/>
+        </div>
+        
         <button type="submit">Mentés</button>
+        <button type="submit">Szerkesztés</button>
+        <button type="submit">Önéletrajz generálás</button>
       </form>
     );
   };
