@@ -59,6 +59,7 @@ class AllaskeresoTanulmanyController extends Controller
         $aktan = new AllaskeresoTanulmany();
         $aktan->fill($request->all());
         $aktan->save();
+        return response()->json(['message' => 'Sikeres mentés'], 200);
     }
 
     public function update(Request $request, $allasker, $intezmeny, $szak){
@@ -68,6 +69,7 @@ class AllaskeresoTanulmanyController extends Controller
         ->firstOrFail();
         $aktan->fill($request->all());
         $aktan->save();
+        return response()->json(['message' => 'Tanulmányokra vonatkozó adatok frissítve'], 200);
     }
 
     public function updatesigned(Request $request, $intezmeny, $szak){
@@ -78,6 +80,7 @@ class AllaskeresoTanulmanyController extends Controller
         ->firstOrFail();
         $aktan->fill($request->all());
         $aktan->save();
+        return response()->json(['message' => 'Adatait sikeresen frissítve'], 200);
     }
 
     public function destroy($allasker, $intezmeny, $szak){

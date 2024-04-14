@@ -53,7 +53,7 @@ class FejvadaszController extends Controller
         }
         $fejvadasz->fill($request->all());     
         $fejvadasz->save();
-        return response()->json('Sikeres mentés', 200);
+        return response()->json(['message' => 'Új fejvadász létrehozva'], 200);
     }
 
     public function update(Request $request, $id){
@@ -70,7 +70,7 @@ class FejvadaszController extends Controller
         $fejvadasz=Fejvadasz::findOrFail($id);
         $fejvadasz->fill($request->all());     
         $fejvadasz->save();
-        return response()->json('Sikeres mentés', 200);
+        return response()->json(['message' => 'Fejvadász adatai sikeresen frissítve'], 200);
     }
 
     public function updatesigned(Request $request){
@@ -88,7 +88,7 @@ class FejvadaszController extends Controller
         $fejvadasz = Fejvadasz::findOrFail($signed);
         $fejvadasz->fill($request->all());     
         $fejvadasz->save();
-        return response()->json('Sikeres mentés', 200);
+        return response()->json(['message' => 'Adataid sikeresen frissítve'], 200);
     }
 
     public function destroy($id){

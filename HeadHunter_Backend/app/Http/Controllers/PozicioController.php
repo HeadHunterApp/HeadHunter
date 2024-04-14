@@ -20,12 +20,14 @@ class PozicioController extends Controller
         $pozi = new Pozicio();
         $pozi->fill($request->all());
         $pozi->save();
+        return response()->json(['message' => 'Sikeres mentés'], 200);
     }
 
     public function update(Request $request, $id){
         $pozi = Pozicio::findOrFail($id);
         $pozi->fill($request->all());
         $pozi->save();
+        return response()->json(['message' => 'Sikeres mentés'], 200);
     }
 
     public function destroy($id){

@@ -19,7 +19,7 @@ class TapasztalatIdoController extends Controller
     
     //currently only fix data, maybe modifiable in the future (then routes needed)
 
-
+/*
     public function store(Request $request){
         $tapasztalatido = new TapasztalatIdo();
         $tapasztalatido->leiras = $request->input('leiras');
@@ -35,4 +35,5 @@ class TapasztalatIdoController extends Controller
     public function destroy($id){
         TapasztalatIdo::findOrFail($id)->delete();
     }
+    */
 }

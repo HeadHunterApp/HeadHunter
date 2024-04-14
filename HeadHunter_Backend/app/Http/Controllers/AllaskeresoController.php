@@ -59,7 +59,7 @@ class AllaskeresoController extends Controller
         }
         $allaskereso->fill($request->all()); 
         $allaskereso->save();
-        return response()->json('Sikeres mentés', 200);
+        return response()->json(['message' => 'Új álláskereső létrehozva'], 200);
     }
 
     public function update(Request $request, $id){
@@ -76,7 +76,7 @@ class AllaskeresoController extends Controller
         }
         $allaskereso->fill($request->all());     
         $allaskereso->save();
-        return response()->json('Sikeres mentés', 200);
+        return response()->json(['message' => 'Álláskereső adatai sikeresen frissítve'], 200);
     }
 
     public function updatesigned(Request $request){
@@ -94,7 +94,7 @@ class AllaskeresoController extends Controller
         }
         $allaskereso->fill($request->all());     
         $allaskereso->save();
-        return response()->json('Sikeres mentés', 200);
+        return response()->json(['message' => 'Adatait sikeresen frissítve'], 200);
     }
 
     public function destroy($id){

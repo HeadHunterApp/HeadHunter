@@ -67,6 +67,7 @@ class AllaskeresoNyelvtudasController extends Controller
         $aknyelv = new AllaskeresoNyelvtudas();
         $aknyelv->fill($request->all());
         $aknyelv->save();
+        return response()->json(['message' => 'Sikeres mentés'], 200);
     }
 
     public function update(Request $request, $allasker, $nyelvtudas){
@@ -75,6 +76,7 @@ class AllaskeresoNyelvtudasController extends Controller
         ->firstOrFail();
         $aknyelv->fill($request->all());
         $aknyelv->save();
+        return response()->json(['message' => 'Nyelvtudásra vonatkozó adatok frissítve'], 200);
     }
 
     public function updatesigned(Request $request, $nyelvtudas){
@@ -84,6 +86,8 @@ class AllaskeresoNyelvtudasController extends Controller
         ->firstOrFail();
         $aknyelv->fill($request->all());
         $aknyelv->save();
+        return response()->json(['message' => 'Adatait sikeresen frissítve'], 200);
+
     }
 
     public function destroy($allasker,$nyelvtudas){

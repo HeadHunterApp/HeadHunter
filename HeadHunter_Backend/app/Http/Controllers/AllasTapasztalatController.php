@@ -21,12 +21,14 @@ class AllasTapasztalatController extends Controller
         $allastap = new AllasTapasztalat();
         $allastap->fill($request->all());
         $allastap->save();
+        return response()->json(['message' => 'Sikeres mentés'], 200);
     }
 
     public function update(Request $request, $allas){
         $allastap = AllasTapasztalat::findOrFail($allas);
         $allastap->fill($request->all());
         $allastap->save();
+        return response()->json(['message' => 'Sikeres mentés'], 200);
     }
 
     public function destroy($allas){

@@ -7,6 +7,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
+//EZT MAJD VALÓSZÍNŰLEG JAVÍTANI KELL, NE HASZNÁLJÁTOK!
+
 class PasswordUpdateTest extends TestCase
 {
     use RefreshDatabase;

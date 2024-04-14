@@ -16,11 +16,13 @@ return new class extends Migration
             $table->foreignId('user_id')->references('user_id')->on('users')->primary();
             $table->string('nem', 5);
             $table->date('szul_ido');
+            $table->string('cim', 120);
             $table->string('telefonszam', 12)->nullable();
             $table->string('fax', 12)->nullable();
+            $table->string('anyanyelv', 20)->default('magyar');
             $table->string('allampolgarsag', 20)->default('magyar');
-            $table->boolean('jogositvany');
-            $table->longText('szoc_keszseg', 150);
+            $table->boolean('jogositvany')->nullable();
+            $table->longText('szoc_keszseg', 255)->nullable();
             /* $table->string('fenykep', 150)->nullable(); */
             $table->timestamps();
         });

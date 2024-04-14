@@ -20,14 +20,14 @@ class TeruletController extends Controller
         $terulet = new Terulet();
         $terulet -> megnevezes = $request->megnevezes;
         $terulet->save();
-
+        return response()->json(['message' => 'Sikeres mentés'], 200);
     }
 
     public function update(Request $request, $id){
         $terulet = Terulet::findOrFail($id);
         $terulet -> megnevezes = $request->megnevezes;
         $terulet->save();
-
+        return response()->json(['message' => 'Sikeres mentés'], 200);
     }
 
     public function destroy($id){
