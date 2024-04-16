@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\FejvadaszTerulet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class FejvadaszTeruletController extends Controller
 {
@@ -31,8 +32,14 @@ class FejvadaszTeruletController extends Controller
 
     public function showfejv($fejvadasz)
     {
-        $fejvadaszterulet = FejvadaszTerulet::where('fejvadasz', $fejvadasz)->get();
-        //lekérdezés az adatok megjelenítéséhez!
+        $fejvadaszterulet = DB::table('fejvadaszterulets as fejvter')
+            ->join('terulets as t', 'ft.terulet','=','t.terulet_id')
+            ->join('users as u', 'ft.fejvadasz','=','u.user_id')
+            ->select(
+                'u.nev',
+                't.megnevezes')
+            ->where('fejvadasz', $fejvadasz)
+            ->get();
         if ($fejvadaszterulet->isEmpty()) {
             return response()->json(['message' => 'Jelenleg egyetlen terület sincs hozzárendelve ehhez a fejvadászhoz'], 404);
         }
@@ -41,8 +48,11 @@ class FejvadaszTeruletController extends Controller
 
     public function showsigned(){
         $signed = Auth::user()->user_id;
-        $fejvadaszterulet = FejvadaszTerulet::where('fejvadasz', $signed)->get();
-        //lekérdezés az adatok megjelenítéséhez!
+        $fejvadaszterulet = DB::table('fejvadaszterulets as fejvter')
+            ->join('terulets as t', 'ft.terulet','=','t.terulet_id')
+            ->select('t.megnevezes')
+            ->where('fejvadasz', $signed)
+            ->get();
         if ($fejvadaszterulet->isEmpty()) {
             return response()->json(['message' => 'Még egyetlen területet sem rendeltek hozzád'], 404);
         }
