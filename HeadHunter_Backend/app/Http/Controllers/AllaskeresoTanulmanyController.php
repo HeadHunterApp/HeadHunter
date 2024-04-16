@@ -39,8 +39,8 @@ class AllaskeresoTanulmanyController extends Controller
 
     public function showsigned(){
         $signed = Auth::user()->user_id;
-        $aktan = AllaskeresoTanulmany::where('allaskereso', $signed)
-            ->select(
+        $aktan = AllaskeresoTanulmany::where('allaskereso', $signed);
+/*             ->select(
                 'intezmeny',
                 'szak',
                 'vegzettseg',
@@ -48,11 +48,22 @@ class AllaskeresoTanulmanyController extends Controller
                 'vegzes',
                 'erintett_targytev'
             )
-            ->get();
+            ->get(); */
         if ($aktan->isEmpty()) {
             return response()->json(['message' => 'Még nem adtad meg, hol végezted a tanulmányaidat'], 404);
         }
-        return $aktan;
+        $vegeDatum = $aktan->vegzes ?? date('Y-m-d');
+        $result = [
+            'idotartam' => $vegeDatum - $aktan->kezdes,
+            'kezdes' => $aktan->kezdes,
+            'vegzes'=> $aktan->vegzes,
+            'intezmeny' => $aktan->intezmeny,
+            'erintett_targytev' => $aktan->erintett_targytev,
+            'szak'=>$aktan->szak,
+            'szoc_keszseg'=> $aktan->allaskeresoEntity->szoc_keszseg,
+        ];
+
+        return $result;
     }
 
     public function store(Request $request){

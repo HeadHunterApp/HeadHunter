@@ -24,8 +24,8 @@ export default function FelhasznaloModal() {
                   </button>
                 </li>
                 <li>
-                  <Link className="open-button" to={"profil"}>
-                    Profil
+                  <Link  to={"profil"}>
+                    <button className="open-button">Profil</button>
                   </Link>
                 </li>
               </>
@@ -45,11 +45,11 @@ export default function FelhasznaloModal() {
             )}
 
         <CustomModal isOpen={isRegOpen} onClose={() => setIsRegOpen(false)}>
-          <Regisztracio />
+          <Regisztracio onClose={() => setIsRegOpen(false)} />
         </CustomModal>
 
         <CustomModal isOpen={isBejOpen} onClose={() => setIsBejOpen(false)}>
-          <Bejelentkezes />
+          <Bejelentkezes onClose={() => setIsBejOpen(false)} />
         </CustomModal>
         </ul>
     </div>

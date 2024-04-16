@@ -1,4 +1,4 @@
-import { useState } from "react";
+/* import { useState } from "react";
 import { getProfilAdmin, postFotoFeltolt } from "../api/profil";
 
 //ez egyébként nem is kell
@@ -86,4 +86,4 @@ import { getProfilAdmin, postFotoFeltolt } from "../api/profil";
     )
 }
 
-export default AdminProfil;
+export default AdminProfil; */

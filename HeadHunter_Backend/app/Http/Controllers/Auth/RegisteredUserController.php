@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Allaskereso;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -36,6 +37,14 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+
+        $allaskereso = Allaskereso::create([
+            'user_id' => $user->user_id,
+            'nem' => '',
+            'szul_ido' => '2000-01-01 00:00:00.000',
+            'cim' => ''
+        ]);
+        $allaskereso->save();
 
         return response()->noContent();
     }

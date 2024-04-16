@@ -35,6 +35,6 @@ class Fejvadasz extends Model
 
     public function fejvadaszTerulet()
     {
-        return $this->hasOne(FejvadaszTerulet::class, 'fejvadasz', 'user_id');
+        return $this->belongsToMany(FejvadaszTerulet::class, 'fejvadasz', 'user_id');
     }
 }

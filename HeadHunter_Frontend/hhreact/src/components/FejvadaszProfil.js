@@ -1,24 +1,32 @@
 import React, { useEffect, useState } from "react";
-import {getProfilFejvadasz, postFotoFeltolt} from '../api/profil';
+import {getProfilFejvadasz, postFotoFeltolt, putProfilFejvadász} from '../api/profil';
 
-const FejvadaszProfil = ({ user, onSubmit }) => {
-    const [nev, setNev] = useState(user.nev);
-    const [email, setEmail] = useState(user.email);
-    const [telefonszam, setTelefonszam] = useState(user.telefonszam)
+const FejvadaszProfil = ({ onSubmit }) => {
+    const [nev, setNev] = useState("");
+    const [email, setEmail] = useState("");
+    const [telefonszam, setTelefonszam] = useState("")
     //const [foto, setFoto] = useState(user.fenykep);
     const [terulet, setTerulet] = useState("");
     
     useEffect(()=>{
       getProfilFejvadasz().then((response)=>{
-        setTerulet(response.terulet_nev) //backendben is így kerüljön elnevezésre
+        setNev(response.nev);
+        setEmail(response.email);
+        setTelefonszam(response.telefonszam);
+        setTerulet(response.terulet_nev); //backendben is így kerüljön elnevezésre
       })
     },[])
+
   
   
     const handleSubmit = (e) => {
       e.preventDefault();
       
-      onSubmit({ nev, email, terulet});
+      putProfilFejvadász({nev, email, telefonszam, terulet_nev:terulet}).then((response)=>{
+        if(response.status === '200'){
+          alert('Módosítás sikersen megtörtént!');
+        }
+      })
     };
 
     const fenykepFeltoltes = (event) =>{

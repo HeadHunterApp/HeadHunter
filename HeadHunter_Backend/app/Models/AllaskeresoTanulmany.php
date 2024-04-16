@@ -40,4 +40,9 @@ class AllaskeresoTanulmany extends Model
             ->where('szak', '=', $this->getAttribute('szak'));
         return $query;
     }
+
+    public function allaskeresoEntity()
+    {
+        return $this->hasOne(Allaskereso::class, 'allaskereso', 'user_id');
+    }
 }

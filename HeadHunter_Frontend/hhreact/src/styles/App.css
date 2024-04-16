@@ -22,7 +22,7 @@ footer {
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  position: fixed;
+ /*  position: fixed; */
   width:100%;
   bottom: 0;
 }

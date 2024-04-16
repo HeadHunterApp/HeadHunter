@@ -30,4 +30,10 @@ class Nyelvtudas extends Model
     ];
 
     public $timestamps = false;
+
+    public function allaskeresoNyelvtudas()
+    {
+        return $this->belongsToMany(AllasNyelvtudas::class, 'nyelvkod', 'nyelvkod');
+    }
 }
+

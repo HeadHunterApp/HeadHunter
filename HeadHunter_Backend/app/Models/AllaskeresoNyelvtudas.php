@@ -31,4 +31,9 @@ class AllaskeresoNyelvtudas extends Model
     ];
 
     public $timestamps = false;
+
+    public function nyelvtudas()
+    {
+        return $this->hasOne(Nyelvtudas::class, 'nyelvtudas', 'nyelvkod');
+    }
 }
