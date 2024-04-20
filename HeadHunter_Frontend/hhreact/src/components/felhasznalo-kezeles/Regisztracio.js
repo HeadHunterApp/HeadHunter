@@ -8,14 +8,14 @@ export default function Regisztracio({onClose}) {
         email: "",
         password: "",
         password_confirmation: "",
-        nem: "",
-        szul_ido: "",
-        /* telefonszam: "",
+        
+        /* nem: "",
+        szul_ido: "",telefonszam: "",
         fax: "",
         allampolgarsag: "magyar",
         jogositvany: false,
-        szoc_keszseg: "",  */
-        cim:"",
+        szoc_keszseg: "", 
+        cim:"", */
       });
     
       const {loginReg, errors} = useAuthContext();
@@ -64,6 +64,9 @@ export default function Regisztracio({onClose}) {
             )}
           </div>
         </div>
+{/* regisztrációnál ez nem kell, ez az álláskereső profil szerkesztésbe kell majd, 
+      akár rögtön irányíthatná oda a felhasználót a regisztrációt követően,
+      mert korábban abban maradtunk, hogy csak usert rögzítsünk az egyszerűség kedvéért, személyes adatokat regisztráció után adja meg
 
          <div className="form-group">
          <p className="pnem">Neme:</p>
@@ -107,7 +110,11 @@ export default function Regisztracio({onClose}) {
             onChange={handleInputChange}
           />
         </div>
+        
+*/}
+
         <div className="form-group">
+        
           <label>E-mail:</label>
           <input
             type="text"
