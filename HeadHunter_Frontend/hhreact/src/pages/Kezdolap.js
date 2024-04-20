@@ -1,15 +1,23 @@
 import React from "react";
 import useAuthContext from "../contexts/AuthContext";
+import BejKezdolap from "../components/BejKezdolap";
+import Fooldal from "../components/Fooldal";
 
-/* bejelentkezett felhasználók kezdőlapja  */
+
+//kezdőlapokat itt kezeljük le
 
 export default function Kezdolap(){
-    const { user, getUser } = useAuthContext();
+
+    const { user } = useAuthContext();
+    const belepve = !!user;
 
     return (
-        <div>
-            <h1>Bejelentkezett felhasználó: {user?.nev}</h1>
-         
-        </div>
+        <>
+        {belepve ? (
+            <BejKezdolap />
+        ) : (
+            <Fooldal />
+        )} 
+        </>
     );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/Fooldal.css";
-import MenuKartya from "../components/menu/MenuKartya";
+import MenuKartya from "./menu/MenuKartya";
 
 //bejelentkezés nélküli főoldal
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./styles/App.css";
 //user vizsgálat:
 import useAuthContext from "./contexts/AuthContext";
@@ -7,7 +7,6 @@ import useAuthContext from "./contexts/AuthContext";
 import VendegLayout from "./layout/VendegLayout";
 import AuthLayout from "./layout/AuthLayout";
 //oldalak:
-import Fooldal from "./pages/Fooldal";
 import Kezdolap from "./pages/Kezdolap";
 import Profilok from "./pages/Profilok";
 import Allaskereses from "./pages/AllasKereses";
@@ -27,15 +26,16 @@ export default function App() {
         path="/"
         element={
           belepve ? (
-            <AuthLayout />
+            <AuthLayout jogosultFelh={[]}/>
           ) : (
-            <VendegLayout>
-              <Route index element={<Fooldal />} />
-            </VendegLayout>
+            <VendegLayout />
           )
         }
       >
-        {/*belépés nélkül is elérhető */}
+        {/*kezdőlapon belül kezeljük le a userfüggő tartalomváltozást */}
+        <Route index element={<Kezdolap />} />
+
+         {/*belépés nélkül is elérhető */}
         <Route path="jobs" element={<Allaskereses />} />
         <Route path="seeker-info" element={<AllaskerInfo />} />
         <Route path="employer-info" element={<MunkaltatoInfo />} />
@@ -44,7 +44,6 @@ export default function App() {
         {belepve && (
           <>
             {/*minden belépett felhasználó */}
-            <Route index element={<Kezdolap />} />
             <Route path="profile" element={<Profilok />} />
 
             <Route
