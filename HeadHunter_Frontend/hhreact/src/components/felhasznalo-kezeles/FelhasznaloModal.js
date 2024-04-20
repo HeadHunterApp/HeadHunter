@@ -30,7 +30,7 @@ export default function FelhasznaloModal() {
                   </button>
                 </li>
                 <li>
-                  <Link  to={"profil"}>
+                  <Link  to={"profile"}>
                     <button className="open-button">Profil</button>
                   </Link>
                 </li>
