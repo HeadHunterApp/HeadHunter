@@ -5,12 +5,18 @@ import Bejelentkezes from "./Bejelentkezes";
 import Regisztracio from "./Regisztracio";
 import useAuthContext from "../../contexts/AuthContext";
 import CustomModal from "./modal/CustomModal";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function FelhasznaloModal() {
   const [isRegOpen, setIsRegOpen] = useState(false);
   const [isBejOpen, setIsBejOpen] = useState(false);
   const { user, logout } = useAuthContext();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout(); //ez az axios-szal jelentkeztet ki
+    navigate("/"); //ez viszi át a VendégLayoutra az AuthLayoutról
+  };
 
   return(
     <div>
@@ -19,7 +25,7 @@ export default function FelhasznaloModal() {
               <>
               
                 <li>
-                  <button className="open-button" onClick={logout}>
+                  <button className="open-button" onClick={handleLogout}>
                     Kijelentkezés
                   </button>
                 </li>

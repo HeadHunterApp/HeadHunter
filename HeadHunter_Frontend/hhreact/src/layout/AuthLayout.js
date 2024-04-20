@@ -8,7 +8,8 @@ import Header from "../components/Header";
 
 export default function AuthLayout({jogosultFelh}) {
     const { user} = useAuthContext();
-    const hasJogosultsag = user?.jogosultsag?.some((jogosultsag) => jogosultFelh.includes(jogosultsag));
+    const belepettJogs = user?.jogosultsag;
+    const hasJogosultsag = belepettJogs && belepettJogs.includes(jogosultFelh);
 
   return (
     <>

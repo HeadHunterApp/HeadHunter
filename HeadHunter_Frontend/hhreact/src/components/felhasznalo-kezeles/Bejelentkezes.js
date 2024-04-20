@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import useAuthContext from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 import '../../styles/Bejelentkezes.css';
 
 export default function Bejelentkezes({onClose}){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const {loginReg, errors} = useAuthContext();
+    const navigate = useNavigate();
 
     const handleSubmit =async(e) => {
         e.preventDefault();
@@ -14,8 +16,9 @@ export default function Bejelentkezes({onClose}){
             password: password,
             _token: errors.token
         };
-        loginReg(adat, "/login");
+        await loginReg(adat, "/login");
         onClose();
+        navigate("home");
     };
 
     return (
