@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { getAllaskeresoNyelvtudas, getAllaskeresoTanulmany, getAllaskeresoTapasztalat, getProfilAllaskereso, postFotoFeltolt, putAllaskeresoNyelvtudas, putAllaskeresoTanulmany, putAllaskeresoTapasztalat, putProfilAllakereso} from '../../../api/profil';
-import axios from "../../../api/axios";
-import '../../../styles/profil.css';
+import { getAllaskeresoNyelvtudas, getAllaskeresoTanulmany, getAllaskeresoTapasztalat, getProfilAllaskereso, postFotoFeltolt, putAllaskeresoNyelvtudas, putAllaskeresoTanulmany, putAllaskeresoTapasztalat, putProfilAllakereso} from '../api/profil';
+import axios from "../api/axios";
+import '../styles/profil.css';
 
 const AllaskeresoProfil = ({ onSubmit }) => {
      

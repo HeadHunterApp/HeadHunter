@@ -26,7 +26,7 @@ export default function Navigacio() {
       <ul>
         <NavLink link="/" title="Kezdőlap" />
        {/*  {!user && (  */}
-                <NavLink link="jobs" title="Álláskeresés" />
+                <NavLink link="allaskereses" title="Álláskeresés" />
          {/*   )} */}
 
           

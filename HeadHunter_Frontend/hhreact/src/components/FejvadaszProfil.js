@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {getProfilFejvadasz, postFotoFeltolt, putProfilFejvadász} from '../../../api/profil';
+import {getProfilFejvadasz, postFotoFeltolt, putProfilFejvadász} from '../api/profil';
 
 const FejvadaszProfil = ({ onSubmit }) => {
     const [nev, setNev] = useState("");

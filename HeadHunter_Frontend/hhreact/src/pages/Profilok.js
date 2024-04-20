@@ -1,9 +1,7 @@
-import AdminProfil from "../components/felhasznalo-kezeles/profil/AdminProfil";
+import AdminProfil from "../components/AdminProfil";
 import useAuthContext from "../contexts/AuthContext";
-import FejvadaszProfil from "../components/felhasznalo-kezeles/profil/FejvadaszProfil";
-import AllaskeresoProfil from "../components/felhasznalo-kezeles/profil/AllaskeresoProfil"; 
-
-//adminnak nem kell profil, szerintem törölni kéne
+import FejvadaszProfil from "../components/FejvadaszProfil";
+import AllaskeresoProfil from "../components/AllaskeresoProfil"; 
 
 export default function Profilok(){
     const { user} = useAuthContext();
