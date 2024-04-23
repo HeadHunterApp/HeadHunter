@@ -9,7 +9,7 @@ export default function Regisztracio({onClose}) {
         password: "",
         password_confirmation: "",
         nem: "",
-        szul_ido: "",
+        szul_ido: '2005-01-01',
         /* telefonszam: "",
         fax: "",
         allampolgarsag: "magyar",

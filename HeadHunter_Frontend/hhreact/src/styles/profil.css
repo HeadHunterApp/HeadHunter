@@ -3,6 +3,8 @@
     margin: 0 auto;
     border: solid 1px black;
     border-radius: 5px;
+    padding: 10px;
+
 }
 .lehetoseg{
     border: solid 1px gray;
@@ -17,12 +19,28 @@
     color: aliceblue;
 }
 
+
 input{
     max-width: 95%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
-    margin: 10px;
- 
+    margin: 13px;
+    width: 95%;
+}
+
+.allprofil label{
+    margin-left: 17px;
+}
+
+.mentes{
+    display: block;
+    max-width: 100px;
+    margin: auto;
+}
+
+.react-select{
+    width: 95%;
+    margin: auto;
 }

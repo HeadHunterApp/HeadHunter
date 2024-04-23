@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/Header.css";
-import LoginModalForm from "./felhasznalo-kezeles/FelhasznaloModal";
+import FelhasznaloModal from "./felhasznalo-kezeles/FelhasznaloModal";
 import Navigacio from "./menu/Navigacio";
 
 const Header = () => {
@@ -10,7 +10,7 @@ const Header = () => {
         <Navigacio />
       </div>
       <div className="right-column">
-        <LoginModalForm />
+        <FelhasznaloModal/>
         
       </div>
     </header>

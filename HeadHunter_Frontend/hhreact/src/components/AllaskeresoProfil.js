@@ -10,7 +10,7 @@ const AllaskeresoProfil = ({ onSubmit }) => {
   const [telefonszam, setTelefonszam] = useState("");
   const [fax, setFax] = useState("");
   const [allampolgarsag, setAllampolgarsag] = useState("");
-  const [szul_ido, setSzul_ido] = useState(new Date);
+  const [szul_ido, setSzul_ido] = useState('2005-01-01');
   const [jogositvany, setJogositvany] = useState(false);
   const [keszseg, setKeszseg] = useState("");
   const [neme, setNeme] = useState();
@@ -33,11 +33,14 @@ const AllaskeresoProfil = ({ onSubmit }) => {
   const [olvasas, setOlvasas] = useState("");
   const [iras, setIras] = useState("");
   const [beszed, setBeszed] = useState("");
+  const [cim, setCim] = useState("");
 
   useEffect(()=>{
     getAllaskeresoNyelvtudas().then((response)=>{
       let nyelv = response.data[0];
 
+      if (nyelv !== null && typeof nyelv !== 'undefined')
+      {
           //setAnyanyelv(nyelv.anyanyelv);
           setNyelvvizsga(nyelv.nyelvvizsga);
           setOlvasas(nyelv.olvasas);
@@ -45,41 +48,57 @@ const AllaskeresoProfil = ({ onSubmit }) => {
           setBeszed(nyelv.beszed);
           setNyelvtudas(nyelv.nyelv);
           //setNyelvtudas(nyelv.allaskeresonyelkod.nyelvtudas);
+      }
     })
   },[])
 
   useEffect(()=>{
     getAllaskeresoTanulmany().then((response)=>{
-          setOktIdotartam(response.idotartam);
-          setIntezmeny(response.intezmeny);
-          setFotargy(response.erintett_targytev);
-          setSzakkepesites(response.szak)
-          setKeszseg(response.szoc_keszseg); 
+
+      let tanulmany = response.data[0];
+
+      if (tanulmany !== null && typeof tanulmany !== 'undefined')
+      {
+        setOktIdotartam(response.idotartam);
+        setIntezmeny(response.intezmeny);
+        setFotargy(response.erintett_targytev);
+        setSzakkepesites(response.szak)
+        setKeszseg(response.szoc_keszseg);
+      } 
     })
   },[])
 
   useEffect(()=>{
     getAllaskeresoTapasztalat().then((response)=>{ 
+
+      let tapasztalat = response.data[0];
+
+      if (tapasztalat !== null && typeof tapasztalat !== 'undefined')
+      {
           setIdotartam(response.idotartam) ; //backend számolja a végzés és a kezdésből.
           setCegnev(response.allaskeresotapasztalat.cegnev);
           setTerulet(response.terulet);
           setBeosztas(response.allaskeresotapasztalat.pozicio);
           setKezdes(response.allaskeresotapasztalat.kezdes);
           setVegzes(response.allaskeresotapasztalat.vegzes);
+      }
     })
   },[])
 
   useEffect(()=>{
     getProfilAllaskereso().then((response)=>{
-      setNev(response.nev);
-      setEmail(response.email);
-      setTelefonszam(response.telefonszam);
-      setFax(response.fax) ;
-      setAllampolgarsag(response.allampolgarsag);
-      setSzul_ido(response.szul_ido);
-      setJogositvany(response.jogositvany);
-      setKeszseg(response.keszseg);
-      setNeme(response.neme);
+      let adat = response.data;
+
+      setNev(adat.nev);
+      setEmail(adat.email);
+      setTelefonszam(adat.telefonszam);
+      setFax(adat.fax) ;
+      setAllampolgarsag(adat.allampolgarsag);
+      setSzul_ido(adat.szul_ido);
+      setJogositvany(adat.jogositvany);
+      setKeszseg(adat.keszseg);
+      setNeme(adat.neme);
+      setCim(adat.cim);
     })
   },[])
 
@@ -95,27 +114,31 @@ const AllaskeresoProfil = ({ onSubmit }) => {
   
     const onSzerkesztes = async()=>{
       let token = "";
+
       await axios.get("/api/token").then((response) => {
         console.log(response);
         token = response.data;
       });
-      console.log("----------------TOKEN:");
-      console.log(token);
-         const config = {
-            headers: {
-               'X-CSRF-TOKEN': token
-           } };
-           console.log(config);
-      putProfilAllakereso({nev, email, fax, allampolgarsag, szul_ido, jogositvany, keszseg, neme}).then((response)=>{
+
+      const config = {
+        headers: {
+          'X-CSRF-TOKEN': token
+      } };
+
+      putProfilAllakereso({nev, email, fax, allampolgarsag, szul_ido, jogositvany, keszseg, neme, cim, anyanyelv}, config)
+      .then((response)=>{
  
       })
-      putAllaskeresoTapasztalat({idotartam, cegnev, terulet, beosztas, kezdes, vegzes}).then((response)=>{
+      putAllaskeresoTapasztalat({cegnev, terulet, beosztas, kezdes, vegzes}, config)
+      .then((response)=>{
 
       })
-      putAllaskeresoTanulmany({oktidotartam, intezmeny, fotargy, szakkepesites, oktkeszseg, oktkezdes, oktvegzes}).then((response)=>{
+      putAllaskeresoTanulmany({intezmeny, fotargy, szakkepesites, oktkeszseg, oktkezdes, oktvegzes}, config)
+      .then((response)=>{
 
       })
-      putAllaskeresoNyelvtudas({anyanyelv, nyelvvizsga, olvasas, iras, beszed, nyelvtudas}, config).then((response)=>{
+      putAllaskeresoNyelvtudas({nyelvvizsga, olvasas, iras, beszed, nyelvtudas}, config)
+      .then((response)=>{
         if(response.status === '200'){
           alert('Módosítás sikersen megtörtént!');
         }
@@ -181,6 +204,15 @@ const AllaskeresoProfil = ({ onSubmit }) => {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="cim">Lakcím: :</label> 
+            <input
+              type="text"
+              id="cim"
+              value={cim}
+              onChange={(e) => setCim(e.target.value)}
             />
           </div>
           <div >

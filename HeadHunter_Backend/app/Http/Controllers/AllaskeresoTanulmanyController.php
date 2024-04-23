@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\AllaskeresoTanulmany;
+use App\Models\Vegzettseg;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AllaskeresoTanulmanyController extends Controller
 {
@@ -39,7 +41,9 @@ class AllaskeresoTanulmanyController extends Controller
 
     public function showsigned(){
         $signed = Auth::user()->user_id;
-        $aktan = AllaskeresoTanulmany::where('allaskereso', $signed);
+        $aktan = DB::table('allaskereso_tanulmanys')
+            ->where('allaskereso', $signed)
+            ->first();
 /*             ->select(
                 'intezmeny',
                 'szak',
@@ -49,9 +53,13 @@ class AllaskeresoTanulmanyController extends Controller
                 'erintett_targytev'
             )
             ->get(); */
-        if ($aktan->isEmpty()) {
-            return response()->json(['message' => 'Még nem adtad meg, hol végezted a tanulmányaidat'], 404);
+
+        if (!$aktan) {
+            //TODO: 200 nem lesz jó hosszútávon.
+            //return response()->json(['message' => 'Még nem adtad meg, hol végezted a tanulmányaidat'], 404);
+            return response()->json(['message' => 'Még nem adtad meg, hol végezted a tanulmányaidat'], 200);
         }
+
         $vegeDatum = $aktan->vegzes ?? date('Y-m-d');
         $result = [
             'idotartam' => $vegeDatum - $aktan->kezdes,
@@ -85,12 +93,22 @@ class AllaskeresoTanulmanyController extends Controller
 
     public function updatesigned(Request $request, $intezmeny, $szak){
         $signed = Auth::user()->user_id;
-        $aktan = AllaskeresoTanulmany::where('allaskereso', $signed)
+        $aktan = DB::table('allaskereso_tanulmanys')
+        ->where('allaskereso','=', $signed)
         ->where('intezmeny','=', $intezmeny)
         ->where('szak','=', $szak)
         ->firstOrFail();
-        $aktan->fill($request->all());
+
+        //$aktan->fill($request->all());
+        $aktan->intezmeny = $request->intezmeny;
+        $aktan->szak = $request->szakkepesites;
+        //$aktan->vegzettseg = $request->vegzettsegId;   //TODO: --> nem látom FE-n
+        $aktan->kezdes = $request->oktkezdes;
+        $aktan->vegzes = $request->oktvegzes;
+        $aktan->erintett_targytev = $request->fotargy;
+
         $aktan->save();
+
         return response()->json(['message' => 'Adatait sikeresen frissítve'], 200);
     }
 

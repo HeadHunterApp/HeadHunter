@@ -28,13 +28,17 @@ class Fejvadasz extends Model
       
     ];
 
+    public static $updaterules = [
+        'telefonszam' => 'nullable|string',
+    ];
+
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function fejvadaszTerulet()
+    public function Teruletek()
     {
-        return $this->belongsToMany(FejvadaszTerulet::class, 'fejvadasz', 'user_id');
+        return $this->belongsToMany(Terulet::class, 'fejvadasz_terulets', 'fejvadasz', 'terulet');
     }
 }

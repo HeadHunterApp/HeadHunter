@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fejvadasz;
+use App\Models\FejvadaszTerulet;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class FejvadaszController extends Controller
@@ -30,11 +33,23 @@ class FejvadaszController extends Controller
         $fejvadasz = Fejvadasz::findOrFail($signed);
         $user = $fejvadasz->user;
         //$user = User::where('user_id', $signed)->first(['user_id', 'nev', 'email']);
+        $teruletek = $fejvadasz->teruletek;
+
+        $terulet_datas = array();
+        foreach ($teruletek as $terulet) {
+            $terulet_datas[] = [
+                'terulet_id' => $terulet->terulet_id,
+                'megnevezes' => $terulet->megnevezes
+            ] ;
+        }
+
         $result = [
-            'user' => $user,
-            'fejvadasz'=> $fejvadasz,
-            'terulet_nev' => $fejvadasz->fejvadaszTerulet->terulet->megnevezes
+            'nev' => $user->nev,
+            'email' => $user->email,
+            'telefonszam'=> $fejvadasz->telefonszam,
+            'teruletek' => $terulet_datas
         ];
+
         return $result;
     }
 
@@ -76,17 +91,63 @@ class FejvadaszController extends Controller
     public function updatesigned(Request $request){
         $signed = Auth::user()->user_id;
         $user=User::findOrFail($signed);
-        $user->fill($request->all());
+
+        $user->nev = $request->nev;
+        $user->email = $request->email;
+
         if ($request->has('jelszo')) {
             $user->jelszo=Hash::make($request->jelszo);
         }
+
         $user->save();
-        $validator = Validator::make($request->all(), Fejvadasz::$rules);
+
+        $validator = Validator::make($request->all(), Fejvadasz::$updaterules);
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+
         $fejvadasz = Fejvadasz::findOrFail($signed);
-        $fejvadasz->fill($request->all());     
+        $fejvadasz->telefonszam = $request->telefonszam;
+        
+        $fejvadaszTerulets = FejvadaszTerulet::where('fejvadasz', $signed)
+            ->get();
+        $fejvadaszTeruletIds = $fejvadaszTerulets->pluck('terulet')->toArray();
+
+        $compareTeruletIds = array();
+        foreach ($request->selectedTerulet as $terulet) {
+            $compareTeruletIds[] = $terulet['value'];
+        }
+
+        $deleteTeruletIds = array_diff($fejvadaszTeruletIds, $compareTeruletIds);
+        $addTeruletIds = array_diff($compareTeruletIds, $fejvadaszTeruletIds);
+
+        //DB::enableQueryLog();
+        foreach($fejvadaszTerulets as $fejvadaszTerulet)
+        {
+            $teruletId = $fejvadaszTerulet->terulet;
+            if(in_array($teruletId, $deleteTeruletIds))
+            {
+                //$primaryKeyValues = [$fejvadaszTerulet->fejvadasz, $fejvadaszTerulet->terulet];
+                //FejvadaszTerulet::destroy($primaryKeyValues);
+                FejvadaszTerulet::where('fejvadasz', $signed)
+                    ->where('terulet', $teruletId)
+                    ->delete();
+            }
+        }
+        //Log::info(DB::getQueryLog());
+
+        foreach($request->selectedTerulet as $terulet)
+        {
+            $teruletId = $terulet['value'];
+            if(in_array($teruletId, $addTeruletIds))
+            {
+                FejvadaszTerulet::create([
+                    'fejvadasz' => $signed,
+                    'terulet' => $teruletId
+                ]);
+            }
+        }
+        
         $fejvadasz->save();
         return response()->json(['message' => 'Adataid sikeresen frissítve'], 200);
     }

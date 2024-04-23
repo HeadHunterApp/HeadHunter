@@ -47,7 +47,18 @@ class Allaskereso extends Model
         'allampolgarsag' => 'required|string',
         'jogositvany' => 'nullable|boolean',
         'szoc_keszseg' => 'nullable|longtext',
-    
+    ];
+
+    public static $updateRules = [
+        'nem' => 'required|in:férfi,nö',
+        'szul_ido' => 'required|date',
+        'cim' => 'required|string',
+        'telefonszam' => 'nullable|string',
+        'fax' => 'nullable|string',
+        'anyanyelv' => 'required|string',
+        'allampolgarsag' => 'required|string',
+        'jogositvany' => 'nullable|boolean',
+        'szoc_keszseg' => 'nullable|longtext',
     ];
 
     public function user()
