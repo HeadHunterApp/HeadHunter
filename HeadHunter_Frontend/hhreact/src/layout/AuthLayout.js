@@ -4,8 +4,6 @@ import useAuthContext from "../contexts/AuthContext";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
-//jogosulatlan felhasználó page-et még meg kell írni
-
 export default function AuthLayout({jogosultFelh}) {
     const { user} = useAuthContext();
     const belepettJogs = user?.jogosultsag;

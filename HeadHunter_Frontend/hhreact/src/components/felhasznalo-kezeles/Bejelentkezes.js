@@ -18,7 +18,7 @@ export default function Bejelentkezes({onClose}){
         };
         await loginReg(adat, "/login");
         onClose();
-        navigate("home");
+        navigate("/");
     };
 
     return (
