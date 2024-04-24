@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {getProfilFejvadasz, postFotoFeltolt, putProfilFejvadász} from '../api/profil';
+import {getProfilFejvadasz, postFotoFeltolt, putProfilFejvadász} from '../../../api/profil';
 import axios from "../api/axios";
 import { getTerulet } from "../api/terulet";
 import Select from "react-select";
+
 
 const FejvadaszProfil = ({ onSubmit }) => {
     const [nev, setNev] = useState("");

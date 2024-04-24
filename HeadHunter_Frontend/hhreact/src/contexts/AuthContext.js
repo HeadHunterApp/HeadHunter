@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [errors, setErrors] = useState({
-    name: "",
+    nev: "",
     email: "",
     password: "",
     password_confirmation: "",
@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
       await axios.post(vegpont, adat);
       console.log("siker");
       await getUser();
-      navigate("/kezdolap");
+      navigate("/");
     } catch (error) {
       console.log(error);
       if (error.response.status === 422) {

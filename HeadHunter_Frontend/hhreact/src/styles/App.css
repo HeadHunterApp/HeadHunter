@@ -14,7 +14,6 @@ main {
 
 footer {
   background-color: #333;
-  color: #fffefe;
   font-size: 1.05em;
   font-weight: 400;
   margin: 0;
@@ -25,4 +24,9 @@ footer {
   position: fixed;
   width:100%;
   bottom: 0;
+}
+
+footer a {
+  color: #fffefe;
+  text-decoration: none;
 }
