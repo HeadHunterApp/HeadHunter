@@ -9,8 +9,8 @@ export const getProfilFejvadasz = ()=>
 export const putProfilFejvadász = (params, config) =>
     axios.put('/api/hunter/headhunters/profile/modification', params, config);
 
-export const postFotoFeltolt = (FormData)=>
-    axios.post("route", FormData, { headers:{ "Content-Type": "multipart/form-data"}})
+export const postFotoFeltolt = (formData, token)=>
+    axios.post("/api/hunter/headhunters/profile/image", formData, { headers:{ "Content-Type": "multipart/form-data", "X-CSRF-TOKEN": token}})
 
 export const getProfilAllaskereso = ()=> 
     axios.get(`/api/seeker/jobseekers/profile`);

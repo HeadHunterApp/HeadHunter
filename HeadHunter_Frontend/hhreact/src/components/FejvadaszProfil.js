@@ -11,6 +11,7 @@ const FejvadaszProfil = ({ onSubmit }) => {
     //const [foto, setFoto] = useState(user.fenykep);
     const [terulet, setTerulet] = useState([]);
     const [selectedTerulet, setselectedTerulet] = useState([]);
+    const [imageSrc, setImageSrc] = useState(null);
 
     useEffect(()=>{
       getProfilFejvadasz().then((response)=>{
@@ -22,7 +23,8 @@ const FejvadaszProfil = ({ onSubmit }) => {
             value: terulet.terulet_id,
             label: terulet.megnevezes
           }
-        })); 
+        }));
+        setImageSrc(response.data.fenykep);
       })
     },[])
 
@@ -63,12 +65,21 @@ const FejvadaszProfil = ({ onSubmit }) => {
       })
     };
 
-    const fenykepFeltoltes = (event) =>{
+    const fenykepFeltoltes = async(event) =>{
       event.preventDefault();
+
       const fajl = event.target.files[0];
-      let FormData = new FormData();
-      FormData.append(fajl.name, fajl)
-      postFotoFeltolt(FormData);//megfelelő routot meg kell adni(írni)!!!
+      console.log(fajl);
+      let formData = new FormData();
+      formData.append('image', fajl)
+
+      let token = "";
+      await axios.get("/api/token").then((response) => {
+        console.log(response);
+        token = response.data;
+      });      
+
+      postFotoFeltolt(formData, token);//megfelelő routot meg kell adni(írni)!!!
     }
   
     return (
@@ -103,11 +114,19 @@ const FejvadaszProfil = ({ onSubmit }) => {
         </div>
         <div>
           <label htmlFor="fenykep">Fénykép:</label>
-          <input
-            type="file"
-            id="fenykep"
-            onChange={fenykepFeltoltes}
-          />
+          {
+            imageSrc ?
+            (
+              <img src={`data:image/png;base64,${imageSrc}`} />
+            ) :
+            (
+              <input
+              type="file"
+              id="fenykep"
+              onChange={fenykepFeltoltes}
+              />
+            )
+          }
         </div>
         <div>
           <label htmlFor="terulet">Terület:</label>

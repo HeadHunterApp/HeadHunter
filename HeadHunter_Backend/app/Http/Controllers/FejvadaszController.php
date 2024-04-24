@@ -50,6 +50,14 @@ class FejvadaszController extends Controller
             'teruletek' => $terulet_datas
         ];
 
+        if($user->fenykep)
+        {
+            $path = public_path($user->fenykep);
+            $imageData = file_get_contents($path);
+            $imageBase64 = base64_encode($imageData);
+            $result['fenykep'] = $imageBase64;
+        }
+
         return $result;
     }
 
@@ -150,6 +158,19 @@ class FejvadaszController extends Controller
         
         $fejvadasz->save();
         return response()->json(['message' => 'Adataid sikeresen frissítve'], 200);
+    }
+
+    public function uploadImage(Request $request){
+        $signed = Auth::user()->user_id;
+        $user=User::findOrFail($signed);
+
+        $image = $request->file('image');
+        $filename = uniqid() . '_' . time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('fenykepek'), $filename);
+        $imagePath = 'fenykepek/' . $filename;
+
+        $user->fenykep = $imagePath;
+        $user->save();
     }
 
     public function destroy($id){

@@ -44,3 +44,8 @@ input{
     width: 95%;
     margin: auto;
 }
+
+img{
+    width: 110px;
+    height: 140px;
+}
