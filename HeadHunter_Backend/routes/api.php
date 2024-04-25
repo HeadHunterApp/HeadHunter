@@ -208,6 +208,7 @@ Route::middleware('auth')->group(function () {
         //fejvadasz
         Route::get('/hunter/headhunters/profile', [FejvadaszController::class, 'showsigned']);
         Route::put('/hunter/headhunters/profile/modification', [FejvadaszController::class, 'updatesigned']);
+        Route::post('/hunter/headhunters/profile/image', [FejvadaszController::class, 'uploadImage']);
         //fejvadasz-terulet
         Route::get('/hunter/headhunters/profile/fields', [FejvadaszTeruletController::class, 'showsigned']);
         //allaskereso

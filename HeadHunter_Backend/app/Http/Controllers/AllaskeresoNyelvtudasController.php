@@ -52,7 +52,7 @@ class AllaskeresoNyelvtudasController extends Controller
         ->select(
             'nt.nyelv',
             'nt.szint',
-            'nt.megnevezes',
+            //'nt.megnevezes',
             'akny.nyelvvizsga',
             'akny.iras',
             'akny.olvasas',
@@ -92,10 +92,10 @@ class AllaskeresoNyelvtudasController extends Controller
 
     public function updatesigned(Request $request){
         $signed = Auth::user()->user_id;
-        //$signed = 3;
         $aknyelv = AllaskeresoNyelvtudas::where('allaskereso', $signed)
         ->where('nyelvtudas','=', $request->nyelvtudas)
         ->first();
+        
         if(!$aknyelv)
         {
             return $this->store($request);

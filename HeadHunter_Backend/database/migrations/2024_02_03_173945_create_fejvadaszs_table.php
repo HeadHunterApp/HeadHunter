@@ -19,7 +19,9 @@ return new class extends Migration
             $table->timestamps();
         });
         
-        
+        Fejvadasz::create([
+            'user_id' => '2'
+        ]);
     }
 
     /**

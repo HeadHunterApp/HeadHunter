@@ -1,44 +1,91 @@
 import React, { useEffect, useState } from "react";
 import {getProfilFejvadasz, postFotoFeltolt, putProfilFejvadász} from '../../../api/profil';
+import axios from "../../../api/axios";
+import { getTerulet } from "../../../api/terulet";
+import Select from "react-select";
+
 
 const FejvadaszProfil = ({ onSubmit }) => {
     const [nev, setNev] = useState("");
     const [email, setEmail] = useState("");
     const [telefonszam, setTelefonszam] = useState("")
     //const [foto, setFoto] = useState(user.fenykep);
-    const [terulet, setTerulet] = useState("");
-    
+    const [terulet, setTerulet] = useState([]);
+    const [selectedTerulet, setselectedTerulet] = useState([]);
+    const [imageSrc, setImageSrc] = useState(null);
+
     useEffect(()=>{
       getProfilFejvadasz().then((response)=>{
-        setNev(response.nev);
-        setEmail(response.email);
-        setTelefonszam(response.telefonszam);
-        setTerulet(response.terulet_nev); //backendben is így kerüljön elnevezésre
+        setNev(response.data.nev);
+        setEmail(response.data.email);
+        setTelefonszam(response.data.telefonszam);
+        setselectedTerulet(response.data.teruletek.map((terulet)=>{
+          return {
+            value: terulet.terulet_id,
+            label: terulet.megnevezes
+          }
+        }));
+        setImageSrc(response.data.fenykep);
       })
     },[])
 
+  useEffect(()=>{
+    getTerulet().then((response)=>{
+      const teruletoptions = response.data.map((teret)=>{
+        return{
+          value:teret.terulet_id,
+          label:teret.megnevezes,
+        }
+      })
+      setTerulet(teruletoptions);
+    })
+  }, []);
   
-  
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
       e.preventDefault();
+      let token = "";
+
+      await axios.get("/api/token").then((response) => {
+        console.log(response);
+        token = response.data;
+      });
+
+      console.log(token);
       
-      putProfilFejvadász({nev, email, telefonszam, terulet_nev:terulet}).then((response)=>{
+      const config = {
+        headers: {
+          'X-CSRF-TOKEN': token
+      } };
+
+      console.log(config);
+
+      putProfilFejvadász({nev, email, telefonszam, selectedTerulet}, config).then((response)=>{
         if(response.status === '200'){
           alert('Módosítás sikersen megtörtént!');
         }
       })
     };
 
-    const fenykepFeltoltes = (event) =>{
+    const fenykepFeltoltes = async(event) =>{
       event.preventDefault();
+
       const fajl = event.target.files[0];
-      let FormData = new FormData();
-      FormData.append(fajl.name, fajl)
-      postFotoFeltolt(FormData);//megfelelő routot meg kell adni(írni)!!!
+      console.log(fajl);
+      let formData = new FormData();
+      formData.append('image', fajl)
+
+      let token = "";
+      await axios.get("/api/token").then((response) => {
+        console.log(response);
+        token = response.data;
+      });      
+
+      postFotoFeltolt(formData, token);//megfelelő routot meg kell adni(írni)!!!
     }
   
     return (
-      <form onSubmit={handleSubmit}>
+      <form className="allprofil" onSubmit={handleSubmit}>
+      
         <div>
           <label htmlFor="nev">Név:</label>
           <input
@@ -68,22 +115,25 @@ const FejvadaszProfil = ({ onSubmit }) => {
         </div>
         <div>
           <label htmlFor="fenykep">Fénykép:</label>
-          <input
-            type="file"
-            id="fenykep"
-            onChange={fenykepFeltoltes}
-          />
+          {
+            imageSrc ?
+            (
+              <img src={`data:image/png;base64,${imageSrc}`} />
+            ) :
+            (
+              <input
+              type="file"
+              id="fenykep"
+              onChange={fenykepFeltoltes}
+              />
+            )
+          }
         </div>
         <div>
           <label htmlFor="terulet">Terület:</label>
-          <input
-            type="text"
-            id="terulet"
-            value={terulet}
-            onChange={(e) => setTerulet(e.target.value)}
-          />
+          <Select className="react-select" isMulti options={terulet} value={selectedTerulet} onChange={setselectedTerulet}/>
         </div>
-        <button type="submit">Mentés</button>
+        <button className="mentes" type="submit">Mentés</button>
       </form>
     );
   };

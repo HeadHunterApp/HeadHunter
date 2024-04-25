@@ -8,9 +8,9 @@ export default function Regisztracio({onClose}) {
         email: "",
         password: "",
         password_confirmation: "",
-        
-        /* nem: "",
-        szul_ido: "",telefonszam: "",
+        nem: "",
+        szul_ido: '2005-01-01',
+        /* telefonszam: "",
         fax: "",
         allampolgarsag: "magyar",
         jogositvany: false,

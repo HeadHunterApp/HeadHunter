@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AllaskeresoTapasztalat;
+use App\Models\Pozicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -50,21 +51,24 @@ class AllaskeresoTapasztalatController extends Controller
     public function showsigned(){
         $signed = Auth::user()->user_id;
         $aktap = DB::table('allaskereso_tapasztalats as akt')
-            ->join('pozicios as p', 'at.pozicio','=','p.pozkod')
+            ->join('pozicios as p', 'akt.pozicio','=','p.pozkod')
             ->join('terulets as t', 'p.terulet','=','t.terulet_id')
             ->select(
                 'akt.cegnev',
                 'akt.ceg_cim',
                 't.megnevezes',
                 'p.pozicio',
-                'ti.leiras',
                 'akt.kezdes',
                 'akt.vegzes')
             ->where('allaskereso', $signed)
             ->get();
+
         if ($aktap->isEmpty()) {
-            return response()->json(['message' => 'Még egyetlen korábbi munkahelyet sem adtál meg'], 404);
+            //TODO: 200 nem lesz jó hosszútávon.
+            //return response()->json(['message' => 'Még egyetlen korábbi munkahelyet sem adtál meg'], 404);
+            return response()->json(['message' => 'Még egyetlen korábbi munkahelyet sem adtál meg'], 200);
         }
+
         return $aktap;
     }
 
@@ -88,11 +92,26 @@ class AllaskeresoTapasztalatController extends Controller
     public function updatesigned(Request $request, $cegnev, $pozicio){
         $signed = Auth::user()->user_id;
         $aktap = AllaskeresoTapasztalat::where('allaskereso', $signed)
-        ->where('cegnev','=', $cegnev)
+        ->where('cegnev','=', $cegnev)  //TODO: nem lenne elég a $request->cegnev ?
         ->where('pozicio','=', $pozicio)
         ->firstOrFail();
-        $aktap->fill($request->all());
+
+        $aktap->cegnev = $request->cegnev;
+        //TODO:
+        //$aktap->ceg_cim = $request->ceg_cim;
+        $aktap->kezdes = $request->kezdes;
+        $aktap->vegzes = $request->vegzes;
+
         $aktap->save();
+
+        $pozicio = Pozicio::where('pozkod', $pozicio)
+        ->firstOrFail();
+
+        $pozicio->pozicio = $request->beosztas;
+        $pozicio->terulet = $request->terulet; //terület Id-t kell ide majd berakni.
+
+        $pozicio->save();
+
         return response()->json(['message' => 'Adatait sikeresen frissítve'], 200);
     }
 
