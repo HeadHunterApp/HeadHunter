@@ -79,6 +79,16 @@ class AllaskeresoTapasztalatController extends Controller
         return response()->json(['message' => 'Sikeres mentés'], 200);
     }
 
+    
+    public function storesigned(Request $request){
+        $signed = Auth::user()->user_id;
+        $aktap = new AllaskeresoTapasztalat();
+        $aktap->allaskereso=$signed;
+        $aktap->fill($request->all());
+        $aktap->save();
+        return response()->json(['message' => 'Sikeres mentés'], 200);
+    }
+
     public function update(Request $request, $allasker, $cegnev, $pozicio){
         $aktap = AllaskeresoTapasztalat::where('allaskereso', $allasker)
         ->where('cegnev','=', $cegnev)

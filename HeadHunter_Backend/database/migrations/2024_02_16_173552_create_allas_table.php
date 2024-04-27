@@ -21,7 +21,7 @@ return new class extends Migration
             //$table->foreign(['terulet', 'pozicio'])->references(['terulet', 'pozicio'])->on('pozicios'); - összetett kulcsok felszámolása
             $table->string('statusz', 40);
             $table->longText('leiras');
-            $table->date('datum');
+            //$table->date('datum'); - timestamp kezeli le
             $table->foreignId('fejvadasz')->references('user_id')->on('fejvadaszs')->nullable();
             $table->timestamps();
         });

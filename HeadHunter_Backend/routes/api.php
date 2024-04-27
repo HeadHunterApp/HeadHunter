@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AllasController;
 use App\Http\Controllers\AllasIsmeretController;
+use App\Http\Controllers\AllasJelentkezoController;
 use App\Http\Controllers\AllaskeresoController;
 use App\Http\Controllers\AllaskeresoIsmeretController;
 use App\Http\Controllers\AllaskeresoNyelvtudasController;
@@ -59,7 +60,25 @@ Route::get('/jobs/{allas_id}/exps', [AllasTapasztalatController::class, 'detaile
 
 Route::middleware('auth')->group(function () {
     // bejelentkezett felhasználók
-
+    //terulet
+    Route::get('/fields/all', [TeruletController::class, 'index']);
+    Route::get('/fields/{terulet_id}', [TeruletController::class, 'show']);
+    //pozicio
+    Route::get('/positions/all', [PozicioController::class, 'index']);
+    Route::get('/positions/{pozkod}', [PozicioController::class], 'show');
+    //szakmai ismeret
+    Route::get('/skills/all', [SzakmaiIsmeretController::class, 'index']);
+    Route::get('/skills/{ismeret_id}', [SzakmaiIsmeretController::class, 'show']);
+    //vegzettseg
+    Route::get('/edu-attainments/all', [VegzettsegController::class, 'index']);
+    Route::get('/edu-attainments/{vegzettseg_id}', [VegzettsegController::class, 'show']);
+    //nyelvtudas
+    Route::get('/languages/all', [NyelvtudasController::class, 'index']);
+    Route::get('/languages/{nyelvkod}', [NyelvtudasController::class, 'show']);
+    //tapasztalat_ido
+    Route::get('/experiences/all', [NyelvtudasController::class, 'index']);
+    Route::get('/experiences/{tapasztalat_id}', [NyelvtudasController::class, 'show']);
+    
     //file feltöltés:
     Route::post('/file-upload', [FileController::class, 'store'])->name('file_store');
 
@@ -72,7 +91,7 @@ Route::middleware('auth')->group(function () {
         //csak az alap táblaadatok megjelenítése, id-k által meghívott adatok nélkül:
         Route::get('/jobs/basic/all', [AllasController::class, 'index']);
         Route::get('/jobs/basic/{allas_id}', [AllasController::class, 'show']);
-
+        //többi:
         Route::post('/jobs/new', [AllasController::class, 'store']);
         Route::put('/jobs/modification/{allas_id}', [AllasController::class, 'update']);
         Route::delete('/jobs/delete/{allas_id}', [AllasController::class, 'destroy']);
@@ -100,6 +119,13 @@ Route::middleware('auth')->group(function () {
         Route::post('/jobs/exps/new', [AllasTapasztalatController::class, 'store']);
         Route::put('/jobs/{allas_id}/exps/modification', [AllasTapasztalatController::class, 'update']);
         Route::delete('/jobs/{allas_id}/exps/delete', [AllasTapasztalatController::class, 'destroy']);
+        //allas-jelentkezo
+        Route::get('/jobs/applicants/all', [AllasJelentkezoController::class, 'index']);
+        Route::get('/jobs/{allas_id}/applicants', [AllasJelentkezoController::class, 'showallas']);
+        Route::get('/jobs/applicants/{allaskereso_id}', [AllasJelentkezoController::class, 'showallasker']);
+        Route::post('/jobs/applicants/new', [AllasJelentkezoController::class, 'store']);
+        Route::put('/jobs/{allas_id}/applicants/modification', [AllasJelentkezoController::class, 'update']);
+        Route::delete('/jobs/{allas_id}/applicants/delete', [AllasJelentkezoController::class, 'destroy']);
         //fejvadasz
         Route::get('/headhunters/all', [FejvadaszController::class, 'index']);
         Route::get('/headhunters/{user_id}', [FejvadaszController::class, 'show']);
@@ -149,64 +175,48 @@ Route::middleware('auth')->group(function () {
         Route::put('/employers/modification/{munkaltato_id}', [MunkaltatoController::class, 'update']);
         Route::delete('/employers/delete/{munkaltato_id}', [MunkaltatoController::class, 'destroy']);
         //terulet
-        Route::get('/fields/all', [TeruletController::class, 'index']);
-        Route::get('/fields/{terulet_id}', [TeruletController::class, 'show']);
         Route::post('/fields/new', [TeruletController::class, 'store]']);
         Route::put('/fields/modification/{terulet_id}', [TeruletController::class, 'update']);
         Route::delete('/fields/delete/{terulet_id}', [TeruletController::class, 'destroy']);
         //pozicio
-        Route::get('/positions/all', [PozicioController::class, 'index']);
-        Route::get('/positions/{pozkod}', [PozicioController::class], 'show');
         Route::post('/positions/new', [PozicioController::class], 'store');
         Route::put('/positions/modification/{pozkod}', [PozicioController::class], 'update');
         Route::delete('/positions/delete/{pozkod}', [PozicioController::class, 'destroy']);
         //szakmai ismeret
-        Route::get('/skills/all', [SzakmaiIsmeretController::class, 'index']);
-        Route::get('/skills/{ismeret_id}', [SzakmaiIsmeretController::class, 'show']);
         Route::post('/skills/new', [SzakmaiIsmeretController::class, 'store']);
         Route::put('/skills/modification/{ismeret_id}', [SzakmaiIsmeretController::class, 'update']);
         Route::delete('/skills/delete/{ismeret_id}', [SzakmaiIsmeretController::class, 'destroy']);
-        //vegzettseg
-        Route::get('/edu-attainments/all', [VegzettsegController::class, 'index']);
-        Route::get('/edu-attainments/{vegzettseg_id}', [VegzettsegController::class, 'show']);
         //nyelvtudas
-        Route::get('/languages/all', [NyelvtudasController::class, 'index']);
-        Route::get('/languages/{nyelvkod}', [NyelvtudasController::class, 'show']);
         Route::post('/languages/new', [NyelvtudasController::class, 'store']);
         Route::put('/languages/modification/{nyelvkod}', [NyelvtudasController::class, 'update']);
         Route::delete('/languages/delete/{nyelvkod}', [NyelvtudasController::class, 'destroy']);
-        //tapasztalat_ido
-        Route::get('/experiences/all', [NyelvtudasController::class, 'index']);
-        Route::get('/experiences/{tapasztalat_id}', [NyelvtudasController::class, 'show']);
-        //lekérdezések:
-
     });
     Route::middleware(['headhunter'])->group(function () {
         //allas
-        Route::get('/jobs/all', [AllasController::class, 'shortAllasAll']);
-        Route::get('/jobs/{allas_id}', [AllasController::class, 'detailedAllas']);
         Route::post('/jobs/new', [AllasController::class, 'store']);
         Route::put('/jobs/modification/{allas_id}', [AllasController::class, 'update']);
         //allas-ismeret
-        Route::get('/jobs/{allas_id}/skills', [AllasIsmeretController::class, 'detailedAllasIsm']);
         Route::post('/jobs/skills/new', [AllasIsmeretController::class, 'store']);
         Route::put('/jobs/{allas_id}/skills/modification', [AllasIsmeretController::class, 'update']);
         Route::delete('/jobs/{allas_id}/skills/delete', [AllasIsmeretController::class, 'destroy']);
         //allas-nyelvtudas
-        Route::get('/jobs/{allas_id}/languages', [AllasNyelvtudasController::class, 'detailedAllasNyelv']);
         Route::post('/jobs/languages/new', [AllasNyelvtudasController::class, 'store']);
         Route::put('/jobs/{allas_id}/languages/modification', [AllasNyelvtudasController::class, 'update']);
         Route::delete('/jobs/{allas_id}/languages/delete', [AllasNyelvtudasController::class, 'destroy']);
         //allas-vegzettseg
-        Route::get('/jobs/{allas_id}/edu-atts', [AllasVegzettsegController::class, 'detailedAllasVegz']);
         Route::post('/jobs/edu-atts/new', [AllasVegzettsegController::class, 'store']);
         Route::put('/jobs/{allas_id}/edu-atts/modification', [AllasVegzettsegController::class, 'update']);
         Route::delete('/jobs/{allas_id}/edu-atts/delete', [AllasVegzettsegController::class, 'destroy']);
         //allas-tapasztalat
-        Route::get('/jobs/{allas_id}/exps', [AllasTapasztalatController::class, 'detailedAllasTap']);
         Route::post('/jobs/exps/new', [AllasTapasztalatController::class, 'store']);
         Route::put('/jobs/{allas_id}/exps/modification', [AllasTapasztalatController::class, 'update']);
         Route::delete('/jobs/{allas_id}/exps/delete', [AllasTapasztalatController::class, 'destroy']);
+        //allas-jelentkezo
+        Route::get('/jobs/applicants/all', [AllasJelentkezoController::class, 'detailedJelentkezokAll']);
+        Route::get('/jobs/{allas_id}/applicants', [AllasJelentkezoController::class, 'detailedAllasJelentkezok']);
+        Route::get('/jobs/applicants/{allaskereso_id}', [AllasJelentkezoController::class, 'detailedAllaskerJelentkezesek']);
+        Route::post('/jobs/applicants/new', [AllasJelentkezoController::class, 'store']);
+        Route::put('/jobs/{allas_id}/applicants/modification', [AllasJelentkezoController::class, 'update']);
         //fejvadasz
         Route::get('/headhunters/profile', [FejvadaszController::class, 'showsigned']);
         Route::put('/headhunters/profile/modification', [FejvadaszController::class, 'updatesigned']);
@@ -226,26 +236,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/employers/{munkaltato_id}', [MunkaltatoController::class, 'show']);
         Route::post('/employers/new', [MunkaltatoController::class, 'store']);
         Route::put('/employers/modification/{munkaltato_id}', [MunkaltatoController::class, 'update']);
-        //terulet
-        Route::get('/fields/all', [TeruletController::class, 'index']);
-        Route::get('/fields/{terulet_id}', [TeruletController::class, 'show']);
-        //pozicio
-        Route::get('/positions/all', [PozicioController::class, 'index']);
-        Route::get('/positions/{pozkod}', [PozicioController::class], 'show');
-        //szakmai ismeret
-        Route::get('/skills/all', [SzakmaiIsmeretController::class, 'index']);
-        Route::get('/skills/{ismeret_id}', [SzakmaiIsmeretController::class, 'show']);
-        //vegzettseg
-        Route::get('/edu-attainments/all', [VegzettsegController::class, 'index']);
-        Route::get('/edu-attainments/{vegzettseg_id}', [VegzettsegController::class, 'show']);
-        //nyelvtudas
-        Route::get('/languages/all', [NyelvtudasController::class, 'index']);
-        Route::get('/languages/{nyelvkod}', [NyelvtudasController::class, 'show']);
-        //tapasztalat_ido
-        Route::get('/experiences/all', [NyelvtudasController::class, 'index']);
-        Route::get('/experiences/{tapasztalat_id}', [NyelvtudasController::class, 'show']);
-        //lekérdezések:
-
     });
     Route::middleware(['jobseeker'])->group(function () {
         //allas
@@ -261,40 +251,23 @@ Route::middleware('auth')->group(function () {
         Route::put('/jobseekers/profile/modification', [AllaskeresoController::class, 'updatesigned']);
         //allaskereso-ismeret
         Route::get('/jobseekers/profile/skills', [AllaskeresoIsmeretController::class, 'showsigned']);
-        Route::post('/jobseekers/skills/new', [AllaskeresoIsmeretController::class, 'store']);
+        Route::post('/jobseekers/skills/new', [AllaskeresoIsmeretController::class, 'storesigned']);
         Route::put('/jobseekers/profile/skills/modification', [AllaskeresoIsmeretController::class, 'updatesigned']);
         //allaskereso-nyelvtudas
         Route::get('/jobseekers/profile/languages', [AllaskeresoNyelvtudasController::class, 'showsigned']);
-        Route::post('/jobseekers/languages/new', [AllaskeresoNyelvtudasController::class, 'store']);
+        Route::post('/jobseekers/languages/new', [AllaskeresoNyelvtudasController::class, 'storesigned']);
         Route::put('/jobseekers/profile/languages/modification', [AllaskeresoNyelvtudasController::class, 'updatesigned']);
         //allaskereso-tanulmany
         Route::get('/jobseekers/profile/edu-atts', [AllaskeresoTanulmanyController::class, 'showsigned']);
-        Route::post('/jobseekers/edu-atts/new', [AllaskeresoTanulmanyController::class, 'store']);
+        Route::post('/jobseekers/edu-atts/new', [AllaskeresoTanulmanyController::class, 'storesigned']);
         Route::put('/jobseekers/profile/edu-atts/modification', [AllaskeresoTanulmanyController::class, 'updatesigned']);
         //allaskereso-tapasztalat
         Route::get('/jobseekers/profile/exps', [AllaskeresoTapasztalatController::class, 'showsigned']);
-        Route::post('/jobseekers/exps/new', [AllaskeresoTapasztalatController::class, 'store']);
+        Route::post('/jobseekers/exps/new', [AllaskeresoTapasztalatController::class, 'storesigned']);
         Route::put('/jobseekers/profile/exps/modification', [AllaskeresoTapasztalatController::class, 'updatesigned']);
-        //terulet
-        Route::get('/fields/all', [TeruletController::class, 'index']);
-        Route::get('/fields/{terulet_id}', [TeruletController::class, 'show']);
-        //pozicio
-        Route::get('/positions/all', [PozicioController::class, 'index']);
-        Route::get('/positions/{pozkod}', [PozicioController::class], 'show');
-        //szakmai ismeret
-        Route::get('/skills/all', [SzakmaiIsmeretController::class, 'index']);
-        Route::get('/skills/{ismeret_id}', [SzakmaiIsmeretController::class, 'show']);
-        //vegzettseg
-        Route::get('/edu-attainments/all', [VegzettsegController::class, 'index']);
-        Route::get('/edu-attainments/{vegzettseg_id}', [VegzettsegController::class, 'show']);
-        //nyelvtudas
-        Route::get('/languages/all', [NyelvtudasController::class, 'index']);
-        Route::get('/languages/{nyelvkod}', [NyelvtudasController::class, 'show']);
-        //tapasztalat_ido
-        Route::get('/experiences/all', [NyelvtudasController::class, 'index']);
-        Route::get('/experiences/{tapasztalat_id}', [NyelvtudasController::class, 'show']);
-        //lekérdezések:
-
+        //allas-jelentkezo
+        Route::get('/jobseekers/jobs/applications', [AllasJelentkezoController::class, 'showsigned']);
+        Route::post('/jobseekers/jobs/{allas_id}/apply}', [AllasJelentkezoController::class, 'storesigned']);
     });
 });
 

@@ -24,7 +24,7 @@ class AllasController extends Controller
         //$allas->terulet=$request->terulet;
         $allas->statusz=$request->statusz;
         $allas->leiras=$request->leiras;
-        $allas->datum=$request->datum;
+        //$allas->datum=$request->datum; - timestamp kezeli le
         $allas->fejvadasz=$request->fejvadasz;
         $allas->save();
     }
@@ -61,7 +61,7 @@ class AllasController extends Controller
                 'p.pozicio',
                 'al.leiras',
                 'al.statusz',
-                'al.datum'
+                DB::raw('DATE_FORMAT(al.created_at, "%Y-%m-%d") as datum')
                 )
             ->where('al.allas_id',$allas_id)
             ->get();

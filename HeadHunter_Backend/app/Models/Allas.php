@@ -19,7 +19,7 @@ class Allas extends Model
         'pozicio',
         'statusz',
         'leiras',
-        'datum',
+        //'datum', - timestamp kezeli le
         'fejvadasz',
     ];
     
