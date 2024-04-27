@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\AllaskeresoTapasztalat;
-use App\Models\Pozicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -79,6 +78,16 @@ class AllaskeresoTapasztalatController extends Controller
         return response()->json(['message' => 'Sikeres mentés'], 200);
     }
 
+    
+    public function storesigned(Request $request){
+        $signed = Auth::user()->user_id;
+        $aktap = new AllaskeresoTapasztalat();
+        $aktap->allaskereso=$signed;
+        $aktap->fill($request->all());
+        $aktap->save();
+        return response()->json(['message' => 'Sikeres mentés'], 200);
+    }
+
     public function update(Request $request, $allasker, $cegnev, $pozicio){
         $aktap = AllaskeresoTapasztalat::where('allaskereso', $allasker)
         ->where('cegnev','=', $cegnev)
@@ -92,26 +101,19 @@ class AllaskeresoTapasztalatController extends Controller
     public function updatesigned(Request $request, $cegnev, $pozicio){
         $signed = Auth::user()->user_id;
         $aktap = AllaskeresoTapasztalat::where('allaskereso', $signed)
-        ->where('cegnev','=', $cegnev)  //TODO: nem lenne elég a $request->cegnev ?
+        ->where('cegnev','=', $cegnev)
         ->where('pozicio','=', $pozicio)
-        ->firstOrFail();
-
+        ->firstOrFail();  
+        if (!$aktap) {
+            return response()->json(['error' => 'Hiba történt'], 404);
+        }
         $aktap->cegnev = $request->cegnev;
-        //TODO:
-        //$aktap->ceg_cim = $request->ceg_cim;
+        $aktap->ceg_cim = $request->ceg_cim;
+        $aktap->pozicio = $request->pozicio;
         $aktap->kezdes = $request->kezdes;
-        $aktap->vegzes = $request->vegzes;
+        $aktap->vegzes = $request->vegzes;  
 
         $aktap->save();
-
-        $pozicio = Pozicio::where('pozkod', $pozicio)
-        ->firstOrFail();
-
-        $pozicio->pozicio = $request->beosztas;
-        $pozicio->terulet = $request->terulet; //terület Id-t kell ide majd berakni.
-
-        $pozicio->save();
-
         return response()->json(['message' => 'Adatait sikeresen frissítve'], 200);
     }
 

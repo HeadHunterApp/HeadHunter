@@ -81,6 +81,15 @@ class AllaskeresoNyelvtudasController extends Controller
         return response()->json(['message' => 'Sikeres mentés'], 200);
     }
 
+    public function storesigned(Request $request){
+        $signed = Auth::user()->user_id;
+        $aknyelv = new AllaskeresoNyelvtudas();
+        $aknyelv->allaskereso=$signed;
+        $aknyelv->fill($request->all());
+        $aknyelv->save();
+        return response()->json(['message' => 'Sikeres mentés'], 200);
+    }
+
     public function update(Request $request, $allasker, $nyelvtudas){
         $aknyelv = AllaskeresoNyelvtudas::where('allaskereso', $allasker)
         ->where('nyelvtudas','=', $nyelvtudas)
