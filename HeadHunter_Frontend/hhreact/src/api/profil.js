@@ -1,40 +1,40 @@
 import axios from "../api/axios";
-
+/*ilyen nincs, törölni kéne
 export const getProfilAdmin = (user_id)=>
     axios.get(`/api/admin/user/${user_id}`)
-
+*/
 export const getProfilFejvadasz = ()=>
-    axios.get(`/api/hunter/headhunters/profile`)
+    axios.get(`/api/headhunters/profile`)
 
 export const putProfilFejvadász = (params, config) =>
-    axios.put('/api/hunter/headhunters/profile/modification', params, config);
+    axios.put('/api/headhunters/profile/modification', params, config);
 
 export const postFotoFeltolt = (formData, token)=>
-    axios.post("/api/hunter/headhunters/profile/image", formData, { headers:{ "Content-Type": "multipart/form-data", "X-CSRF-TOKEN": token}})
+    axios.post("/api/headhunters/profile/image", formData, { headers:{ "Content-Type": "multipart/form-data", "X-CSRF-TOKEN": token}})
 
 export const getProfilAllaskereso = ()=> 
-    axios.get(`/api/seeker/jobseekers/profile`);
+    axios.get(`/api/jobseekers/profile`);
 
 export const putProfilAllakereso = (params, config) =>
-    axios.put('/api/seeker/jobseekers/profile/modification', params, config);
+    axios.put('/api/jobseekers/profile/modification', params, config);
 
 export const getAllaskeresoTapasztalat = ()=>
-    axios.get('/api/seeker/jobseekers/profile/exps');
+    axios.get('/api/jobseekers/profile/exps');
 
 export const putAllaskeresoTapasztalat = (params, config) =>
-    axios.put('/api/seeker/jobseekers/profile/exps/modification', params, config);
+    axios.put('/api/jobseekers/profile/exps/modification', params, config);
 
 export const getAllaskeresoTanulmany = ()=>
-    axios.get('/api/seeker/jobseekers/profile/edu-atts');
+    axios.get('/api/jobseekers/profile/edu-atts');
 
 export const putAllaskeresoTanulmany = (params, config)=>
-    axios.put('/api/seeker/jobseekers/profile/edu-atts/modification', params, config);
+    axios.put('/api/jobseekers/profile/edu-atts/modification', params, config);
 
 export const getAllaskeresoNyelvtudas = ()=>
-    axios.get('/api/seeker/jobseekers/profile/languages');
+    axios.get('/api/jobseekers/profile/languages');
 
 export const putAllaskeresoNyelvtudas = (params, config) =>
-    axios.put('/api/seeker/jobseekers/profile/languages/modification', params, config);
+    axios.put('/api/jobseekers/profile/languages/modification', params, config);
 
 
 
