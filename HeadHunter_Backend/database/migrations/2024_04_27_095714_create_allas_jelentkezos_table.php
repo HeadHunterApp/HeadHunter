@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('allas')->references('allas_id')->on('allass');
             $table->foreignId('allaskereso')->references('user_id')->on('allaskeresos');
             $table->primary(['allas','allaskereso']);
-            $table->string('statusz', 12);
+            $table->string('statusz', 12)->default('jelentkezett');
             $table->timestamps();
         });
     }
