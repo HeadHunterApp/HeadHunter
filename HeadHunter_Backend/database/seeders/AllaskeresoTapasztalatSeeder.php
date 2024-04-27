@@ -19,9 +19,10 @@ class AllaskeresoTapasztalatSeeder extends Seeder
         AllaskeresoTapasztalat::create([
             'allaskereso' => 3,
             'cegnev' => 'Magyar Telekom Nyrt.',
+            'ceg_cim' => '1097 Budapest, Könyves Kálmán krt. 36.',
             'pozicio' => 'INFFRO',
-            'kezdes' => '2023/01/04',
-            'vegzes' => '2024/02/01',
+            'kezdes' => '2023-01-04',
+            'vegzes' => '2024-02-01',
         ]);
     }
 }

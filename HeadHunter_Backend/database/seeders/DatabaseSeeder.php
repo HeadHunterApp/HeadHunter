@@ -44,5 +44,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AllaskeresoTapasztalatSeeder::class);
         $this->call(AllaskeresoTanulmanySeeder::class);
         $this->call(AllasJelentkezoSeeder::class);
+
     }
 }
