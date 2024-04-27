@@ -25,7 +25,7 @@ return new class extends Migration
         ]);
         Terulet::create([
             'megnevezes' => 'Marketing', 
-        ]);
+        ]); 
 
     }
 

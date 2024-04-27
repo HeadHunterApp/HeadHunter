@@ -45,7 +45,7 @@ return new class extends Migration
         
         Vegzettseg::create([
             'megnevezes' => 'egyetem - DR',
-        ]);
+        ]); 
     }
 
     /**

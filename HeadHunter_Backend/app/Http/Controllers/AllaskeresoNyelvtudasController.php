@@ -71,6 +71,33 @@ class AllaskeresoNyelvtudasController extends Controller
         return $result; */
     }
 
+     public function showsignedv2(){
+        $signed = Auth::user()->user_id;
+        //$signed = 3;
+        $aknyelv = DB::table('allaskereso_nyelvtudass as akny')
+        ->join('nyelvtudass as nt', 'akny.nyelvtudas','=','nt.nyelvkod')
+        ->where('allaskereso', $signed)
+        ->select(
+            'nt.nyelv',
+            'nt.szint',
+            //'nt.megnevezes',
+            'akny.nyelvvizsga',
+            'akny.iras',
+            'akny.olvasas',
+            'akny.beszed'
+            )
+        ->get();
+        //if ($aknyelv->isEmpty()) {
+        //    return response()->json(['message' => 'Még nem adtál meg a nyelvtudásodra vonatkozó adatot'], 404);
+        //}
+        return $aknyelv;
+
+/*         $result = [
+            'nyelvtudas'=> $aknyelv,
+            'allaskeresonyelkod' => $aknyelv->allaskeresoNyelvtudas->nyelvkod->megnevezes
+        ];
+        return $result; */
+    }
 
     public function store(Request $request){
         $signed = Auth::user()->user_id;
@@ -108,6 +135,28 @@ class AllaskeresoNyelvtudasController extends Controller
         
         return response()->json(['message' => 'Adatait sikeresen frissítve'], 200);
 
+
+    }
+
+    public function updatesignedv2(Request $request){
+        $signed = Auth::user()->user_id;
+        $aknyelv = AllaskeresoNyelvtudas::where('allaskereso', $signed)
+        ->where('nyelvtudas','=', $request->nyelvtudas)
+        ->first();
+        
+        if(!$aknyelv)
+        {
+            return $this->store($request);
+        }
+        else
+        {
+            $aknyelv->fill($request->all());
+            $aknyelv->save();
+        }
+        
+        return response()->json(['message' => 'Adatait sikeresen frissítve'], 200);
+
+        
     }
 
     public function destroy($allasker,$nyelvtudas){

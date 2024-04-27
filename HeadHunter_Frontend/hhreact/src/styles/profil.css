@@ -1,51 +1,71 @@
-.allprofil{
-    max-width: 70%;
-    margin: 0 auto;
-    border: solid 1px black;
-    border-radius: 5px;
-    padding: 10px;
-
+.allprofil {
+  max-width: 70%;
+  margin: 0 auto;
+  border: solid 1px black;
+  border-radius: 5px;
+  padding: 10px;
+  max-height: 550px; /* Változtasd meg a magasságot igényed szerint */
+  overflow-y: auto; /* Csak függőleges görgetést engedélyez */
 }
-.lehetoseg{
-    border: solid 1px gray;
-    border-radius: 5px;
-    max-width: 70%;
-    margin: 0 auto;
-    padding: 20px;
-    max-width: 150px;
-    text-align: center;
-    
-    background-color: teal;
-    color: aliceblue;
+.menu-list {
+  border: solid 1px gray;
+  border-radius: 5px;
+  max-width: 70%;
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 150px;
+  text-align: center;
+
+  background-color: teal;
+  color: aliceblue;
+  flex: 1;
 }
 
+.hidden {
+  display: none;
+}
 
-input{
-    max-width: 95%;
-    padding: 10px;
-    border: 1px solid #ccc;
+input {
+  max-width: 95%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin: 13px;
+  width: 95%;
+}
+
+.allprofil label {
+  margin-left: 17px;
+}
+
+.mentes {
+  display: block;
+  max-width: 100px;
+  margin: auto;
+}
+
+.react-select {
+  width: 95%;
+  margin: auto;
+}
+
+.photo {
+  width: 110px;
+  height: 140px;
+  margin-left: 20px;
+}
+.menu {
+  display: flex;
+  padding: 10px;
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+.temakor{
+    border: 1px solid #055046;
     border-radius: 5px;
     box-sizing: border-box;
-    margin: 13px;
-    width: 95%;
-}
-
-.allprofil label{
-    margin-left: 17px;
-}
-
-.mentes{
-    display: block;
-    max-width: 100px;
-    margin: auto;
-}
-
-.react-select{
-    width: 95%;
-    margin: auto;
-}
-
-img{
-    width: 110px;
-    height: 140px;
+    padding: 10px;
+    margin: 10px;
 }

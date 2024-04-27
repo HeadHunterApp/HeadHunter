@@ -58,6 +58,8 @@ Route::get('/guest/jobs/{allas_id}/exps', [AllasTapasztalatController::class, 'd
 
 Route::middleware('auth')->group(function () {
     // bejelentkezett felhasználók
+    //Route::post('/hunter/headhunters/profile/image', [FejvadaszController::class, 'uploadImage']);
+    Route::post('/user/profile/image', [UserController::class, 'uploadImage']);
 
     Route::middleware(['admin'])->group(function () {
         //user
@@ -207,8 +209,9 @@ Route::middleware('auth')->group(function () {
         Route::delete('/hunter/jobs/{allas_id}/exps/delete', [AllasTapasztalatController::class, 'destroy']);
         //fejvadasz
         Route::get('/hunter/headhunters/profile', [FejvadaszController::class, 'showsigned']);
+        Route::get('/hunter/headhunters/profile/v2', [FejvadaszController::class, 'showsignedv2']);
         Route::put('/hunter/headhunters/profile/modification', [FejvadaszController::class, 'updatesigned']);
-        Route::post('/hunter/headhunters/profile/image', [FejvadaszController::class, 'uploadImage']);
+        Route::put('/hunter/headhunters/profile/modification/v2', [FejvadaszController::class, 'updatesignedv2']);
         //fejvadasz-terulet
         Route::get('/hunter/headhunters/profile/fields', [FejvadaszTeruletController::class, 'showsigned']);
         //allaskereso
@@ -258,23 +261,31 @@ Route::middleware('auth')->group(function () {
         Route::get('/seeker/jobs/{allas_id}/exps', [AllasTapasztalatController::class, 'detailedAllasTap']);
         //allaskereso
         Route::get('/seeker/jobseekers/profile', [AllaskeresoController::class, 'showsigned']);
+        Route::get('/seeker/jobseekers/profile/v2', [AllaskeresoController::class, 'showsignedv2']);
         Route::put('/seeker/jobseekers/profile/modification', [AllaskeresoController::class, 'updatesigned']);
+        Route::put('/seeker/jobseekers/profile/modification/v2', [AllaskeresoController::class, 'updatesignedv2']);
         //allaskereso-ismeret
         Route::get('/seeker/jobseekers/profile/skills', [AllaskeresoIsmeretController::class, 'showsigned']);
         Route::post('/seeker/jobseekers/skills/new', [AllaskeresoIsmeretController::class, 'store']);
         Route::put('/seeker/jobseekers/profile/skills/modification', [AllaskeresoIsmeretController::class, 'updatesigned']);
         //allaskereso-nyelvtudas
         Route::get('/seeker/jobseekers/profile/languages', [AllaskeresoNyelvtudasController::class, 'showsigned']);
+        Route::get('/seeker/jobseekers/profile/languages/v2', [AllaskeresoNyelvtudasController::class, 'showsignedv2']);
         Route::post('/seeker/jobseekers/languages/new', [AllaskeresoNyelvtudasController::class, 'store']);
         Route::put('/seeker/jobseekers/profile/languages/modification', [AllaskeresoNyelvtudasController::class, 'updatesigned']);
+        Route::put('/seeker/jobseekers/profile/languages/modification/v2', [AllaskeresoNyelvtudasController::class, 'updatesignedv2']);
         //allaskereso-tanulmany
         Route::get('/seeker/jobseekers/profile/edu-atts', [AllaskeresoTanulmanyController::class, 'showsigned']);
+        Route::get('/seeker/jobseekers/profile/edu-atts/v2', [AllaskeresoTanulmanyController::class, 'showsignedv2']);
         Route::post('/seeker/jobseekers/edu-atts/new', [AllaskeresoTanulmanyController::class, 'store']);
         Route::put('/seeker/jobseekers/profile/edu-atts/modification', [AllaskeresoTanulmanyController::class, 'updatesigned']);
+        Route::put('/seeker/jobseekers/profile/edu-atts/modification/v2', [AllaskeresoTanulmanyController::class, 'updatesignedv2']);
         //allaskereso-tapasztalat
         Route::get('/seeker/jobseekers/profile/exps', [AllaskeresoTapasztalatController::class, 'showsigned']);
+        Route::get('/seeker/jobseekers/profile/exps/v2', [AllaskeresoTapasztalatController::class, 'showsignedv2']);
         Route::post('/seeker/jobseekers/exps/new', [AllaskeresoTapasztalatController::class, 'store']);
         Route::put('/seeker/jobseekers/profile/exps/modification', [AllaskeresoTapasztalatController::class, 'updatesigned']);
+        Route::put('/seeker/jobseekers/profile/exps/modification/v2', [AllaskeresoTapasztalatController::class, 'updatesignedv2']);
         //terulet
         Route::get('/seeker/fields/all', [TeruletController::class, 'index']);
         Route::get('/seeker/fields/{terulet_id}', [TeruletController::class, 'show']);

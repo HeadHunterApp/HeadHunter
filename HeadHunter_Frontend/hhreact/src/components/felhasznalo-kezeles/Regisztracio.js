@@ -10,15 +10,18 @@ export default function Regisztracio({onClose}) {
         password_confirmation: "",
         nem: "",
         szul_ido: '2005-01-01',
+        cim:""
         /* telefonszam: "",
         fax: "",
         allampolgarsag: "magyar",
         jogositvany: false,
         szoc_keszseg: "", 
-        cim:"", */
+        , */
       });
     
       const {loginReg, errors} = useAuthContext();
+      const [error, setError] = useState(null);
+
       const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -27,18 +30,23 @@ export default function Regisztracio({onClose}) {
         });
       };
     
-      /*
-      const handleCheckboxChange = (e) => {
-        const { name, checked } = e.target;
-        setFormData({
-          ...formData,
-          [name]: checked,
-        });
-      };
-      */
-    
-      const handleSubmit = (e) => {
+      const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Ellenőrizd, hogy a jelszó mezők egyeznek-e
+        if (formData.password !== formData.password_confirmation) {
+          setError('A jelszavak nem egyeznek meg!');
+          return;
+        }
+
+        // Ellenőrizd, hogy van-e üres mező
+        for (const key in formData) {
+          if (formData.hasOwnProperty(key) && formData[key] === "") {
+            setError('Minden mező kitöltése kötelező!');
+            return;
+          }
+        }
+
         console.log(formData);
         loginReg(formData, "/register");
 
@@ -50,6 +58,9 @@ export default function Regisztracio({onClose}) {
     <div className="regisztral" >
       <h1 className="regisztracio">Regisztráció</h1>
       <form onSubmit={handleSubmit}>
+        {error && ( // Megjeleníti az error üzenetet, ha az állapotban van hiba
+          <div className="text-danger">{error}</div>
+        )}
         <div className="form-group">
         <label>Név:</label>
           <input
@@ -58,15 +69,7 @@ export default function Regisztracio({onClose}) {
             value={formData.nev}
             onChange={handleInputChange}
           />
-          <div>
-            {errors.nev && (
-              <span className="text-danger">{errors.nev[0]}</span>
-            )}
-          </div>
         </div>
-{/* regisztrációnál ez nem kell, ez az álláskereső profil szerkesztésbe kell majd, 
-      akár rögtön irányíthatná oda a felhasználót a regisztrációt követően,
-      mert korábban abban maradtunk, hogy csak usert rögzítsünk az egyszerűség kedvéért, személyes adatokat regisztráció után adja meg
 
          <div className="form-group">
          <p className="pnem">Neme:</p>
@@ -110,8 +113,6 @@ export default function Regisztracio({onClose}) {
             onChange={handleInputChange}
           />
         </div>
-        
-*/}
 
         <div className="form-group">
         
@@ -137,11 +138,6 @@ export default function Regisztracio({onClose}) {
             value={formData.password}
             onChange={handleInputChange}
           />
-          <div>
-            {errors.password && (
-              <span className="text-danger">{errors.password[0]}</span>
-            )}
-          </div>
         </div>
         <div className="form-group">
           <label >
@@ -153,61 +149,7 @@ export default function Regisztracio({onClose}) {
             value={formData.password_confirmation}
             onChange={handleInputChange}
           />
-          <div>
-            {errors.password_confirmation && (
-              <span className="text-danger">
-                {errors.password_confirmation[0]}
-              </span>
-            )}
-          </div>
         </div>
-
-
-        {/* <div className="form-group">
-        <label>Telefon szám:</label>
-          <input
-            type="text"
-            name="telefonszam"
-            value={formData.telefonszam}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-        <label>Fax:</label>
-          <input
-            type="text"
-            name="fax"
-            value={formData.fax}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-        <label>Állampolgárság:</label>
-          <input
-            type="text"
-            name="allampolgarsag"
-            value={formData.allampolgarsag}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-        <label>Jogosítvány:</label>
-          <input
-            type="checkbox"
-            name="jogositvany"
-            checked={formData.jogositvany}
-            onChange={handleCheckboxChange}
-          />
-        </div>
-        <div className="form-group">
-          <label>Szociális készség:</label>
-          <input
-            type="text"
-            name="szoc_keszseg"
-            checked={formData.szocKeszseg}
-            onChange={handleCheckboxChange}
-          />
-        </div> */}
  
         <button type="submit" className="">
           Regisztrálok

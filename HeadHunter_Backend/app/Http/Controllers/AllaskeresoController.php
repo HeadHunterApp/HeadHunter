@@ -52,6 +52,25 @@ class AllaskeresoController extends Controller
         return $result;
     }
 
+    public function showsignedv2(){
+        $signed = Auth::user()->user_id;
+        $allaskereso = Allaskereso::findOrFail($signed);
+        $user = User::where('user_id', $signed)->first(['nev', 'email']);
+        $result = [
+            'nev' => $user->nev,
+            'email' => $user->email,
+            'telefonszam'=> $allaskereso->telefonszam,
+            'fax'=> $allaskereso->fax,
+            'allampolgarsag'=> $allaskereso->allampolgarsag,
+            'szul_ido'=> $allaskereso->szul_ido,
+            'jogositvany'=> $allaskereso->jogositvany,
+            'keszseg'=> $allaskereso->keszseg,
+            'neme'=> $allaskereso->neme,
+            'cim'=> $allaskereso->cim,
+        ];
+        return $result;
+    }
+
     public function store(Request $request){
         $user=new User();
         $user->nev=$request->nev;
@@ -88,6 +107,42 @@ class AllaskeresoController extends Controller
     }
 
     public function updatesigned(Request $request){
+        $signed = Auth::user()->user_id;
+        $user=User::findOrFail($signed);
+
+        //$user->fill($request->all());
+        $user->nev = $request->nev;
+        $user->email = $request->email;
+
+        if ($request->has('jelszo')) {
+            $user->jelszo=Hash::make($request->jelszo);
+
+        }
+
+        $user->save();
+
+        $allaskereso = Allaskereso::findOrFail($signed);
+
+        $validator = Validator::make($request->all(), Allaskereso::$updateRules);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        //$allaskereso->fill($request->all());   
+        $allaskereso->fax = $request->fax;
+        $allaskereso->allampolgarsag = $request->allampolgarsag;
+        $allaskereso->szul_ido = $request->szul_ido;
+        $allaskereso->jogositvany = $request->jogositvany;
+        $allaskereso->szoc_keszseg = $request->keszseg;
+        $allaskereso->nem = $request->neme;
+        $allaskereso->cim = $request->cim;
+        $allaskereso->anyanyelv = $request->anyanyelv;
+
+        $allaskereso->save();
+        return response()->json(['message' => 'Adatait sikeresen frissítve'], 200);
+    }
+
+    public function updatesignedv2(Request $request){
         $signed = Auth::user()->user_id;
         $user=User::findOrFail($signed);
 

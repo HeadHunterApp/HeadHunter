@@ -72,6 +72,31 @@ class AllaskeresoTapasztalatController extends Controller
         return $aktap;
     }
 
+    public function showsignedv2(){
+        $signed = Auth::user()->user_id;
+        $aktap = DB::table('allaskereso_tapasztalats as akt')
+            ->join('pozicios as p', 'akt.pozicio','=','p.pozkod')
+            ->join('terulets as t', 'p.terulet','=','t.terulet_id')
+            ->select(
+                'akt.cegnev',
+                'akt.ceg_cim',
+                't.megnevezes',
+                'p.pozicio',
+                'akt.kezdes',
+                'akt.vegzes')
+            ->where('allaskereso', $signed)
+            ->get();
+
+        if ($aktap->isEmpty()) {
+            //TODO: 200 nem lesz jó hosszútávon.
+            //return response()->json(['message' => 'Még egyetlen korábbi munkahelyet sem adtál meg'], 404);
+            return response()->json(['message' => 'Még egyetlen korábbi munkahelyet sem adtál meg'], 200);
+        }
+
+        return $aktap;
+    }
+
+
     public function store(Request $request){
         $aktap = new AllaskeresoTapasztalat();
         $aktap->fill($request->all());
@@ -90,6 +115,32 @@ class AllaskeresoTapasztalatController extends Controller
     }
 
     public function updatesigned(Request $request, $cegnev, $pozicio){
+        $signed = Auth::user()->user_id;
+        $aktap = AllaskeresoTapasztalat::where('allaskereso', $signed)
+        ->where('cegnev','=', $cegnev)  //TODO: nem lenne elég a $request->cegnev ?
+        ->where('pozicio','=', $pozicio)
+        ->firstOrFail();
+
+        $aktap->cegnev = $request->cegnev;
+        //TODO:
+        //$aktap->ceg_cim = $request->ceg_cim;
+        $aktap->kezdes = $request->kezdes;
+        $aktap->vegzes = $request->vegzes;
+
+        $aktap->save();
+
+        $pozicio = Pozicio::where('pozkod', $pozicio)
+        ->firstOrFail();
+
+        $pozicio->pozicio = $request->beosztas;
+        $pozicio->terulet = $request->terulet; //terület Id-t kell ide majd berakni.
+
+        $pozicio->save();
+
+        return response()->json(['message' => 'Adatait sikeresen frissítve'], 200);
+    }
+
+    public function updatesignedv2(Request $request, $cegnev, $pozicio){
         $signed = Auth::user()->user_id;
         $aktap = AllaskeresoTapasztalat::where('allaskereso', $signed)
         ->where('cegnev','=', $cegnev)  //TODO: nem lenne elég a $request->cegnev ?

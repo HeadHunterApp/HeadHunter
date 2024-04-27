@@ -41,7 +41,7 @@ return new class extends Migration
             'password' => Hash::make('Hubabuba123.'),
             'jogosultsag' => 'fejvadász',
         ]);
-        
+         
     }
 
 

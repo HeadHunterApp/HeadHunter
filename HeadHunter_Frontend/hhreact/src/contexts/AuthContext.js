@@ -3,16 +3,18 @@ import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
+const emptyError = {
+  message: "",
+  name: "",
+  email: "",
+  password: "",
+  password_confirmation: "",
+};
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const [errors, setErrors] = useState({
-    nev: "",
-    email: "",
-    password: "",
-    password_confirmation: "",
-  });
+  const [errors, setErrors] = useState(emptyError);
 
   let token = "";
   const csrf = () =>
@@ -31,33 +33,40 @@ export const AuthProvider = ({ children }) => {
     console.log(token);
     axios.post("/logout", { _token: token }).then((resp) => {
       setUser(null);
-      navigate('/');
+      navigate("/");
       console.log(resp);
     });
   };
 
   const loginReg = async ({ ...adat }, vegpont) => {
-    await csrf();
-    console.log(token);
-    adat._token = token;
-    console.log(adat);
-
-    /*   const config = {
-          /*  headers: {
-               'X-CSRF-TOKEN': token
-           } };*/
-
-    console.log(vegpont);
     try {
-      await axios.post(vegpont, adat);
+      await csrf();
+      console.log(token);
+      adat._token = token;
+      console.log(adat);
+
+      /*   const config = {
+            /*  headers: {
+                 'X-CSRF-TOKEN': token
+             } };*/
+
+      console.log(vegpont);
+      const response = await axios.post(vegpont, adat);
+      //const data = await JSON.parse(response.data);
+
       console.log("siker");
       await getUser();
       navigate("/");
+      return true;
     } catch (error) {
       console.log(error);
-      if (error.response.status === 422) {
-        setErrors(error.response.data.errors);
+
+      if (error?.response?.status === 422) {
+        setErrors({...error.response.data.errors, message: error.response.data.message});
+      } else {
+        setErrors({...emptyError, message: error.message});
       }
+      return false;
     }
   };
 

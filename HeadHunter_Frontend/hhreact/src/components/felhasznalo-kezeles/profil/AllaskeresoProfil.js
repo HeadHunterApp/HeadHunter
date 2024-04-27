@@ -20,7 +20,7 @@ const AllaskeresoProfil = ({ onSubmit }) => {
   const [beosztas, setBeosztas] = useState("");
   const [kezdes, setKezdes] = useState(new Date);
   const [vegzes, setVegzes] = useState(new Date);
-  const [oktidotartam, setOktIdotartam] = useState(0);
+  const [oktidotartam, setOktIdotartam] = useState(null);
   const [intezmeny, setIntezmeny] = useState("");
   const [fotargy, setFotargy] = useState("")
   const [szakkepesites, setSzakkepesites] = useState("");
@@ -34,6 +34,7 @@ const AllaskeresoProfil = ({ onSubmit }) => {
   const [iras, setIras] = useState("");
   const [beszed, setBeszed] = useState("");
   const [cim, setCim] = useState("");
+  const [imageSrc, setImageSrc] = useState(null);
 
   useEffect(()=>{
     getAllaskeresoNyelvtudas().then((response)=>{
@@ -104,13 +105,25 @@ const AllaskeresoProfil = ({ onSubmit }) => {
 
 
 
-    const fenykepFeltoltes = (event) =>{
-      event.preventDefault();
-      const fajl = event.target.files[0];
-      let FormData = new FormData();
-      FormData.append(fajl.name, fajl)
-      postFotoFeltolt(FormData);//megfelelő routot meg kell adni(írni)!!!
-    }
+  const fenykepFeltoltes = async(event) =>{
+    event.preventDefault();
+
+    const fajl = event.target.files[0];
+    
+    setImageSrc(URL.createObjectURL(fajl));
+
+    let formData = new FormData();
+    formData.append('image', fajl)
+
+    let token = "";
+    await axios.get("/api/token").then((response) => {
+      console.log(response);
+      token = response.data;
+    });
+
+    postFotoFeltolt(formData, token);
+   
+  }
   
     const onSzerkesztes = async()=>{
       let token = "";
@@ -157,18 +170,28 @@ const AllaskeresoProfil = ({ onSubmit }) => {
 
     return (
       <>
-      <div className="lehetoseg">Álláslehetőségek</div>
+       <div className="menu"> 
+      <div className="menu-list">Álláslehetőségek</div>
+      </div> 
       <form className="allprofil" onSubmit={handleSubmit}>
        
        <div>
           <label htmlFor="fenykep">Fénykép:</label> 
-          <input
-            type="file"
-            id="fenykep"
-            onChange={fenykepFeltoltes}
-          />
+          {
+            imageSrc ?
+            (            
+              <img className="photo" src={imageSrc} />
+            ) :
+            (
+              <input
+              type="file"
+              id="fenykep"
+              onChange={fenykepFeltoltes}
+              />
+            )
+          }
         </div>
-        <div className="temakor">SZEMÉLYES ADATOK:</div> 
+        <div className="temakor">SZEMÉLYES ADATOK:
         <div>
                  <div>
             <label htmlFor="nev">Vezetéknév/utónév:</label> 
@@ -274,8 +297,10 @@ const AllaskeresoProfil = ({ onSubmit }) => {
             />
           </div>
         </div>
+        <button className="mentes" type="submit">Mentés</button>
+        </div> 
        
-        <div className="temakor">SZAKMAI TAPASZTALAT</div>
+        <div className="temakor">SZAKMAI TAPASZTALAT
         <div >
         <div>
             <label htmlFor="idotartam">Időtartam:</label> 
@@ -287,7 +312,7 @@ const AllaskeresoProfil = ({ onSubmit }) => {
             />
           </div>  
           <div>
-            <label htmlFor="kezdes">Időtartam:</label> 
+            <label htmlFor="kezdes">Kezdés dátuma:</label> 
             <input
               type="date"
               id="kezdes"
@@ -296,7 +321,7 @@ const AllaskeresoProfil = ({ onSubmit }) => {
             />
           </div>  
           <div>
-            <label htmlFor="vegzes">Időtartam:</label> 
+            <label htmlFor="vegzes">Végzés dátuma:</label> 
             <input
               type="date"
               id="vegzes"
@@ -332,20 +357,16 @@ const AllaskeresoProfil = ({ onSubmit }) => {
             />
           </div>
         </div>
+        <button className="mentes" type="submit">Mentés</button>
+        </div>
 
-        <div className="temakor">OKTATÁS ÉS KÉPZÉS</div> 
+        <div className="temakor">OKTATÁS ÉS KÉPZÉS
         <div >
         <div>
-            <label htmlFor="oktidotartam">Időtartam:</label> 
-            <input
-              type="number"
-              id="oktidotartam"
-              value={oktidotartam}
-              onChange={(e) => setOktIdotartam(e.target.value)}
-            />
+            <label htmlFor="oktidotartam">Időtartam: {oktidotartam}</label>
           </div>  
           <div>
-            <label htmlFor="oktkezdes">Időtartam:</label> 
+            <label htmlFor="oktkezdes">Kezdés dátuma:</label> 
             <input
               type="date"
               id="oktkezdes"
@@ -354,7 +375,7 @@ const AllaskeresoProfil = ({ onSubmit }) => {
             />
           </div>  
           <div>
-            <label htmlFor="oktvegzes">Időtartam:</label> 
+            <label htmlFor="oktvegzes">Végzés dátuma:</label> 
             <input
               type="date"
               id="oktvegzes"
@@ -400,7 +421,9 @@ const AllaskeresoProfil = ({ onSubmit }) => {
             />
           </div>
         </div>
-        <div className="temakor">NYELV ISMERET: </div>
+        <button className="mentes" type="submit">Mentés</button>
+        </div> 
+        <div className="temakor">NYELV ISMERET: 
         <div >
         <div>
             <label htmlFor="anyanyelv">Anyanyelv:</label> 
@@ -458,9 +481,11 @@ const AllaskeresoProfil = ({ onSubmit }) => {
             />
           </div>
         </div>
+        <button className="mentes" type="submit">Mentés</button>
+        </div>
+
         <div className="divbotton">
-        <button type="submit">Mentés</button>
-        <button onClick={onGenerealas}>Önéletrajz generálás</button>
+        <button className="mentes" onClick={onGenerealas}>Önéletrajz generálás</button>
         </div>
         </form>
         </>

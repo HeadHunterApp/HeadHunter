@@ -40,9 +40,9 @@ class RegisteredUserController extends Controller
 
         $allaskereso = Allaskereso::create([
             'user_id' => $user->user_id,
-            'nem' => '',
-            'szul_ido' => '2000-01-01 00:00:00.000',
-            'cim' => ''
+            'nem' => $request->nem,
+            'szul_ido' => $request->szul_ido,
+            'cim' => $request->cim
         ]);
         $allaskereso->save();
 
