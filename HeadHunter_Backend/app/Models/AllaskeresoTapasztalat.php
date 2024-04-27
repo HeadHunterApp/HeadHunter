@@ -17,7 +17,7 @@ class AllaskeresoTapasztalat extends Model
             ->where('cegnev', '=', $this->
             getAttribute('cegnev'))
             ->where('pozicio', '=', $this->
-            getAttribute('pozkod'));
+            getAttribute('pozicio'));
 
 
         return $query;

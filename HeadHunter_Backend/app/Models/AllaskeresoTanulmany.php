@@ -10,8 +10,17 @@ class AllaskeresoTanulmany extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = ['allaskereso', 'intezmeny', 'vegzettseg'];
-    public $timestamps = false;
+    protected $table = 'allaskereso_tanulmanys';
+
+    protected function setKeysForSaveQuery($query)
+    {
+        $query
+            ->where('allaskereso', '=', $this->getAttribute('user_id'))
+            ->where('intezmeny', '=', $this->getAttribute('intezmeny'))
+            ->where('szak', '=', $this->getAttribute('szak'));
+        return $query;
+    }
+
 
     protected $fillable = [
         'allaskereso',
@@ -23,26 +32,13 @@ class AllaskeresoTanulmany extends Model
         'erintett_targytev'
     ];
 
-    //I preferred Carbon, not casting
+    public $timestamps = false;
 
-    public function setKezdesAttribute($value)
-    {
-        $formatteddate = Carbon::parse($value)->format('Y/m');
-        $this->attributes['kezdes'] = $formatteddate;
-        $this->attributes['vegzes'] = $formatteddate;
-    }
-
-    protected function setKeysForSaveQuery($query)
-    {
-        $query
-            ->where('allaskereso', '=', $this->getAttribute('user_id'))
-            ->where('intezmeny', '=', $this->getAttribute('intezmeny'))
-            ->where('szak', '=', $this->getAttribute('szak'));
-        return $query;
-    }
+   
 
     public function allaskeresoEntity()
     {
         return $this->hasOne(Allaskereso::class, 'allaskereso', 'user_id');
     }
+    
 }

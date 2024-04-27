@@ -58,7 +58,7 @@ class AllasSeeder extends Seeder
             'pozicio' => 'GRFUIX',
             'statusz' => 'nyitott',
             'leiras' => 'Keresünk egy kreatív UX/UI tervezőt, aki javítja a felhasználói élményt. Az ideális jelöltnek erős portfólióval kell rendelkeznie, amely bemutatja tervezői készségeit, valamint tapasztalattal kell rendelkeznie drótvázak és prototípusok készítésében. A felhasználói kutatási módszerek ismerete előny.',
-            //nincs fejvadász megadva
+            'fejvadasz' => 5,
         ]);
         
         Allas::create([

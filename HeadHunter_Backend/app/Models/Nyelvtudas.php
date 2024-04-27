@@ -9,7 +9,6 @@ class Nyelvtudas extends Model
 {
     use HasFactory;
 
-    //protected $table = 'ideiromamagyartobbesszamot';
     protected $table = 'nyelvtudass';
 
     //protected $primarykey=['nyelv', 'szint']; - összetett kulcsok felszámolása
