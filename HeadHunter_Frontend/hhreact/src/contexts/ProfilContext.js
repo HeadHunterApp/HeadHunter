@@ -9,13 +9,17 @@ export const getProfilFejvadasz = ()=>
 export const putProfilFejvadász = (params, config) =>
     axios.put('/api/headhunters/profile/modification', params, config);
 
+//beraktam azért a területes route-ot is,hátha mégis használnánk
+export const getFejvadaszTerulet = ()=>
+    axios.get(`/api/headhunters/profile/fields`)
+
 export const postFotoFeltolt = (formData, token)=>
     axios.post("/api/headhunters/profile/image", formData, { headers:{ "Content-Type": "multipart/form-data", "X-CSRF-TOKEN": token}})
 
 export const getProfilAllaskereso = ()=> 
     axios.get(`/api/jobseekers/profile`);
 
-export const putProfilAllakereso = (params, config) =>
+export const putProfilAllaskereso = (params, config) =>
     axios.put('/api/jobseekers/profile/modification', params, config);
 
 export const getAllaskeresoTapasztalat = ()=>
@@ -36,5 +40,6 @@ export const getAllaskeresoNyelvtudas = ()=>
 export const putAllaskeresoNyelvtudas = (params, config) =>
     axios.put('/api/jobseekers/profile/languages/modification', params, config);
 
-
+export const getAllaskeresoJelentkezett = ()=>
+    axios.get(`/api/jobseekers/profile/applications`);
 
