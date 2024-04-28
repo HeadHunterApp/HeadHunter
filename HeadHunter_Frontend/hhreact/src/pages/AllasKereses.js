@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Kereses.css";
 import AllasKartya from '../components/AllasKartya';
-
-/*  ----  EZT LEHET KOMPONENSSÉ KELLENE MAJD TENNI, ÉS AZ EREDMÉNYMEGJELENÍTŐS RÉSZE LENNE A PAGE,
-      EZT PEDIG CSAK MEGHÍVNÁNK OTT  -----  */
-
-
+import { getAllasAll } from "../contexts/AllasContext";
+import useAuthContext from "../contexts/AuthContext";
       
-const Allaskereses = () => {
+export default function Allaskereses() {
+    
+  const { user } = useAuthContext();
+  const isJobseeker = (felhasznalo) => {
+      return felhasznalo.jogosultsag === 'álláskereső';
+  };
+
   const [searchQuery, setSearchQuery] = useState('');
   const [searchedJobs, setSearchedJobs] = useState([]);
 
@@ -19,7 +22,7 @@ const Allaskereses = () => {
   // a jobdatat szedi ki
   const fetchJobs = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/guest/jobs/all');
+      const response = await getAllasAll();
       if (!response.ok) {
         throw new Error('Failed to fetch job data');
       }
@@ -65,11 +68,17 @@ const Allaskereses = () => {
           /> {/* kereső gomb */}
         </div>
         {/*mappal kiirja a talált állásokat */}
-        {searchedJobs.map((job) => (
-          <AllasKartya key={job.allas_id} job={job} />
-        ))}
+        {user && isJobseeker ? (       
+          searchedJobs
+            .filter(job => job.statusz === "nyitott")
+            .map((job) => (
+              <AllasKartya key={job.allas_id} job={job} />
+          )) ) : (
+            searchedJobs
+            .map((job) => (
+              <AllasKartya key={job.allas_id} job={job} />
+            ))
+        )}
     </div>
   );
 };
-
-export default Allaskereses;

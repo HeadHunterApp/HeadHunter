@@ -11,7 +11,7 @@ export default function Navigacio() {
     return felhasznalo.jogosultsag === 'admin';
   };
   const isHeadhunter = (felhasznalo) => {
-    return felhasznalo.jogosultsag === 'fejvadasz';
+    return felhasznalo.jogosultsag === 'fejvadász';
   };
 
   return (

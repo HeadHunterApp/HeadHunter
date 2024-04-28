@@ -57,7 +57,7 @@ class AllasController extends Controller
                 'al.allas_id',
                 'm.cegnev',
                 'al.megnevezes',
-                't.megnevezes',
+                't.megnevezes as terulet',
                 'p.pozicio',
                 'al.leiras',
                 'al.statusz',
@@ -66,7 +66,7 @@ class AllasController extends Controller
             ->where('al.allas_id',$allas_id)
             ->get();
             if (Auth::check() && (Auth::user()->jogosultsag === 'admin' || Auth::user()->jogosultsag === 'fejvadasz')) {
-                $query->addSelect('al.fejvadasz_id', 'u.nev');
+                $query->addSelect('al.fejvadasz_id', 'u.nev as fejvadasz');
             }
             return $query;
     }
