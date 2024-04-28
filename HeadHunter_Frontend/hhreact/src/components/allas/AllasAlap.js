@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useAuthContext from "../../contexts/AuthContext";
 import { getAllas } from "../../contexts/AllasContext";
-import VisszaLink from "../menu/VisszaLink";
 
 export default function AllasAlap({ jobId }) {
   const { user } = useAuthContext();
@@ -11,10 +10,6 @@ export default function AllasAlap({ jobId }) {
   const isHeadhunter = (felhasznalo) => {
     return felhasznalo.jogosultsag === "fejvadász";
   };
-  const isJobseeker = (felhasznalo) => {
-    return felhasznalo.jogosultsag === "álláskereső";
-  };
-
   const allasId = jobId;
   const [cegnev, setCegnev] = useState("");
   const [megnevezes, setMegnevezes] = useState("");
@@ -78,14 +73,7 @@ export default function AllasAlap({ jobId }) {
             <p>Fejvadász: {fejvadaszId} - {fejvadaszNev}</p>
           </div>
         ))}
-        <div className="apply-button">
-          {user && isJobseeker ? (
-            <button>Jelentkezés</button>
-          ) : (
-            <button>Jelentkeztetés</button>
-          )}
-        </div>
-        <VisszaLink />
+        
       </div>
     </>
   );

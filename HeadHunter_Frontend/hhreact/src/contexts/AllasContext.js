@@ -4,23 +4,23 @@ import axios from "../api/axios";
 
 //shortAllasAll
 export const getAllasAll = ()=>
-    axios.get('/jobs/all');
+    axios.get('/api/jobs/all');
 //detailedAllas
 export const getAllas = (allas_id)=>
-    axios.get(`/jobs/${allas_id}`);
+    axios.get(`/api/jobs/${allas_id}`);
 
 //detailedAllasIsm
 export const getAllasIsmeret = (allas_id)=>
-    axios.get(`/jobs/${allas_id}/skills`);
+    axios.get(`/api/jobs/${allas_id}/skills`);
 //detailedAllasNyelv
 export const getAllasNyelvtudas = (allas_id)=>
-    axios.get(`/jobs/${allas_id}/languages`);
+    axios.get(`/api/jobs/${allas_id}/languages`);
 //detailedAllasVegz
 export const getAllasVegzettseg = (allas_id)=>
-    axios.get(`/jobs/${allas_id}/edu-atts`);
+    axios.get(`/api/jobs/${allas_id}/edu-atts`);
 //detailedAllasTap
 export const getAllasTapasztalat = (allas_id)=>
-    axios.get(`/jobs/${allas_id}/exps`);
+    axios.get(`/api/jobs/${allas_id}/exps`);
 
 
 //új és szerkesztés - fejvadász és admin
