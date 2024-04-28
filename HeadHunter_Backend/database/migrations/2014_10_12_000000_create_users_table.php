@@ -35,7 +35,9 @@ return new class extends Migration
             'jogosultsag' => 'admin',
         ]);
 
-        User::create([
+
+        //ezt majd ki kell szedni!!!
+        /*User::create([
             'nev' => 'Huba BUba', 
             'email' => 'huba@gmail.com', 
             'password' => Hash::make('Hubabuba123.'),

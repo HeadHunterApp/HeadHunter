@@ -17,7 +17,21 @@ class TeruletSeeder extends Seeder
         //tesztadatok
 
         Terulet::create([
-            'megnevezes' => 'informatika',
+            'megnevezes' => 'Informatika', 
+        ]);
+        Terulet::create([
+            'megnevezes' => 'Értékesítés', 
+        ]);
+        Terulet::create([
+            'megnevezes' => 'Marketing', 
+        ]);
+        
+        Terulet::create([
+            'megnevezes' => 'Grafikai tervezés', 
+        ]);
+
+        Terulet::create([
+            'megnevezes' => 'Gyártás-termelés', 
         ]);
     }
 }

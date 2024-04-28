@@ -10,6 +10,18 @@ use Illuminate\Support\Facades\Log;
 
 use function PHPUnit\Framework\isEmpty;
 
+
+
+        /*szintek és megnevezések:
+            A1 - kezdő
+            A2 - alapszint
+            B1 - küszöbszint - ez az első három maradjon az eredeti megnevezésével
+            B2 - középszint - ez a társalgási szint
+            C1 - haladó szint - ez a tárgyalóképes szint
+            C2 - mesterfok - ez az anyanyelvi szint
+        */
+
+
 class AllaskeresoNyelvtudasController extends Controller
 {
     public function index(){
@@ -31,7 +43,16 @@ class AllaskeresoNyelvtudasController extends Controller
         ->select(
             'nt.nyelv',
             'nt.szint',
-            'nt.megnevezes',
+            DB::raw('case 
+                when nt.szint = "A1" THEN "kezdő"
+                when nt.szint = "A2" THEN "alapszint"
+                when nt.szint = "B1" THEN "küszöbszint"
+                when nt.szint = "B2" THEN "társalgási szint"
+                when nt.szint = "C1" THEN "tárgyalóképes szint"
+                when nt.szint = "C2" THEN "anyanyelvi szint"
+                else "egyéb"
+                end
+                as megnevezes'),//egyéb csak egyedi hibánál fordulhat elő
             'akny.nyelvvizsga',
             'akny.iras',
             'akny.olvasas',
@@ -53,7 +74,16 @@ class AllaskeresoNyelvtudasController extends Controller
         ->select(
             'nt.nyelv',
             'nt.szint',
-            //'nt.megnevezes',
+            DB::raw('case 
+                when nt.szint = "A1" THEN "kezdő"
+                when nt.szint = "A2" THEN "alapszint"
+                when nt.szint = "B1" THEN "küszöbszint"
+                when nt.szint = "B2" THEN "társalgási szint"
+                when nt.szint = "C1" THEN "tárgyalóképes szint"
+                when nt.szint = "C2" THEN "anyanyelvi szint"
+                else "egyéb"
+                end
+                as megnevezes'),//egyéb csak egyedi hibánál fordulhat elő
             'akny.nyelvvizsga',
             'akny.iras',
             'akny.olvasas',
@@ -103,6 +133,15 @@ class AllaskeresoNyelvtudasController extends Controller
         $aknyelv = new AllaskeresoNyelvtudas();
         $aknyelv->fill($request->all());
         $aknyelv->allaskereso = $signed;
+        $aknyelv->save();
+        return response()->json(['message' => 'Sikeres mentés'], 200);
+    }
+
+    public function storesigned(Request $request){
+        $signed = Auth::user()->user_id;
+        $aknyelv = new AllaskeresoNyelvtudas();
+        $aknyelv->allaskereso=$signed;
+        $aknyelv->fill($request->all());
         $aknyelv->save();
         return response()->json(['message' => 'Sikeres mentés'], 200);
     }

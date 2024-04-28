@@ -133,6 +133,15 @@ class AllaskeresoTanulmanyController extends Controller
         return response()->json(['message' => 'Sikeres mentés'], 200);
     }
 
+    public function storesigned(Request $request){
+        $signed = Auth::user()->user_id;
+        $aktan = new AllaskeresoTanulmany();
+        $aktan->allaskereso=$signed;
+        $aktan->fill($request->all());
+        $aktan->save();
+        return response()->json(['message' => 'Sikeres mentés'], 200);
+    }
+
     public function update(Request $request, $allasker, $intezmeny, $szak){
         $aktan = AllaskeresoTanulmany::where('allaskereso', $allasker)
         ->where('intezmeny','=', $intezmeny)

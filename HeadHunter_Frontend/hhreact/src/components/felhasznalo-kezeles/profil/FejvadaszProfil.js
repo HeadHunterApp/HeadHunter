@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {getProfilFejvadasz, postFotoFeltolt, putProfilFejvadász} from '../../../api/profil';
+import {getProfilFejvadasz, postFotoFeltolt, putProfilFejvadász} from '../../../contexts/ProfilContext';
 import axios from "../../../api/axios";
-import { getTerulet } from "../../../api/terulet";
+import { getTerulet } from "../../../contexts/FotablaContext";
 import Select from "react-select";
 
 

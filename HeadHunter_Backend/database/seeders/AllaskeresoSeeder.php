@@ -20,7 +20,8 @@ class AllaskeresoSeeder extends Seeder
         Allaskereso::create([
             'user_id' => 3,
             'nem' => 'nő',
-            'szul_ido' => '1999/09/09',
+            'szul_ido' => '1999-09-09',
+            'cim' => '1111 Budapest, Kis Pál utca 12/B. 1/1.',
             'telefonszam' => '+36301234567',
             'fax' => '+361123456',
             'allampolgarsag' => 'magyar',
@@ -31,9 +32,10 @@ class AllaskeresoSeeder extends Seeder
         Allaskereso::create([
             'user_id' => 4,
             'nem' => 'férfi',
-            'szul_ido' => '2002/02/02',
+            'szul_ido' => '2002-02-02',
+            'cim' => '5000 Szolnok, Pacsirta utca 8.',
             'telefonszam' => '+36709876543',
-            'fax' => '',
+            'anyanyelv' => 'román',
             'allampolgarsag' => 'magyar',
             'jogositvany' => true,
             'szoc_keszseg' => 'úgy gondolom, jó velem együtt dolgozni',

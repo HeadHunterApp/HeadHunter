@@ -21,5 +21,42 @@ class PozicioSeeder extends Seeder
             'terulet' => 1,
             'pozicio' => 'frontend fejlesztő'
         ]);
+
+        Pozicio::create([
+            'pozkod' => 'INFBCK',
+            'terulet' => 1,
+            'pozicio' => 'backend fejlesztő'
+        ]);
+
+        Pozicio::create([
+            'pozkod' => 'INFSEN',
+            'terulet' => 1,
+            'pozicio' => 'szoftvermérnök'
+        ]);
+
+        Pozicio::create([
+            'pozkod' => 'INFDSC',
+            'terulet' => 1,
+            'pozicio' => 'adattudós'
+        ]);
+
+        Pozicio::create([
+            'pozkod' => 'MARMGR',
+            'terulet' => 3,
+            'pozicio' => 'marketing manager'
+        ]);
+        
+        Pozicio::create([
+            'pozkod' => 'GRFUIX',
+            'terulet' => 4,
+            'pozicio' => 'UX/UI tervező'
+        ]);
+
+        Pozicio::create([
+            'pozkod' => 'GYTPEN',
+            'terulet' => 5,
+            'pozicio' => 'termékmérnök'
+        ]);
+
     }
 }
