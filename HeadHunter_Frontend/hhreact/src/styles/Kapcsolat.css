@@ -1,0 +1,116 @@
+.kapcsolat-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .kapcsolat-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .kapcsolat-container p {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .contact-info p {
+    text-align: center;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .form-group textarea {
+    height: 150px;
+  }
+  
+  button[type="submit"] {
+    background-color: teal;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #059c6f;
+  }
+  
+  .map-container {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .map-wrapper {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .map-wrapper .leaflet-container {
+    width: 50%;
+    height: 300px;
+  }
+  
+  .download-button {
+    margin-top: 20px;
+    background-color: teal;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .download-button a {
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  .download-button:hover {
+    background-color: #059c6f;
+  }
+  
+  .small-button {
+    font-size: 14px;
+    width: 60%;
+    height: 30px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 128, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 999;
+  }
+  
