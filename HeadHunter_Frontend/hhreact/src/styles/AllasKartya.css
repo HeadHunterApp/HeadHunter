@@ -11,6 +11,11 @@
   .job-description p {
     margin: 0;
   }
+
+  .job-status p {
+    margin: 0;
+    font-weight: bold;
+  }
   
   .apply-button button {
     background-color: teal;
@@ -23,6 +28,21 @@
   }
   
   .apply-button button:hover {
+    background-color: #00b39b;
+  }
+  
+  
+  .info-button button {
+    background-color: teal;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .info-button button:hover {
     background-color: #00b39b;
   }
   
