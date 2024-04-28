@@ -19,28 +19,28 @@ class UserSeeder extends Seeder
             'nev' => 'Minta-Fejvadász András', 
             'email' => 'a.minta-fejv@headhunter.com', 
             'password' => 'Newpass123',
-            'jogosultsag' => 'fejvadasz',
+            'jogosultsag' => 'fejvadász',
         ]);
 
         User::create([
             'nev' => 'Példa-Álláskereső Lilla', 
             'email' => 'lilla-pallker@gmail.com', 
             'password' => 'Jelszo123',
-            'jogosultsag' => 'allaskereso',
+            'jogosultsag' => 'álláskereső',
         ]);
 
         User::create([
             'nev' => 'Holameló Béla', 
             'email' => 'bela-the-king@freemail.hu', 
             'password' => 'Almafa123',
-            'jogosultsag' => 'allaskereso',
+            'jogosultsag' => 'álláskereső',
         ]);
 
         User::create([
             'nev' => 'Beoszt Tivadar', 
             'email' => 't.beoszt@headhunter.com', 
             'password' => 'Newpass123',
-            'jogosultsag' => 'fejvadasz',
+            'jogosultsag' => 'fejvadász',
         ]);
     }
 }
