@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Select from "react-select";
-import { putAllaskeresoNyelvtudas } from "../../../../api/profil";
+import { putAllaskeresoNyelvtudas } from "../../../../contexts/ProfilContext";
 
 const Nyelvismeret = ({ id, config, data, nyelvek }) => {
   const [nyelvvizsga, setNyelvvizsga] = useState(false);

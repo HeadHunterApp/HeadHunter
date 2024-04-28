@@ -3,7 +3,7 @@ import {
   getAllaskeresoNyelvtudas,
   getAllaskeresoTanulmany,
   getAllaskeresoTapasztalat,
-} from "../../../api/profil";
+} from "../../../contexts/ProfilContext";
 import axios from "../../../api/axios";
 import "../../../styles/profil.css";
 import SzakmaiTapasztalat from "./components/SzakmaiTapasztalat";
@@ -17,6 +17,7 @@ import { getAllaskeresoNyelvek } from "../../../api/nyelv";
 
 const AllaskeresoProfil = ({ onSubmit }) => {
   const [token, setToken] = useState("");
+  const [config, setConfig] = useState("");
 
   const [szakmaiTapasztalat, setSzakmaiTapasztalat] = useState([]);
   const [nyelvTudas, setNyelvTudas] = useState([]);
@@ -101,7 +102,8 @@ const AllaskeresoProfil = ({ onSubmit }) => {
         },
       };
 
-      setToken(config);
+      setToken(token);
+      setConfig(config);
     };
 
     fetchData();
@@ -184,12 +186,12 @@ const AllaskeresoProfil = ({ onSubmit }) => {
     <div className="allprofil">
 
 
-      <SzemelyesAdatok id="szem_adatok" config={token} />
+      <SzemelyesAdatok id="szem_adatok" config={config} token={token} />
 
       {szakmaiTapasztalat.map((item, index) => {
         return (
           <SzakmaiTapasztalat
-            config={token}
+            config={config}
             data={item}
             teruletek={teruletek}
             poziciok={poziciok}
@@ -200,14 +202,14 @@ const AllaskeresoProfil = ({ onSubmit }) => {
 
       {nyelvTudas.map((item, index) => {
         return (
-          <Nyelvismeret config={token} data={item} nyelvek={nyelvek} id={`nyelv__${index}`} />
+          <Nyelvismeret config={config} data={item} nyelvek={nyelvek} id={`nyelv__${index}`} />
         );
       })}
 
       {tanulmany.map((item, index) => {
         return (
           <OktatasKepzes
-            config={token}
+            config={config}
             data={item}
             vegzettsegek={vegzettsegek}
             id={`oktkepzes__${index}`}

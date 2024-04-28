@@ -81,7 +81,7 @@ Route::middleware('auth')->group(function () {
     //tapasztalat_ido
     Route::get('/experiences/all', [TapasztalatIdoController::class, 'index']);
     Route::get('/experiences/{tapasztalat_id}', [TapasztalatIdoController::class, 'show']);
-    
+
     //file feltöltés:
     Route::post('/file-upload', [FileController::class, 'store'])->name('file_store');
 
@@ -303,6 +303,3 @@ Route::middleware('auth')->group(function () {
         Route::post('/jobseekers/jobs/{allas_id}/apply}', [AllasJelentkezoController::class, 'storesigned']);
     });
 });
-
-
-

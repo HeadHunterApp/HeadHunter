@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { putAllaskeresoTapasztalat } from "../../../../api/profil";
+import { putAllaskeresoTapasztalat } from "../../../../contexts/ProfilContext";
 import Select from "react-select";
 
 const SzakmaiTapasztalat = ({ id, config, data, poziciok }) => {

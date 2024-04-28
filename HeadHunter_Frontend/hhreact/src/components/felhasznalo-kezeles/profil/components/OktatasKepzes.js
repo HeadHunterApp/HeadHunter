@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { putAllaskeresoTanulmany } from "../../../../api/profil";
+import { putAllaskeresoTanulmany } from "../../../../contexts/ProfilContext";
 import Select from "react-select";
 
 const OktatasKepzes = ({ id, config, data, vegzettsegek }) => {

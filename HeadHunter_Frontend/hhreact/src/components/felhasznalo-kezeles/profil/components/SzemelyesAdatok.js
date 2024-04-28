@@ -3,8 +3,8 @@ import {
   getProfilAllaskereso,
   putProfilAllakereso,
   postFotoFeltolt,
-} from "../../../../api/profil";
-const SzemelyesAdatok = ({ id, config }) => {
+} from "../../../../contexts/ProfilContext";
+const SzemelyesAdatok = ({ id, config, token }) => {
   const [nev, setNev] = useState("");
   const [email, setEmail] = useState("");
   const [telefonszam, setTelefonszam] = useState("");
@@ -72,7 +72,7 @@ const SzemelyesAdatok = ({ id, config }) => {
     let formData = new FormData();
     formData.append("image", fajl);
 
-    postFotoFeltolt(formData, config);
+    postFotoFeltolt(formData, token);
   };
 
   return (
