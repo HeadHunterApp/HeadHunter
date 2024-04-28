@@ -1,6 +1,7 @@
 import React from "react";
-import VisszaLink from "../../components/menu/VisszaLink";
+
 import AllasAlap from "../components/allas/AllasAlap";
+import VisszaLink from "../components/menu/VisszaLink";
 
 export default function AllasAdatlap({ jobId }){
 
