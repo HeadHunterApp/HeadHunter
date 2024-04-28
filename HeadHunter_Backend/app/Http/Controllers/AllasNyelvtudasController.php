@@ -51,7 +51,19 @@ class AllasNyelvtudasController extends Controller
     public function detailedAllasNyelv($allas_id){
         $allasnyelv=DB::table('allas_nyelvtudass as an')
             ->join('nyelvtudass as nt', 'an.nyelvtudas','=','nt.nyelvkod')
-            ->select('nt.nyelv', 'nt.megnevezes')
+            ->select(
+                'nt.nyelv',
+                DB::raw('case 
+                when nt.szint = "A1" THEN "kezdő"
+                when nt.szint = "A2" THEN "alapszint"
+                when nt.szint = "B1" THEN "küszöbszint"
+                when nt.szint = "B2" THEN "társalgási szint"
+                when nt.szint = "C1" THEN "tárgyalóképes szint"
+                when nt.szint = "C2" THEN "anyanyelvi szint"
+                else "egyéb"
+                end
+                as megnevezes'),//egyéb csak egyedi hibánál fordulhat elő
+                )
             ->where('an.allas', $allas_id)
             ->get();
         if ($allasnyelv->isEmpty()) {
