@@ -24,26 +24,78 @@ class NyelvtudasSeeder extends Seeder
 
 
         //tesztadatok
-
+        
         Nyelvtudas::create([
-            'nyelvkod' => 'DEA2',
-            'nyelv' => 'német',
-            'szint' => 'A2',
-            'megnevezes' => 'alapszint',
+            'nyelvkod' => 'ENA1',
+            'nyelv' => 'Angol',
+            'szint' => 'A1'
         ]);
 
         Nyelvtudas::create([
-            'nyelvkod' => 'DEB2',
-            'nyelv' => 'német',
-            'szint' => 'B2',
-            'megnevezes' => 'társalgási szint',
+            'nyelvkod' => 'ENA2',
+            'nyelv' => 'Angol',
+            'szint' => 'A2'
+        ]);
+
+        Nyelvtudas::create([
+            'nyelvkod' => 'ENB1',
+            'nyelv' => 'Angol',
+            'szint' => 'B1'
         ]);
 
         Nyelvtudas::create([
             'nyelvkod' => 'ENB2',
-            'nyelv' => 'angol',
-            'szint' => 'B2',
-            'megnevezes' => 'társalgási szint',
+            'nyelv' => 'Angol',
+            'szint' => 'B2'
         ]);
+
+        Nyelvtudas::create([
+            'nyelvkod' => 'ENC1',
+            'nyelv' => 'Angol',
+            'szint' => 'C1'
+        ]);
+
+        Nyelvtudas::create([
+            'nyelvkod' => 'ENC2',
+            'nyelv' => 'Angol',
+            'szint' => 'C2'
+        ]);
+
+        Nyelvtudas::create([
+            'nyelvkod' => 'DEA1',
+            'nyelv' => 'Német',
+            'szint' => 'A1'
+        ]);
+
+        Nyelvtudas::create([
+            'nyelvkod' => 'DEA2',
+            'nyelv' => 'Német',
+            'szint' => 'A2'
+        ]);
+
+        Nyelvtudas::create([
+            'nyelvkod' => 'DEB1',
+            'nyelv' => 'Német',
+            'szint' => 'B1'
+        ]);
+
+        Nyelvtudas::create([
+            'nyelvkod' => 'DEB2',
+            'nyelv' => 'Német',
+            'szint' => 'B2'
+        ]);
+
+        Nyelvtudas::create([
+            'nyelvkod' => 'DEC1',
+            'nyelv' => 'Német',
+            'szint' => 'C1'
+        ]);
+
+        Nyelvtudas::create([
+            'nyelvkod' => 'DEC2',
+            'nyelv' => 'Német',
+            'szint' => 'C2'
+        ]);
+
     }
 }

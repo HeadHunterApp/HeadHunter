@@ -42,6 +42,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AllaskeresoIsmeretSeeder::class);
         $this->call(AllaskeresoNyelvtudasSeeder::class);
         $this->call(AllaskeresoTapasztalatSeeder::class);
-        //$this->call(AllaskeresoTanulmanySeeder::class);
+        $this->call(AllaskeresoTanulmanySeeder::class);
+        $this->call(AllasJelentkezoSeeder::class);
+
     }
 }

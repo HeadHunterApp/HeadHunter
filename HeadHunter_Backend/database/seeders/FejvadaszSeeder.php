@@ -20,14 +20,12 @@ class FejvadaszSeeder extends Seeder
         Fejvadasz::create([
             'user_id' => 2,
             'telefonszam' => '+36201234567',
-            'fenykep' => 'jpg',
         ]);
 
         
         Fejvadasz::create([
             'user_id' => 5,
             'telefonszam' => '+36201239876',
-            'fenykep' => 'masikjpg',
         ]);
     }
 }

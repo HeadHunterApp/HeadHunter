@@ -45,7 +45,11 @@ export default function App() {
               path="seeker"
               element={<AuthLayout jogosultFelh={["álláskereső"]} />}
             >
-              {/*elvileg nincs olyan route, amit csak ő érne el */}
+              {/*jövőbeli route a saját jelentkezései megtekintéséhez:
+              
+              <Route path="my-applications" element={<JelentkezesSajat />} />
+
+              */}
             </Route>
 
             <Route
@@ -55,6 +59,8 @@ export default function App() {
               {/* jövőbeli route-ok:
             
             <Route path="jobseekers" element={<Allaskeresok />} />
+            <Route path="applicants" element={<Jelentkezok />} />
+            <Route path="hired" element={<FelvettJelentkezok />} />
             <Route path="queries" element={<Lekerdezesek />} />
 
             */}
@@ -67,6 +73,8 @@ export default function App() {
               {/* jövőbeli route-ok:
             
             <Route path="jobseekers" element={<Allaskeresok />} />
+            <Route path="applicants" element={<Jelentkezok />} />
+            <Route path="hired" element={<FelvettJelentkezok />} />
             <Route path="headhunters" element={<Fejvadaszok />} />
             <Route path="queries" element={<Lekerdezesek />} />
             <Route path="employers" element={<Munkaltatok />} />
