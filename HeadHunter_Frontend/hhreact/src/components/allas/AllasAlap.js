@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useAuthContext from "../../contexts/AuthContext";
+import { getAllas } from "../../contexts/AllasContext";
+import VisszaLink from "../menu/VisszaLink";
 
 export default function AllasAlap({ jobId }) {
   const { user } = useAuthContext();

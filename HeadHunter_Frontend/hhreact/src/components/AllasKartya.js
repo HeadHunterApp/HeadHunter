@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/AllasKartya.css";
 import useAuthContext from "../contexts/AuthContext";
+import { Link } from "react-router-dom";
 
 const AllasKartya = ({ job }) => {
   const { user } = useAuthContext();
