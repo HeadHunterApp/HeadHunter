@@ -16,17 +16,6 @@ return new class extends Migration
             $table->id('terulet_id');
             $table->string('megnevezes');
         });
-
-/*         Terulet::create([
-            'megnevezes' => 'Informatika', 
-        ]);
-        Terulet::create([
-            'megnevezes' => 'Értékesítés', 
-        ]);
-        Terulet::create([
-            'megnevezes' => 'Marketing', 
-        ]);  */
-
     }
 
     /**

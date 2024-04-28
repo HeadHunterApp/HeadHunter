@@ -73,7 +73,6 @@ export default function AllasAlap({ jobId }) {
             <p>Fejvadász: {fejvadaszId} - {fejvadaszNev}</p>
           </div>
         ))}
-        
       </div>
     </>
   );
