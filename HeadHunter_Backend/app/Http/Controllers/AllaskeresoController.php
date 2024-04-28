@@ -67,6 +67,7 @@ class AllaskeresoController extends Controller
             'keszseg'=> $allaskereso->keszseg,
             'neme'=> $allaskereso->neme,
             'cim'=> $allaskereso->cim,
+            'anyanyelv'=> $allaskereso->anyanyelv
         ];
         return $result;
     }

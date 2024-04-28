@@ -20,6 +20,10 @@
   color: aliceblue;
   flex: 1;
 }
+.divbuttons {
+  display: flex;
+  gap: 2px;
+}
 
 .hidden {
   display: none;
@@ -41,8 +45,12 @@ input {
 
 .mentes {
   display: block;
-  max-width: 100px;
+  max-width: 120px;
   margin: auto;
+  background-color: teal;
+  color: aliceblue;
+  border-radius: 5px;
+
 }
 
 .react-select {
@@ -62,10 +70,10 @@ input {
   margin: 0 auto;
 }
 
-.temakor{
-    border: 1px solid #055046;
-    border-radius: 5px;
-    box-sizing: border-box;
-    padding: 10px;
-    margin: 10px;
+.temakor {
+  border: 1px solid #055046;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 10px;
+  margin: 10px;
 }

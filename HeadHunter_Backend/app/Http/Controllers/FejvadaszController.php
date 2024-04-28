@@ -65,7 +65,6 @@ class FejvadaszController extends Controller
         $signed = Auth::user()->user_id;
         $fejvadasz = Fejvadasz::findOrFail($signed);
         $user = $fejvadasz->user;
-        //$user = User::where('user_id', $signed)->first(['user_id', 'nev', 'email']);
         $teruletek = $fejvadasz->teruletek;
 
         $terulet_datas = array();

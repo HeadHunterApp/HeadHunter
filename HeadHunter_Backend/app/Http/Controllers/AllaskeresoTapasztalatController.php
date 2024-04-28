@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\AllaskeresoTapasztalat;
 use App\Models\Pozicio;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class AllaskeresoTapasztalatController extends Controller
 {
@@ -74,26 +76,39 @@ class AllaskeresoTapasztalatController extends Controller
 
     public function showsignedv2(){
         $signed = Auth::user()->user_id;
-        $aktap = DB::table('allaskereso_tapasztalats as akt')
-            ->join('pozicios as p', 'akt.pozicio','=','p.pozkod')
-            ->join('terulets as t', 'p.terulet','=','t.terulet_id')
-            ->select(
-                'akt.cegnev',
-                'akt.ceg_cim',
-                't.megnevezes',
-                'p.pozicio',
-                'akt.kezdes',
-                'akt.vegzes')
-            ->where('allaskereso', $signed)
+        $allaskeresoTapasztalatok = AllaskeresoTapasztalat::where('allaskereso', $signed)
             ->get();
 
-        if ($aktap->isEmpty()) {
+        if (!$allaskeresoTapasztalatok) {
             //TODO: 200 nem lesz jó hosszútávon.
-            //return response()->json(['message' => 'Még egyetlen korábbi munkahelyet sem adtál meg'], 404);
-            return response()->json(['message' => 'Még egyetlen korábbi munkahelyet sem adtál meg'], 200);
+            //return response()->json(['message' => 'Még nem adtad meg, hol végezted a tanulmányaidat'], 404);
+            return response()->json(['message' => 'Még nem adtad meg, hol végezted a tanulmányaidat'], 404);
         }
 
-        return $aktap;
+        $tapasztalat_datas = array();
+        foreach ($allaskeresoTapasztalatok as $tapasztalat) {
+            $vegeDatum = $tapasztalat->vegzes ? new DateTime($tapasztalat->vegzes) : new DateTime();
+            $kezdesDatum = new DateTime($tapasztalat->kezdes);
+            $datumKulonbseg = $vegeDatum->diff($kezdesDatum);
+            $datumKulonbsegHonapokban = $datumKulonbseg->y * 12 + $datumKulonbseg->m;
+
+            Log::error("--------TAPASZTALAT LOG:");
+            Log::error($tapasztalat);
+            Log::error($tapasztalat->pozicioEntity);
+
+            $tapasztalat_datas[] = [
+                'idotartam' => $datumKulonbsegHonapokban,
+                'kezdes' => $tapasztalat->kezdes,
+                'vegzes'=> $tapasztalat->vegzes,
+                'cegnev' => $tapasztalat->cegnev,
+                'ceg_cim' => $tapasztalat->ceg_cim,
+                'teruletMegnevezes'=> $tapasztalat->pozicioEntity->teruletEntity->megnevezes,
+                'pozkod' => $tapasztalat->pozicio,
+                'pozicio' => $tapasztalat->pozicioEntity->pozicio
+            ] ;
+        }
+
+        return $tapasztalat_datas;
     }
 
 
@@ -140,30 +155,47 @@ class AllaskeresoTapasztalatController extends Controller
         return response()->json(['message' => 'Adatait sikeresen frissítve'], 200);
     }
 
-    public function updatesignedv2(Request $request, $cegnev, $pozicio){
+    public function updatesignedv2(Request $request){
         $signed = Auth::user()->user_id;
-        $aktap = AllaskeresoTapasztalat::where('allaskereso', $signed)
-        ->where('cegnev','=', $cegnev)  //TODO: nem lenne elég a $request->cegnev ?
-        ->where('pozicio','=', $pozicio)
-        ->firstOrFail();
 
-        $aktap->cegnev = $request->cegnev;
-        //TODO:
-        //$aktap->ceg_cim = $request->ceg_cim;
-        $aktap->kezdes = $request->kezdes;
-        $aktap->vegzes = $request->vegzes;
+        $tapasztalat = AllaskeresoTapasztalat::where('allaskereso', $signed)
+        ->where('cegnev','=', $request->origCegnev)
+        ->where('pozicio','=', $request->origPozkod)
+        ->first();
 
-        $aktap->save();
+        Log::error("Tapasztalat módosítás / beszúrás log.");
+        Log::error($tapasztalat);
 
-        $pozicio = Pozicio::where('pozkod', $pozicio)
-        ->firstOrFail();
+        if($tapasztalat)
+        {
+            Log::error("Módosítok");
+            DB::table('allaskereso_tapasztalats')
+            ->where('allaskereso','=', $signed)
+            ->where('cegnev','=', $request->origCegnev)
+            ->where('pozicio','=', $request->origPozkod)
+            ->update([
+                'cegnev' => $request->cegnev,
+                'ceg_cim' => $request->cegcim,
+                'kezdes' => $request->kezdes,
+                'vegzes' => $request->vegzes,
+                'pozicio' => $request->selectedPozicio['value']
+            ]);
+            
+            return response()->json(['message' => 'Adatait sikeresen frissítve'], 200);
+        }
+        else
+        {
+            Log::error("Újat szúrok be.");
 
-        $pozicio->pozicio = $request->beosztas;
-        $pozicio->terulet = $request->terulet; //terület Id-t kell ide majd berakni.
-
-        $pozicio->save();
-
-        return response()->json(['message' => 'Adatait sikeresen frissítve'], 200);
+            AllaskeresoTapasztalat::create([
+                'allaskereso' => $signed,
+                'cegnev' => $request->cegnev,
+                'kezdes' => $request->kezdes,
+                'vegzes' => $request->vegzes,
+                'ceg_cim' => $request->cegcim,
+                'pozicio' => $request->selectedPozicio['value']
+            ]);
+        }
     }
 
     public function destroy($allasker, $cegnev, $pozicio){

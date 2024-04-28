@@ -39,3 +39,7 @@ export const putAllaskeresoNyelvtudas = (params, config) =>
 
 export const getFejvadaszAllaskereso = (params, config) =>
     axios.get('api/hunter/jobseekers/all');
+
+export const getAllasbetolt = () =>
+    axios.get();
+
