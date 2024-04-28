@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('megnevezes');
         });
 
-        Terulet::create([
+/*         Terulet::create([
             'megnevezes' => 'Informatika', 
         ]);
         Terulet::create([
@@ -25,7 +25,7 @@ return new class extends Migration
         ]);
         Terulet::create([
             'megnevezes' => 'Marketing', 
-        ]); 
+        ]);  */
 
     }
 
