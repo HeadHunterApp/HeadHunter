@@ -6,6 +6,7 @@ use App\Models\AllaskeresoNyelvtudas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -101,6 +102,31 @@ class AllaskeresoNyelvtudasController extends Controller
         return $result; */
     }
 
+     public function showsignedv2(){
+        $signed = Auth::user()->user_id;
+
+        $aknyelv = DB::table('allaskereso_nyelvtudass as akny')
+        ->join('nyelvtudass as nt', 'akny.nyelvtudas','=','nt.nyelvkod')
+        ->where('allaskereso', $signed)
+        ->select(
+            'nt.nyelv',
+            'nt.szint',
+            //'nt.megnevezes',
+            'akny.nyelvtudas',
+            'akny.nyelvvizsga',
+            'akny.iras',
+            'akny.olvasas',
+            'akny.beszed'
+            )
+        ->get();
+
+        //TODO: majd rakjjuk vissza
+        //if ($aknyelv->isEmpty()) {
+        //    return response()->json(['message' => 'Még nem adtál meg a nyelvtudásodra vonatkozó adatot'], 404);
+        //}
+
+        return $aknyelv;
+    }
 
     public function store(Request $request){
         $signed = Auth::user()->user_id;
@@ -147,6 +173,50 @@ class AllaskeresoNyelvtudasController extends Controller
         
         return response()->json(['message' => 'Adatait sikeresen frissítve'], 200);
 
+
+    }
+
+    public function updatesignedv2(Request $request){
+        $signed = Auth::user()->user_id;
+        $nyelvismeret = AllaskeresoNyelvtudas::where('allaskereso', $signed)
+        ->where('nyelvtudas','=', $request->origNyelvTudas)
+        ->first();
+        
+        Log::error($request);
+
+        if(!$nyelvismeret)
+        {
+            //Log::error("Újat adok hozzá!");
+
+            AllaskeresoNyelvtudas::Create([
+                'allaskereso' => $signed,
+                'nyelvtudas' => $request->selectedNyelv['value'],
+                'nyelvvizsga' => $request->nyelvvizsga,
+                'iras' => $request->iras,
+                'olvasas' => $request->olvasas,
+                'beszed' => $request->beszed
+            ]);
+        }
+        else
+        {
+            //Log::error("Módosítok!");
+            //Log::error($request->selectedNyelv['value']);
+
+            DB::table('allaskereso_nyelvtudass')
+            ->where('allaskereso','=', $signed)
+            ->where('nyelvtudas','=', $request->origNyelvTudas)
+            ->update([
+                'nyelvtudas' => $request->selectedNyelv['value'],
+                'nyelvvizsga' => $request->nyelvvizsga,
+                'iras' => $request->iras,
+                'olvasas' => $request->olvasas,
+                'beszed' => $request->beszed
+            ]);
+
+            //Log::error($nyelvismeret);
+        }
+        
+        return response()->json(['message' => 'Adatait sikeresen frissítve'], 200);
     }
 
     public function destroy($allasker,$nyelvtudas){

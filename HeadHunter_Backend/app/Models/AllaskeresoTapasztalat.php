@@ -44,4 +44,8 @@ class AllaskeresoTapasztalat extends Model
 
     public $timestamps = false;
     
+    public function pozicioEntity()
+    {
+        return $this->hasOne(Pozicio::class, 'pozkod', 'pozicio');
+    }
 }

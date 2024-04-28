@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\AllaskeresoTanulmany;
 use App\Models\Vegzettseg;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class AllaskeresoTanulmanyController extends Controller
 {
@@ -74,6 +76,56 @@ class AllaskeresoTanulmanyController extends Controller
         return $result;
     }
 
+    public function showsignedv2(){
+        $signed = Auth::user()->user_id;
+        $allaskeresoTanulmanyok = DB::table('allaskereso_tanulmanys')
+            ->where('allaskereso', $signed)
+            ->get();
+
+        if (!$allaskeresoTanulmanyok) {
+            //TODO: 200 nem lesz jó hosszútávon.
+            //return response()->json(['message' => 'Még nem adtad meg, hol végezted a tanulmányaidat'], 404);
+            return response()->json(['message' => 'Még nem adtad meg, hol végezted a tanulmányaidat'], 404);
+        }
+
+        $tanulmany_datas = array();
+        foreach ($allaskeresoTanulmanyok as $tanulmany) {
+            //$vegeDatum = $tanulmany->vegzes ? date('Y-m-d', $tanulmany->vegzes) : date('Y-m-d');
+            //Log::error("-------------------- Dátum számolás: ");
+            //Log::error($tanulmany->vegzes);
+            //Log::error("Mai dátum:");
+            //Log::error(date('Y-m-d'));
+            //Log::error("kezdés dátum:");
+            //Log::error($tanulmany->kezdes);
+            //Log::error("kivonás értéke:");
+            //Log::error(($vegeDatum - $tanulmany->kezdes));
+            //$datumKulonbseg = $vegeDatum->diffInMonths(date('Y-m-d', $tanulmany->kezdes));
+
+
+
+            $vegeDatum = $tanulmany->vegzes ? new DateTime($tanulmany->vegzes) : new DateTime();
+            $kezdesDatum = new DateTime($tanulmany->kezdes);
+            $datumKulonbseg = $vegeDatum->diff($kezdesDatum);
+            $datumKulonbsegHonapokban = $datumKulonbseg->y * 12 + $datumKulonbseg->m;
+            $vegzettseg = Vegzettseg::where('vegzettseg_id', $tanulmany->vegzettseg)->first();
+
+            $tanulmany_datas[] = [
+                'idotartam' => $datumKulonbsegHonapokban,
+                'kezdes' => $tanulmany->kezdes,
+                'vegzes'=> $tanulmany->vegzes,
+                'intezmeny' => $tanulmany->intezmeny,
+                'erintett_targytev' => $tanulmany->erintett_targytev,
+                'szak'=>$tanulmany->szak,
+                'vegzettseg'=>[
+                    'id' => $vegzettseg->vegzettseg_id,
+                    'megnevezes' => $vegzettseg->megnevezes
+                ]
+            ] ;
+        }
+
+        return $tanulmany_datas;
+    }
+
     public function store(Request $request){
         $aktan = new AllaskeresoTanulmany();
         $aktan->fill($request->all());
@@ -119,6 +171,49 @@ class AllaskeresoTanulmanyController extends Controller
         $aktan->save();
 
         return response()->json(['message' => 'Adatait sikeresen frissítve'], 200);
+    }
+
+    public function updatesignedv2(Request $request){
+        $signed = Auth::user()->user_id;
+        $tanulmany = DB::table('allaskereso_tanulmanys')
+        ->where('allaskereso','=', $signed)
+        ->where('intezmeny','=', $request->origIntezmeny)
+        ->where('szak','=', $request->origSzakkepesites)
+        ->first();
+
+        if($tanulmany)
+        {
+            DB::table('allaskereso_tanulmanys')
+            ->where('allaskereso','=', $signed)
+            ->where('intezmeny','=', $request->origIntezmeny)
+            ->where('szak','=', $request->origSzakkepesites)
+            ->update([
+                'intezmeny' => $request->intezmeny,
+                'szak' => $request->szakkepesites,
+                'vegzettseg' => $request->selectedVegzettseg['value'],
+                'kezdes' => $request->oktkezdes,
+                'vegzes' => $request->oktvegzes,
+                'erintett_targytev' => $request->fotargy,
+            ]);
+
+            return response()->json(['message' => 'Adatait sikeresen frissítve'], 200);
+        }
+        else
+        {
+            Log::info("--------------------Array cucc:--------------");
+            Log::info($request->selectedVegzettseg);
+            Log::info($request->selectedVegzettseg['value']);
+
+            DB::table('allaskereso_tanulmanys')->insert([
+                'allaskereso' => $signed,
+                'intezmeny' => $request->intezmeny,
+                'szak' => $request->szakkepesites,
+                'vegzettseg' => $request->selectedVegzettseg['value'],
+                'kezdes' => $request->oktkezdes,
+                'vegzes' => $request->oktvegzes,
+                'erintett_targytev' => $request->fotargy
+            ]);
+        }
     }
 
     public function destroy($allasker, $intezmeny, $szak){

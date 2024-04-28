@@ -53,5 +53,18 @@ class UserController extends Controller
         $user=User::findOrFail($id);
         $user->delete();
     }
+
+    public function uploadImage(Request $request){
+        $signed = Auth::user()->user_id;
+        $user=User::findOrFail($signed);
+
+        $image = $request->file('image');
+        $filename = uniqid() . '_' . time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('fenykepek'), $filename);
+        $imagePath = 'fenykepek/' . $filename;
+
+        $user->fenykep = $imagePath;
+        $user->save();
+    }
     
 }

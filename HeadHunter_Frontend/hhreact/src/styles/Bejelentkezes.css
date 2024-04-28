@@ -34,6 +34,11 @@
   color: white;
 
 }
+
 .colse{
   border-radius: 2px;
+  padding-bottom: 20px;
+}
+.text-danger{
+  color: red;
 }

@@ -8,11 +8,11 @@ import Select from "react-select";
 const FejvadaszProfil = ({ onSubmit }) => {
     const [nev, setNev] = useState("");
     const [email, setEmail] = useState("");
-    const [telefonszam, setTelefonszam] = useState("")
-    //const [foto, setFoto] = useState(user.fenykep);
+    const [telefonszam, setTelefonszam] = useState("");
     const [terulet, setTerulet] = useState([]);
     const [selectedTerulet, setselectedTerulet] = useState([]);
     const [imageSrc, setImageSrc] = useState(null);
+    
 
     useEffect(()=>{
       getProfilFejvadasz().then((response)=>{
@@ -25,7 +25,11 @@ const FejvadaszProfil = ({ onSubmit }) => {
             label: terulet.megnevezes
           }
         }));
-        setImageSrc(response.data.fenykep);
+        if(response.data.fenykep){
+          const decodedImage = 'data:image/png;base64,' + response.data.fenykep;
+          setImageSrc(decodedImage);
+        }
+
       })
     },[])
 
@@ -40,6 +44,8 @@ const FejvadaszProfil = ({ onSubmit }) => {
       setTerulet(teruletoptions);
     })
   }, []);
+
+
   
     const handleSubmit = async(e) => {
       e.preventDefault();
@@ -70,7 +76,9 @@ const FejvadaszProfil = ({ onSubmit }) => {
       event.preventDefault();
 
       const fajl = event.target.files[0];
-      console.log(fajl);
+      
+      setImageSrc(URL.createObjectURL(fajl));
+
       let formData = new FormData();
       formData.append('image', fajl)
 
@@ -78,20 +86,50 @@ const FejvadaszProfil = ({ onSubmit }) => {
       await axios.get("/api/token").then((response) => {
         console.log(response);
         token = response.data;
-      });      
+      });
 
-      postFotoFeltolt(formData, token);//megfelelő routot meg kell adni(írni)!!!
+      //const Buffer = require("buffer").Buffer;
+      //let base64Img = new Buffer(fajl).toString("base64");
+      //let base64Img = Buffer.from(fajl).toString('base64');
+
+      //let base64Img = base64.encode(fajl);
+
+      postFotoFeltolt(formData, token);
+     
     }
   
     return (
+      <>
+      <div className="menu">
+      <div className="menu-list">Álláskereső</div>
+      <div className="menu-list">Álláslehetőségek</div>
+      <div className="hidden"></div>
+      <div className="hidden"></div>
+      </div>
       <form className="allprofil" onSubmit={handleSubmit}>
-      
+             <div >
+          <label  htmlFor="fenykep">Fénykép:</label>
+          {
+            imageSrc ?
+            (            
+              <img className="photo" src={imageSrc} />
+            ) :
+            (
+              <input
+              type="file"
+              id="fenykep"
+              onChange={fenykepFeltoltes}
+              />
+            )
+          }
+        </div>
         <div>
           <label htmlFor="nev">Név:</label>
           <input
             type="text"
             id="nev"
             value={nev}
+            placeholder="Vezeték/Keresztnév"
             onChange={(e) => setNev(e.target.value)}
           />
         </div>
@@ -113,28 +151,14 @@ const FejvadaszProfil = ({ onSubmit }) => {
             onChange={(e) => setTelefonszam(e.target.value)}
           />
         </div>
-        <div>
-          <label htmlFor="fenykep">Fénykép:</label>
-          {
-            imageSrc ?
-            (
-              <img src={`data:image/png;base64,${imageSrc}`} />
-            ) :
-            (
-              <input
-              type="file"
-              id="fenykep"
-              onChange={fenykepFeltoltes}
-              />
-            )
-          }
-        </div>
-        <div>
+ 
+        <div className="area">
           <label htmlFor="terulet">Terület:</label>
           <Select className="react-select" isMulti options={terulet} value={selectedTerulet} onChange={setselectedTerulet}/>
         </div>
         <button className="mentes" type="submit">Mentés</button>
       </form>
+      </>
     );
   };
   

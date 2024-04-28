@@ -27,4 +27,8 @@ class Pozicio extends Model
 
     public $timestamps = false;
     
+    public function teruletEntity()
+    {
+        return $this->belongsTo(Terulet::class, 'terulet', 'terulet_id');
+    }
 }

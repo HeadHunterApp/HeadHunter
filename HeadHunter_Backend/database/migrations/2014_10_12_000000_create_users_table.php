@@ -28,7 +28,7 @@ return new class extends Migration
         //FIX ADAT
         //only one user with jogosultsag='admin'
 
-        User::create([
+ /*        User::create([
             'nev' => 'Admin', 
             'email' => 'admin@headhunter.com', 
             'password' => Hash::make('Admin123.'),
@@ -42,8 +42,8 @@ return new class extends Migration
             'email' => 'huba@gmail.com', 
             'password' => Hash::make('Hubabuba123.'),
             'jogosultsag' => 'fejvadász',
-        ]);*/
-        
+        ]); */
+         
     }
 
 

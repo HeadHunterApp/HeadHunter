@@ -14,6 +14,7 @@ import AllaskerInfo from "./pages/informacio/AllaskerInfo";
 import MunkaltatoInfo from "./pages/informacio/MunkaltatoInfo";
 import Kapcsolat from "./pages/informacio/Kapcsolat";
 import JogosulatlanFelh from "./pages/JogosulatlanFelh";
+import FejvadaszProfil from "./components/felhasznalo-kezeles/profil/FejvadaszProfil";
 //a többi page-et még létre kell hozni
 
 export default function App() {
@@ -22,26 +23,20 @@ export default function App() {
 
   return (
     <Routes>
-      <Route 
+      <Route
         path="/"
-        element={
-          belepve ? (
-            <AuthLayout jogosultFelh={[]}/>
-          ) : (
-            <VendegLayout />
-          )
-        }
+        element={belepve ? <AuthLayout jogosultFelh={[]} /> : <VendegLayout />}
       >
         {/*kezdőlapon belül kezeljük le a userfüggő tartalomváltozást */}
         <Route index element={<Kezdolap />} />
 
-         {/*belépés nélkül is elérhető */}
+        {/*belépés nélkül is elérhető */}
         <Route path="jobs" element={<Allaskereses />} />
         <Route path="seeker-info" element={<AllaskerInfo />} />
         <Route path="employer-info" element={<MunkaltatoInfo />} />
         <Route path="contact" element={<Kapcsolat />} />
 
-        {belepve && (
+        {true && (
           <>
             {/*minden belépett felhasználó */}
             <Route path="profile" element={<Profilok />} />
@@ -94,7 +89,6 @@ export default function App() {
         )}
       </Route>
       <Route path="unauthorized" element={<JogosulatlanFelh />} />
-
     </Routes>
   );
 }

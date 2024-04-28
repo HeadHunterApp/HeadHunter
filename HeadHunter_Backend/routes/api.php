@@ -61,6 +61,8 @@ Route::get('/jobs/{allas_id}/exps', [AllasTapasztalatController::class, 'detaile
 
 Route::middleware('auth')->group(function () {
     // bejelentkezett felhasználók
+    //Route::post('/hunter/headhunters/profile/image', [FejvadaszController::class, 'uploadImage']);
+    Route::post('/user/profile/image', [UserController::class, 'uploadImage']);
     //terulet
     Route::get('/fields/all', [TeruletController::class, 'index']);
     Route::get('/fields/{terulet_id}', [TeruletController::class, 'show']);
@@ -79,7 +81,7 @@ Route::middleware('auth')->group(function () {
     //tapasztalat_ido
     Route::get('/experiences/all', [TapasztalatIdoController::class, 'index']);
     Route::get('/experiences/{tapasztalat_id}', [TapasztalatIdoController::class, 'show']);
-    
+
     //file feltöltés:
     Route::post('/file-upload', [FileController::class, 'store'])->name('file_store');
 
@@ -219,6 +221,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/jobs/applicants/new', [AllasJelentkezoController::class, 'store']);
         Route::put('/jobs/{allas_id}/applicants/modification', [AllasJelentkezoController::class, 'update']);
         //fejvadasz
+        Route::get('/headhunters/profile/v2', [FejvadaszController::class, 'showsignedv2']);
+        Route::put('/headhunters/profile/modification/v2', [FejvadaszController::class, 'updatesignedv2']);
         Route::get('/headhunters/profile', [FejvadaszController::class, 'showsigned']);
         Route::put('/headhunters/profile/modification', [FejvadaszController::class, 'updatesigned']);
         Route::post('/headhunters/profile/image', [FejvadaszController::class, 'uploadImage']);
@@ -248,21 +252,49 @@ Route::middleware('auth')->group(function () {
         Route::get('/jobs/{allas_id}/edu-atts', [AllasVegzettsegController::class, 'detailedAllasVegz']);
         Route::get('/jobs/{allas_id}/exps', [AllasTapasztalatController::class, 'detailedAllasTap']);
         //allaskereso
+        Route::get('/jobseekers/profile/v2', [AllaskeresoController::class, 'showsignedv2']);
+        Route::put('/jobseekers/profile/modification/v2', [AllaskeresoController::class, 'updatesignedv2']);
         Route::get('/jobseekers/profile', [AllaskeresoController::class, 'showsigned']);
         Route::put('/jobseekers/profile/modification', [AllaskeresoController::class, 'updatesigned']);
         //allaskereso-ismeret
         Route::get('/jobseekers/profile/skills', [AllaskeresoIsmeretController::class, 'showsigned']);
         Route::post('/jobseekers/skills/new', [AllaskeresoIsmeretController::class, 'storesigned']);
         Route::put('/jobseekers/profile/skills/modification', [AllaskeresoIsmeretController::class, 'updatesigned']);
-        //allaskereso-nyelvtudas
+        //terulet
+        Route::get('/seeker/fields/all', [TeruletController::class, 'index']);
+        Route::get('/seeker/fields/{terulet_id}', [TeruletController::class, 'show']);
+        //pozicio
+        Route::get('/seeker/positions/all', [PozicioController::class, 'index']);
+        Route::get('/seeker/positions/{pozkod}', [PozicioController::class], 'show');
+        //szakmai ismeret
+        Route::get('/seeker/skills/all', [SzakmaiIsmeretController::class, 'index']);
+        Route::get('/seeker/skills/{ismeret_id}', [SzakmaiIsmeretController::class, 'show']);
+        //vegzettseg
+        Route::get('/seeker/edu-attainments/all', [VegzettsegController::class, 'index']);
+        Route::get('/seeker/edu-attainments/{vegzettseg_id}', [VegzettsegController::class, 'show']);
+        //nyelvtudas
+        Route::get('/seeker/languages/all', [NyelvtudasController::class, 'index']);
+        Route::get('/seeker/languages/{nyelvkod}', [NyelvtudasController::class, 'show']);
+        //tapasztalat_ido
+        Route::get('/seeker/experiences/all', [NyelvtudasController::class, 'index']);
+        Route::get('/seeker/experiences/{tapasztalat_id}', [NyelvtudasController::class, 'show']);
+        //file feltöltés:
+        Route::post('/seeker/file-upload', [FileController::class, 'store'])->name('file_store');
+        //lekérdezések:
+        Route::get('/jobseekers/profile/languages/v2', [AllaskeresoNyelvtudasController::class, 'showsignedv2']);
+        Route::put('/jobseekers/profile/languages/modification/v2', [AllaskeresoNyelvtudasController::class, 'updatesignedv2']);
         Route::get('/jobseekers/profile/languages', [AllaskeresoNyelvtudasController::class, 'showsigned']);
         Route::post('/jobseekers/languages/new', [AllaskeresoNyelvtudasController::class, 'storesigned']);
         Route::put('/jobseekers/profile/languages/modification', [AllaskeresoNyelvtudasController::class, 'updatesigned']);
         //allaskereso-tanulmany
+        Route::get('/jobseekers/profile/edu-atts/v2', [AllaskeresoTanulmanyController::class, 'showsignedv2']);
+        Route::put('/jobseekers/profile/edu-atts/modification/v2', [AllaskeresoTanulmanyController::class, 'updatesignedv2']);
         Route::get('/jobseekers/profile/edu-atts', [AllaskeresoTanulmanyController::class, 'showsigned']);
         Route::post('/jobseekers/edu-atts/new', [AllaskeresoTanulmanyController::class, 'storesigned']);
         Route::put('/jobseekers/profile/edu-atts/modification', [AllaskeresoTanulmanyController::class, 'updatesigned']);
         //allaskereso-tapasztalat
+        Route::get('/jobseekers/profile/exps/v2', [AllaskeresoTapasztalatController::class, 'showsignedv2']);
+        Route::put('/jobseekers/profile/exps/modification/v2', [AllaskeresoTapasztalatController::class, 'updatesignedv2']);
         Route::get('/jobseekers/profile/exps', [AllaskeresoTapasztalatController::class, 'showsigned']);
         Route::post('/jobseekers/exps/new', [AllaskeresoTapasztalatController::class, 'storesigned']);
         Route::put('/jobseekers/profile/exps/modification', [AllaskeresoTapasztalatController::class, 'updatesigned']);
@@ -271,6 +303,3 @@ Route::middleware('auth')->group(function () {
         Route::post('/jobseekers/jobs/{allas_id}/apply}', [AllasJelentkezoController::class, 'storesigned']);
     });
 });
-
-
-

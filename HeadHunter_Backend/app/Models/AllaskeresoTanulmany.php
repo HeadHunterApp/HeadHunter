@@ -40,5 +40,9 @@ class AllaskeresoTanulmany extends Model
     {
         return $this->hasOne(Allaskereso::class, 'allaskereso', 'user_id');
     }
-    
+
+    public function VegzettsegEntity()
+    {
+        return $this->belongsTo(Vegzettseg::class, 'vegzettseg', 'vegzettseg_id');
+    }
 }

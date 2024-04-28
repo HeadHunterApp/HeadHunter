@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Pozicio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PozicioController extends Controller
 {
     public function index(){
-        
-        return Pozicio::all();
+        return DB::table('pozicios as p')
+            ->select(
+                'p.pozkod',
+                'p.terulet',
+                'p.pozicio')
+            ->get();
     }
 
     public function show($id){

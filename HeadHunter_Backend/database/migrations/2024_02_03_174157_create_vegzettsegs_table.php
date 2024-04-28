@@ -19,7 +19,7 @@ return new class extends Migration
         
         //FIX ADATOK
 
-        Vegzettseg::create([
+       /*  Vegzettseg::create([
             'megnevezes' => 'általános iskola',
         ]);
 
@@ -45,7 +45,7 @@ return new class extends Migration
         
         Vegzettseg::create([
             'megnevezes' => 'egyetem - DR',
-        ]);
+        ]);  */
     }
 
     /**

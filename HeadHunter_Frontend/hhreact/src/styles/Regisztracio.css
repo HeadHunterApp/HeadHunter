@@ -1,6 +1,7 @@
   .form-group {
     /* margin-bottom: 20px; */
     width: 95%;
+    margin-bottom: 10px;
   }
   
   .form-group label {
@@ -10,18 +11,80 @@
     color: black;
     text-align: left;
     margin-left: 10px;
+    margin-bottom: 5px;
   }
   
   .form-group input {
     width: 100%;
-    padding: 10px;
+    padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    margin: 0;
   }
   
   .form-group textarea {
     height: 100px;
+    padding: 8px;
+    margin: 0;
+  }
+  
+  .form-group button {
+    /* width: 100%; */
+    padding: 10px;
+    background-color: teal;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form-group button:hover {
+    background-color: #008080;
+  }
+  
+
+  .nem {
+    display: flex;
+    align-items: center;
+    color: black;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    
+}
+.nem-label {
+  margin-right: 8px; 
+}
+    .form-group {
+    /* margin-bottom: 20px; */
+    width: 95%;
+    margin-bottom: 10px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    /*  margin-bottom: 5px; */
+    color: black;
+    text-align: left;
+    margin-left: 10px;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin: 0;
+  }
+  
+  .form-group textarea {
+    height: 100px;
+    padding: 8px;
+    margin: 0;
   }
   
   .form-group button {
@@ -50,6 +113,7 @@
 }
 .nem-label {
   margin-right: 15px; 
+  
 }
   
 .regisztracio{
@@ -75,6 +139,35 @@
 
 .pnem{
   font-weight: bold;
-  font-size: large;
+  font-size: 16px;
   margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+.regisztracio{
+     background-color: #008080;
+    border-radius: 5px;
+    max-width: 100%;
+    text-align: center;
+    padding: 15px;
+    color: white;
+  
+}
+
+.colse{
+  border-radius: 2px;
+}
+
+.regisztral{
+
+    max-width: 400px;
+    padding-top: 5px;
+
+}
+
+.pnem{
+  font-weight: bold;
+  font-size: 16px;
+  margin-left: 10px;
+  margin-bottom: 5px;
 }

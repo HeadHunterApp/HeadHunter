@@ -13,11 +13,11 @@ export default function Kezdolap(){
 
     return (
         <>
-        {belepve ? (
+     {/*    {belepve ? (
             <BejKezdolap />
-        ) : (
+        ) : ( */}
             <Fooldal />
-        )} 
+     {/*    )}  */}
         </>
     );
 }
