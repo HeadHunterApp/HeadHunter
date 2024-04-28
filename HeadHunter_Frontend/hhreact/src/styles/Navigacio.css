@@ -1,5 +1,10 @@
-nav ul {
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
 
+nav ul {
   padding: 0;
   margin-top: 60px;
   margin-bottom: 0;
@@ -7,12 +12,19 @@ nav ul {
   list-style-type: none;
 }
 
-.navlink a{
+.nav li{
   display: inline;
+}
+
+.navlink a{
+  display: inline-block;
+  width: 100%;
   margin: 0 20px;
   color: white;
   text-decoration: none;
+  text-align: center; 
 }
+
 
 .navlink:hover {
   text-shadow: -3px -1px 16px rgba(0, 0, 0, 0.95);
@@ -27,4 +39,32 @@ nav ul {
   display: flex;
   flex-direction: column;
   align-items: flex-end; 
+}
+
+ .dropdown {
+  margin: 42px 20px 0 20px;
+ }
+
+.dropdown:hover {
+  text-shadow: -3px -1px 16px rgba(0, 0, 0, 0.95);
+  cursor: pointer;
+}
+
+.dropdown-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; 
+  color: black;
+  background-color: white;
+  margin: 10px;
+}
+
+.dropdown-option:hover {
+  text-shadow: -3px -1px 16px teal;
+  cursor: pointer;
+}
+
+.dropdown-option--is-selected {
+  color: white;
+  background-color: teal;
 }

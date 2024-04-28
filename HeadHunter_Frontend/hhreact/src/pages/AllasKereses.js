@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Kereses.css";
-import AllasKartya2 from '../components/AllasKartya2';
+import AllasKartya from '../components/AllasKartya';
 
 /*  ----  EZT LEHET KOMPONENSSÉ KELLENE MAJD TENNI, ÉS AZ EREDMÉNYMEGJELENÍTŐS RÉSZE LENNE A PAGE,
       EZT PEDIG CSAK MEGHÍVNÁNK OTT  -----  */
@@ -19,9 +19,6 @@ const Allaskereses = () => {
   // a jobdatat szedi ki
   const fetchJobs = async () => {
     try {
-
-      /*  ----  IDE NEM CSAK AZ API UTÁNI RÉSZ KELL AZ AXIOS MIATT? VAGY AZ NEM KEZELI LE EZT A RÉSZT?  -----  */
-
       const response = await fetch('http://localhost:8000/api/guest/jobs/all');
       if (!response.ok) {
         throw new Error('Failed to fetch job data');
@@ -69,7 +66,7 @@ const Allaskereses = () => {
         </div>
         {/*mappal kiirja a talált állásokat */}
         {searchedJobs.map((job) => (
-          <AllasKartya2 key={job.allas_id} job={job} />
+          <AllasKartya key={job.allas_id} job={job} />
         ))}
     </div>
   );
