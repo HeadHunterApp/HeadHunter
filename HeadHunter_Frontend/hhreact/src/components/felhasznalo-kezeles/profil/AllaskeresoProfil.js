@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllaskeresoNyelvtudas, getAllaskeresoTanulmany, getAllaskeresoTapasztalat, getProfilAllaskereso, postFotoFeltolt, putAllaskeresoNyelvtudas, putAllaskeresoTanulmany, putAllaskeresoTapasztalat, putProfilAllakereso} from '../../../api/profil';
+import { getAllaskeresoNyelvtudas, getAllaskeresoTanulmany, getAllaskeresoTapasztalat, getProfilAllaskereso, postFotoFeltolt, putAllaskeresoNyelvtudas, putAllaskeresoTanulmany, putAllaskeresoTapasztalat, putProfilAllaskereso} from '../../../contexts/ProfilContext';
 import axios from "../../../api/axios";
 import '../../../styles/profil.css';
 
@@ -125,7 +125,7 @@ const AllaskeresoProfil = ({ onSubmit }) => {
           'X-CSRF-TOKEN': token
       } };
 
-      putProfilAllakereso({nev, email, fax, allampolgarsag, szul_ido, jogositvany, keszseg, neme, cim, anyanyelv}, config)
+      putProfilAllaskereso({nev, email, fax, allampolgarsag, szul_ido, jogositvany, keszseg, neme, cim, anyanyelv}, config)
       .then((response)=>{
  
       })
