@@ -21,7 +21,7 @@ return new class extends Migration
             //$table->string('megnevezes', 20);
         });
         
-    /*   Nyelvtudas::create([
+        Nyelvtudas::create([
             'nyelvkod' => 'ENA1',
             'nyelv' => 'Angol',
             'szint' => 'A1'
@@ -91,7 +91,7 @@ return new class extends Migration
             'nyelvkod' => 'DEC2',
             'nyelv' => 'Német',
             'szint' => 'C2'
-        ]);  */
+        ]);  
     }
 
     /**

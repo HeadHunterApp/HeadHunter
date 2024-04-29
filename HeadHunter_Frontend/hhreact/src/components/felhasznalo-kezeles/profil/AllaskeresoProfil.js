@@ -3,6 +3,7 @@ import {
   getAllaskeresoNyelvtudas,
   getAllaskeresoTanulmany,
   getAllaskeresoTapasztalat,
+
 } from "../../../contexts/ProfilContext";
 import axios from "../../../api/axios";
 import "../../../styles/profil.css";
@@ -10,10 +11,14 @@ import SzakmaiTapasztalat from "./components/SzakmaiTapasztalat";
 import Nyelvismeret from "./components/Nyelvismeret";
 import OktatasKepzes from "./components/OktatasKepzes";
 import SzemelyesAdatok from "./components/SzemelyesAdatok";
-import { getAllaskeresoTeruletek } from "../../../api/terulet";
-import { getAllaskeresoPoziciok } from "../../../api/pozicio";
-import { getAllaskeresoVegzettsegek } from "../../../api/vegzettseg";
-import { getAllaskeresoNyelvek } from "../../../api/nyelv";
+//import { getAllaskeresoTeruletek } from "../../../api/terulet";
+import {getTerulet} from "../../../contexts/FotablaContext";
+//import { getAllaskeresoPoziciok } from "../../../api/pozicio";
+import { getPozicio } from "../../../contexts/FotablaContext";
+//import { getAllaskeresoVegzettsegek } from "../../../api/vegzettseg";
+import {getVegzettseg} from "../../../contexts/FotablaContext";
+//import { getAllaskeresoNyelvek } from "../../../contexts/NyelvContext";
+import {getNyelvtudas}from "../../../contexts/FotablaContext";
 
 const AllaskeresoProfil = ({ onSubmit }) => {
   const [token, setToken] = useState("");
@@ -27,9 +32,8 @@ const AllaskeresoProfil = ({ onSubmit }) => {
   const [vegzettsegek, setVegzettsegek] = useState([]);
   const [nyelvek, setNyelvek] = useState([]);
 
-
-  useEffect(()=>{
-    getAllaskeresoTeruletek().then((response)=>{
+  useEffect(()=>{//getAllaskeresoTeruletek
+    getTerulet().then((response)=>{
       const teruletoptions = response.data.map((teret)=>{
         return{
           value:teret.terulet_id,
@@ -40,8 +44,20 @@ const AllaskeresoProfil = ({ onSubmit }) => {
     })
   }, []);
 
-  useEffect(()=>{
-    getAllaskeresoPoziciok().then((response)=>{
+  useEffect(()=>{// getAllaskeresoVegzettsegek
+    getVegzettseg().then((response)=>{
+      const vegzettsegoptions = response.data.map((veg)=>{
+        return{
+          value: veg.vegzettseg_id,
+          label: veg.megnevezes,
+        }
+      })
+      setVegzettsegek(vegzettsegoptions);
+    })
+  }, []);
+
+  useEffect(()=>{ //getAllaskeresoPoziciok
+    getPozicio().then((response)=>{
       const poziciooptions = response.data.map((poz)=>{
         return{
           value:poz.pozkod,
@@ -52,20 +68,8 @@ const AllaskeresoProfil = ({ onSubmit }) => {
     })
   }, []);
 
-  useEffect(()=>{
-    getAllaskeresoVegzettsegek().then((response)=>{
-      const vegzettsegoptions = response.data.map((veg)=>{
-        return{
-          value:veg.vegzettseg_id,
-          label:veg.megnevezes,
-        }
-      })
-      setVegzettsegek(vegzettsegoptions);
-    })
-  }, []);
-
-  useEffect(()=>{
-    getAllaskeresoNyelvek().then((response)=>{
+  useEffect(()=>{ //getAllaskeresoNyelvek
+    getNyelvtudas().then((response)=>{
       const nyelvoptions = response.data.map((nyelv)=>{
         return{
           value:nyelv.nyelvkod,
@@ -170,7 +174,9 @@ const AllaskeresoProfil = ({ onSubmit }) => {
         intezmeny: "",
         erintett_targytev: "",
         szak: "",
-        szoc_keszseg: "",
+        vegzettseg: "",
+        vegzes: "",
+        kezdes: ""
       },
     ]);
   };
@@ -179,10 +185,7 @@ const AllaskeresoProfil = ({ onSubmit }) => {
 
   return (
     <>
-    <div className="menu">
-    <div className="menu-list">Álláslehetőségek</div>
-    <div className="menu-list">Jelentkezések</div>
-  </div>
+
     <div className="allprofil">
 
 

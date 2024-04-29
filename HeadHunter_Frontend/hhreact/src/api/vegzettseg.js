@@ -1,4 +1,4 @@
-import axios from "../api/axios";
+/* import axios from "../api/axios";
 
 export const getAllaskeresoVegzettsegek = ()=>
-    axios.get('/api/seeker/edu-attainments/all');
+    axios.get('/api/seeker/edu-attainments/all'); */

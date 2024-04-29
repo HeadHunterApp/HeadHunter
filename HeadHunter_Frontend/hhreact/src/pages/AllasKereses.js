@@ -19,7 +19,7 @@ const Allaskereses = () => {
   // a jobdatat szedi ki
   const fetchJobs = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/guest/jobs/all');
+      const response = await fetch('http://localhost:8000/api/jobs/all');
       if (!response.ok) {
         throw new Error('Failed to fetch job data');
       }

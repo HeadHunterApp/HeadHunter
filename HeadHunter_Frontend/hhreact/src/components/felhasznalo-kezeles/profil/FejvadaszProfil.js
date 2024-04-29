@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {getProfilFejvadasz, postFotoFeltolt, putProfilFejvadász} from '../../../contexts/ProfilContext';
+import {getProfilFejvadasz, 
+        postFotoFeltolt, 
+        putProfilFejvadász,
+        } from '../../../contexts/ProfilContext';
 import axios from "../../../api/axios";
 import { getTerulet } from "../../../contexts/FotablaContext";
 import Select from "react-select";

@@ -1,4 +1,4 @@
-import axios from "../api/axios";
+/* import axios from "../api/axios";
 
 export const getAllaskeresoPoziciok = ()=>
-    axios.get('/api/seeker/positions/all');
+    axios.get('/api/seeker/positions/all'); */

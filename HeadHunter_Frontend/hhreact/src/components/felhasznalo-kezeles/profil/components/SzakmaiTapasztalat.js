@@ -41,6 +41,11 @@ const SzakmaiTapasztalat = ({ id, config, data, poziciok }) => {
         alert("Szakmai tapasztalat elmenetve");
         setOrigCegnev(cegnev);
         setOrigPozkod(selectedPozicio.value);
+        const vegzesDate = new Date(vegzes);
+        const kezdesDate = new Date(kezdes);
+        const yearDiff = vegzesDate.getFullYear() - kezdesDate.getFullYear();
+        const monthDiff = vegzesDate.getMonth() - kezdesDate.getMonth();
+        setIdotartam(yearDiff * 12 + monthDiff);
       } else {
         alert(`Hiba a szakmai tapasztalat mentésekor ${response.data.message}`);
       }

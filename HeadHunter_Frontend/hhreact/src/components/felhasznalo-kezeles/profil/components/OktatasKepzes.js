@@ -14,6 +14,7 @@ const OktatasKepzes = ({ id, config, data, vegzettsegek }) => {
   const [oktidotartam, setOktIdotartam] = useState(null);
 
   useEffect(() => {
+    console.log(vegzettsegek);
     if(data) //TODO: --> nem ez volt a baj a felületen. Több oktatás esetén elhasal valami.
     {
       setOrigIntezmeny(data.intezmeny);
