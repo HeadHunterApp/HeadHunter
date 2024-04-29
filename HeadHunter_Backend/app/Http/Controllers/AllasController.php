@@ -48,7 +48,7 @@ class AllasController extends Controller
     }    
   
     public function detailedAllas($allas_id){
-        $query = DB::table('allas as al')
+        $query = DB::table('allass as al')
             ->join('munkaltatos as m', 'al.munkaltato','=','m.munkaltato_id')
             ->join('pozicios as p', 'al.pozicio','=','p.pozkod')
             ->join('terulets as t', 'p.terulet','=','t.terulet_id')
@@ -72,12 +72,13 @@ class AllasController extends Controller
     }
     
     public function shortAllasAll(){
-        $query = DB::table('allas as al')
+        $query = DB::table('allass as al')
             ->join('munkaltatos as m', 'al.munkaltato','=','m.munkaltato_id')
             ->join('pozicios as p', 'al.pozicio','=','p.pozkod')
             ->join('terulets as t', 'p.terulet','=','t.terulet_id')
             ->join('users as u', 'al.fejvadasz','=','u.user_id')
             ->select(
+                'al.allas_id',
                 'm.cegnev',
                 'al.megnevezes',
                 'al.leiras',
