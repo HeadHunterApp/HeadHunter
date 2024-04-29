@@ -1,11 +1,13 @@
 import React from "react";
-
 import AllasAlap from "../components/allas/AllasAlap";
 import VisszaLink from "../components/menu/VisszaLink";
 import useAuthContext from "../contexts/AuthContext";
 import AllasElvaras from "../components/allas/AllasElvaras";
+import { postAllaskerJelentkezes } from "../contexts/AllasContext";
+
 
 export default function AllasAdatlap({ jobId }) {
+
   const { user } = useAuthContext();
   const isAdmin = (felhasznalo) => {
     return felhasznalo.jogosultsag === "admin";
@@ -17,16 +19,29 @@ export default function AllasAdatlap({ jobId }) {
     return felhasznalo.jogosultsag === "álláskereső";
   };
 
+    
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    try {
+      await postAllaskerJelentkezes(jobId, user._token);
+      alert('Sikeres jelentkezés!');
+    } catch (error) {
+      console.error(error);
+      alert('Hiba történt a jelentkezés során');
+    }
+  };
+  
+
   return (
     <>
       <div className="job-info">
         <AllasAlap jobId={jobId} />
         <AllasElvaras jobId={jobId} />
-        <div className="apply-button">
+        <div className="apply-button" onSubmit={handleSubmit}>
           {user && isJobseeker ? (
-            <button>Jelentkezés</button>
+            <button type="submit">Jelentkezés</button>
           ) : (
-            <button>Jelentkeztetés</button>
+            <button >Jelentkeztetés</button>
           )}
         </div>
       </div>
