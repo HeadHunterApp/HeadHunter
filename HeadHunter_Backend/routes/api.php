@@ -243,14 +243,6 @@ Route::middleware('auth')->group(function () {
         Route::put('/employers/modification/{munkaltato_id}', [MunkaltatoController::class, 'update']);
     });
     Route::middleware(['jobseeker'])->group(function () {
-        //allas
-        Route::get('/jobs/all', [AllasController::class, 'shortAllasAll']);
-        Route::get('/jobs/{allas_id}', [AllasController::class, 'detailedAllas']);
-        //allas-kapcsolódók
-        Route::get('/jobs/{allas_id}/skills', [AllasIsmeretController::class, 'detailedAllasIsm']);
-        Route::get('/jobs/{allas_id}/languages', [AllasNyelvtudasController::class, 'detailedAllasNyelv']);
-        Route::get('/jobs/{allas_id}/edu-atts', [AllasVegzettsegController::class, 'detailedAllasVegz']);
-        Route::get('/jobs/{allas_id}/exps', [AllasTapasztalatController::class, 'detailedAllasTap']);
         //allaskereso
         Route::get('/jobseekers/profile/v2', [AllaskeresoController::class, 'showsignedv2']);
         Route::put('/jobseekers/profile/modification/v2', [AllaskeresoController::class, 'updatesignedv2']);

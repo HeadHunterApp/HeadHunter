@@ -29,6 +29,8 @@ const AllasKartya = ({ job }) => {
         </div>
       )}
       <div className="info-button">
+        {/** ezt a stringify-t ki kell majd kommentelni */}
+        {JSON.stringify(job)}
         <button>
           <Link to={`job-info/${job.allas_id}`}>Részletek</Link>
         </button>

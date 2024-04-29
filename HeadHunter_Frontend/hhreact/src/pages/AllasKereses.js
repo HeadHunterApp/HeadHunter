@@ -23,13 +23,12 @@ export default function Allaskereses() {
   const fetchJobs = async () => {
     try {
       const response = await getAllasAll();
-      if (!response.ok) {
+      /*if (!response.ok) {
         throw new Error('Failed to fetch job data');
       }
-      const data = await response.json();
-      // alals id és fejvadássz kizárása talán nem is fontos :D
-      const filteredData = data.map(({ allas_id, fejvadasz, ...rest }) => rest);
-      setSearchedJobs(filteredData);
+      const data = await response.json();*/
+      const data=response.data;
+      setSearchedJobs(data);
     } catch (error) {
       console.error('Error fetching job data:', error);
     }
