@@ -33,6 +33,7 @@ export default function App() {
 
         {/*belépés nélkül is elérhető */}
         <Route path="jobs" element={<Allaskereses />} />
+        <Route path="job-info/:allas_id" element={<AllasAdatlap />} />
         <Route path="seeker-info" element={<AllaskerInfo />} />
         <Route path="employer-info" element={<MunkaltatoInfo />} />
         <Route path="contact" element={<Kapcsolat />} />
@@ -41,7 +42,6 @@ export default function App() {
           <>
             {/*minden belépett felhasználó */}
             <Route path="profile" element={<Profilok />} />
-            <Route path="job-info/:allas_id" element={<AllasAdatlap />} />
 
             <Route
               path="seeker"
