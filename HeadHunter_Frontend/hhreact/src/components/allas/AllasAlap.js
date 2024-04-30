@@ -23,6 +23,7 @@ export default function AllasAlap({ jobId }) {
 
   useEffect(() => {
     getAllas(allasId).then((response) => {
+      console.log(response.data);
       setCegnev(response.data.cegnev);
       setMegnevezes(response.data.megnevezes);
       setTerulet(response.data.terulet);
