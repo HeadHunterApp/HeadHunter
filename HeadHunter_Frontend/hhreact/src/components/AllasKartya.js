@@ -5,14 +5,17 @@ import { Link } from "react-router-dom";
 
 const AllasKartya = ({ job }) => {
   const { user } = useAuthContext();
-  const isAdmin = (felhasznalo) => {
-    return felhasznalo.jogosultsag === "admin";
+
+  const isAdmin = (user) => {
+    return user && user.jogosultsag === "admin";
   };
-  const isHeadhunter = (felhasznalo) => {
-    return felhasznalo.jogosultsag === "fejvadász";
+
+  const isHeadhunter = (user) => {
+    return user && user.jogosultsag === "fejvadász";
   };
-  const isJobseeker = (felhasznalo) => {
-    return felhasznalo.jogosultsag === "álláskereső";
+
+  const isJobseeker = (user) => {
+    return user && user.jogosultsag === "álláskereső";
   };
 
   return (
@@ -23,20 +26,20 @@ const AllasKartya = ({ job }) => {
       <div className="job-description">
         <p>{job.leiras}</p>
       </div>
-      {user && (isAdmin(user) || isHeadhunter(user)) && (
+      {(isAdmin(user) || isHeadhunter(user)) && (
         <div className="job-status">
           <p>{job.statusz}</p>
         </div>
       )}
-      <div className="info-button">
-        {/** ezt a stringify-t ki kell majd kommentelni */}
-        {JSON.stringify(job)}
-        <button>
-          <Link to={`job-info/${job.allas_id}`}>Részletek</Link>
+      <div className="apply-button">
+        <button
+          onClick={() => (window.location.href = `job-info/${job.allas_id}`)}
+        >
+          Részletek
         </button>
       </div>
       <div className="apply-button">
-        {user && isJobseeker ? (
+        {isJobseeker(user) ? (
           <button>Jelentkezés</button>
         ) : (
           <button>Jelentkeztetés</button>
@@ -47,3 +50,9 @@ const AllasKartya = ({ job }) => {
 };
 
 export default AllasKartya;
+
+/* A változtatások itt a isAdmin, isHeadhunter és isJobseeker függvényekben vannak. 
+Ezek most már helyesen ellenőrzik, hogy a felhasználó valóban létezik-e (user !== null), 
+mielőtt megpróbálnák ellenőrizni a jogosultságát. Ez megakadályozza a hibákat, ha a user értéke null vagy undefined.
+
+Ezenkívül a user változót most már megfelelően használjuk a isJobseeker függvényben is, amikor ellenőrizzük az álláskereső jogosultságot. */
