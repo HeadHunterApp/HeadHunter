@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { putAllaskeresoTanulmany } from "../../../../contexts/ProfilContext";
 import Select from "react-select";
+import {deleteAllaskerTanulmany} from "../../../../contexts/AllaskeresoContext";
 
-const OktatasKepzes = ({ id, config, data, vegzettsegek }) => {
+const OktatasKepzes = ({ id, config, data, vegzettsegek, setTanulmany,tanulmany}) => {
   const [oktkezdes, setOktKezdes] = useState(new Date());
   const [oktvegzes, setOktVegzes] = useState(new Date());
   const [intezmeny, setIntezmeny] = useState("");
@@ -54,6 +55,21 @@ const OktatasKepzes = ({ id, config, data, vegzettsegek }) => {
       }
     });
   };
+
+  const torles = () => {
+    const tanulmanyok = tanulmany
+      .filter((item) => item.id !== id)
+      .map((item, index) => {
+        return {
+          ...item,
+          id: `tanulmany_${index}`,
+        };
+      });
+    setTanulmany(tanulmany);
+
+    deleteAllaskerTanulmany(origIntezmeny, origSzakkepesites, config);
+  };
+
 
   return (
     <form id={id} key={id} onSubmit={onSubmit}>
@@ -130,9 +146,16 @@ const OktatasKepzes = ({ id, config, data, vegzettsegek }) => {
             />
           </div> */}
         </div>
-        <button className="mentes" type="submit">
-          Mentés
-        </button>
+        <div className="temakor-buttons">
+          <button className="mentes" type="submit">
+            Mentés
+          </button>
+        </div>
+        <div className="temakor-buttons">
+          <button className="torles" onClick={torles}>
+            Törlés
+          </button>
+        </div>
       </div>
     </form>
   );

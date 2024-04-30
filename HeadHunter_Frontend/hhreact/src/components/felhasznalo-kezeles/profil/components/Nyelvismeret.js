@@ -40,8 +40,24 @@ const Nyelvismeret = ({ id, config, data, nyelvek }) => {
     });
   };
 
+  const torles = () => {
+/*     const tapasztalatok = szakmaiTapasztalat
+      .filter((item) => item.id !== id)
+      .map((item, index) => {
+        return {
+          ...item,
+          id: `szakmaitap__${index}`,
+        };
+      });
+    setSzakmaiTapasztalat(tapasztalatok);
+
+    console.log("megfut most a törlés:");
+    deleteAllaskerTapasztalat(origCegnev, origPozkod, config); */
+  };
+
   return (
     <form id={id} key={id} onSubmit={onSubmit}>
+    
       <div className="temakor">
         NYELV ISMERET:
         <div>
@@ -87,9 +103,16 @@ const Nyelvismeret = ({ id, config, data, nyelvek }) => {
             />
           </div>
         </div>
-        <button className="mentes" type="submit">
-          Mentés
-        </button>
+        <div className="temakor-buttons">
+          <button className="mentes" type="submit">
+            Mentés
+          </button>
+        </div>
+        <div className="temakor-buttons">
+          <button className="torles" onClick={torles}>
+            Törlés
+          </button>
+        </div>
       </div>
     </form>
   );

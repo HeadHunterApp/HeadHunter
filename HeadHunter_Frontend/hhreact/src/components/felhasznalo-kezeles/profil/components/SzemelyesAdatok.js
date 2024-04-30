@@ -85,10 +85,12 @@ const SzemelyesAdatok = ({ id, config, token }) => {
     <form id={id} key={id} onSubmit={onSubmit}>
       <div>
         <label htmlFor="fenykep">Fénykép:</label>
-        {imageSrc &&
-          <img className="photo" src={imageSrc} />
-        }
-        <input type="file" id="fenykep" onChange={fenykepFeltoltes} />
+        <div style={{ display: "flex" }}>
+          {imageSrc && <img className="photo" src={imageSrc} />}
+          <div>
+            <input type="file" id="fenykep" onChange={fenykepFeltoltes} />
+          </div>
+        </div>
       </div>
       <div className="temakor">
         SZEMÉLYES ADATOK:

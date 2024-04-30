@@ -1,8 +1,16 @@
 import { useState, useEffect } from "react";
 import { putAllaskeresoTapasztalat } from "../../../../contexts/ProfilContext";
 import Select from "react-select";
+import { deleteAllaskerTapasztalat } from "../../../../contexts/AllaskeresoContext";
 
-const SzakmaiTapasztalat = ({ id, config, data, poziciok }) => {
+const SzakmaiTapasztalat = ({
+  id,
+  config,
+  data,
+  poziciok,
+  setSzakmaiTapasztalat,
+  szakmaiTapasztalat,
+}) => {
   const [origCegnev, setOrigCegnev] = useState("");
   const [origPozkod, setOrigPozkod] = useState("");
   const [idotartam, setIdotartam] = useState("");
@@ -23,8 +31,8 @@ const SzakmaiTapasztalat = ({ id, config, data, poziciok }) => {
 
     const pozObject = {
       value: data.pozkod,
-      label: data.pozicio
-    }
+      label: data.pozicio,
+    };
     setselectedPozicio(pozObject);
   }, []);
 
@@ -33,8 +41,18 @@ const SzakmaiTapasztalat = ({ id, config, data, poziciok }) => {
 
     console.log(config);
 
+    console.log("Lefut a submit.");
+
     putAllaskeresoTapasztalat(
-      { cegnev, selectedPozicio, kezdes, vegzes, cegcim, origCegnev, origPozkod},
+      {
+        cegnev,
+        selectedPozicio,
+        kezdes,
+        vegzes,
+        cegcim,
+        origCegnev,
+        origPozkod,
+      },
       config
     ).then((response) => {
       if (response.status === 200) {
@@ -50,6 +68,21 @@ const SzakmaiTapasztalat = ({ id, config, data, poziciok }) => {
         alert(`Hiba a szakmai tapasztalat mentésekor ${response.data.message}`);
       }
     });
+  };
+
+  const torles = () => {
+    const tapasztalatok = szakmaiTapasztalat
+      .filter((item) => item.id !== id)
+      .map((item, index) => {
+        return {
+          ...item,
+          id: `szakmaitap__${index}`,
+        };
+      });
+    setSzakmaiTapasztalat(tapasztalatok);
+
+    console.log("megfut most a törlés:");
+    deleteAllaskerTapasztalat(origCegnev, origPozkod, config);
   };
 
   return (
@@ -100,11 +133,23 @@ const SzakmaiTapasztalat = ({ id, config, data, poziciok }) => {
         </div>
         <div>
           <label htmlFor="pozicio">Foglalkoztatás, beosztás:</label>
-          <Select className="react-select" options={poziciok} value={selectedPozicio} onChange={setselectedPozicio}/>
+          <Select
+            className="react-select"
+            options={poziciok}
+            value={selectedPozicio}
+            onChange={setselectedPozicio}
+          />
         </div>
-        <button className="mentes" type="submit">
-          Mentés
-        </button>
+        <div className="temakor-buttons">
+          <button className="mentes" type="submit">
+            Mentés
+          </button>
+        </div>
+        <div className="temakor-buttons">
+          <button className="torles" onClick={torles}>
+            Törlés
+          </button>
+        </div>
       </div>
     </form>
   );

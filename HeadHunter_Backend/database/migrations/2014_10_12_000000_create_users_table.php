@@ -37,12 +37,12 @@ return new class extends Migration
 
 
         //ezt majd ki kell szedni!!!
-        User::create([
+/*         User::create([
             'nev' => 'Huba BUba', 
             'email' => 'huba@gmail.com', 
             'password' => Hash::make('Hubabuba123.'),
             'jogosultsag' => 'fejvadász',
-        ]); 
+        ]);  */
          
     }
 

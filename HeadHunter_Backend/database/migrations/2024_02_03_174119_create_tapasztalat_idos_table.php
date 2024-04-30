@@ -19,7 +19,7 @@ return new class extends Migration
 
         //FIX ADATOK
 
-        TapasztalatIdo::create([
+/*         TapasztalatIdo::create([
             'leiras' => 'pályakezdő (0-1 év)',
         ]);
         
@@ -33,7 +33,7 @@ return new class extends Migration
         
         TapasztalatIdo::create([
             'leiras' => '5+ év tapasztalat',
-        ]);  
+        ]);  */ 
     }
 
     /**

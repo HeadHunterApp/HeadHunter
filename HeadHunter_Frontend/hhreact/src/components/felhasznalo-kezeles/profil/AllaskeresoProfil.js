@@ -3,7 +3,6 @@ import {
   getAllaskeresoNyelvtudas,
   getAllaskeresoTanulmany,
   getAllaskeresoTapasztalat,
-
 } from "../../../contexts/ProfilContext";
 import axios from "../../../api/axios";
 import "../../../styles/profil.css";
@@ -12,13 +11,13 @@ import Nyelvismeret from "./components/Nyelvismeret";
 import OktatasKepzes from "./components/OktatasKepzes";
 import SzemelyesAdatok from "./components/SzemelyesAdatok";
 //import { getAllaskeresoTeruletek } from "../../../api/terulet";
-import {getTerulet} from "../../../contexts/FotablaContext";
+import { getTerulet } from "../../../contexts/FotablaContext";
 //import { getAllaskeresoPoziciok } from "../../../api/pozicio";
 import { getPozicio } from "../../../contexts/FotablaContext";
 //import { getAllaskeresoVegzettsegek } from "../../../api/vegzettseg";
-import {getVegzettseg} from "../../../contexts/FotablaContext";
+import { getVegzettseg } from "../../../contexts/FotablaContext";
 //import { getAllaskeresoNyelvek } from "../../../contexts/NyelvContext";
-import {getNyelvtudas}from "../../../contexts/FotablaContext";
+import { getNyelvtudas } from "../../../contexts/FotablaContext";
 
 const AllaskeresoProfil = ({ onSubmit }) => {
   const [token, setToken] = useState("");
@@ -32,64 +31,75 @@ const AllaskeresoProfil = ({ onSubmit }) => {
   const [vegzettsegek, setVegzettsegek] = useState([]);
   const [nyelvek, setNyelvek] = useState([]);
 
-  useEffect(()=>{//getAllaskeresoTeruletek
-    getTerulet().then((response)=>{
-      const teruletoptions = response.data.map((teret)=>{
-        return{
-          value:teret.terulet_id,
-          label:teret.megnevezes,
-        }
-      })
+  useEffect(() => {
+    //getAllaskeresoTeruletek
+    getTerulet().then((response) => {
+      const teruletoptions = response.data.map((teret) => {
+        return {
+          value: teret.terulet_id,
+          label: teret.megnevezes,
+        };
+      });
       setTeruletek(teruletoptions);
-    })
+    });
   }, []);
 
-  useEffect(()=>{// getAllaskeresoVegzettsegek
-    getVegzettseg().then((response)=>{
-      const vegzettsegoptions = response.data.map((veg)=>{
-        return{
+  useEffect(() => {
+    // getAllaskeresoVegzettsegek
+    getVegzettseg().then((response) => {
+      const vegzettsegoptions = response.data.map((veg) => {
+        return {
           value: veg.vegzettseg_id,
           label: veg.megnevezes,
-        }
-      })
+        };
+      });
       setVegzettsegek(vegzettsegoptions);
-    })
+    });
   }, []);
 
-  useEffect(()=>{ //getAllaskeresoPoziciok
-    getPozicio().then((response)=>{
-      const poziciooptions = response.data.map((poz)=>{
-        return{
-          value:poz.pozkod,
-          label:poz.pozicio,
-        }
-      })
+  useEffect(() => {
+    //getAllaskeresoPoziciok
+    getPozicio().then((response) => {
+      const poziciooptions = response.data.map((poz) => {
+        return {
+          value: poz.pozkod,
+          label: poz.pozicio,
+        };
+      });
       setPoziciok(poziciooptions);
-    })
+    });
   }, []);
 
-  useEffect(()=>{ //getAllaskeresoNyelvek
-    getNyelvtudas().then((response)=>{
-      const nyelvoptions = response.data.map((nyelv)=>{
-        return{
-          value:nyelv.nyelvkod,
-          label:nyelv.nyelv + " - " + nyelv.szint,
-        }
-      })
+  useEffect(() => {
+    //getAllaskeresoNyelvek
+    getNyelvtudas().then((response) => {
+      const nyelvoptions = response.data.map((nyelv) => {
+        return {
+          value: nyelv.nyelvkod,
+          label: nyelv.nyelv + " - " + nyelv.szint,
+        };
+      });
       setNyelvek(nyelvoptions);
-    })
+    });
   }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         getAllaskeresoNyelvtudas().then((response) => {
-          setNyelvTudas(response.data);
+          setNyelvTudas(
+            response.data.map((item, index) => {
+              return{
+                id: `nyelv__${index}`,
+                ...item,
+              };
+            })
+          );
         });
       } catch (error) {
         console.log(error);
       }
-      
+
       let token = "";
 
       await axios.get("/api/token").then((response) => {
@@ -97,9 +107,9 @@ const AllaskeresoProfil = ({ onSubmit }) => {
         token = response.data;
       });
 
-      console.log('------------TOKEN--------------')
+      console.log("------------TOKEN--------------");
       console.log(token);
-  
+
       const config = {
         headers: {
           "X-CSRF-TOKEN": token,
@@ -116,7 +126,14 @@ const AllaskeresoProfil = ({ onSubmit }) => {
   useEffect(() => {
     try {
       getAllaskeresoTanulmany().then((response) => {
-        setTanulmany(response.data);
+        setTanulmany(
+          response.data.map((item, index) => {
+            return{
+              id: `tanulmany__${index}`,
+              ...item,
+            };
+          })
+        );
       });
     } catch (error) {
       console.log(error);
@@ -126,7 +143,14 @@ const AllaskeresoProfil = ({ onSubmit }) => {
   useEffect(() => {
     try {
       getAllaskeresoTapasztalat().then((response) => {
-        setSzakmaiTapasztalat(response.data);
+        setSzakmaiTapasztalat(
+          response.data.map((item, index) => {
+            return {
+              id: `szakmaitap__${index}`,
+              ...item,
+            };
+          })
+        );
       });
     } catch (error) {
       console.log(error);
@@ -139,6 +163,7 @@ const AllaskeresoProfil = ({ onSubmit }) => {
     setSzakmaiTapasztalat([
       ...szakmaiTapasztalat,
       {
+        id: `szakmaitap__${szakmaiTapasztalat.length}`,
         idotartam: "",
         terulet: "",
         allaskeresotapasztalat: {
@@ -155,6 +180,7 @@ const AllaskeresoProfil = ({ onSubmit }) => {
     setNyelvTudas([
       ...nyelvTudas,
       {
+        id: `nyelv__${nyelvTudas.length}`,
         nyelv: "",
         szint: "",
         nyelvtudas: "",
@@ -170,74 +196,79 @@ const AllaskeresoProfil = ({ onSubmit }) => {
     setTanulmany([
       ...tanulmany,
       {
+        id: `tanulmany__${tanulmany.length}`,
         idotartam: "",
         intezmeny: "",
         erintett_targytev: "",
         szak: "",
         vegzettseg: "",
         vegzes: "",
-        kezdes: ""
+        kezdes: "",
       },
     ]);
   };
 
-  
-
   return (
     <>
+      <div className="allprofil">
+        <SzemelyesAdatok id="szem_adatok" config={config} token={token} />
 
-    <div className="allprofil">
+        {szakmaiTapasztalat.map((item, index) => {
+          return (
+            <SzakmaiTapasztalat
+              config={config}
+              data={item}
+              teruletek={teruletek}
+              poziciok={poziciok}
+              id={`szakmaitap__${index}`}
+              setSzakmaiTapasztalat={setSzakmaiTapasztalat}
+              szakmaiTapasztalat={szakmaiTapasztalat}
+            />
+          );
+        })}
 
+        {nyelvTudas.map((item, index) => {
+          return (
+            <Nyelvismeret
+              config={config}
+              data={item}
+              nyelvek={nyelvek}
+              id={`nyelv__${index}`}
+              setnyelvTudas = {setNyelvTudas}
+              nyelvTudas = {nyelvTudas}
+            />
+          );
+        })}
 
-      <SzemelyesAdatok id="szem_adatok" config={config} token={token} />
+        {tanulmany.map((item, index) => {
+          return (
+            <OktatasKepzes
+              config={config}
+              data={item}
+              vegzettsegek={vegzettsegek}
+              id={`oktkepzes__${index}`}
+              setTanulmany={setTanulmany}
+              tanulmany={tanulmany}
+            />
+          );
+        })}
 
-      {szakmaiTapasztalat.map((item, index) => {
-        return (
-          <SzakmaiTapasztalat
-            config={config}
-            data={item}
-            teruletek={teruletek}
-            poziciok={poziciok}
-            id={`szakmaitap__${index}`}
-          />
-        );
-      })}
-
-      {nyelvTudas.map((item, index) => {
-        return (
-          <Nyelvismeret config={config} data={item} nyelvek={nyelvek} id={`nyelv__${index}`} />
-        );
-      })}
-
-      {tanulmany.map((item, index) => {
-        return (
-          <OktatasKepzes
-            config={config}
-            data={item}
-            vegzettsegek={vegzettsegek}
-            id={`oktkepzes__${index}`}
-          />
-        );
-      })}
-
-      <div className="divbuttons">
-        <button className="mentes" onClick={onGenerealas}>
-          Önéletrajz generálás
-        </button>
-
+        <div className="divbuttons">
         <button className="mentes" onClick={szakmaiTapHozzaadas}>
-          Szakmai Tapasztalat hozzáadása
-        </button>
+            Szakmai Tapasztalat hozzáadása
+          </button>
+          <button className="mentes" onClick={nyelvHozzaadas}>
+            Nyelvtudás hozzáadaása
+          </button>
+          <button className="mentes" onClick={oktHozzaadas}>
+            Tanulmányok hozzáadása
+          </button>
 
-        <button className="mentes" onClick={nyelvHozzaadas}>
-          Nyelvtudás hozzáadaása
-        </button>
-
-        <button className="mentes" onClick={oktHozzaadas}>
-          Tanulmányok hozzáadása
-        </button>
+          <button className="mentes" onClick={onGenerealas}>
+            Önéletrajz generálás
+          </button>
+        </div>
       </div>
-    </div>
     </>
   );
 };

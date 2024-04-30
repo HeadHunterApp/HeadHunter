@@ -50,8 +50,18 @@ input {
   background-color: teal;
   color: aliceblue;
   border-radius: 5px;
-
+ 
 }
+
+.torles {
+  display: block;
+  width: 120px;
+  margin: auto;
+  background-color: teal;
+  color: aliceblue;
+  border-radius: 5px;
+  height: 35px;
+} 
 
 .react-select {
   width: 95%;
@@ -77,3 +87,11 @@ input {
   padding: 10px;
   margin: 10px;
 }
+.temakor-buttons{
+  margin: 20px;
+}
+
+
+
+
+

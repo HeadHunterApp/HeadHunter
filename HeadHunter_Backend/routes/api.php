@@ -292,12 +292,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/jobseekers/profile/edu-atts', [AllaskeresoTanulmanyController::class, 'showsigned']);
         Route::post('/jobseekers/edu-atts/new', [AllaskeresoTanulmanyController::class, 'storesigned']);
         Route::put('/jobseekers/profile/edu-atts/modification', [AllaskeresoTanulmanyController::class, 'updatesigned']);
+        Route::delete('/jobseekers/edu-atts/delete', [AllaskeresoTanulmanyController::class, 'destroySigned']);
         //allaskereso-tapasztalat
         Route::get('/jobseekers/profile/exps/v2', [AllaskeresoTapasztalatController::class, 'showsignedv2']);
         Route::put('/jobseekers/profile/exps/modification/v2', [AllaskeresoTapasztalatController::class, 'updatesignedv2']);
         Route::get('/jobseekers/profile/exps', [AllaskeresoTapasztalatController::class, 'showsigned']);
         Route::post('/jobseekers/exps/new', [AllaskeresoTapasztalatController::class, 'storesigned']);
         Route::put('/jobseekers/profile/exps/modification', [AllaskeresoTapasztalatController::class, 'updatesigned']);
+        Route::delete('/jobseekers/exps/delete', [AllaskeresoTapasztalatController::class, 'destroySigned']);
         //allas-jelentkezo
         Route::get('/jobseekers/profile/applications', [AllasJelentkezoController::class, 'showsigned']);
         Route::post('/jobseekers/jobs/{allas_id}/apply}', [AllasJelentkezoController::class, 'storesigned']);
