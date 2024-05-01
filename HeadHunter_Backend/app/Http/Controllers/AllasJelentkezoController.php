@@ -72,7 +72,6 @@ class AllasJelentkezoController extends Controller
     }
 
     public function storesigned($allas_id){
-        return "hahó";
         $allas = Allas::findOrFail($allas_id);
         
         $user = Auth::guard('sanctum')->user();
