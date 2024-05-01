@@ -38,7 +38,7 @@ class Allaskereso extends Model
     
     public static $rules = [
         'user_id' => 'required',
-        'nem' => 'required|in:férfi,nö',
+        'nem' => 'required|in:férfi,nő',
         'szul_ido' => 'required|date',
         'cim' => 'required|string',
         'telefonszam' => 'nullable|string',
@@ -50,7 +50,7 @@ class Allaskereso extends Model
     ];
 
     public static $updateRules = [
-        'nem' => 'required|in:férfi,nö',
+        'neme' => 'required|in:férfi,nő',
         'szul_ido' => 'required|date',
         'cim' => 'required|string',
         'telefonszam' => 'nullable|string',

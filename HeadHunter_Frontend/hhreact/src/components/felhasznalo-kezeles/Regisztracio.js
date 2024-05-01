@@ -78,8 +78,8 @@ export default function Regisztracio({onClose}) {
             <label className="nem-label1"> Férfi</label>
             <input 
               type="radio"
-              value="ferfi"
-              checked={formData.nem === "ferfi"}
+              value="férfi"
+              checked={formData.nem === "férfi"}
               name="nem"
               onChange={handleInputChange}
             />

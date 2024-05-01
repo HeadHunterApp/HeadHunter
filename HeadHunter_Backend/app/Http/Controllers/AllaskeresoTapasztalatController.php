@@ -201,11 +201,23 @@ class AllaskeresoTapasztalatController extends Controller
         }
     }
 
-    public function destroy($allasker, $cegnev, $pozicio){
+    public function destroy($allasker, $cegnev, $pozicio){ // ez azért marad, hogy az admin is tudjon törölni
         $aktap = AllaskeresoTapasztalat::where('allaskereso', $allasker)
         ->where('cegnev','=', $cegnev)
         ->where('pozicio','=', $pozicio)
         ->firstOrFail();
         $aktap->delete();
+    }
+
+    public function destroySigned(Request $request){ //ez az álláskereső tudja magánál törölni
+        $signed = Auth::user()->user_id;
+        $cegnev = $request->query('cegnev');
+        $pozkod = $request->query('pozkod');
+
+        DB::table('allaskereso_tapasztalats')
+        ->where('allaskereso', $signed)
+        ->where('cegnev','=', $cegnev)
+        ->where('pozicio','=', $pozkod)
+        ->delete();
     }
 }

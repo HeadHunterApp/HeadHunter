@@ -1,8 +1,16 @@
 import { useState, useEffect } from "react";
 import { putAllaskeresoTapasztalat } from "../../../../contexts/ProfilContext";
 import Select from "react-select";
+import { deleteAllaskerTapasztalat } from "../../../../contexts/AllaskeresoContext";
 
-const SzakmaiTapasztalat = ({ id, config, data, poziciok }) => {
+const SzakmaiTapasztalat = ({
+  id,
+  config,
+  data,
+  poziciok,
+  setSzakmaiTapasztalat,
+  szakmaiTapasztalat,
+}) => {
   const [origCegnev, setOrigCegnev] = useState("");
   const [origPozkod, setOrigPozkod] = useState("");
   const [idotartam, setIdotartam] = useState("");
@@ -23,8 +31,8 @@ const SzakmaiTapasztalat = ({ id, config, data, poziciok }) => {
 
     const pozObject = {
       value: data.pozkod,
-      label: data.pozicio
-    }
+      label: data.pozicio,
+    };
     setselectedPozicio(pozObject);
   }, []);
 
@@ -33,23 +41,53 @@ const SzakmaiTapasztalat = ({ id, config, data, poziciok }) => {
 
     console.log(config);
 
+    console.log("Lefut a submit.");
+
     putAllaskeresoTapasztalat(
-      { cegnev, selectedPozicio, kezdes, vegzes, cegcim, origCegnev, origPozkod},
+      {
+        cegnev,
+        selectedPozicio,
+        kezdes,
+        vegzes,
+        cegcim,
+        origCegnev,
+        origPozkod,
+      },
       config
     ).then((response) => {
       if (response.status === 200) {
         alert("Szakmai tapasztalat elmenetve");
         setOrigCegnev(cegnev);
         setOrigPozkod(selectedPozicio.value);
+        const vegzesDate = new Date(vegzes);
+        const kezdesDate = new Date(kezdes);
+        const yearDiff = vegzesDate.getFullYear() - kezdesDate.getFullYear();
+        const monthDiff = vegzesDate.getMonth() - kezdesDate.getMonth();
+        setIdotartam(yearDiff * 12 + monthDiff);
       } else {
         alert(`Hiba a szakmai tapasztalat mentésekor ${response.data.message}`);
       }
     });
   };
 
+  const torles = () => {
+    const tapasztalatok = szakmaiTapasztalat
+      .filter((item) => item.id !== id)
+      .map((item, index) => {
+        return {
+          ...item,
+          id: `szakmaitap__${index}`,
+        };
+      });
+    setSzakmaiTapasztalat(tapasztalatok);
+
+    console.log("megfut most a törlés:");
+    deleteAllaskerTapasztalat(origCegnev, origPozkod, config);
+  };
+
   return (
-    <form id={id} key={id} onSubmit={onSubmit}>
-      <div className="temakor">
+    <div className="temakor">
+      <form id={id} key={id} onSubmit={onSubmit}>
         SZAKMAI TAPASZTALAT
         <div>
           <label htmlFor="idotartam">Időtartam: {idotartam ?? 0} hónap</label>
@@ -95,13 +133,26 @@ const SzakmaiTapasztalat = ({ id, config, data, poziciok }) => {
         </div>
         <div>
           <label htmlFor="pozicio">Foglalkoztatás, beosztás:</label>
-          <Select className="react-select" options={poziciok} value={selectedPozicio} onChange={setselectedPozicio}/>
+          <Select
+            className="react-select"
+            options={poziciok}
+            maxMenuHeight={200}
+            value={selectedPozicio}
+            onChange={setselectedPozicio}
+          />
         </div>
-        <button className="mentes" type="submit">
-          Mentés
+        <div className="temakor-buttons">
+          <button className="mentes" type="submit">
+            Mentés
+          </button>
+        </div>
+      </form>
+      <div className="temakor-buttons">
+        <button className="torles" onClick={torles}>
+          Törlés
         </button>
       </div>
-    </form>
+    </div>
   );
 };
 

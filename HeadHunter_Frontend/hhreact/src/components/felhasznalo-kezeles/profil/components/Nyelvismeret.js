@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import { putAllaskeresoNyelvtudas } from "../../../../contexts/ProfilContext";
-
-const Nyelvismeret = ({ id, config, data, nyelvek }) => {
+import { deleteAllaskerNyelvtudas } from "../../../../contexts/AllaskeresoContext";
+const Nyelvismeret = ({
+  id,
+  config,
+  data,
+  nyelvek,
+  nyelvTudas,
+  setNyelvTudas,
+}) => {
   const [nyelvvizsga, setNyelvvizsga] = useState(false);
   const [origNyelvTudas, setOrigNyelvTudas] = useState("");
   const [olvasas, setOlvasas] = useState("");
@@ -19,8 +26,8 @@ const Nyelvismeret = ({ id, config, data, nyelvek }) => {
 
     const nyelvObject = {
       value: data.nyelvtudas,
-      label: data.nyelv + ' - ' + data.szint
-    }
+      label: data.nyelv + " - " + data.szint,
+    };
     setSelectedNyelv(nyelvObject);
   }, []);
 
@@ -40,14 +47,38 @@ const Nyelvismeret = ({ id, config, data, nyelvek }) => {
     });
   };
 
+  const torles = () => {
+    const nyelvtud = nyelvTudas
+      .filter((item) => item.id !== id)
+      .map((item, index) => {
+        console.log(item.id);
+        console.log(id);
+        return {
+          ...item,
+          id: `nyelv__${index}`,
+        };
+      });
+      console.log(nyelvtud);
+      setNyelvTudas(nyelvtud);
+      console.log(id);
+      console.log("megfut most a törlés:");
+      deleteAllaskerNyelvtudas(origNyelvTudas, config);
+      console.log(nyelvTudas);
+    };
+
   return (
-    <form id={id} key={id} onSubmit={onSubmit}>
-      <div className="temakor">
+    <div className="temakor">
+      <form id={id} key={id} onSubmit={onSubmit}>
         NYELV ISMERET:
         <div>
           <div>
             <label htmlFor="nyelvtudas">Idegen nyelvismeret:</label>
-            <Select className="react-select" options={nyelvek} value={selectedNyelv} onChange={setSelectedNyelv}/>
+            <Select
+              className="react-select"
+              options={nyelvek}
+              value={selectedNyelv}
+              onChange={setSelectedNyelv}
+            />
           </div>
           <div>
             <label htmlFor="nyelvvizsga">Nylevvizsga:</label>
@@ -87,11 +118,18 @@ const Nyelvismeret = ({ id, config, data, nyelvek }) => {
             />
           </div>
         </div>
-        <button className="mentes" type="submit">
-          Mentés
+        <div className="temakor-buttons">
+          <button className="mentes" type="submit">
+            Mentés
+          </button>
+        </div>
+      </form>
+      <div className="temakor-buttons">
+        <button className="torles" onClick={torles}>
+          Törlés
         </button>
       </div>
-    </form>
+    </div>
   );
 };
 

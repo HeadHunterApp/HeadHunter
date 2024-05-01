@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {getProfilFejvadasz, postFotoFeltolt, putProfilFejvadász} from '../../../contexts/ProfilContext';
+import {getProfilFejvadasz, 
+        postFotoFeltolt, 
+        putProfilFejvadász,
+        } from '../../../contexts/ProfilContext';
 import axios from "../../../api/axios";
 import { getTerulet } from "../../../contexts/FotablaContext";
 import Select from "react-select";
@@ -100,29 +103,17 @@ const FejvadaszProfil = ({ onSubmit }) => {
   
     return (
       <>
-      <div className="menu">
-      <div className="menu-list">Álláskereső</div>
-      <div className="menu-list">Álláslehetőségek</div>
-      <div className="hidden"></div>
-      <div className="hidden"></div>
-      </div>
+
       <form className="allprofil" onSubmit={handleSubmit}>
-             <div >
-          <label  htmlFor="fenykep">Fénykép:</label>
-          {
-            imageSrc ?
-            (            
-              <img className="photo" src={imageSrc} />
-            ) :
-            (
-              <input
-              type="file"
-              id="fenykep"
-              onChange={fenykepFeltoltes}
-              />
-            )
-          }
+      <div>
+        <label htmlFor="fenykep">Fénykép:</label>
+        <div style={{ display: "flex" }}>
+          {imageSrc && <img className="photo" src={imageSrc} />}
+          <div>
+            <input type="file" id="fenykep" onChange={fenykepFeltoltes} />
+          </div>
         </div>
+      </div>
         <div>
           <label htmlFor="nev">Név:</label>
           <input
@@ -154,7 +145,12 @@ const FejvadaszProfil = ({ onSubmit }) => {
  
         <div className="area">
           <label htmlFor="terulet">Terület:</label>
-          <Select className="react-select" isMulti options={terulet} value={selectedTerulet} onChange={setselectedTerulet}/>
+          <Select className="react-select" 
+                  isMulti options={terulet} 
+                  value={selectedTerulet} 
+                  onChange={setselectedTerulet}
+                  maxMenuHeight={200}
+                  />
         </div>
         <button className="mentes" type="submit">Mentés</button>
       </form>
