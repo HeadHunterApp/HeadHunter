@@ -16,7 +16,7 @@ class MunkaltatoController extends Controller
         return Munkaltato::findOrFail($id);
     }
 
-    public function store(Request $request){
+   /*  public function store(Request $request){
         $munkaltato = new Munkaltato();
         // $munkaltato->cegnev = $request->input('cegnev');
         // $munkaltato->szekhely = $request->input('szekhely');
@@ -25,7 +25,23 @@ class MunkaltatoController extends Controller
         // $munkaltato->email = $request->input('email');
         $munkaltato->fill($request->all());
         $munkaltato->save();
-        return response()->json(['message' => 'Új munkáltató rögzítve'], 200);
+        return response()->json(['message' => 'Új munkáltató rögzítve'], 200); */
+    public function store(Request $request)
+    {
+        // Validáció
+        $validatedData = $request->validate([
+            'cegnev' => 'required|string|max:255',
+            'szekhely' => 'required|string|max:255',
+            'kapcsolattarto' => 'required|string|max:255',
+            'telefonszam' => 'required|string|max:20',
+            'email' => 'required|email|unique:munkaltato|max:255',
+        ]);
+
+        // Új munkáltató létrehozása az adatok alapján
+        $munkaltato = Munkaltato::create($validatedData);
+
+        // Válasz küldése a kliensnek
+        return response()->json(['message' => 'Munkáltató sikeresen hozzáadva', 'munkaltatos' => $munkaltato], 201);
     }
 
     public function update(Request $request, $id){

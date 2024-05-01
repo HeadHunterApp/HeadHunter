@@ -57,6 +57,10 @@ Route::get('/jobs/{allas_id}/skills', [AllasIsmeretController::class, 'detailedA
 Route::get('/jobs/{allas_id}/languages', [AllasNyelvtudasController::class, 'detailedAllasNyelv']);
 Route::get('/jobs/{allas_id}/edu-atts', [AllasVegzettsegController::class, 'detailedAllasVegz']);
 Route::get('/jobs/{allas_id}/exps', [AllasTapasztalatController::class, 'detailedAllasTap']);
+//munkaltato teszt route
+Route::get('/munkaltatok/all', [MunkaltatoController::class, 'index']);
+Route::post('/munkaltatok/new', [MunkaltatoController::class, 'store']);
+
 
 
 Route::middleware('auth')->group(function () {

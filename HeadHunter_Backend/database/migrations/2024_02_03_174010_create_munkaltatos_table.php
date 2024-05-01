@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('cegnev', 60);
             $table->string('szekhely', 80);
             $table->string('kapcsolattarto', 40);
-            $table->string('telefonszam', 12)->nullable();
+            $table->string('telefonszam', 30)->nullable();
             $table->string('email', 40)->unique();
             $table->timestamps();
         });
