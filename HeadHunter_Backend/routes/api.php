@@ -270,7 +270,7 @@ Route::middleware('auth')->group(function () {
         //nyelvtudas
         Route::get('/seeker/languages/all', [NyelvtudasController::class, 'index']);
         Route::get('/seeker/languages/{nyelvkod}', [NyelvtudasController::class, 'show']);
-        Route::delete('/seeker/languages/delete', [AllaskeresoNyelvtudasController::class, 'destroySigned']);
+        Route::delete('/seeker/profile/languages/delete', [AllaskeresoNyelvtudasController::class, 'destroySigned']);
         //tapasztalat_ido
         Route::get('/seeker/experiences/all', [NyelvtudasController::class, 'index']);
         Route::get('/seeker/experiences/{tapasztalat_id}', [NyelvtudasController::class, 'show']);
@@ -295,7 +295,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/jobseekers/profile/exps', [AllaskeresoTapasztalatController::class, 'showsigned']);
         Route::post('/jobseekers/exps/new', [AllaskeresoTapasztalatController::class, 'storesigned']);
         Route::put('/jobseekers/profile/exps/modification', [AllaskeresoTapasztalatController::class, 'updatesigned']);
-        Route::delete('/jobseekers/exps/delete', [AllaskeresoTapasztalatController::class, 'destroySigned']);
+        Route::delete('/jobseekers/profile/exps/delete', [AllaskeresoTapasztalatController::class, 'destroySigned']);
         //allas-jelentkezo
         Route::get('/jobseekers/profile/applications', [AllasJelentkezoController::class, 'showsigned']);
         Route::post('/jobseekers/jobs/{allas_id}/apply', [AllasJelentkezoController::class, 'storesigned'])->whereNumber('allas_id');

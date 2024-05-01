@@ -46,7 +46,7 @@ export const putAllaskerNyelvtudas = (user_id, params)=>
     axios.put(`/api/jobseekers/${user_id}/languages/modification`, params);
     
 export const deleteAllaskerNyelvtudas = (nyelvtudas, config)=>
-    axios.delete(`/api/seeker/languages/delete?nyelvtudas=${nyelvtudas}`,config);
+    axios.delete(`/api/seeker/profile/languages/delete?nyelvtudas=${nyelvtudas}`,config);
     
 //allaskereso-tanulmany
 export const getAllaskerTanulmanyAll = ()=>
@@ -81,7 +81,7 @@ export const putAllaskerTapasztalat = (user_id, params)=>
     axios.delete(`/api/jobseekers/exps/delete/${cegnev}/${pozkod}`); */
  
 export const deleteAllaskerTapasztalat = (cegnev, pozkod, config)=>
-    axios.delete(`/api/jobseekers/exps/delete?cegnev=${cegnev}&pozkod=${pozkod}`, config);
+    axios.delete(`/api/jobseekers/profile/exps/delete?cegnev=${cegnev}&pozkod=${pozkod}`, config);
     
 //konkrét álláskereső összes jelentkezése:
 export const getAllaskerJelentkezett = (user_id)=>
