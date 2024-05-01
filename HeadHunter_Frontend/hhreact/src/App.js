@@ -10,11 +10,12 @@ import AuthLayout from "./layout/AuthLayout";
 import Kezdolap from "./pages/Kezdolap";
 import Profilok from "./pages/Profilok";
 import Allaskereses from "./pages/AllasKereses";
+import AllasAdatlap from "./pages/AllasAdatlap";
 import AllaskerInfo from "./pages/informacio/AllaskerInfo";
 import MunkaltatoInfo from "./pages/informacio/MunkaltatoInfo";
 import Kapcsolat from "./pages/informacio/Kapcsolat";
 import JogosulatlanFelh from "./pages/JogosulatlanFelh";
-import FejvadaszProfil from "./components/felhasznalo-kezeles/profil/FejvadaszProfil";
+
 //a többi page-et még létre kell hozni
 
 export default function App() {
@@ -32,11 +33,12 @@ export default function App() {
 
         {/*belépés nélkül is elérhető */}
         <Route path="jobs" element={<Allaskereses />} />
+        <Route path="job-info/:allas_id" element={<AllasAdatlap />} />
         <Route path="seeker-info" element={<AllaskerInfo />} />
         <Route path="employer-info" element={<MunkaltatoInfo />} />
         <Route path="contact" element={<Kapcsolat />} />
 
-        {true && (
+        {belepve && (
           <>
             {/*minden belépett felhasználó */}
             <Route path="profile" element={<Profilok />} />

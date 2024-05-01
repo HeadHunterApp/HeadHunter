@@ -1,27 +1,41 @@
 .job-card {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .job-title h2 {
-    margin: 0;
-  }
-  
-  .job-description p {
-    margin: 0;
-  }
-  
-  .apply-button button {
-    background-color: teal;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .apply-button button:hover {
-    background-color: #00b39b;
-  }
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.job-title h2 {
+  margin: 0;
+}
+
+.job-description p {
+  margin: 0;
+}
+
+.job-status p {
+  margin: 0;
+  font-weight: bold;
+}
+
+.button-container {
+  display: flex; /* A gombok egymás mellett legyenek */
+  justify-content: space-between; /* A gombok legyenek egyenletesen elosztva */
+  align-items: center; /* A gombok középre igazítása függőlegesen */
+}
+
+
+.apply-button button {
+  background-color: teal;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 150px;
+}
+
+
+.apply-button button:hover {
+  background-color: #00b39b;
+}

@@ -40,7 +40,7 @@ class AllasTapasztalatController extends Controller
             ->join('tapasztalat_idos as ti', 'at.tapasztalat_ido','=','ti.tapasztalat_id')
             ->join('pozicios as p', 'at.pozicio','=','p.pozkod')
             ->join('terulets as t', 'p.terulet','=','t.terulet_id')
-            ->select('t.megnevezes', 'p.pozicio', 'ti.leiras')
+            ->select('t.megnevezes as terulet', 'p.pozicio', 'ti.leiras')
             ->where('ai.allas', $allas_id)
             ->get();
         if ($allastap->isEmpty()) {

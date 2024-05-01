@@ -11,7 +11,7 @@ export default function NavLegordulo() {
         { label: "Képességek", value: "/skills" },
         { label: "Nyelvtudás", value: "/languages" }
     ];
-    const menuNev = "Továbbiak";
+    const menuNev = "Továbbiak ⮟";
 
     const valasztasKezeles = (valasztott) => {
         navigate(valasztott.value);
@@ -19,8 +19,8 @@ export default function NavLegordulo() {
 
 
   return (
-    <Dropdown controlClassName="dropdown"
-    optionClassName="dropdown-option"
+    <Dropdown controlClassName="Dropdown"
+    optionClassName="Dropdown-option"
     options={legorduloLista}
     onChange={valasztasKezeles}
     value={menuNev}

@@ -70,4 +70,5 @@ export const getAllaskeresoNyelvtudas = ()=>
 export const putAllaskeresoNyelvtudas = (params, config) =>
     axios.put('/api/jobseekers/profile/languages/modification/v2', params, config);
 
-
+export const getAllaskeresoJelentkezett = ()=>
+    axios.get(`/api/jobseekers/profile/applications`);

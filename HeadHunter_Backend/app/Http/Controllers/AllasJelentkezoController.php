@@ -72,17 +72,18 @@ class AllasJelentkezoController extends Controller
 
     public function storesigned(Request $request){
         $request->validate([
-            'allas' => 'required|exists:allas,id',
+            'allas' => 'required|exists:allas,allas_id',
         ]);
-        try {
-            $signed = Auth::user()->user_id;
+        $user = Auth::guard('sanctum')->user();
+        if ($user) {
+            $signed = $user->user_id;
             $allasjel = new AllasJelentkezo();
             $allasjel->allaskereso=$signed;
             $allasjel->allas=$request->allas;
             $allasjel->save();
             return response()->json(['message' => 'Sikeres jelentkezés'], 200);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Hiba történt a jelentkezés során'], 500);
+        }  else {
+            return response()->json(['message' => 'Jogosultság probléma'], 401);
         }
     }
 
