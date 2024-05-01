@@ -64,8 +64,8 @@ class AllasController extends Controller
                 DB::raw('DATE_FORMAT(al.created_at, "%Y-%m-%d") as datum')
                 )
             ->where('al.allas_id',$allas_id)
-            ->get();
-            if (Auth::check() && (Auth::user()->jogosultsag === 'admin' || Auth::user()->jogosultsag === 'fejvadasz')) {
+            ->first();
+            if (Auth::check() && (Auth::user()->jogosultsag === 'admin' || Auth::user()->jogosultsag === 'fejvadász')) {
                 $query->addSelect('al.fejvadasz_id', 'u.nev as fejvadasz');
             }
             return $query;

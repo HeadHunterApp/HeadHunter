@@ -6,31 +6,25 @@ import NavLegordulo from "./NavLegordulo";
 
 export default function Navigacio() {
   
-  const { user } = useAuthContext();
-  const isAdmin = (felhasznalo) => {
-    return felhasznalo.jogosultsag === 'admin';
-  };
-  const isHeadhunter = (felhasznalo) => {
-    return felhasznalo.jogosultsag === 'fejvadász';
-  };
+  const { user, isAdmin, isHeadhunter } = useAuthContext();
 
   return (
     <nav>
       <ul>
         <NavLink link="/" title="Kezdőlap" />
         <NavLink link="jobs" title="Álláskeresés" />
-        {(user && (isAdmin(user) || isHeadhunter(user))) &&
+        {(user && (isAdmin() || isHeadhunter())) &&
           <>
             <NavLink link="employers" title="Munkáltatók" />
             <NavLink link="jobseekers" title="Álláskeresők" />
             <NavLink link="hired" title="Felvett jelentkezők" />
           </>
         }
-        {user && isAdmin(user) &&
+        {user && isAdmin() &&
             <NavLink link="headhunters" title="Fejvadászok" />
         }
       </ul>
-      {user && isAdmin(user) &&
+      {user && isAdmin() &&
             <NavLegordulo />
         }
     </nav>
