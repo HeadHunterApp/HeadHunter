@@ -40,8 +40,8 @@ class AllasVegzettsegController extends Controller
             ->join('vegzettsegs as v', 'av.vegzettseg','=','v.vegzettseg_id')
             ->select('v.megnevezes')
             ->where('av.allas', $allas_id)
-            ->get();
-        if ($allasvegz->isEmpty()) {
+            ->first();
+        if ($allasvegz === null) {
             return response()->json(['message' => 'Ehhez az álláshoz nem adtak meg iskolai végzettségre vonatkozó elvárást'], 404);
         }
         return $allasvegz;

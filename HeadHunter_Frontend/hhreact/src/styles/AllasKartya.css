@@ -1,7 +1,9 @@
 .job-card {
   border: 1px solid #ccc;
   padding: 10px;
-  margin-bottom: 20px;
+  margin: 20px 15px;
+  background-color: white;
+  border-radius: 10px;
 }
 
 .job-title h2 {

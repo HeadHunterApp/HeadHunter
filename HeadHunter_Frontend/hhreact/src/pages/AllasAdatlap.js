@@ -1,40 +1,61 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AllasAlap from "../components/allas/AllasAlap";
 import VisszaLink from "../components/menu/VisszaLink";
 import useAuthContext from "../contexts/AuthContext";
 import AllasElvaras from "../components/allas/AllasElvaras";
-import { postAllasJelentkezo, postAllaskerJelentkezes } from "../contexts/AllasContext";
+import {
+  postAllasJelentkezo,
+  postAllaskerJelentkezes,
+} from "../contexts/AllasContext";
+import { useParams } from "react-router-dom";
+import "../styles/AllasAdatlap.css";
+import axios from "../api/axios";
 
+export default function AllasAdatlap() {
+  const { user, isAdmin, isHeadhunter, isJobseeker } = useAuthContext();
+  const { allas_id } = useParams();
+  const [config, setConfig] = useState("");
 
-export default function AllasAdatlap({ jobId }) {
+  
+  useEffect(()=>{
+    const fetchData = async () => {
+    let token = "";
 
-  const { user } = useAuthContext();
-  const isAdmin = (felhasznalo) => {
-    return felhasznalo.jogosultsag === "admin";
+    await axios.get("/api/token").then((response) => {
+      console.log(response);
+      token = response.data;
+    });
+
+    console.log('------------TOKEN--------------')
+    console.log(token);
+  
+    const config = {
+      headers: {
+        "X-CSRF-TOKEN": token,
+      },
+    };
+    setConfig(config);    
   };
-  const isHeadhunter = (felhasznalo) => {
-    return felhasznalo.jogosultsag === "fejvadász";
-  };
-  const isJobseeker = (felhasznalo) => {
-    return felhasznalo.jogosultsag === "álláskereső";
-  };
 
-  const allasId= jobId;
-    
-  const handleSeekerSubmit = async(e) => {
+  fetchData();
+}, []);
+
+  
+
+  const handleSeekerSubmit = async (e) => {
     e.preventDefault();
     try {
-      await postAllaskerJelentkezes(allasId, user._token);
-      alert('Sikeres jelentkezés!');
+      console.log("config: ");
+      console.log(config);
+      await postAllaskerJelentkezes(allas_id, config);
+      alert("Sikeres jelentkezés!");
     } catch (error) {
       console.error(error);
-      alert('Hiba történt a jelentkezés során');
+      alert("Hiba történt a jelentkezés során");
     }
   };
 
-  const chooseSeeker = {
-
-  };
+  const chooseSeeker = {};
   /*
   const handleOtherSubmit = async(e) => {
     e.preventDefault();
@@ -52,27 +73,40 @@ export default function AllasAdatlap({ jobId }) {
   return (
     <>
       <div className="job-info">
-        <AllasAlap jobId={allasId} />
-        <AllasElvaras jobId={allasId} />
-        <div className="buttons" >
+        {console.log(allas_id)}
+        <AllasAlap jobId={allas_id} />
+        <AllasElvaras jobId={allas_id} />
+        <div className="apply-buttons">
+          {console.log(user)}
+          {/*console.log(user.jogosultsag)*/}
+          {/*console.log(isJobseeker())*/}
+          {/*console.log(isAdmin())*/}
+          {/*console.log(isHeadhunter())*/}
           {user && isJobseeker ? (
-            <button type="submit" onSubmit={handleSeekerSubmit}>Jelentkezés</button>
+            <button type="submit" onClick={handleSeekerSubmit}>
+              Jelentkezés
+            </button>
+          ) : user && (isAdmin() || isHeadhunter()) ? (
+            <>
+              {/**ide kell a legörülő */}
+              <button type="submit" /*onSubmit={handleOtherSubmit}*/>
+                Jelentkeztetés
+              </button>
+            </>
           ) : (
-            user && (isAdmin(user) || isHeadhunter(user))? (
-              <button type="submit" /*onSubmit={handleOtherSubmit}*/>Jelentkeztetés</button>
-            ) : (
-              <div className="login-or-reg">Tetszik ez az állás? Belépést követően tudsz jelentkezni rá</div>
-            )
+            <div className="login-or-reg">
+              Tetszik ez az állás? Belépést követően tudsz jelentkezni rá!
+            </div>
           )}
         </div>
+        <div className="handling-buttons">
+          {user && (isAdmin() || isHeadhunter()) && (
+            <button>Szerkeszt</button>
+          )}
+          {user && isAdmin() && (<button>Töröl</button>)}
+        </div>
+        <VisszaLink />
       </div>
-      <div className="handling-button">
-        {user && (isAdmin(user) || isHeadhunter(user)) && (
-          <button>Szerkeszt</button>
-        )}
-        {user && isAdmin(user)(<button>Töröl</button>)}
-      </div>
-      <VisszaLink />
     </>
   );
 }

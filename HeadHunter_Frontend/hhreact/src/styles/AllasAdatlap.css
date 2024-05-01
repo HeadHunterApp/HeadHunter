@@ -1,0 +1,119 @@
+
+.job-info {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.8em;
+    border: 1px solid #ccc;
+    padding: 2em 1.5em;
+    margin: 2em 8em;
+    background-color: white;
+    border-radius: 1.4em;
+  }
+
+.job-info h2 {
+    font-size: 12pt;
+}
+
+.job-info p, .job-info h4 {
+    font-size: 11.5pt;
+    text-align: left;
+    font-weight: lighter;
+}
+  
+.job-identifiers, .job-details, .job-expectations {
+    display: flex;    
+    border: 1px solid #ccc;
+    border-radius: 0.6em;
+    margin: 0;
+    padding: 1em 2em;
+}
+
+.job-identifiers{
+    flex-direction:row;
+    column-gap: 1em;
+    align-items: center;
+    justify-items: center;
+    background-color: rgb(138, 191, 191);
+}
+
+.job-id {
+    text-align: center;
+    padding-left: 1.2em;
+}
+.jobtitle {
+    text-align: center;
+    padding-left: 1.2em;
+    text-transform: uppercase;
+}
+
+.job-details {
+    flex-direction: column;
+    background-color: white;
+}
+
+.job-basic span {
+    font-weight: bold;
+}
+
+.job-basic p {
+    padding-left: 1.2em;
+    margin: 0;
+    margin-bottom: 0.3em;
+}
+.jobdesc {
+    margin: 0.6em 0;
+    padding: 1em 0;
+    background-color:rgb(227, 242, 242);
+    border-radius: 0.6em;
+}
+
+.jobdesc p {
+    padding-left: 1.2em;
+    margin: 0;
+}
+
+.job-expectations {
+    flex-direction: column;
+    background-color:rgb(242, 240, 227);
+}
+
+.job-musthave ul {
+    padding: 0 1.2em;
+    margin: 0 1.2em;
+}
+
+.job-musthave h2, .job-preference h2 {
+    text-align: left;
+}
+
+.job-musthave ul li, .job-musthave p, .job-musthave h4 {
+    font-size: 11.5pt;
+    margin: 0;
+    padding-bottom: 1em;
+}
+
+.job-musthave h4 {
+    text-decoration: underline;
+}
+
+.apply-buttons {
+    margin: 0;
+    padding-top: 1.4em;
+}
+
+.apply-buttons button {
+    background-color: teal;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 150px;
+  }
+  
+  
+  .apply-buttons button:hover {
+    background-color: #00b39b;
+  }
+  

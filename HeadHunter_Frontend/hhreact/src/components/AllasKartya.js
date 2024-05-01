@@ -4,19 +4,7 @@ import useAuthContext from "../contexts/AuthContext";
 import { Link } from "react-router-dom";
 
 const AllasKartya = ({ job }) => {
-  const { user } = useAuthContext();
-
-  const isAdmin = (user) => {
-    return user && user.jogosultsag === "admin";
-  };
-
-  const isHeadhunter = (user) => {
-    return user && user.jogosultsag === "fejvadász";
-  };
-
-  const isJobseeker = (user) => {
-    return user && user.jogosultsag === "álláskereső";
-  };
+  const { user, isAdmin, isHeadhunter, isJobseeker } = useAuthContext();
 
   return (
     <div className="job-card">
@@ -26,20 +14,18 @@ const AllasKartya = ({ job }) => {
       <div className="job-description">
         <p>{job.leiras}</p>
       </div>
-      {(isAdmin(user) || isHeadhunter(user)) && (
+      {(isAdmin() || isHeadhunter()) && (
         <div className="job-status">
           <p>{job.statusz}</p>
         </div>
       )}
       <div className="apply-button">
-        <button
-          onClick={() => (window.location.href = `job-info/${job.allas_id}`)}
-        >
-          Részletek
-        </button>
+        <Link to={`/job-info/${job.allas_id}`}>
+          <button type="button">Részletek</button>
+        </Link>
       </div>
       <div className="apply-button">
-        {isJobseeker(user) ? (
+        {isJobseeker() ? (
           <button>Jelentkezés</button>
         ) : (
           <button>Jelentkeztetés</button>

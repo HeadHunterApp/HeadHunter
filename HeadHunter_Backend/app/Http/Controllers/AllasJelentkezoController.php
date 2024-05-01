@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Allas;
 use App\Models\AllasJelentkezo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -50,7 +51,7 @@ class AllasJelentkezoController extends Controller
             ->where('aj.allaskereso', $signed)
             ->get();
         if ($allasjel->isEmpty()) {
-                return response()->json(['message' => 'Ez az álláskereső még egyetlen pályázatot sem nyújtott be'], 404);
+                return response()->json(['message' => 'Még egyetlen állásra sem jelentkeztél'], 404);
         }
         return $allasjel;
     }
@@ -70,16 +71,15 @@ class AllasJelentkezoController extends Controller
         }
     }
 
-    public function storesigned(Request $request){
-        $request->validate([
-            'allas' => 'required|exists:allas,allas_id',
-        ]);
+    public function storesigned($allas_id){
+        $allas = Allas::findOrFail($allas_id);
+        
         $user = Auth::guard('sanctum')->user();
         if ($user) {
             $signed = $user->user_id;
             $allasjel = new AllasJelentkezo();
             $allasjel->allaskereso=$signed;
-            $allasjel->allas=$request->allas;
+            $allasjel->allas=$allas->allas_id;
             $allasjel->save();
             return response()->json(['message' => 'Sikeres jelentkezés'], 200);
         }  else {
