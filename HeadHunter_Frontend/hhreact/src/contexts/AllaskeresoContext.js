@@ -62,7 +62,7 @@ export const putAllaskerTanulmany = (user_id, params)=>
     axios.put(`/api/jobseekers/${user_id}/edu-atts/modification`, params);
     
 export const deleteAllaskerTanulmany = (intezmeny, szak, config)=>
-    axios.delete(`/api/jobseekers/edu-atts/delete?intezmeny=${intezmeny}$szak=${szak}`, config);
+    axios.delete(`/api/jobseekers/profile/edu-atts/delete?intezmeny=${intezmeny}$szak=${szak}`, config);
     
 //allaskereso-tapasztalat
 export const getAllaskerTapasztalatAll = ()=>

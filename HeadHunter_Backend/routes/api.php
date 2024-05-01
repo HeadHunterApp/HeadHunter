@@ -285,7 +285,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/jobseekers/profile/edu-atts', [AllaskeresoTanulmanyController::class, 'showsigned']);
         Route::post('/jobseekers/edu-atts/new', [AllaskeresoTanulmanyController::class, 'storesigned']);
         Route::put('/jobseekers/profile/edu-atts/modification', [AllaskeresoTanulmanyController::class, 'updatesigned']);
-        Route::delete('/jobseekers/edu-atts/delete', [AllaskeresoTanulmanyController::class, 'destroySigned']);
+        Route::delete('/jobseekers/profile/edu-atts/delete', [AllaskeresoTanulmanyController::class, 'destroySigned']);
         //allaskereso-tapasztalat
         Route::get('/jobseekers/profile/exps/v2', [AllaskeresoTapasztalatController::class, 'showsignedv2']);
         Route::put('/jobseekers/profile/exps/modification/v2', [AllaskeresoTapasztalatController::class, 'updatesignedv2']);
