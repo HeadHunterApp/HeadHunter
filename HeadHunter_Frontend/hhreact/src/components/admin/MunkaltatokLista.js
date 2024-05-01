@@ -3,8 +3,9 @@ import axios from 'axios';
 import "../../styles/Tables.css";
 
 const MunkaltatokLista = () => {
-  const [employers, setEmployers] = useState([]);
-  const [newEmployer, setNewEmployer] = useState({
+  // Állapotok inicializálása
+  const [munkaltatok, setMunkaltatok] = useState([]);
+  const [ujMunkaltato, setUjMunkaltato] = useState({
     cegnev: '',
     szekhely: '',
     kapcsolattarto: '',
@@ -12,39 +13,60 @@ const MunkaltatokLista = () => {
     email: ''
   });
 
+  // Munkáltatók lekérdezése az API-ról
   useEffect(() => {
-    const fetchEmployers = async () => {
+    const munkaltatokLekerdezese = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/munkaltatok/all');
-        setEmployers(response.data);
+        const valasz = await axios.get('http://127.0.0.1:8000/api/munkaltatok/all');
+        setMunkaltatok(valasz.data);
       } catch (error) {
-        console.error('Error fetching employers:', error);
+        console.error('Hiba a munkáltatók lekérdezésekor:', error);
       }
     };
 
-    fetchEmployers();
+    munkaltatokLekerdezese();
   }, []);
 
-  const handleDelete = async (munkaltatoId) => {
+  // Munkáltató törlése
+  const munkaltatoTorlese = async (munkaltatoId) => {
     try {
       await axios.delete(`http://127.0.0.1:8000/api/munkaltatok/${munkaltatoId}`);
-      setEmployers(employers.filter((employer) => employer.munkaltato_id !== munkaltatoId));
+      // Törölt munkáltató eltávolítása az állapotból
+      setMunkaltatok(munkaltatok.filter((m) => m.munkaltato_id !== munkaltatoId));
     } catch (error) {
-      console.error('Error deleting employer:', error);
+      console.error('Hiba a munkáltató törlésekor:', error);
     }
   };
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setNewEmployer({ ...newEmployer, [name]: value });
+  // Új munkáltató adatainak frissítése változás esetén
+  const adatokFrissitese = (esemeny) => {
+    const { name, value } = esemeny.target;
+    // Új munkáltató állapotának frissítése a változásokkal
+    setUjMunkaltato({ ...ujMunkaltato, [name]: value });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  // Új munkáltató felvétele
+  const ujMunkaltatoFelvitele = async (esemeny) => {
+    esemeny.preventDefault();
     try {
-      await axios.post('http://127.0.0.1:8000/api/munkaltatok/new', newEmployer);
-      setEmployers([...employers, newEmployer]);
-      setNewEmployer({
+      // CSRF token lekérdezése a meta tag-ből
+      const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+      // Új munkáltató felvétele az API-ra CSRF token-nel
+      const valasz = await axios.post(
+        'http://127.0.0.1:8000/api/munkaltatok/munkaltato',
+        ujMunkaltato,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken,
+          },
+        }
+      );
+      console.log('Valasz:', valasz.data);
+      // Új munkáltató hozzáadása az állapothoz
+      setMunkaltatok([...munkaltatok, valasz.data]);
+      // Űrlap visszaállítása
+      setUjMunkaltato({
         cegnev: '',
         szekhely: '',
         kapcsolattarto: '',
@@ -52,7 +74,7 @@ const MunkaltatokLista = () => {
         email: ''
       });
     } catch (error) {
-      console.error('Error adding new employer:', error);
+      console.error('Hiba az új munkáltató hozzáadásakor:', error);
     }
   };
 
@@ -71,15 +93,15 @@ const MunkaltatokLista = () => {
           </tr>
         </thead>
         <tbody>
-          {employers.map((employer) => (
-            <tr key={employer.munkaltato_id}>
-              <td>{employer.cegnev}</td>
-              <td>{employer.szekhely}</td>
-              <td>{employer.kapcsolattarto}</td>
-              <td>{employer.telefonszam}</td>
-              <td>{employer.email}</td>
+          {munkaltatok.map((m) => (
+            <tr key={m.munkaltato_id}>
+              <td>{m.cegnev}</td>
+              <td>{m.szekhely}</td>
+              <td>{m.kapcsolattarto}</td>
+              <td>{m.telefonszam}</td>
+              <td>{m.email}</td>
               <td>
-                <button onClick={() => handleDelete(employer.munkaltato_id)}>Törlés</button>
+                <button onClick={() => munkaltatoTorlese(m.munkaltato_id)}>Törlés</button>
                 <button>Módosítás</button>
                 <button>Új felvitele</button>
               </td>
@@ -87,18 +109,18 @@ const MunkaltatokLista = () => {
           ))}
         </tbody>
       </table>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={ujMunkaltatoFelvitele}>
         <h2>Új munkáltató felvitele</h2>
         <label htmlFor="cegnev">Cégnév:</label>
-        <input type="text" id="cegnev" name="cegnev" value={newEmployer.cegnev} onChange={handleInputChange} required />
+        <input type="text" id="cegnev" name="cegnev" value={ujMunkaltato.cegnev} onChange={adatokFrissitese} required />
         <label htmlFor="szekhely">Székhely:</label>
-        <input type="text" id="szekhely" name="szekhely" value={newEmployer.szekhely} onChange={handleInputChange} required />
+        <input type="text" id="szekhely" name="szekhely" value={ujMunkaltato.szekhely} onChange={adatokFrissitese} required />
         <label htmlFor="kapcsolattarto">Kapcsolattartó:</label>
-        <input type="text" id="kapcsolattarto" name="kapcsolattarto" value={newEmployer.kapcsolattarto} onChange={handleInputChange} required />
+        <input type="text" id="kapcsolattarto" name="kapcsolattarto" value={ujMunkaltato.kapcsolattarto} onChange={adatokFrissitese} required />
         <label htmlFor="telefonszam">Telefonszám:</label>
-        <input type="tel" id="telefonszam" name="telefonszam" value={newEmployer.telefonszam} onChange={handleInputChange} required />
+        <input type="tel" id="telefonszam" name="telefonszam" value={ujMunkaltato.telefonszam} onChange={adatokFrissitese} required />
         <label htmlFor="email">Email:</label>
-        <input type="email" id="email" name="email" value={newEmployer.email} onChange={handleInputChange} required />
+        <input type="email" id="email" name="email" value={ujMunkaltato.email} onChange={adatokFrissitese} required />
         <button type="submit">Hozzáadás</button>
       </form>
     </div>

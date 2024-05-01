@@ -16,18 +16,37 @@ class MunkaltatoController extends Controller
         return Munkaltato::findOrFail($id);
     }
 
-   /*  public function store(Request $request){
+    /* public function store(Request $request){
         $munkaltato = new Munkaltato();
-        // $munkaltato->cegnev = $request->input('cegnev');
-        // $munkaltato->szekhely = $request->input('szekhely');
-        // $munkaltato->kapcsolattarto = $request->input('kapcsolattarto');
-        // $munkaltato->telefonszam = $request->input('telefonszam');
-        // $munkaltato->email = $request->input('email');
+         $munkaltato->cegnev = $request->input('cegnev');
+         $munkaltato->szekhely = $request->input('szekhely');
+         $munkaltato->kapcsolattarto = $request->input('kapcsolattarto');
+         $munkaltato->telefonszam = $request->input('telefonszam');
+         $munkaltato->email = $request->input('email');
         $munkaltato->fill($request->all());
         $munkaltato->save();
-        return response()->json(['message' => 'Új munkáltató rögzítve'], 200); */
-    public function store(Request $request)
+        return response()->json(['message' => 'Új munkáltató rögzítve'], 200); 
+        //régit kikommenteltem de itt van ha nem jó cserélem vissza
+        public function store(Request $request)
+   } */
+   public function store(Request $request)
     {
+    // bej9övő adata validálása
+    $validatedData = $request->validate([
+        'cegnev' => 'required|string|max:255',
+        'szekhely' => 'required|string|max:255',
+        'kapcsolattarto' => 'required|string|max:255',
+        'telefonszam' => 'required|string|max:20',
+        'email' => 'required|email|unique:munkaltatos|max:255',
+    ]);
+
+    // ujmunkaltato validált adatokkal
+    $munkaltato = Munkaltato::create($validatedData);
+
+    // JSON RESPONSE siker esetén
+    return response()->json(['message' => 'Új munkáltató rögzítve', 'munkaltato' => $munkaltato], 201);
+}
+    /* {
         // Validáció
         $validatedData = $request->validate([
             'cegnev' => 'required|string|max:255',
@@ -42,7 +61,7 @@ class MunkaltatoController extends Controller
 
         // Válasz küldése a kliensnek
         return response()->json(['message' => 'Munkáltató sikeresen hozzáadva', 'munkaltatos' => $munkaltato], 201);
-    }
+    } */
 
     public function update(Request $request, $id){
         $munkaltato = Munkaltato::findOrFail($id);
@@ -56,8 +75,15 @@ class MunkaltatoController extends Controller
         return response()->json(['message' => 'Munkáltató adatai sikeresen frissítve'], 200); 
     }
 
-    public function destroy($id){
-        Munkaltato::findOrFail($id)->delete();
+    public function destroy($munkaltato_id){
+        try {
+            $munkaltato = Munkaltato::findOrFail($munkaltato_id);
+            $munkaltato->delete();
+            return response()->json(['message' => 'Munkáltató sikeresen törölve'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Hiba történt a munkáltató törlésekor: ' . $e->getMessage()], 500);
+        }
     }
+    
     
 }
