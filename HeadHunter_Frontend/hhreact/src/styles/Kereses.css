@@ -1,24 +1,24 @@
 .search-bar {
     display: flex;
-    margin-top: 20px;
+    margin: 20px 15px;
     text-align: center;
     gap: 1rem;
-    display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-  }
-  
-  /* .search-bar input[type="text"] {
-      padding: 10px;
-      width: 200px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-  } */
-  
-  .search-bar-button {
+    background-color: rgb(138, 191, 191);
+}
+
+/* .search-bar input[type="text"] {
+    padding: 10px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+} */
+
+.search-bar-button {
     padding: 10px 20px;
     width: 2em;
     border: none;

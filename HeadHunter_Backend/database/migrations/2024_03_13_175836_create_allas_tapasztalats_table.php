@@ -15,7 +15,7 @@ return new class extends Migration
             $table->foreignId('allas')->references('allas_id')->on('allass');
             $table->string('pozicio', 6);
             $table->foreign('pozicio')->references('pozkod')->on('pozicios');
-            $table->foreignId('tapasztalat')->references('tapasztalat_id')->on('tapasztalat_idos');
+            $table->foreignId('tapasztalat_ido')->references('tapasztalat_id')->on('tapasztalat_idos');
             $table->primary('allas');
         });
     }

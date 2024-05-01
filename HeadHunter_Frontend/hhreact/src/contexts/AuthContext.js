@@ -13,7 +13,10 @@ const emptyError = {
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    console.log("Új üres user");
+    return null;
+  });
   const [errors, setErrors] = useState(emptyError);
 
   let token = "";
@@ -25,6 +28,7 @@ export const AuthProvider = ({ children }) => {
 
   const getUser = async () => {
     const { data } = await axios.get("/api/user");
+    console.log("setUser", data);
     setUser(data);
   };
 
@@ -62,16 +66,42 @@ export const AuthProvider = ({ children }) => {
       console.log(error);
 
       if (error?.response?.status === 422) {
-        setErrors({...error.response.data.errors, message: error.response.data.message});
+        setErrors({
+          ...error.response.data.errors,
+          message: error.response.data.message,
+        });
       } else {
-        setErrors({...emptyError, message: error.message});
+        setErrors({ ...emptyError, message: error.message });
       }
       return false;
     }
   };
 
+  const isAdmin = () => {
+    return user && user?.jogosultsag === "admin";
+  };
+
+  const isHeadhunter = () => {
+    return user && user?.jogosultsag === "fejvadász";
+  };
+
+  const isJobseeker = () => {
+    return user && user?.jogosultsag === "álláskereső";
+  };
+
   return (
-    <AuthContext.Provider value={{ logout, loginReg, errors, getUser, user }}>
+    <AuthContext.Provider
+      value={{
+        logout,
+        loginReg,
+        errors,
+        getUser,
+        user,
+        isAdmin,
+        isHeadhunter,
+        isJobseeker,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
