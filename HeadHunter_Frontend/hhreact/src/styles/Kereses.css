@@ -1,14 +1,14 @@
 .search-bar {
     display: flex;
-    margin-top: 20px;
+    margin: 20px 15px;
     text-align: center;
     gap: 1rem;
-    display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: rgb(138, 191, 191);
 }
 
 /* .search-bar input[type="text"] {

@@ -41,7 +41,7 @@ class AllasTapasztalatController extends Controller
             ->join('pozicios as p', 'at.pozicio','=','p.pozkod')
             ->join('terulets as t', 'p.terulet','=','t.terulet_id')
             ->select('t.megnevezes as terulet', 'p.pozicio', 'ti.leiras')
-            ->where('ai.allas', $allas_id)
+            ->where('at.allas', $allas_id)
             ->get();
         if ($allastap->isEmpty()) {
                 return response()->json(['message' => 'Ehhez az álláshoz nem adtak meg korábbi munkatapasztalatra vonatkozó elvárást'], 404);
