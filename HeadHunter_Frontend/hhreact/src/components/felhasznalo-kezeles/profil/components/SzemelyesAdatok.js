@@ -33,6 +33,11 @@ const SzemelyesAdatok = ({ id, config, token }) => {
       setNeme(adat.neme);
       setCim(adat.cim);
       setAnyanyelv(adat.anyanyelv);
+
+      if(adat.fenykep){
+        const decodedImage = 'data:image/png;base64,' + response.data.fenykep;
+        setImageSrc(decodedImage);
+      }
     });
   }, []);
 
@@ -43,18 +48,19 @@ const SzemelyesAdatok = ({ id, config, token }) => {
       {
         nev,
         email,
+        telefonszam,
         fax,
         allampolgarsag,
         szul_ido,
         jogositvany,
         keszseg,
         neme,
-        cim /* 
-          anyanyelv, */,
+        cim,
+        anyanyelv,
       },
       config
     ).then((response) => {
-      if (response.status === "201") {
+      if (response.status === 200) {
         alert("Profil elmenetve");
       } else {
         alert(`Hiba a profil mentésekor ${response.data.message}`);
@@ -79,11 +85,12 @@ const SzemelyesAdatok = ({ id, config, token }) => {
     <form id={id} key={id} onSubmit={onSubmit}>
       <div>
         <label htmlFor="fenykep">Fénykép:</label>
-        {imageSrc ? (
-          <img className="photo" src={imageSrc} />
-        ) : (
-          <input type="file" id="fenykep" onChange={fenykepFeltoltes} />
-        )}
+        <div style={{ display: "flex" }}>
+          {imageSrc && <img className="photo" src={imageSrc} />}
+          <div>
+            <input type="file" id="fenykep" onChange={fenykepFeltoltes} />
+          </div>
+        </div>
       </div>
       <div className="temakor">
         SZEMÉLYES ADATOK:
@@ -165,8 +172,8 @@ const SzemelyesAdatok = ({ id, config, token }) => {
               <label className="nem-label1"> Férfi</label>
               <input
                 type="radio"
-                value="ferfi"
-                checked={neme === "ferfi"}
+                value="férfi"
+                checked={neme === "férfi"}
                 name="nem"
                 onChange={(e) => setNeme(e.target.value)}
               />
@@ -185,10 +192,11 @@ const SzemelyesAdatok = ({ id, config, token }) => {
           <div>
             <label>Vezetői engedély(ek):</label>
             <input
-              type="text"
+              type="checkbox"
               name="jogositvany"
               value={jogositvany}
-              onChange={(e) => setJogositvany(e.target.value)}
+              checked={jogositvany}
+              onChange={(e) => setJogositvany(e.target.checked)}
             />
           </div>
           <div>

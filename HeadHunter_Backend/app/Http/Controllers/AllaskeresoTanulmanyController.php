@@ -216,11 +216,23 @@ class AllaskeresoTanulmanyController extends Controller
         }
     }
 
-    public function destroy($allasker, $intezmeny, $szak){
+    public function destroy($allasker, $intezmeny, $szak){ // ez azért marad, hogy az admin is tudjon törölni
         $aktan = AllaskeresoTanulmany::where('allaskereso', $allasker)
         ->where('intezmeny','=', $intezmeny)
         ->where('szak','=', $szak)
         ->firstOrFail();
         $aktan->delete();
+    }
+
+    public function destroySigned(Request $request){ //ez az álláskereső tudja magánál törölni
+        $signed = Auth::user()->user_id;
+        $intezmeny = $request->query('intezmeny');
+        $szak = $request->query('szak');
+        DB::table('allaskereso_tanulmanys')
+        ->where('allaskereso', $signed)
+        ->where('intezmeny','=', $intezmeny)
+        ->where('szak','=', $szak)
+        ->delete();
+    
     }
 }

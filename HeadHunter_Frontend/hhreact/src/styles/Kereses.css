@@ -20,13 +20,28 @@
 
 .search-bar-button {
     padding: 10px 20px;
-    width:2em;
+    width: 2em;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-}
-
-.search-bar button:hover {
+  }
+  
+  .search-bar button:hover {
     background-color: #555;
-}
+  }
+  
+  .allker {
+    max-width: 70%;
+    margin: 0 auto;
+    border: solid 1px black;
+    border-radius: 5px;
+    padding: 10px;
+    max-height: 550px; /* Változtasd meg a magasságot igényed szerint */
+    overflow-y: auto; /* Csak függőleges görgetést engedélyez */
+  }
+  
+  .allker-border {
+    margin-top: 35px;
+  }
+  

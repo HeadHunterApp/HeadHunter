@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class AllaskeresoController extends Controller
@@ -55,7 +56,7 @@ class AllaskeresoController extends Controller
     public function showsignedv2(){
         $signed = Auth::user()->user_id;
         $allaskereso = Allaskereso::findOrFail($signed);
-        $user = User::where('user_id', $signed)->first(['nev', 'email']);
+        $user = User::where('user_id', $signed)->first(['nev', 'email', 'fenykep']);
         $result = [
             'nev' => $user->nev,
             'email' => $user->email,
@@ -64,11 +65,23 @@ class AllaskeresoController extends Controller
             'allampolgarsag'=> $allaskereso->allampolgarsag,
             'szul_ido'=> $allaskereso->szul_ido,
             'jogositvany'=> $allaskereso->jogositvany,
-            'keszseg'=> $allaskereso->keszseg,
-            'neme'=> $allaskereso->neme,
+            'keszseg'=> $allaskereso->szoc_keszseg,
+            'neme'=> $allaskereso->nem,
             'cim'=> $allaskereso->cim,
             'anyanyelv'=> $allaskereso->anyanyelv
         ];
+
+        Log::error("------------------------ USER FÉNYKÉP ----------------------------");
+        Log::error($user);
+
+        if($user->fenykep)
+        {
+            $path = public_path($user->fenykep);
+            $imageData = file_get_contents($path);
+            $imageBase64 = base64_encode($imageData);
+            $result['fenykep'] = $imageBase64;
+        }
+
         return $result;
     }
 
@@ -167,6 +180,7 @@ class AllaskeresoController extends Controller
 
         //$allaskereso->fill($request->all());   
         $allaskereso->fax = $request->fax;
+        $allaskereso->telefonszam = $request->telefonszam;
         $allaskereso->allampolgarsag = $request->allampolgarsag;
         $allaskereso->szul_ido = $request->szul_ido;
         $allaskereso->jogositvany = $request->jogositvany;
