@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AllasAlap from "../components/allas/AllasAlap";
 import VisszaLink from "../components/menu/VisszaLink";
 import useAuthContext from "../contexts/AuthContext";
@@ -9,15 +9,45 @@ import {
 } from "../contexts/AllasContext";
 import { useParams } from "react-router-dom";
 import "../styles/AllasAdatlap.css";
+import axios from "../api/axios";
 
 export default function AllasAdatlap() {
   const { user, isAdmin, isHeadhunter, isJobseeker } = useAuthContext();
   const { allas_id } = useParams();
+  const [config, setConfig] = useState("");
+
+  
+  useEffect(()=>{
+    const fetchData = async () => {
+    let token = "";
+
+    await axios.get("/api/token").then((response) => {
+      console.log(response);
+      token = response.data;
+    });
+
+    console.log('------------TOKEN--------------')
+    console.log(token);
+  
+    const config = {
+      headers: {
+        "X-CSRF-TOKEN": token,
+      },
+    };
+    setConfig(config);    
+  };
+
+  fetchData();
+}, []);
+
+  
 
   const handleSeekerSubmit = async (e) => {
     e.preventDefault();
     try {
-      await postAllaskerJelentkezes(allas_id, user._token);
+      console.log("config: ");
+      console.log(config);
+      await postAllaskerJelentkezes(allas_id, config);
       alert("Sikeres jelentkezés!");
     } catch (error) {
       console.error(error);
