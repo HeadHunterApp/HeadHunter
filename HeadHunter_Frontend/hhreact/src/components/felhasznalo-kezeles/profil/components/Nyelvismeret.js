@@ -51,17 +51,20 @@ const Nyelvismeret = ({
     const nyelvtud = nyelvTudas
       .filter((item) => item.id !== id)
       .map((item, index) => {
+        console.log(item.id);
+        console.log(id);
         return {
           ...item,
           id: `nyelv__${index}`,
         };
       });
+      console.log(nyelvtud);
       setNyelvTudas(nyelvtud);
-
       console.log(id);
-    console.log("megfut most a törlés:");
-    deleteAllaskerNyelvtudas(origNyelvTudas, config);
-  };
+      console.log("megfut most a törlés:");
+      deleteAllaskerNyelvtudas(origNyelvTudas, config);
+      console.log(nyelvTudas);
+    };
 
   return (
     <div className="temakor">

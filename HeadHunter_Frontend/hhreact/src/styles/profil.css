@@ -1,6 +1,7 @@
 .allprofil {
   max-width: 70%;
   margin: 0 auto;
+  margin-top: 20px;
   border: solid 1px black;
   border-radius: 5px;
   padding: 10px;
@@ -50,8 +51,13 @@ input {
   background-color: teal;
   color: aliceblue;
   border-radius: 5px;
- 
+  font-size: 16px;
 }
+
+.mentes:hover{
+  background-color: #00b39b;
+}
+
 
 .torles {
   display: block;
@@ -61,7 +67,12 @@ input {
   color: aliceblue;
   border-radius: 5px;
   height: 35px;
+  font-size: 16px;
 } 
+
+.torles:hover{
+  background-color: #00b39b;
+}
 
 .react-select {
   width: 95%;
@@ -71,7 +82,10 @@ input {
 .photo {
   width: 110px;
   height: 140px;
-  margin-left: 20px;
+  margin-left: 40px;
+  border-radius: 5px;
+  border: solid 1px teal;
+  box-shadow: 5px 5px 5px rgba(6, 143, 167, 0.5);
 }
 .menu {
   display: flex;
@@ -91,7 +105,16 @@ input {
   margin: 20px;
 }
 
+.lista{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
 
+.react-select__menu {
+  max-height: 200px; /* Állítsd be a megfelelő maximális magasságot */
+  overflow-y: auto; /* Engedélyezd a függőleges görgetést */
+}
 
 
 

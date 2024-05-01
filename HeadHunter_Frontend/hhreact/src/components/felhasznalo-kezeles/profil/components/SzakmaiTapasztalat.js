@@ -136,6 +136,7 @@ const SzakmaiTapasztalat = ({
           <Select
             className="react-select"
             options={poziciok}
+            maxMenuHeight={200}
             value={selectedPozicio}
             onChange={setselectedPozicio}
           />

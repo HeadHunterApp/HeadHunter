@@ -148,6 +148,7 @@ const OktatasKepzes = ({
             <Select
               className="react-select"
               options={vegzettsegek}
+              maxMenuHeight={200}
               value={selectedVegzettseg}
               onChange={setSelectedVegzettseg}
             />

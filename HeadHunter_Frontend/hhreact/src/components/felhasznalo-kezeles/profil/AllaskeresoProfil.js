@@ -150,6 +150,16 @@ const AllaskeresoProfil = ({ onSubmit }) => {
     }
   }, []);
 
+  /* function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  } */
+
+  /* useEffect(() => {
+    sleep(5000);
+    console.log("Profilból írom:")
+    console.log(nyelvTudas);
+  }, []); */
+
   const onGenerealas = () => {};
 
   const szakmaiTapHozzaadas = () => {

@@ -60,7 +60,7 @@ const SzemelyesAdatok = ({ id, config, token }) => {
       },
       config
     ).then((response) => {
-      if (response.status === "201") {
+      if (response.status === 200) {
         alert("Profil elmenetve");
       } else {
         alert(`Hiba a profil mentésekor ${response.data.message}`);

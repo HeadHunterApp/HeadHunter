@@ -145,7 +145,12 @@ const FejvadaszProfil = ({ onSubmit }) => {
  
         <div className="area">
           <label htmlFor="terulet">Terület:</label>
-          <Select className="react-select" isMulti options={terulet} value={selectedTerulet} onChange={setselectedTerulet}/>
+          <Select className="react-select" 
+                  isMulti options={terulet} 
+                  value={selectedTerulet} 
+                  onChange={setselectedTerulet}
+                  maxMenuHeight={200}
+                  />
         </div>
         <button className="mentes" type="submit">Mentés</button>
       </form>

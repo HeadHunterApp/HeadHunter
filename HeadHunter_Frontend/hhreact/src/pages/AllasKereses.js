@@ -52,7 +52,8 @@ export default function Allaskereses() {
   };
 
   return (
-    <div>
+    <div className="allker-border">
+    <div className="allker">
       {/* Keresőmező és gomb */}
       <div className="search-bar">
         <input 
@@ -81,6 +82,7 @@ export default function Allaskereses() {
             <AllasKartya key={job.allas_id} job={job} />
           ))
       )}
+    </div>
     </div>
   );
 };
