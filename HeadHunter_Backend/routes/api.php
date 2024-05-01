@@ -50,8 +50,8 @@ Route::get('/token', function () {
 
 //álláskereső oldalhoz route-ok:
 //allas
-Route::get('/jobs/all', [AllasController::class, 'shortAllasAll']);
-Route::get('/jobs/{allas_id}', [AllasController::class, 'detailedAllas']);
+Route::get('/jobs-basic/all', [AllasController::class, 'shortAllasAll']);
+Route::get('/jobs-basic/{allas_id}', [AllasController::class, 'detailedAllas']);
 //allas-kapcsolódók
 Route::get('/jobs/{allas_id}/skills', [AllasIsmeretController::class, 'detailedAllasIsm']);
 Route::get('/jobs/{allas_id}/languages', [AllasNyelvtudasController::class, 'detailedAllasNyelv']);
@@ -59,8 +59,12 @@ Route::get('/jobs/{allas_id}/edu-atts', [AllasVegzettsegController::class, 'deta
 Route::get('/jobs/{allas_id}/exps', [AllasTapasztalatController::class, 'detailedAllasTap']);
 //munkaltato teszt route
 Route::get('/munkaltatok/all', [MunkaltatoController::class, 'index']);
-Route::post('/munkaltatok/new', [MunkaltatoController::class, 'store']);
+Route::post('/munkaltatok/munkaltato', [MunkaltatoController::class, 'store']);
 
+Route::get('/jobs-basic/{allas_id}/skills', [AllasIsmeretController::class, 'detailedAllasIsm']);
+Route::get('/jobs-basic/{allas_id}/languages', [AllasNyelvtudasController::class, 'detailedAllasNyelv']);
+Route::get('/jobs-basic/{allas_id}/edu-atts', [AllasVegzettsegController::class, 'detailedAllasVegz']);
+Route::get('/jobs-basic/{allas_id}/exps', [AllasTapasztalatController::class, 'detailedAllasTap']);
 
 
 Route::middleware('auth')->group(function () {
@@ -96,8 +100,8 @@ Route::middleware('auth')->group(function () {
         Route::delete('/users/delete/{user_id}', [UserController::class, 'destroy']);
         //allas
         //csak az alap táblaadatok megjelenítése, id-k által meghívott adatok nélkül:
-        Route::get('/jobs/basic/all', [AllasController::class, 'index']);
-        Route::get('/jobs/basic/{allas_id}', [AllasController::class, 'show']);
+        Route::get('/jobs/all', [AllasController::class, 'index']);
+        Route::get('/jobs/{allas_id}', [AllasController::class, 'show']);
         //többi:
         Route::post('/jobs/new', [AllasController::class, 'store']);
         Route::put('/jobs/modification/{allas_id}', [AllasController::class, 'update']);

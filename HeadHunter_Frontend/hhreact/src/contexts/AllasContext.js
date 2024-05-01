@@ -4,23 +4,23 @@ import axios from "../api/axios";
 
 //shortAllasAll
 export const getAllasAll = ()=>
-    axios.get('/api/jobs/all');
+    axios.get('/api/jobs-basic/all');
 //detailedAllas
 export const getAllas = (allas_id)=>
-    axios.get(`/api/jobs/${allas_id}`);
+    axios.get(`/api/jobs-basic/${allas_id}`);
 
 //detailedAllasIsm
 export const getAllasIsmeret = (allas_id)=>
-    axios.get(`/api/jobs/${allas_id}/skills`);
+    axios.get(`/api/jobs-basic/${allas_id}/skills`);
 //detailedAllasNyelv
 export const getAllasNyelvtudas = (allas_id)=>
-    axios.get(`/api/jobs/${allas_id}/languages`);
+    axios.get(`/api/jobs-basic/${allas_id}/languages`);
 //detailedAllasVegz
 export const getAllasVegzettseg = (allas_id)=>
-    axios.get(`/api/jobs/${allas_id}/edu-atts`);
+    axios.get(`/api/jobs-basic/${allas_id}/edu-atts`);
 //detailedAllasTap
 export const getAllasTapasztalat = (allas_id)=>
-    axios.get(`/api/jobs/${allas_id}/exps`);
+    axios.get(`/api/jobs-basic/${allas_id}/exps`);
 
 
 //új és szerkesztés - fejvadász és admin
@@ -77,3 +77,26 @@ export const postAllasJelentkezo = (params)=>
 
 export const putAllasJelentkezo = (allas_id, params)=>
     axios.put(`/jobs/${allas_id}/applicants/modification`, params);
+
+
+
+//csak az alap táblaadatok megjelenítése, id-k által meghívott adatok nélkül:
+//index
+export const getAllasAllRaw = ()=>
+axios.get('/api/jobs/all');
+//show
+export const getAllasRaw = (allas_id)=>
+axios.get(`/api/jobs/${allas_id}`);
+
+//detailedAllasIsm
+export const getAllasIsmeretRaw = (allas_id)=>
+axios.get(`/api/jobs/${allas_id}/skills`);
+//detailedAllasNyelv
+export const getAllasNyelvtudasRaw = (allas_id)=>
+axios.get(`/api/jobs/${allas_id}/languages`);
+//detailedAllasVegz
+export const getAllasVegzettsegRaw = (allas_id)=>
+axios.get(`/api/jobs/${allas_id}/edu-atts`);
+//detailedAllasTap
+export const getAllasTapasztalatRaw = (allas_id)=>
+axios.get(`/api/jobs/${allas_id}/exps`);

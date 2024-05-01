@@ -3,7 +3,7 @@ import AllasAlap from "../components/allas/AllasAlap";
 import VisszaLink from "../components/menu/VisszaLink";
 import useAuthContext from "../contexts/AuthContext";
 import AllasElvaras from "../components/allas/AllasElvaras";
-import { postAllaskerJelentkezes } from "../contexts/AllasContext";
+import { postAllasJelentkezo, postAllaskerJelentkezes } from "../contexts/AllasContext";
 
 
 export default function AllasAdatlap({ jobId }) {
@@ -19,11 +19,27 @@ export default function AllasAdatlap({ jobId }) {
     return felhasznalo.jogosultsag === "álláskereső";
   };
 
+  const allasId= jobId;
     
-  const handleSubmit = async(e) => {
+  const handleSeekerSubmit = async(e) => {
     e.preventDefault();
     try {
-      await postAllaskerJelentkezes(jobId, user._token);
+      await postAllaskerJelentkezes(allasId, user._token);
+      alert('Sikeres jelentkezés!');
+    } catch (error) {
+      console.error(error);
+      alert('Hiba történt a jelentkezés során');
+    }
+  };
+
+  const chooseSeeker = {
+
+  };
+  /*
+  const handleOtherSubmit = async(e) => {
+    e.preventDefault();
+    try {
+      await postAllasJelentkezo(allasId, seekerId);
       alert('Sikeres jelentkezés!');
     } catch (error) {
       console.error(error);
@@ -31,17 +47,22 @@ export default function AllasAdatlap({ jobId }) {
     }
   };
   
+*/
 
   return (
     <>
       <div className="job-info">
-        <AllasAlap jobId={jobId} />
-        <AllasElvaras jobId={jobId} />
-        <div className="apply-button" onSubmit={handleSubmit}>
+        <AllasAlap jobId={allasId} />
+        <AllasElvaras jobId={allasId} />
+        <div className="buttons" >
           {user && isJobseeker ? (
-            <button type="submit">Jelentkezés</button>
+            <button type="submit" onSubmit={handleSeekerSubmit}>Jelentkezés</button>
           ) : (
-            <button >Jelentkeztetés</button>
+            user && (isAdmin(user) || isHeadhunter(user))? (
+              <button type="submit" /*onSubmit={handleOtherSubmit}*/>Jelentkeztetés</button>
+            ) : (
+              <div className="login-or-reg">Tetszik ez az állás? Belépést követően tudsz jelentkezni rá</div>
+            )
           )}
         </div>
       </div>
