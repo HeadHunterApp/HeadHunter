@@ -10,13 +10,9 @@ import SzakmaiTapasztalat from "./components/SzakmaiTapasztalat";
 import Nyelvismeret from "./components/Nyelvismeret";
 import OktatasKepzes from "./components/OktatasKepzes";
 import SzemelyesAdatok from "./components/SzemelyesAdatok";
-//import { getAllaskeresoTeruletek } from "../../../api/terulet";
 import { getTerulet } from "../../../contexts/FotablaContext";
-//import { getAllaskeresoPoziciok } from "../../../api/pozicio";
 import { getPozicio } from "../../../contexts/FotablaContext";
-//import { getAllaskeresoVegzettsegek } from "../../../api/vegzettseg";
 import { getVegzettseg } from "../../../contexts/FotablaContext";
-//import { getAllaskeresoNyelvek } from "../../../contexts/NyelvContext";
 import { getNyelvtudas } from "../../../contexts/FotablaContext";
 
 const AllaskeresoProfil = ({ onSubmit }) => {
@@ -32,7 +28,7 @@ const AllaskeresoProfil = ({ onSubmit }) => {
   const [nyelvek, setNyelvek] = useState([]);
 
   useEffect(() => {
-    //getAllaskeresoTeruletek
+   
     getTerulet().then((response) => {
       const teruletoptions = response.data.map((teret) => {
         return {
@@ -45,8 +41,7 @@ const AllaskeresoProfil = ({ onSubmit }) => {
   }, []);
 
   useEffect(() => {
-    // getAllaskeresoVegzettsegek
-    getVegzettseg().then((response) => {
+   getVegzettseg().then((response) => {
       const vegzettsegoptions = response.data.map((veg) => {
         return {
           value: veg.vegzettseg_id,
@@ -58,8 +53,7 @@ const AllaskeresoProfil = ({ onSubmit }) => {
   }, []);
 
   useEffect(() => {
-    //getAllaskeresoPoziciok
-    getPozicio().then((response) => {
+   getPozicio().then((response) => {
       const poziciooptions = response.data.map((poz) => {
         return {
           value: poz.pozkod,
@@ -71,7 +65,6 @@ const AllaskeresoProfil = ({ onSubmit }) => {
   }, []);
 
   useEffect(() => {
-    //getAllaskeresoNyelvek
     getNyelvtudas().then((response) => {
       const nyelvoptions = response.data.map((nyelv) => {
         return {
@@ -234,7 +227,7 @@ const AllaskeresoProfil = ({ onSubmit }) => {
               data={item}
               nyelvek={nyelvek}
               id={`nyelv__${index}`}
-              setnyelvTudas = {setNyelvTudas}
+              setNyelvTudas = {setNyelvTudas}
               nyelvTudas = {nyelvTudas}
             />
           );

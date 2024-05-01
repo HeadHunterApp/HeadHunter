@@ -86,8 +86,8 @@ const SzakmaiTapasztalat = ({
   };
 
   return (
-    <form id={id} key={id} onSubmit={onSubmit}>
-      <div className="temakor">
+    <div className="temakor">
+      <form id={id} key={id} onSubmit={onSubmit}>
         SZAKMAI TAPASZTALAT
         <div>
           <label htmlFor="idotartam">Időtartam: {idotartam ?? 0} hónap</label>
@@ -145,13 +145,13 @@ const SzakmaiTapasztalat = ({
             Mentés
           </button>
         </div>
-        <div className="temakor-buttons">
-          <button className="torles" onClick={torles}>
-            Törlés
-          </button>
-        </div>
+      </form>
+      <div className="temakor-buttons">
+        <button className="torles" onClick={torles}>
+          Törlés
+        </button>
       </div>
-    </form>
+    </div>
   );
 };
 

@@ -45,8 +45,8 @@ export const postAllaskerNyelvtudas = (params)=>
 export const putAllaskerNyelvtudas = (user_id, params)=>
     axios.put(`/api/jobseekers/${user_id}/languages/modification`, params);
     
-export const deleteAllaskerNyelvtudas = (user_id)=>
-    axios.delete(`/api/jobseekers/${user_id}/languages/delete`);
+export const deleteAllaskerNyelvtudas = (nyelvtudas, config)=>
+    axios.delete(`/api/seeker/languages/delete?nyelvtudas=${nyelvtudas}`,config);
     
 //allaskereso-tanulmany
 export const getAllaskerTanulmanyAll = ()=>

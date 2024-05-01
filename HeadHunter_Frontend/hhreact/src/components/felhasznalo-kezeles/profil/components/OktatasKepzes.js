@@ -1,9 +1,16 @@
 import { useState, useEffect } from "react";
 import { putAllaskeresoTanulmany } from "../../../../contexts/ProfilContext";
 import Select from "react-select";
-import {deleteAllaskerTanulmany} from "../../../../contexts/AllaskeresoContext";
+import { deleteAllaskerTanulmany } from "../../../../contexts/AllaskeresoContext";
 
-const OktatasKepzes = ({ id, config, data, vegzettsegek, setTanulmany,tanulmany}) => {
+const OktatasKepzes = ({
+  id,
+  config,
+  data,
+  vegzettsegek,
+  setTanulmany,
+  tanulmany,
+}) => {
   const [oktkezdes, setOktKezdes] = useState(new Date());
   const [oktvegzes, setOktVegzes] = useState(new Date());
   const [intezmeny, setIntezmeny] = useState("");
@@ -16,8 +23,8 @@ const OktatasKepzes = ({ id, config, data, vegzettsegek, setTanulmany,tanulmany}
 
   useEffect(() => {
     console.log(vegzettsegek);
-    if(data) //TODO: --> nem ez volt a baj a felületen. Több oktatás esetén elhasal valami.
-    {
+    if (data) {
+      //TODO: --> nem ez volt a baj a felületen. Több oktatás esetén elhasal valami.
       setOrigIntezmeny(data.intezmeny);
       setOrigSzakkepesites(data.szak);
       setOktIdotartam(data.idotartam);
@@ -26,14 +33,14 @@ const OktatasKepzes = ({ id, config, data, vegzettsegek, setTanulmany,tanulmany}
       setIntezmeny(data.intezmeny);
       setFotargy(data.erintett_targytev);
       setSzakkepesites(data.szak);
-  
+
       console.log(data.vegzettseg);
       console.log("------ mappelés:");
       const vegzettsegData = {
         value: data.vegzettseg.id,
-        label: data.vegzettseg.megnevezes
+        label: data.vegzettseg.megnevezes,
       };
-  
+
       setSelectedVegzettseg(vegzettsegData);
     }
   }, []);
@@ -42,7 +49,16 @@ const OktatasKepzes = ({ id, config, data, vegzettsegek, setTanulmany,tanulmany}
     event.preventDefault();
 
     putAllaskeresoTanulmany(
-      { intezmeny, fotargy, szakkepesites, oktkezdes, oktvegzes, selectedVegzettseg, origIntezmeny, origSzakkepesites },
+      {
+        intezmeny,
+        fotargy,
+        szakkepesites,
+        oktkezdes,
+        oktvegzes,
+        selectedVegzettseg,
+        origIntezmeny,
+        origSzakkepesites,
+      },
       config
     ).then((response) => {
       console.log(response.status);
@@ -62,22 +78,23 @@ const OktatasKepzes = ({ id, config, data, vegzettsegek, setTanulmany,tanulmany}
       .map((item, index) => {
         return {
           ...item,
-          id: `tanulmany_${index}`,
+          id: `oktkepzes__${index}`,
         };
       });
-    setTanulmany(tanulmany);
+    setTanulmany(tanulmanyok);
 
     deleteAllaskerTanulmany(origIntezmeny, origSzakkepesites, config);
   };
 
-
   return (
-    <form id={id} key={id} onSubmit={onSubmit}>
-      <div className="temakor">
+    <div className="temakor">
+      <form id={id} key={id} onSubmit={onSubmit}>
         OKTATÁS ÉS KÉPZÉS
         <div>
           <div>
-            <label htmlFor="oktidotartam">Időtartam: {oktidotartam ?? 0} hónap</label>
+            <label htmlFor="oktidotartam">
+              Időtartam: {oktidotartam ?? 0} hónap
+            </label>
           </div>
           <div>
             <label htmlFor="oktkezdes">Kezdés dátuma:</label>
@@ -109,9 +126,7 @@ const OktatasKepzes = ({ id, config, data, vegzettsegek, setTanulmany,tanulmany}
             />
           </div>
           <div>
-            <label htmlFor="szakkepesites">
-              Szak:
-            </label>
+            <label htmlFor="szakkepesites">Szak:</label>
             <input
               type="text"
               id="szakkepesites"
@@ -129,12 +144,15 @@ const OktatasKepzes = ({ id, config, data, vegzettsegek, setTanulmany,tanulmany}
             />
           </div>
           <div>
-            <label htmlFor="vegzettseg">
-              Végzettség:
-            </label>
-            <Select className="react-select" options={vegzettsegek} value={selectedVegzettseg} onChange={setSelectedVegzettseg}/>
+            <label htmlFor="vegzettseg">Végzettség:</label>
+            <Select
+              className="react-select"
+              options={vegzettsegek}
+              value={selectedVegzettseg}
+              onChange={setSelectedVegzettseg}
+            />
           </div>
-{/*           <div>
+          {/*           <div>
             <label htmlFor="oktszoc_keszseg">
               Szociális készségek és képességek:
             </label>
@@ -151,13 +169,13 @@ const OktatasKepzes = ({ id, config, data, vegzettsegek, setTanulmany,tanulmany}
             Mentés
           </button>
         </div>
-        <div className="temakor-buttons">
-          <button className="torles" onClick={torles}>
-            Törlés
-          </button>
-        </div>
+      </form>
+      <div className="temakor-buttons">
+        <button className="torles" onClick={torles}>
+          Törlés
+        </button>
       </div>
-    </form>
+    </div>
   );
 };
 

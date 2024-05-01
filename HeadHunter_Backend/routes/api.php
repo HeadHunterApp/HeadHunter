@@ -275,6 +275,7 @@ Route::middleware('auth')->group(function () {
         //nyelvtudas
         Route::get('/seeker/languages/all', [NyelvtudasController::class, 'index']);
         Route::get('/seeker/languages/{nyelvkod}', [NyelvtudasController::class, 'show']);
+        Route::delete('/seeker/languages/delete', [AllaskeresoNyelvtudasController::class, 'destroySigned']);
         //tapasztalat_ido
         Route::get('/seeker/experiences/all', [NyelvtudasController::class, 'index']);
         Route::get('/seeker/experiences/{tapasztalat_id}', [NyelvtudasController::class, 'show']);

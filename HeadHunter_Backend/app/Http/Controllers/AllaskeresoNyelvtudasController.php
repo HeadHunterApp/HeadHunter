@@ -219,10 +219,21 @@ class AllaskeresoNyelvtudasController extends Controller
         return response()->json(['message' => 'Adatait sikeresen frissítve'], 200);
     }
 
-    public function destroy($allasker,$nyelvtudas){
+    public function destroy($allasker,$nyelvtudas){// admin törléséhez
         $aknyelv = AllaskeresoNyelvtudas::where('allaskereso', $allasker)
         ->where('nyelvtudas','=', $nyelvtudas)
         ->firstOrFail();
         $aknyelv->delete();
+    }
+
+    public function destroySigned(Request $request){//álláskereső törléséhez
+        $signed = Auth::user()->user_id;
+        $nyelvtudas = $request->query('nyelvtudas');
+        
+        DB::table('allaskereso_nyelvtudass')
+        ->where('allaskereso', '=', $signed)
+        ->where('nyelvtudas','=', $nyelvtudas)
+        ->delete();
+    
     }
 }
