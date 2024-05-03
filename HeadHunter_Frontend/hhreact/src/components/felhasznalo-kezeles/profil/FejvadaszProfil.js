@@ -149,7 +149,7 @@ const FejvadaszProfil = ({ onSubmit }) => {
                   isMulti options={terulet} 
                   value={selectedTerulet} 
                   onChange={setselectedTerulet}
-                  maxMenuHeight={200}
+                  maxMenuHeight={100}
                   />
         </div>
         <button className="mentes" type="submit">Mentés</button>

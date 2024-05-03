@@ -42,5 +42,11 @@ class UserSeeder extends Seeder
             'password' => 'Newpass123',
             'jogosultsag' => 'fejvadász',
         ]);
+        User::create([
+            'nev' => 'Huba István', 
+            'email' => 'huba@headhunter.com', 
+            'password' => 'Huba123.',
+            'jogosultsag' => 'fejvadász',
+        ]);
     }
 }
