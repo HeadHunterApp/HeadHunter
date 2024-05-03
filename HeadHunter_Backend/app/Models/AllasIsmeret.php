@@ -10,7 +10,7 @@ class AllasIsmeret extends Model
     use HasFactory;
     protected function setKeysForSaveQuery($query)
     {
-        $query
+        $query 
             ->where('allas', '=', $this->
             getAttribute('allas_id'))
             ->where('szakmai_ismeret', '=', $this->
@@ -24,6 +24,8 @@ class AllasIsmeret extends Model
         'szakmai_ismeret',
         'elvaras_szint',
     ];
-
+    protected $casts = [
+        'elvaras_szint' => 'string:50', // A 'string' típust állítsd a megfelelő hosszúságúra
+    ];
     public $timestamps = false;
 }

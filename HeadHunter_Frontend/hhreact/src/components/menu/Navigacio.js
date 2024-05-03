@@ -1,5 +1,3 @@
-// Navigacio.js
-
 import React, { useState, useEffect } from "react";
 import "../../styles/Navigacio.css";
 import NavLink from "../../components/menu/NavLink";
@@ -8,29 +6,26 @@ import NavLegordulo from "./NavLegordulo";
 
 export default function Navigacio() {
   const { user } = useAuthContext();
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Állapot a menü nyitásához/zárásához
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   const isAdmin = (felhasznalo) => {
-    return felhasznalo.jogosultsag === 'admin';
+    return felhasznalo?.jogosultsag === 'admin';
   };
 
   const isHeadhunter = (felhasznalo) => {
-    return felhasznalo.jogosultsag === 'fejvadász';
+    return felhasznalo?.jogosultsag === 'fejvadász';
   };
 
   useEffect(() => {
     const handleResize = () => {
       if (!isMenuOpen) {
-        // Csak akkor rendezzük újra az elemeket, ha a menü zárva van
         if (window.innerWidth > 768) {
-          // Ha a képernyő nagyobb mint 768px, rendezzük újra az elemeket egymás mellé
           document.querySelector(".menu-items").style.display = "flex";
         } else {
-          // Különben maradnak a függőleges rendezésnél
           document.querySelector(".menu-items").style.display = "none";
         }
       }
@@ -38,7 +33,6 @@ export default function Navigacio() {
 
     window.addEventListener("resize", handleResize);
 
-    // A tisztítás az useEffect lefutásának megszüntetésekor
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -55,6 +49,9 @@ export default function Navigacio() {
         <ul className={`menu-items ${isMenuOpen ? "open" : ""}`}>
           <NavLink link="/" title="Kezdőlap" />
           <NavLink link="/jobs" title="Álláskeresés" />
+          {((isAdmin(user) || isHeadhunter(user)) && (
+            <li className="menu-item">Állások</li>
+          ))}
           {user && (isAdmin(user) || isHeadhunter(user)) && (
             <>
               <NavLink link="/admin/employers" title="Munkáltatók" />
