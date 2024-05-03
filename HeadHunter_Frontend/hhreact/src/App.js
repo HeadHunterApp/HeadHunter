@@ -50,11 +50,11 @@ export default function App() {
               path="hunter"
               element={<AuthLayout jogosultFelh={["fejvadász"]} />}
             >
+              <Route path="employers" element={<MunkaltatokLista />} />
               {/* Jövőbeli route-ok:
               <Route path="jobseekers" element={<Allaskeresok />} />
               <Route path="applicants" element={<Jelentkezok />} />
               <Route path="hired" element={<FelvettJelentkezok />} />
-              <Route path="queries" element={<Lekerdezesek />} />
               */}
             </Route>
 
@@ -65,14 +65,11 @@ export default function App() {
               <Route index element={<MunkaltatokLista />} />
 
               <Route path="employers" element={<MunkaltatokLista />} />
-              {/* Itt helyesen definiáljuk az employers útvonalat */}
               {/* Jövőbeli route-ok:
               <Route path="jobseekers" element={<Allaskeresok />} />
               <Route path="applicants" element={<Jelentkezok />} />
               <Route path="hired" element={<FelvettJelentkezok />} />
               <Route path="headhunters" element={<Fejvadaszok />} />
-              <Route path="queries" element={<Lekerdezesek />} />
-              <Route path="employers" element={<Munkaltatok />} />
               <Route path="fields" element={<Teruletek />} />
               <Route path="positions" element={<Poziciok />} />
               <Route path="languages" element={<Nyelvtudas />} />

@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Kereses.css";
-import AllasKartya from '../components/AllasKartya';
+import AllasKartya from '../components/allas/AllasKartya';
 import { getAllasAll } from "../contexts/AllasContext";
 import useAuthContext from "../contexts/AuthContext";
       
 export default function Allaskereses() {
     
-  const { user } = useAuthContext();
-  
-  // Ellenőrzi, hogy az aktuális felhasználó álláskereső-e
-  const isJobseeker = (felhasznalo) => {
-      return felhasznalo.jogosultsag === 'álláskereső';
-  };
+  const { user, isAdmin, isHeadhunter } = useAuthContext();
 
   // Állapotok inicializálása
   const [searchQuery, setSearchQuery] = useState('');
@@ -71,13 +66,13 @@ export default function Allaskereses() {
       </div>
       
       {/* Talált állások megjelenítése */}
-      {user && isJobseeker ? (       
+      {user && (isAdmin() || isHeadhunter()) ? (       
         searchedJobs
-          .filter(job => job.statusz === "nyitott")
           .map((job) => (
             <AllasKartya key={job.allas_id} job={job} />
         )) ) : (
           searchedJobs
+          .filter(job => job.statusz === "nyitott")
           .map((job) => (
             <AllasKartya key={job.allas_id} job={job} />
           ))
@@ -86,13 +81,3 @@ export default function Allaskereses() {
     </div>
   );
 };
-/* 
-Az searchedJobs állapot mindig frissül az összes állás listájával, amikor lekéri az adatokat a backendből. 
-Ez biztosítja, hogy mindig legyen egy friss másolat az összes állásról, amelyre visszatérhetünk a keresési mező ürítésekor.
-
-Az isJobseeker függvény helyesen ellenőrzi, hogy a felhasználó jogosultsága álláskereső-e, és megfelelően kezeli az esetet,
- amikor a user értéke null vagy undefined.
-
-A keresés gomb most egy egyszerű <button> elem, amelyet kattintáskor aktivál, és nincs szükség a value attribútumra.
-
-A keresési funkció most csak a megnevezes tulajdonságot használja a szűréshez, de könnyen kibővíthető más tulajdonságokkal is, mint például a leiras vagy a statusz. */
