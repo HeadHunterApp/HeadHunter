@@ -1,0 +1,35 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "HeadHunter",
+    "collectionId": "cf7bfb37-f22b-4487-ba52-36a0c67371fb",
+    "dateExported": "2024-05-03T17:16:45.435Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "6b135069-8cfb-43d5-a0d4-1fa0eea5db47",
+            "colId": "cf7bfb37-f22b-4487-ba52-36a0c67371fb",
+            "containerId": "",
+            "name": "GET_Allasok_index",
+            "url": "api/jobs-basic/all",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-05-02T21:49:22.106Z",
+            "modified": "2024-05-02T21:52:13.070Z",
+            "headers": [],
+            "auth": {
+                "type": "basic",
+                "basic": {
+                    "username": "elek@gmail.com",
+                    "password": "Elek123."
+                }
+            }
+        }
+    ],
+    "settings": {
+        "options": {
+            "baseUrl": "http://127.0.0.1:8000/"
+        }
+    },
+    "ref": "0u-CQafKLzwwuF0i8OO-6pLQWq5yc3TCFVlcb-FFofLyytbdqOzufDK0h6BRW70x_07d6wqmb3Qs0S7I7TE3Zg"
+}
