@@ -74,7 +74,7 @@ export default function JelentkeztetGomb(props) {
       <button type="choose" onClick={handleKivalasztas}>
         Álláskereső kiválasztása
       </button>
-      {showSelect && (
+      {kivalasztas && (
         <>
           <Select
             options={allaskerOptions}
