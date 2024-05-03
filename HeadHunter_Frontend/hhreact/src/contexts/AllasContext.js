@@ -69,12 +69,12 @@ export const getAllasJelentkezok = (allas_id)=>
     axios.get(`/api/jobs/${allas_id}/applicants`);
 
 //allaskereso maga jelentkezik:
-export const postAllaskerJelentkezes = (allas_id)=>
-    axios.post(`/api/jobseekers/jobs/${allas_id}/apply`, []);
+export const postAllaskerJelentkezes = (allas_id, config)=>
+    axios.post(`/api/jobseekers/jobs/${allas_id}/apply`, [], config);
 
 //fejvadasz/admin jelentkeztet allaskeresot:
-export const postAllasJelentkezo = (params)=>
-    axios.post(`/api/jobs/applicants/new`, params);
+export const postAllasJelentkezo = (allas_id, allaskereso, config)=>
+    axios.post(`/api/jobs/applicants/new`, {allas: allas_id, allaskereso: allaskereso}, config);
 
 export const putAllasJelentkezo = (allas_id, params)=>
     axios.put(`/api/jobs/${allas_id}/applicants/modification`, params);
