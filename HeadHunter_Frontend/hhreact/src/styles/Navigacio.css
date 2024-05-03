@@ -54,6 +54,11 @@
     display: block;
   }
 
+  .nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
   .menu-items {
     display: none;
     flex-direction: column;
@@ -61,13 +66,14 @@
     top: 50px;
     left: 0;
     width: 100%;
-    background-color:teal;
+    background-color: #f9f9f9;
     border-top: 1px solid #ccc;
     padding: 10px 0;
   }
 
   .menu-items.open {
     display: flex;
+    flex-direction: column; /* Hozzáadva: függőleges elrendezés */
   }
 
   .menu-items li {

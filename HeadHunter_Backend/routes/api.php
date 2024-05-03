@@ -60,11 +60,13 @@ Route::get('/jobs/{allas_id}/skills', [AllasIsmeretController::class, 'detailedA
 Route::get('/jobs/{allas_id}/languages', [AllasNyelvtudasController::class, 'detailedAllasNyelv']);
 Route::get('/jobs/{allas_id}/edu-atts', [AllasVegzettsegController::class, 'detailedAllasVegz']);
 Route::get('/jobs/{allas_id}/exps', [AllasTapasztalatController::class, 'detailedAllasTap']);
-//munkaltato teszt route
+//munkaltato teszt routeok:
+
 Route::get('/munkaltatok/all', [MunkaltatoController::class, 'index']);
 Route::post('/munkaltatok/munkaltato', [MunkaltatoController::class, 'store']);
 Route::delete('/munkaltatok/{munkaltato_id}', [MunkaltatoController::class, 'destroy'])->whereNumber('munkaltato_id');
-
+Route::put('/employers/munkaltatok/{munkaltato_id}', [MunkaltatoController::class, 'update'])->whereNumber('munkaltato_id');
+//munkaltato tesztek vége
 
 
 
