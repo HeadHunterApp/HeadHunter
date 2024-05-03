@@ -20,9 +20,9 @@
 }
 
 .button-container {
-  display: flex; /* A gombok egymás mellett legyenek */
-  justify-content: space-between; /* A gombok legyenek egyenletesen elosztva */
-  align-items: center; /* A gombok középre igazítása függőlegesen */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 

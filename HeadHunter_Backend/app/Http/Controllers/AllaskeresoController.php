@@ -6,6 +6,7 @@ use App\Models\Allaskereso;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -13,7 +14,15 @@ use Illuminate\Support\Facades\Validator;
 class AllaskeresoController extends Controller
 {
     public function index(){
-        return Allaskereso::all();
+        //return Allaskereso::all();
+        $allaskeresok = DB::table('allaskeresos as ak')
+        ->join('users as u', 'ak.user_id', '=', 'u.user_id')
+        ->select(
+            'u.nev',
+            'u.email',
+            'ak.*'
+        )->get();
+        return $allaskeresok;
     }
 
     public function show($id){
