@@ -1,81 +1,88 @@
-nav {
+/* Navigacio.css */
+
+.nav {
   position: relative;
   z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
-nav ul {
-  padding: 0;
-  margin-top: 60px;
-  margin-bottom: 0;
-  text-align: center;
+.menu-toggle {
+  display: none;
+  cursor: pointer;
+}
+
+.menu-toggle .bar {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  margin: 5px 0;
+  transition: 0.4s;
+}
+
+.menu-items {
   list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.nav li{
-  display: inline;
+.menu-items li {
+  margin-right: 20px;
 }
 
-.navlink a{
-  display: inline-block;
-  width: 100%;
-  margin: 0 20px;
-  color: white;
+.menu-items li:last-child {
+  margin-right: 0;
+}
+
+.menu-items li a {
   text-decoration: none;
-  text-align: center; 
+  color: #ffffff;
+  transition: color 0.3s;
 }
 
-
-.navlink:hover {
-  text-shadow: -3px -1px 16px rgba(0, 0, 0, 0.95);
-  cursor: pointer;
-}
-nav ul {
-  display: flex;
-  justify-content: space-between;
-  
-}
-.left-column {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end; 
+.menu-items li a:hover {
+  color: #000000;
 }
 
- .Dropdown {
-  position: relative;
-  width: 100%;
-  z-index: 3;
-  margin: 40px 20px 0 20px;
-  word-spacing: 5px;
- }
-
-.Dropdown:hover, .Dropdown-option:hover {
-  text-shadow: -3px -1px 16px rgba(0, 0, 0, 0.95);
-  cursor: pointer;
+.menu-items.open {
+  display: block;
 }
 
+@media screen and (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
 
-.Dropdown-menu {
-  position: absolute;
-  top: 100%; 
-  margin-left: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-  background-color: teal;
-  border-radius: 10px;
-  box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.4);
-  z-index: 1;
-}
+  .menu-items {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    background-color:teal;
+    border-top: 1px solid #ccc;
+    padding: 10px 0;
+  }
 
-.Dropdown-option {
-  color: white;
-  margin: 8px 10px ;
-}
+  .menu-items.open {
+    display: flex;
+  }
 
-.Dropdown-option--is-selected {
-  color: white;
-  background-color: teal;
+  .menu-items li {
+    margin: 0;
+    text-align: center;
+  }
+
+  .menu-items li a {
+    display: block;
+    padding: 10px 0;
+  }
+
+  /* CSS a NavLegordulo komponenshez */
+  .menu-items .nav-legordulo {
+    display: block;
+    padding: 10px 0;
+  }
 }
