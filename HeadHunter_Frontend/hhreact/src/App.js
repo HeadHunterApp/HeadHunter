@@ -13,6 +13,7 @@ import MunkaltatoInfo from "./pages/informacio/MunkaltatoInfo";
 import Kapcsolat from "./pages/informacio/Kapcsolat";
 import JogosulatlanFelh from "./pages/JogosulatlanFelh";
 import MunkaltatokLista from "./components/admin/MunkaltatokLista";
+import Allasok from "./components/admin/Allasok"; // Új komponens importálása
 
 export default function App() {
   const { user } = useAuthContext();
@@ -75,6 +76,7 @@ export default function App() {
               <Route path="languages" element={<Nyelvtudas />} />
               <Route path="skills" element={<Kepessegek />} />
               */}
+              <Route path="jobs" element={<Allasok />} /> {/* Állások komponens hozzáadása */}
             </Route>
           </>
         )}

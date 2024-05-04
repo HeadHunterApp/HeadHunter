@@ -4,53 +4,72 @@ import "../../styles/Tables.css";
 
 const MunkaltatokLista = () => {
   const [munkaltatok, setMunkaltatok] = useState([]);
-  const [ujMunkaltato, setUjMunkaltato] = useState({
-    cegnev: "",
-    szekhely: "",
-    kapcsolattarto: "",
-    telefonszam: "",
-    email: "",
-  });
   const [modositottMunkaltato, setModositottMunkaltato] = useState({
     cegnev: "",
     szekhely: "",
     kapcsolattarto: "",
     telefonszam: "",
     email: "",
+    munkaltato_id: null, // Hozzáadva: az aktuális munkáltató azonosítójának tárolása
   });
-  const [lastClickedButton, setLastClickedButton] = useState(null); // Új állapot létrehozása a legutóbbi kattintott gomb tárolására
+  const [lastClickedButton, setLastClickedButton] = useState(null);
+
   const handleModositottMunkaltatoChange = (esemeny) => {
     const { name, value } = esemeny.target;
     setModositottMunkaltato({ ...modositottMunkaltato, [name]: value });
   };
 
+  const handleMunkaltatoModositasClick = (munkaltato) => {
+    setModositottMunkaltato({
+      ...munkaltato,
+      munkaltato_id: munkaltato.munkaltato_id,
+    });
+    setLastClickedButton("Módosítás");
+  };
+
   const handleMunkaltatoModositas = async (esemeny, munkaltatoId) => {
     esemeny.preventDefault();
     try {
+      // CSRF token lekérése a dokumentumból
+      const csrfToken = document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content");
+  
+      // Munkáltató módosítása, CSRF tokennal ellátva
       const valasz = await axios.put(
-        `http://127.0.0.1:8000/api/munkaltatok/${munkaltatoId}`,
-        modositottMunkaltato
+        `http://127.0.0.1:8000/api/employers/munkaltatok/${munkaltatoId}`,
+        modositottMunkaltato,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": csrfToken, // CSRF token hozzáadása a kérés fejlécéhez
+          },
+        }
       );
-      console.log("Módosított munkáltató:", valasz.data);
-      // Állapot frissítése az új munkáltatóval
+  
+      // Módosított munkáltató frissítése a helyi állapothoz
       const modositottIndex = munkaltatok.findIndex(
         (m) => m.munkaltato_id === munkaltatoId
       );
       const ujMunkaltatok = [...munkaltatok];
       ujMunkaltatok[modositottIndex] = valasz.data;
       setMunkaltatok(ujMunkaltatok);
-      // Módosított munkáltató állapotának visszaállítása
+  
+      // Az űrlap mezőinek visszaállítása
       setModositottMunkaltato({
         cegnev: "",
         szekhely: "",
         kapcsolattarto: "",
         telefonszam: "",
         email: "",
+        munkaltato_id: null,
       });
+      setLastClickedButton(null); // Utolsó gomb visszaállítása null-ra
     } catch (error) {
       console.error("Hiba a munkáltató módosítása során:", error);
     }
   };
+  
 
   useEffect(() => {
     const munkaltatokLekerdezese = async () => {
@@ -82,27 +101,34 @@ const MunkaltatokLista = () => {
 
   const adatokFrissitese = (esemeny) => {
     const { name, value } = esemeny.target;
-    setUjMunkaltato({ ...ujMunkaltato, [name]: value });
+    setModositottMunkaltato({ ...modositottMunkaltato, [name]: value });
   };
 
   const ujMunkaltatoFelvitele = async (esemeny) => {
     esemeny.preventDefault();
     try {
+      // CSRF token lekérése a dokumentumból
       const csrfToken = document
         .querySelector('meta[name="csrf-token"]')
         .getAttribute("content");
+  
+      // Új munkáltató hozzáadása, CSRF tokennal ellátva
       const valasz = await axios.post(
         "http://127.0.0.1:8000/api/munkaltatok/munkaltato",
-        ujMunkaltato,
+        modositottMunkaltato,
         {
           headers: {
             "Content-Type": "application/json",
-            "X-CSRF-TOKEN": csrfToken,
+            "X-CSRF-TOKEN": csrfToken, // CSRF token hozzáadása a kérés fejlécéhez
           },
         }
       );
+  
+      // Új munkáltató hozzáadása a helyi állapothoz
       setMunkaltatok([...munkaltatok, valasz.data]);
-      setUjMunkaltato({
+  
+      // Az űrlap mezőinek visszaállítása
+      setModositottMunkaltato({
         cegnev: "",
         szekhely: "",
         kapcsolattarto: "",
@@ -113,8 +139,8 @@ const MunkaltatokLista = () => {
       console.error("Hiba az új munkáltató hozzáadásakor:", error);
     }
   };
+  
 
-  // Gombkattintás kezelése
   const handleButtonClick = (buttonName) => {
     setLastClickedButton(buttonName);
   };
@@ -122,7 +148,7 @@ const MunkaltatokLista = () => {
   return (
     <div className="munkaltatok-container">
       <div className="button-container">
-        {lastClickedButton !== "Új felvitele" && ( // Új felvitele gomb csak akkor jelenik meg, ha nem volt rá kattintva
+        {lastClickedButton !== "Új felvitele" && (
           <button
             className="action-button uj-felvitele-button"
             onClick={() => handleButtonClick("Új felvitele")}
@@ -161,18 +187,16 @@ const MunkaltatokLista = () => {
                 </button>
                 <button
                   className="action-button modositas-button"
-                  onClick={() => handleButtonClick("Módosítás")}
+                  onClick={() => handleMunkaltatoModositasClick(munkaltato)}
                 >
                   Módosítás
                 </button>
-                {/* Módosítás gomb kattintása */}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
 
-      {/* Tartalom megjelenítése a gombkattintás alapján */}
       {lastClickedButton === "Módosítás" && (
         <div>
           <h3>Munkáltató módosítása</h3>
@@ -226,23 +250,26 @@ const MunkaltatokLista = () => {
               onChange={handleModositottMunkaltatoChange}
               required
             />
-            <button type="submit">Mentés</button>
+            <button
+              className="action-button modositas-button"
+              type="submit"
+            >
+              Módosítás
+            </button>
           </form>
         </div>
       )}
 
       {lastClickedButton === "Új felvitele" && (
         <div>
-          {/* Új felvitele űrlap */}
           <h3>Új felvitele</h3>
-          {/* Itt jelenítsd meg az új felvitele űrlapot */}
           <form onSubmit={ujMunkaltatoFelvitele}>
             <label htmlFor="cegnev">Cégnév:</label>
             <input
               type="text"
               id="cegnev"
               name="cegnev"
-              value={ujMunkaltato.cegnev}
+              value={modositottMunkaltato.cegnev}
               onChange={adatokFrissitese}
               required
             />
@@ -251,7 +278,7 @@ const MunkaltatokLista = () => {
               type="text"
               id="szekhely"
               name="szekhely"
-              value={ujMunkaltato.szekhely}
+              value={modositottMunkaltato.szekhely}
               onChange={adatokFrissitese}
               required
             />
@@ -260,7 +287,7 @@ const MunkaltatokLista = () => {
               type="text"
               id="kapcsolattarto"
               name="kapcsolattarto"
-              value={ujMunkaltato.kapcsolattarto}
+              value={modositottMunkaltato.kapcsolattarto}
               onChange={adatokFrissitese}
               required
             />
@@ -269,7 +296,7 @@ const MunkaltatokLista = () => {
               type="tel"
               id="telefonszam"
               name="telefonszam"
-              value={ujMunkaltato.telefonszam}
+              value={modositottMunkaltato.telefonszam}
               onChange={adatokFrissitese}
               required
             />
@@ -278,7 +305,7 @@ const MunkaltatokLista = () => {
               type="email"
               id="email"
               name="email"
-              value={ujMunkaltato.email}
+              value={modositottMunkaltato.email}
               onChange={adatokFrissitese}
               required
             />

@@ -64,7 +64,10 @@
   border: none;
   color: white;
   cursor: pointer;
+  width: 100px; /* Fix szélesség */
+  height: 40px; /* Fix magasság */
 }
+
 
 .action-button:hover {
   background-color: rgb(128, 163, 163);
@@ -89,4 +92,9 @@
 /* Új felvitele gomb stílusa */
 .uj-felvitele-button {
   background-color: #4CAF50; /* Zöld */
+}
+.torles-button,
+.modositas-button {
+  width: 80px; /* Fix szélesség */
+  height: 30px; /* Fix magasság */
 }

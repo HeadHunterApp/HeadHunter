@@ -25,6 +25,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: teal; /* Hozzáadva: háttérszín */
 }
 
 .menu-items li {
@@ -46,7 +47,8 @@
 }
 
 .menu-items.open {
-  display: block;
+  display: flex !important; /* Felülírás az esetleges korábbi beállításoknak */
+  flex-direction: column; /* Hozzáadva: függőleges elrendezés */
 }
 
 @media screen and (max-width: 768px) {
@@ -61,12 +63,10 @@
 
   .menu-items {
     display: none;
-    flex-direction: column;
     position: absolute;
     top: 50px;
     left: 0;
     width: 100%;
-    background-color:teal;
     border-top: 1px solid #ccc;
     padding: 10px 0;
   }

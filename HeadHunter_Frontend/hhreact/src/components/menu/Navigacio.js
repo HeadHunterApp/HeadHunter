@@ -50,7 +50,7 @@ export default function Navigacio() {
           <NavLink link="/" title="Kezdőlap" />
           <NavLink link="/jobs" title="Álláskeresés" />
           {((isAdmin(user) || isHeadhunter(user)) && (
-            <li className="menu-item">Állások</li>
+            <NavLink link="admin/jobs" title="Állások" />
           ))}
           {user && (isAdmin(user) || isHeadhunter(user)) && (
             <>

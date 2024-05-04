@@ -67,9 +67,13 @@ Route::post('/munkaltatok/munkaltato', [MunkaltatoController::class, 'store']);
 Route::delete('/munkaltatok/{munkaltato_id}', [MunkaltatoController::class, 'destroy'])->whereNumber('munkaltato_id');
 Route::put('/employers/munkaltatok/{munkaltato_id}', [MunkaltatoController::class, 'update'])->whereNumber('munkaltato_id');
 //munkaltato tesztek vége
+//allasok teszt rouetok
+Route::get('/jobs/all', [AllasController::class, 'index']);
+Route::post('/jobs/new', [AllasController::class, 'store']);
+Route::put('/jobs/modification/{allas_id}', [AllasController::class, 'update']);
+Route::delete('/jobs/delete/{allas_id}', [AllasController::class, 'destroy']);
 
-
-
+//allasok tesz rouetok vége
 Route::get('/jobs-basic/{allas_id}/skills', [AllasIsmeretController::class, 'detailedAllasIsm']);
 Route::get('/jobs-basic/{allas_id}/languages', [AllasNyelvtudasController::class, 'detailedAllasNyelv']);
 Route::get('/jobs-basic/{allas_id}/edu-atts', [AllasVegzettsegController::class, 'detailedAllasVegz']);
