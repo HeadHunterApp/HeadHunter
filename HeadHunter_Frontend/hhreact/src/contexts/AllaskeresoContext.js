@@ -3,6 +3,9 @@ import axios from "../api/axios";
 //allaskereso
 export const getAllaskeresoAll = ()=>
     axios.get(`/api/jobseekers/all`);
+
+export const getAllAllaskeresoforFejvadaszAdmin = () =>
+    axios.get(`/api/seeker/all`);
     
 export const getAllaskereso = (user_id)=>
     axios.get(`/api/jobseekers/${user_id}`);

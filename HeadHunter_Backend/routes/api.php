@@ -22,6 +22,7 @@ use App\Http\Controllers\TapasztalatIdoController;
 use App\Http\Controllers\TeruletController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VegzettsegController;
+use App\Models\Allaskereso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -99,6 +100,9 @@ Route::middleware('auth')->group(function () {
 
     //file feltöltés:
     Route::post('/file-upload', [FileController::class, 'store'])->name('file_store');
+
+    //allaskereso lista:
+    Route::get('/seeker/all', [AllaskeresoController::class, 'index']);
 
     Route::middleware(['admin'])->group(function () {
         //user

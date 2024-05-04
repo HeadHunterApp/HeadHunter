@@ -13,6 +13,7 @@ import MunkaltatoInfo from "./pages/informacio/MunkaltatoInfo";
 import Kapcsolat from "./pages/informacio/Kapcsolat";
 import JogosulatlanFelh from "./pages/JogosulatlanFelh";
 import MunkaltatokLista from "./components/admin/MunkaltatokLista";
+import Allaskeresok from "./components/felhasznalo-kezeles/profil/components/Allaskeresok";
 
 export default function App() {
   const { user } = useAuthContext();
@@ -23,15 +24,17 @@ export default function App() {
       <Route
         path="/"
         element={
-          belepve ? <AuthLayout jogosultFelh={[]} /> : <VendegLayout />
+          belepve ? <AuthLayout jogosultFelh={[user.jogosultsag]} /> : <VendegLayout />
         }
       >
         <Route index element={<Kezdolap />} />
         <Route path="jobs" element={<Allaskereses />} />
         <Route path="job-info/:allas_id" element={<AllasAdatlap />} />
+        <Route path="seeker-info/:user_id" element={<AllaskeresoAdatlap />} />
         <Route path="seeker-info" element={<AllaskerInfo />} />
         <Route path="employer-info" element={<MunkaltatoInfo />} />
         <Route path="contact" element={<Kapcsolat />} />
+      
 
         {belepve && (
           <>
@@ -39,7 +42,7 @@ export default function App() {
 
             <Route
               path="seeker"
-              element={<AuthLayout jogosultFelh={["álláskereső"]} />}
+              //element={<AuthLayout jogosultFelh={["álláskereső"]} />}
             >
               {/* Jövőbeli route a saját jelentkezéseinek megtekintéséhez:
               <Route path="my-applications" element={<JelentkezesSajat />} />
@@ -48,11 +51,12 @@ export default function App() {
 
             <Route
               path="hunter"
-              element={<AuthLayout jogosultFelh={["fejvadász"]} />}
+              //element={<AuthLayout jogosultFelh={["fejvadász"]} />}
             >
               <Route path="employers" element={<MunkaltatokLista />} />
-              {/* Jövőbeli route-ok:
               <Route path="jobseekers" element={<Allaskeresok />} />
+              {/* Jövőbeli route-ok:
+              
               <Route path="applicants" element={<Jelentkezok />} />
               <Route path="hired" element={<FelvettJelentkezok />} />
               */}
@@ -60,14 +64,15 @@ export default function App() {
 
             <Route
               path="admin"
-              element={<AuthLayout jogosultFelh={["admin"]} />}
+              //element={<AuthLayout jogosultFelh={["admin"]} />}
             >
               <Route index element={<MunkaltatokLista />} />
 
               <Route path="employers" element={<MunkaltatokLista />} />
-              {/* Jövőbeli route-ok:
+              
               <Route path="jobseekers" element={<Allaskeresok />} />
-              <Route path="applicants" element={<Jelentkezok />} />
+              {/* Jövőbeli route-ok:*/
+              /*<Route path="applicants" element={<Jelentkezok />} />
               <Route path="hired" element={<FelvettJelentkezok />} />
               <Route path="headhunters" element={<Fejvadaszok />} />
               <Route path="fields" element={<Teruletek />} />
