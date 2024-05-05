@@ -17,16 +17,28 @@ class AllasController extends Controller
 
     public function store(Request $request)
     {
+        // Validáció hozzáadása a bejövő kéréshez
+        $validatedData = $request->validate([
+            'munkaltato' => 'required|string',
+            'megnevezes' => 'required|string',
+            'pozicio' => 'required|string',
+            'statusz' => 'required|string',
+            'leiras' => 'required|string',
+            'fejvadasz' => 'required|string',
+        ]);
+    
+        // Új Allas modell létrehozása és feltöltése a validált adatokkal
         $allas = new Allas();
-        $allas->munkaltato = $request->munkaltato;
-        $allas->megnevezes = $request->megnevezes;
-        $allas->pozicio=$request->pozicio;
-        //$allas->terulet=$request->terulet;
-        $allas->statusz=$request->statusz;
-        $allas->leiras=$request->leiras;
-        //$allas->datum=$request->datum; - timestamp kezeli le
-        $allas->fejvadasz=$request->fejvadasz;
+        $allas->munkaltato = $validatedData['munkaltato'];
+        $allas->megnevezes = $validatedData['megnevezes'];
+        $allas->pozicio = $validatedData['pozicio'];
+        $allas->statusz = $validatedData['statusz'];
+        $allas->leiras = $validatedData['leiras'];
+        $allas->fejvadasz = $validatedData['fejvadasz'];
         $allas->save();
+    
+        // Visszatérési érték a mentett állás objektummal
+        return response()->json(['allas' => $allas], 201);
     }
 
  

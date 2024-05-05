@@ -24,5 +24,6 @@ class AllaskeresoTapasztalatSeeder extends Seeder
             'kezdes' => '2023-01-04',
             'vegzes' => '2024-02-01',
         ]);
+        
     }
 }

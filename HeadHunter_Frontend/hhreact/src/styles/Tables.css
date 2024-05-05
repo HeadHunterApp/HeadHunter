@@ -1,3 +1,4 @@
+/* Munkáltatók táblázat stílusai */
 .munkaltatok-container {
   margin-top: 20px;
   margin-bottom: 50px; /* Hozzáadott margin a footer és a form között */
@@ -32,15 +33,11 @@
   margin-right: 5px;
   padding: 6px 12px;
   border: none;
-  background-color: #4CAF50;
   color: white;
   cursor: pointer;
 }
 
-.munkaltatok-table td button:hover {
-  background-color: #45a049;
-}
-
+/* Munkáltatók űrlap stílusai */
 .munkaltatok-form {
   margin-top: 20px;
 }
@@ -58,6 +55,46 @@
   cursor: pointer;
 }
 
-.munkaltatok-form button:hover {
-  background-color: #45a049;
+
+
+/* Általános akció gombok stílusai */
+.action-button {
+  margin-right: 5px;
+  padding: 6px 12px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  width: 100px; /* Fix szélesség */
+  height: 40px; /* Fix magasság */
+}
+
+
+.action-button:hover {
+  background-color: rgb(128, 163, 163);
+}
+
+/* Gomb konténer stílusai */
+.button-container {
+  text-align: center; /* A gombok középre igazítása */
+  margin-bottom: 20px; /* Hozzáadott margin a gombok és a táblázat között */
+}
+
+/* Módosítás gomb stílusa */
+.modositas-button {
+  background-color: teal; /* Kék */
+}
+
+/* Törlés gomb stílusa */
+.torles-button {
+  background-color: #710000; /* Piros */
+}
+
+/* Új felvitele gomb stílusa */
+.uj-felvitele-button {
+  background-color: #4CAF50; /* Zöld */
+}
+.torles-button,
+.modositas-button {
+  width: 80px; /* Fix szélesség */
+  height: 30px; /* Fix magasság */
 }
