@@ -20,12 +20,11 @@ export default function AllasAdatlap() {
         <AllasElvaras jobId={allas_id} />
         <div className="apply-buttons">
           {console.log(user)}
-          {user && isJobseeker ? (
-            <JelentkezesGomb allas_id={allas_id} />
-          ) : user && (isAdmin() || isHeadhunter()) ? (
+          {user && (isAdmin() || isHeadhunter()) ? (
+            <JelentkeztetGomb allas_id={allas_id} />
+          ) : user && isJobseeker ? (
             <>
-              {/**ide kell a legördülő */}
-              <JelentkeztetGomb allas_id={allas_id} />
+              <JelentkezesGomb allas_id={allas_id} />
             </>
           ) : (
             <div className="login-or-reg">

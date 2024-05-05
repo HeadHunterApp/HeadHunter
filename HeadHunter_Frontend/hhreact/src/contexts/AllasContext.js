@@ -63,7 +63,7 @@ export const putAllasTapasztalat = (allas_id, params)=>
 //allas-jelentkezo
 
 export const getAllasJelentkezoAll = ()=>
-    axios.get(`/api/jobs/applicants/all`);
+    axios.get(`/api/jobs/applicants-all`);
 
 export const getAllasJelentkezok = (allas_id)=>
     axios.get(`/api/jobs/${allas_id}/applicants`);
@@ -84,7 +84,7 @@ export const putAllasJelentkezo = (allas_id, params)=>
 //csak az alap táblaadatok megjelenítése, id-k által meghívott adatok nélkül:
 //index
 export const getAllasAllRaw = ()=>
-axios.get('/api/jobs/all');
+axios.get('/api/jobs-all');
 //show
 export const getAllasRaw = (allas_id)=>
 axios.get(`/api/jobs/${allas_id}`);

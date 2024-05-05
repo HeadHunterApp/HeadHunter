@@ -1,8 +1,4 @@
 import axios from "../api/axios";
-/*ilyen nincs, törölni kéne
-export const getProfilAdmin = (user_id)=>
-    axios.get(`/api/admin/user/${user_id}`)
-*/
 /* export const getProfilFejvadasz = ()=>
     axios.get(`/api/headhunters/profile`) */
 
