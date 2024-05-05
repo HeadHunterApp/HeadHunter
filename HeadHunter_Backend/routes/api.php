@@ -163,7 +163,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/employers/{munkaltato_id}', [MunkaltatoController::class, 'show'])->whereNumber('munkaltato_id');
         Route::post('/employers/new', [MunkaltatoController::class, 'store']);
         Route::put('/employers/modification/{munkaltato_id}', [MunkaltatoController::class, 'update'])->whereNumber('munkaltato_id');
-
     });
 
     Route::middleware(['admin'])->group(function () {
