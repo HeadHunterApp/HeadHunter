@@ -37,9 +37,6 @@ export default function JelentkeztetGomb(props) {
 
   const handleKivalasztas = () => {
     setKivalasztas(true);
-  };
-
-  useEffect(() => {
     getAllaskeresoAll().then((response) => {
       const osszesAllasker = response.data.map((allasker) => {
         return {
@@ -49,7 +46,7 @@ export default function JelentkeztetGomb(props) {
       });
       setAllaskerOptions(osszesAllasker);
     });
-  }, []);
+  };
 
   const handleOtherApply = async (e) => {
     e.preventDefault();
@@ -79,7 +76,7 @@ export default function JelentkeztetGomb(props) {
           <Select
             options={allaskerOptions}
             onChange={(selectedOption) => setSelectedAllasker(selectedOption)}
-            value={selectedAllasker} /* Módosítva: itt selectedAllasker selectedOptionrol*/
+            value={selectedAllasker}
             placeholder="Válassz egy álláskeresőt..."
           />
           <button type="button" onClick={handleOtherApply}>
