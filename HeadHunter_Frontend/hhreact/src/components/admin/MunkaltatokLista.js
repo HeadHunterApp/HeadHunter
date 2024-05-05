@@ -37,7 +37,7 @@ const MunkaltatokLista = () => {
   
       // Munkáltató módosítása, CSRF tokennal ellátva
       const valasz = await axios.put(
-        `http://127.0.0.1:8000/api/employers/munkaltatok/${munkaltatoId}`,
+        `http://127.0.0.1:8000/api/munkaltatok/${munkaltatoId}`,
         modositottMunkaltato,
         {
           headers: {
