@@ -21,10 +21,10 @@ const OktatasKepzes = ({
   const [selectedVegzettseg, setSelectedVegzettseg] = useState("");
   const [oktidotartam, setOktIdotartam] = useState(null);
 
+  // betölti az álláskereső tanulmányát/tanulmányait
   useEffect(() => {
     console.log(vegzettsegek);
     if (data) {
-      //TODO: --> nem ez volt a baj a felületen. Több oktatás esetén elhasal valami.
       setOrigIntezmeny(data.intezmeny);
       setOrigSzakkepesites(data.szak);
       setOktIdotartam(data.idotartam);
@@ -48,6 +48,7 @@ const OktatasKepzes = ({
   const onSubmit = (event) => {
     event.preventDefault();
 
+    // menti és módosítja az álláskereső tanulmányát
     putAllaskeresoTanulmany(
       {
         intezmeny,
@@ -77,6 +78,7 @@ const OktatasKepzes = ({
     });
   };
 
+  // törli az álláskereső tanulmányát
   const torles = () => {
     const tanulmanyok = tanulmany
       .filter((item) => item.id !== id)

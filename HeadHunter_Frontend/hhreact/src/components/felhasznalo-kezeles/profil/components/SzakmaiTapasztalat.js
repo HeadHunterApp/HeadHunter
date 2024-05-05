@@ -20,8 +20,9 @@ const SzakmaiTapasztalat = ({
   const [selectedPozicio, setselectedPozicio] = useState(null);
   const [cegcim, setCegcim] = useState("");
 
+  // betölti az álláskereső szakmai tapaasztalatát/ szakmai tapasztalatait
   useEffect(() => {
-    setIdotartam(data.idotartam); //backend számolja a végzés és a kezdésből.
+    setIdotartam(data.idotartam); 
     setCegnev(data.cegnev);
     setOrigCegnev(data.cegnev);
     setOrigPozkod(data.pozkod);
@@ -36,12 +37,14 @@ const SzakmaiTapasztalat = ({
     setselectedPozicio(pozObject);
   }, []);
 
+  // menti és módosítja az álláskereső szakmai tapasztalatát
   const onSubmit = (event) => {
     event.preventDefault();
 
     console.log(config);
 
     console.log("Lefut a submit.");
+
 
     putAllaskeresoTapasztalat(
       {
@@ -70,6 +73,7 @@ const SzakmaiTapasztalat = ({
     });
   };
 
+  // törli az álláskereső szakmai tapasztalatát
   const torles = () => {
     const tapasztalatok = szakmaiTapasztalat
       .filter((item) => item.id !== id)

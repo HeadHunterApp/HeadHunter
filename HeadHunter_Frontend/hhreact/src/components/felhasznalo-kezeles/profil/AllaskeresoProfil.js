@@ -27,8 +27,8 @@ const AllaskeresoProfil = ({ onSubmit }) => {
   const [vegzettsegek, setVegzettsegek] = useState([]);
   const [nyelvek, setNyelvek] = useState([]);
 
+  //Betölti az álláskereső területét
   useEffect(() => {
-   
     getTerulet().then((response) => {
       const teruletoptions = response.data.map((teret) => {
         return {
@@ -40,8 +40,9 @@ const AllaskeresoProfil = ({ onSubmit }) => {
     });
   }, []);
 
+  // betölti az álláskerső végzettségét
   useEffect(() => {
-   getVegzettseg().then((response) => {
+    getVegzettseg().then((response) => {
       const vegzettsegoptions = response.data.map((veg) => {
         return {
           value: veg.vegzettseg_id,
@@ -52,8 +53,9 @@ const AllaskeresoProfil = ({ onSubmit }) => {
     });
   }, []);
 
+  //betölti az álláskereső pozícióját
   useEffect(() => {
-   getPozicio().then((response) => {
+    getPozicio().then((response) => {
       const poziciooptions = response.data.map((poz) => {
         return {
           value: poz.pozkod,
@@ -64,6 +66,7 @@ const AllaskeresoProfil = ({ onSubmit }) => {
     });
   }, []);
 
+  //betölti az álláskereső nyelvismeretét
   useEffect(() => {
     getNyelvtudas().then((response) => {
       const nyelvoptions = response.data.map((nyelv) => {
@@ -76,13 +79,14 @@ const AllaskeresoProfil = ({ onSubmit }) => {
     });
   }, []);
 
+  //betölti az álláskereső összes nyelvtudását tölti be
   useEffect(() => {
     const fetchData = async () => {
       try {
         getAllaskeresoNyelvtudas().then((response) => {
           setNyelvTudas(
             response.data.map((item, index) => {
-              return{
+              return {
                 id: `nyelv__${index}`,
                 ...item,
               };
@@ -100,9 +104,6 @@ const AllaskeresoProfil = ({ onSubmit }) => {
         token = response.data;
       });
 
-      console.log("------------TOKEN--------------");
-      console.log(token);
-
       const config = {
         headers: {
           "X-CSRF-TOKEN": token,
@@ -116,12 +117,13 @@ const AllaskeresoProfil = ({ onSubmit }) => {
     fetchData();
   }, []);
 
+  //betölti az álláskereső összes tanulmányát tölti be
   useEffect(() => {
     try {
       getAllaskeresoTanulmany().then((response) => {
         setTanulmany(
           response.data.map((item, index) => {
-            return{
+            return {
               id: `oktkepzes__${index}`,
               ...item,
             };
@@ -133,6 +135,7 @@ const AllaskeresoProfil = ({ onSubmit }) => {
     }
   }, []);
 
+  //betölti az álláskereső összes szakmai tapasztalatát tölti be
   useEffect(() => {
     try {
       getAllaskeresoTapasztalat().then((response) => {
@@ -150,18 +153,11 @@ const AllaskeresoProfil = ({ onSubmit }) => {
     }
   }, []);
 
-  /* function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  } */
 
-  /* useEffect(() => {
-    sleep(5000);
-    console.log("Profilból írom:")
-    console.log(nyelvTudas);
-  }, []); */
-
+  // továbbfejlsztés része
   const onGenerealas = () => {};
 
+  // álláskereső új szakmai tapasztalat adatainak feltöltése
   const szakmaiTapHozzaadas = () => {
     setSzakmaiTapasztalat([
       ...szakmaiTapasztalat,
@@ -179,6 +175,7 @@ const AllaskeresoProfil = ({ onSubmit }) => {
     ]);
   };
 
+  // álláskereső új nyelvisemret adatainak feltöltése
   const nyelvHozzaadas = () => {
     setNyelvTudas([
       ...nyelvTudas,
@@ -195,6 +192,7 @@ const AllaskeresoProfil = ({ onSubmit }) => {
     ]);
   };
 
+  // álláskereső új Tanulmány adatainak feltöltése
   const oktHozzaadas = () => {
     setTanulmany([
       ...tanulmany,
@@ -237,8 +235,8 @@ const AllaskeresoProfil = ({ onSubmit }) => {
               data={item}
               nyelvek={nyelvek}
               id={`nyelv__${index}`}
-              setNyelvTudas = {setNyelvTudas}
-              nyelvTudas = {nyelvTudas}
+              setNyelvTudas={setNyelvTudas}
+              nyelvTudas={nyelvTudas}
             />
           );
         })}
@@ -257,11 +255,11 @@ const AllaskeresoProfil = ({ onSubmit }) => {
         })}
 
         <div className="divbuttons">
-        <button className="mentes" onClick={szakmaiTapHozzaadas}>
+          <button className="mentes" onClick={szakmaiTapHozzaadas}>
             Szakmai Tapasztalat hozzáadása
           </button>
           <button className="mentes" onClick={nyelvHozzaadas}>
-            Nyelvtudás hozzáadaása
+            Nyelvismere hozzáadaása
           </button>
           <button className="mentes" onClick={oktHozzaadas}>
             Tanulmányok hozzáadása

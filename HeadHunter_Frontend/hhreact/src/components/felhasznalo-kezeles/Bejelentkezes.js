@@ -10,6 +10,7 @@ export default function Bejelentkezes({ onClose }) {
   const navigate = useNavigate();
   // const [error, setError] = useState(null);
 
+  //felhasználó bejelentkeztetése, front és backen  oldali adatokat ellenőrzi, és ha egyezik, akkor belépteti a felhasználót.
   const handleSubmit = async (e) => {
     e.preventDefault();
 

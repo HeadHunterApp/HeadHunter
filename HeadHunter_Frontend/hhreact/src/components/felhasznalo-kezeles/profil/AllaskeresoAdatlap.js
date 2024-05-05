@@ -10,6 +10,7 @@ import {
   getAllaskerTapasztalatById,
   getAllaskeresoById,
 } from "../../../contexts/AllaskeresoContext";
+import VisszaLink from "../../menu/VisszaLink";
 
 const AllaskeresoAdatlap = () => {
   const { user_id } = useParams();
@@ -19,6 +20,7 @@ const AllaskeresoAdatlap = () => {
   const [tapasztalatok, setTapasztalatok] = useState([]);
   const [tanulmanyok, setTanulmanyok] = useState([]);
 
+  //személy id alapján kéri le a személy személyes adatait
   useEffect(() => {
     getAllaskeresoById(user_id).then((response) => {
       let adat = response.data;
@@ -27,6 +29,7 @@ const AllaskeresoAdatlap = () => {
       console.log(adat.fenykep);
     });
 
+    //személy id alapján kéri le a személy nyelvtudásait
     getAllaskerNyelvtudasById(user_id).then((response) => {
       setNyelvek(
         response.data.map((item, index) => {
@@ -38,6 +41,7 @@ const AllaskeresoAdatlap = () => {
       );
     });
 
+    //személy id alapján kéri le a személy tanulmányait
     getAllaskerTanulmanyById(user_id).then((response) => {
       setTanulmanyok(
         response.data.map((item, index) => {
@@ -49,6 +53,7 @@ const AllaskeresoAdatlap = () => {
       );
     });
 
+    //személy id alapján kéri le a személy szakmai tapasztalatait
     getAllaskerTapasztalatById(user_id).then((response) => {
       setTapasztalatok(
         response.data.map((item, index) => {
@@ -65,19 +70,20 @@ const AllaskeresoAdatlap = () => {
     <div className="allprofil">
       <div>
         <SzemelyesAdatokRO adatok={szemelyesInfok} />
-     
+
         {nyelvek.map((item, index) => (
           <NyelvismeretRO key={index} adatok={item} />
         ))}
-       
+
         {tanulmanyok.map((item, index) => (
           <OktatasKepzesRO key={index} adatok={item} />
         ))}
-        
+
         {tapasztalatok.map((item, index) => (
           <SzakmaiTapasztalatRO key={index} adatok={item} />
         ))}
       </div>
+      <VisszaLink />
     </div>
   );
 };

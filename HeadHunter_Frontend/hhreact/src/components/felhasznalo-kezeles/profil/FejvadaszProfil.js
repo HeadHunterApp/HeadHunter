@@ -16,7 +16,7 @@ const FejvadaszProfil = ({ onSubmit }) => {
     const [selectedTerulet, setselectedTerulet] = useState([]);
     const [imageSrc, setImageSrc] = useState(null);
     
-
+    // betölti a fejvadász személyes adatait
     useEffect(()=>{
       getProfilFejvadasz().then((response)=>{
         setNev(response.data.nev);
@@ -36,6 +36,7 @@ const FejvadaszProfil = ({ onSubmit }) => {
       })
     },[])
 
+  //betölti a listázandó területeket
   useEffect(()=>{
     getTerulet().then((response)=>{
       const teruletoptions = response.data.map((teret)=>{
@@ -49,7 +50,7 @@ const FejvadaszProfil = ({ onSubmit }) => {
   }, []);
 
 
-  
+    // fejvadász profil adatait frissíti a szerveren
     const handleSubmit = async(e) => {
       e.preventDefault();
       let token = "";
@@ -75,6 +76,7 @@ const FejvadaszProfil = ({ onSubmit }) => {
       })
     };
 
+    //a feltöltött fényképet leküldi a szervernek
     const fenykepFeltoltes = async(event) =>{
       event.preventDefault();
 
@@ -90,12 +92,6 @@ const FejvadaszProfil = ({ onSubmit }) => {
         console.log(response);
         token = response.data;
       });
-
-      //const Buffer = require("buffer").Buffer;
-      //let base64Img = new Buffer(fajl).toString("base64");
-      //let base64Img = Buffer.from(fajl).toString('base64');
-
-      //let base64Img = base64.encode(fajl);
 
       postFotoFeltolt(formData, token);
      
