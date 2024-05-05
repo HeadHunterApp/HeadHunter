@@ -16,7 +16,7 @@ import MunkaltatokLista from "./components/admin/MunkaltatokLista";
 
 import Allaskeresok from "./components/felhasznalo-kezeles/profil/components/Allaskeresok";
 import AllaskeresoAdatlap from "./components/felhasznalo-kezeles/profil/AllaskeresoAdatlap";
-import Allasok from "./components/admin/Allasok"; // Új komponens importálása
+import Allasok from "./components/admin/Allasok";
 
 
 export default function App() {
@@ -28,7 +28,7 @@ export default function App() {
       <Route
         path="/"
         element={
-          belepve ? <AuthLayout jogosultFelh={[user.jogosultsag]} /> : <VendegLayout /> //user.jogosultsag azért került ide, mert a lenti kommenteket pótolja
+          belepve ? <AuthLayout jogosultFelh={[user.jogosultsag]} /> : <VendegLayout /> 
         }
       >
         <Route index element={<Kezdolap />} />
@@ -45,20 +45,17 @@ export default function App() {
             <Route path="profile" element={<Profilok />} />
 
             <Route
-              path="seeker"
-              //element={<AuthLayout jogosultFelh={["álláskereső"]} />} /a dupélikált navbar elkerülése miatt kommentelve
-            >
+              path="seeker">
               {/* Jövőbeli route a saját jelentkezéseinek megtekintéséhez:
               <Route path="my-applications" element={<JelentkezesSajat />} />
               */}
             </Route>
 
             <Route
-              path="hunter"
-              //element={<AuthLayout jogosultFelh={["fejvadász"]} />} /a dupélikált navbar elkerülése miatt kommentelve
-            >
+              path="hunter">
               <Route path="employers" element={<MunkaltatokLista />} />
               <Route path="jobseekers" element={<Allaskeresok />} />
+              <Route path="jobs" element={<Allasok />} />
               {/* Jövőbeli route-ok:
               
               <Route path="applicants" element={<Jelentkezok />} />
@@ -67,24 +64,21 @@ export default function App() {
             </Route>
 
             <Route
-              path="admin"
-              //element={<AuthLayout jogosultFelh={["admin"]} />} /a dupélikált navbar elkerülése miatt kommentelve
-            >
-              <Route index element={<MunkaltatokLista />} />
-
+              path="admin">
               <Route path="employers" element={<MunkaltatokLista />} />
-              
               <Route path="jobseekers" element={<Allaskeresok />} />
+              <Route path="jobs" element={<Allasok />} />
+
               {/* Jövőbeli route-ok:*/
               /*<Route path="applicants" element={<Jelentkezok />} />
               <Route path="hired" element={<FelvettJelentkezok />} />
-              <Route path="headhunters" element={<Fejvadaszok />} />
+                 <Route path="headhunters" element={<Fejvadaszok />} />
               <Route path="fields" element={<Teruletek />} />
               <Route path="positions" element={<Poziciok />} />
               <Route path="languages" element={<Nyelvtudas />} />
               <Route path="skills" element={<Kepessegek />} />
               */}
-              <Route path="jobs" element={<Allasok />} /> {/* Állások komponens hozzáadása */}
+              
             </Route>
           </>
         )}
