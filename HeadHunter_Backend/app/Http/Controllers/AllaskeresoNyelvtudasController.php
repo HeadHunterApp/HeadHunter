@@ -128,6 +128,30 @@ class AllaskeresoNyelvtudasController extends Controller
         return $aknyelv;
     }
 
+    public function showAllByUser($user_id){
+        $aknyelv = DB::table('allaskereso_nyelvtudass as akny')
+        ->join('nyelvtudass as nt', 'akny.nyelvtudas','=','nt.nyelvkod')
+        ->where('allaskereso', $user_id)
+        ->select(
+            'nt.nyelv',
+            'nt.szint',
+            //'nt.megnevezes',
+            'akny.nyelvtudas',
+            'akny.nyelvvizsga',
+            'akny.iras',
+            'akny.olvasas',
+            'akny.beszed'
+            )
+        ->get();
+
+        //TODO: majd rakjjuk vissza
+        //if ($aknyelv->isEmpty()) {
+        //    return response()->json(['message' => 'Még nem adtál meg a nyelvtudásodra vonatkozó adatot'], 404);
+        //}
+
+        return $aknyelv;
+    }
+
     public function store(Request $request){
         $signed = Auth::user()->user_id;
         $aknyelv = new AllaskeresoNyelvtudas();

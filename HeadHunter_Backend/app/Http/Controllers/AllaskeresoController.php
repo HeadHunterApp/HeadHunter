@@ -27,19 +27,24 @@ class AllaskeresoController extends Controller
 
     public function show($id){
         $allaskereso = Allaskereso::findOrFail($id);
-        $user = User::where('user_id', $id)->first(['nev', 'email']);
+        $user = User::where('user_id', $id)
+            ->first(['nev', 'email']);
+
         if (Auth::check() && (Auth::user()->jogosultsag === 'admin' || Auth::user()->jogosultsag === 'fejvadasz')) {
             $result = [
-                'user_id' => $user->user_id,
-                'user' => $user,
-                'allaskereso' => $allaskereso
-            ];
-        } else {
-            $result = [
-                'user' => $user,
-                'allaskereso'=> $allaskereso
+                'nev' => $user->nev,
+                'email' => $user->email,
+                'telefonszam'=> $allaskereso->telefonszam,
+                'fax'=> $allaskereso->fax,
+                'allampolgarsag'=> $allaskereso->allampolgarsag,
+                'szul_ido'=> $allaskereso->szul_ido,
+                'jogositvany'=> $allaskereso->jogositvany,
+                'keszseg'=> $allaskereso->keszseg,
+                'neme'=> $allaskereso->neme,
+                'cim'=> $allaskereso->cim,
             ];
         }
+
         return $result;
     }
 
@@ -66,6 +71,37 @@ class AllaskeresoController extends Controller
         $signed = Auth::user()->user_id;
         $allaskereso = Allaskereso::findOrFail($signed);
         $user = User::where('user_id', $signed)->first(['nev', 'email', 'fenykep']);
+        $result = [
+            'nev' => $user->nev,
+            'email' => $user->email,
+            'telefonszam'=> $allaskereso->telefonszam,
+            'fax'=> $allaskereso->fax,
+            'allampolgarsag'=> $allaskereso->allampolgarsag,
+            'szul_ido'=> $allaskereso->szul_ido,
+            'jogositvany'=> $allaskereso->jogositvany,
+            'keszseg'=> $allaskereso->szoc_keszseg,
+            'neme'=> $allaskereso->nem,
+            'cim'=> $allaskereso->cim,
+            'anyanyelv'=> $allaskereso->anyanyelv
+        ];
+
+        Log::error("------------------------ USER FÉNYKÉP ----------------------------");
+        Log::error($user);
+
+        if($user->fenykep)
+        {
+            $path = public_path($user->fenykep);
+            $imageData = file_get_contents($path);
+            $imageBase64 = base64_encode($imageData);
+            $result['fenykep'] = $imageBase64;
+        }
+
+        return $result;
+    }
+
+    public function showAllByUser($user_id){
+        $allaskereso = Allaskereso::findOrFail($user_id);
+        $user = User::where('user_id', $user_id)->first(['nev', 'email', 'fenykep']);
         $result = [
             'nev' => $user->nev,
             'email' => $user->email,

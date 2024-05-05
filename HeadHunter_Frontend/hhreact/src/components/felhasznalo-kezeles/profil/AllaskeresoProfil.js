@@ -122,7 +122,7 @@ const AllaskeresoProfil = ({ onSubmit }) => {
         setTanulmany(
           response.data.map((item, index) => {
             return{
-              id: `tanulmany__${index}`,
+              id: `oktkepzes__${index}`,
               ...item,
             };
           })
@@ -199,7 +199,7 @@ const AllaskeresoProfil = ({ onSubmit }) => {
     setTanulmany([
       ...tanulmany,
       {
-        id: `tanulmany__${tanulmany.length}`,
+        id: `oktkepzes__${tanulmany.length}`,
         idotartam: "",
         intezmeny: "",
         erintett_targytev: "",

@@ -3,9 +3,15 @@ import axios from "../api/axios";
 //allaskereso
 export const getAllaskeresoAll = ()=>
     axios.get(`/api/jobseekers/all`);
+
+export const getAllAllaskeresoforFejvadaszAdmin = () =>
+    axios.get(`/api/seeker/all`);
     
 export const getAllaskereso = (user_id)=>
     axios.get(`/api/jobseekers/${user_id}`);
+
+export const getAllaskeresoById = (user_id)=>
+    axios.get(`/api/seekers/${user_id}`);
     
 export const postAllaskereso = (params)=>
     axios.post(`/api/jobseekers/new`, params);
@@ -38,6 +44,9 @@ export const getAllaskerNyelvtudasAll = ()=>
     
 export const getAllaskerNyelvtudas = (user_id)=>
     axios.get(`/api/jobseekers/${user_id}/languages`);
+
+export const getAllaskerNyelvtudasById = (user_id)=>
+    axios.get(`/api/seekers/${user_id}/languages`);
     
 export const postAllaskerNyelvtudas = (params)=>
     axios.post(`/api/jobseekers/languages/new`, params);
@@ -54,6 +63,9 @@ export const getAllaskerTanulmanyAll = ()=>
     
 export const getAllaskerTanulmany = (user_id)=>
     axios.get(`/api/jobseekers/${user_id}/edu-atts`);
+
+export const getAllaskerTanulmanyById = (user_id)=>
+    axios.get(`/api/seekers/${user_id}/edu-atts`);
     
 export const postAllaskerTanulmany = (params)=>
     axios.post(`/api/jobseekers/edu-atts/new`, params);
@@ -62,7 +74,7 @@ export const putAllaskerTanulmany = (user_id, params)=>
     axios.put(`/api/jobseekers/${user_id}/edu-atts/modification`, params);
     
 export const deleteAllaskerTanulmany = (intezmeny, szak, config)=>
-    axios.delete(`/api/jobseekers/profile/edu-atts/delete?intezmeny=${intezmeny}$szak=${szak}`, config);
+    axios.delete(`/api/jobseekers/profile/edu-atts/delete?intezmeny=${intezmeny}&szak=${szak}`, config);
     
 //allaskereso-tapasztalat
 export const getAllaskerTapasztalatAll = ()=>
@@ -70,6 +82,9 @@ export const getAllaskerTapasztalatAll = ()=>
     
 export const getAllaskerTapasztalat = (user_id)=>
     axios.get(`/api/jobseekers/${user_id}/exps`);
+
+export const getAllaskerTapasztalatById = (user_id)=>
+    axios.get(`/api/seekers/${user_id}/exps`);
     
 export const postAllaskerTapasztalat = (params)=>
     axios.post(`/api/jobseekers/exps/new`, params);
