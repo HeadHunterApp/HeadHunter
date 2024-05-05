@@ -4,10 +4,10 @@ import axios from "../api/axios";
 
 //allas
 export const getAllasAdminAll = ()=>
-    axios.get(`/api/jobs/basic/all`);
+    axios.get(`/api/jobs-all`);
     
 export const getAllasAdmin = (allas_id)=>
-    axios.get(`/api/jobs/basic/${allas_id}`);
+    axios.get(`/api/jobs/${allas_id}`);
 
 export const deleteAllas = (allas_id)=>
     axios.delete(`/api/jobs/delete/${allas_id}`);

@@ -76,7 +76,7 @@ class AllasController extends Controller
                     'al.leiras',
                     'al.statusz',
                     DB::raw('DATE_FORMAT(al.created_at, "%Y-%m-%d") as datum'),
-                    'al.fejvadasz',
+                    'al.fejvadasz as fejvadasz_id',
                     'u.nev as fejvadasz'
                 );
             } else {

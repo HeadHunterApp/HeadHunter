@@ -2,7 +2,7 @@ import axios from "../api/axios";
 
 //allaskereso
 export const getAllaskeresoAll = ()=>
-    axios.get(`/api/jobseekers/all`);
+    axios.get(`/api/jobseekers-all`);
 
 export const getAllAllaskeresoforFejvadaszAdmin = () =>
     axios.get(`/api/seeker/all`);
@@ -55,7 +55,7 @@ export const putAllaskerNyelvtudas = (user_id, params)=>
     axios.put(`/api/jobseekers/${user_id}/languages/modification`, params);
     
 export const deleteAllaskerNyelvtudas = (nyelvtudas, config)=>
-    axios.delete(`/api/seeker/profile/languages/delete?nyelvtudas=${nyelvtudas}`,config);
+    axios.delete(`/api/jobseekers/profile/languages/delete?nyelvtudas=${nyelvtudas}`,config);
     
 //allaskereso-tanulmany
 export const getAllaskerTanulmanyAll = ()=>
@@ -100,4 +100,4 @@ export const deleteAllaskerTapasztalat = (cegnev, pozkod, config)=>
     
 //konkrét álláskereső összes jelentkezése:
 export const getAllaskerJelentkezett = (user_id)=>
-    axios.get(`/jobs/applicants/${user_id}`);
+    axios.get(`/api/jobs/applicants/${user_id}`);

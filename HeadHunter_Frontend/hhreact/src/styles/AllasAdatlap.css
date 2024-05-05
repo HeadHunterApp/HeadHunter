@@ -51,11 +51,11 @@
     background-color: white;
 }
 
-.job-basic span {
+.job-basic span, .job-status span  {
     font-weight: bold;
 }
 
-.job-basic p {
+.job-basic p, .job-status p {
     padding-left: 1.2em;
     margin: 0;
     margin-bottom: 0.3em;
