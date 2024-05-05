@@ -14,11 +14,11 @@ export default function Allaskeresok() {
   const [searchedSeekers, setSearchedSeekers] = useState([]);
 
   useEffect(() => {
-    // Adatok lekérése az adatbázisból az oldal betöltésekor
+    // adatok lekérése az adatbázisból az oldal betöltésekor
     fetchSeekers();
   }, []);
 
-  // Állások lekérése a backendből
+  // Álláskeresők szociális készségek lekérése a backendből
   const fetchSeekers = async () => {
     try {
       const response = await getAllAllaskeresoforFejvadaszAdmin();
@@ -39,11 +39,11 @@ export default function Allaskeresok() {
   // Keresés gombra kattintás kezelése
   const handleSearch = () => {
     if (searchQuery.trim() === "") {
-      fetchSeekers(); // Üres keresőmező esetén az összes állás lekérése
+      fetchSeekers(); // Üres keresőmező esetén az összes álláskereső lekérése
     } else {
       // Szűrés a keresett kifejezés alapján
       const filteredSeekers = searchedSeekers.filter(seeker =>
-        seeker.nev.toLowerCase().includes(searchQuery.toLowerCase())
+        seeker.szoc_keszseg.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setSearchedSeekers(filteredSeekers);
     }
@@ -68,7 +68,7 @@ export default function Allaskeresok() {
         /> {/* kereső gomb */}
       </div>
       
-      {/* Talált állások megjelenítése */}
+      {/* Talált szociális készségek megjelenítése */}
       {
         user && (isAdmin() || isHeadhunter()) ? (       
         searchedSeekers

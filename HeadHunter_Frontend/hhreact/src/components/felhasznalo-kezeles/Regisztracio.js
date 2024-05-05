@@ -9,7 +9,7 @@ export default function Regisztracio({onClose}) {
         password: "",
         password_confirmation: "",
         nem: "",
-        szul_ido: '2005-01-01',
+        szul_ido: '2005-01-01', //beállított érték, ez jelenik meg egyből
         cim:""
         /* telefonszam: "",
         fax: "",
@@ -22,6 +22,7 @@ export default function Regisztracio({onClose}) {
       const {loginReg, errors} = useAuthContext();
       const [error, setError] = useState(null);
 
+      // egy mező érték változásánál fut le, frissíti a komponens állapotát az új adatokkal
       const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -30,16 +31,17 @@ export default function Regisztracio({onClose}) {
         });
       };
     
+      // beküldési érték eseményét figyeli
       const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Ellenőrizd, hogy a jelszó mezők egyeznek-e
+        // Ellenőrzi, hogy a jelszó mezők egyeznek-e, ha nem akkor hibaüzenetet ír ki
         if (formData.password !== formData.password_confirmation) {
           setError('A jelszavak nem egyeznek meg!');
           return;
         }
 
-        // Ellenőrizd, hogy van-e üres mező
+        // Ellenőrzi, hogy van-e üres mező, ha van, akkor hibaüzenetet ír ki.
         for (const key in formData) {
           if (formData.hasOwnProperty(key) && formData[key] === "") {
             setError('Minden mező kitöltése kötelező!');
