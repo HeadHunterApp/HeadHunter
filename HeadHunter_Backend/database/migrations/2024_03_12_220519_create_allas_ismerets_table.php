@@ -15,7 +15,7 @@ return new class extends Migration
             $table->foreignId('allas')->references('allas_id')->on('allass');
             $table->foreignId('szakmai_ismeret')->references('ismeret_id')->on('szakmai_ismerets');
             $table->primary(['allas','szakmai_ismeret']);
-            $table->string('elvaras_szint', 7);
+            $table->string('elvaras_szint', 15);
         });
     }
 
