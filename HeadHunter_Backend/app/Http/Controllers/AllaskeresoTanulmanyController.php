@@ -126,6 +126,42 @@ class AllaskeresoTanulmanyController extends Controller
         return $tanulmany_datas;
     }
 
+    public function showAllByUser($user_id){
+        $allaskeresoTanulmanyok = DB::table('allaskereso_tanulmanys')
+            ->where('allaskereso', $user_id)
+            ->get();
+
+        if (!$allaskeresoTanulmanyok) {
+            //TODO: 200 nem lesz jó hosszútávon.
+            //return response()->json(['message' => 'Még nem adtad meg, hol végezted a tanulmányaidat'], 404);
+            return response()->json(['message' => 'Még nem adtad meg, hol végezted a tanulmányaidat'], 404);
+        }
+
+        $tanulmany_datas = array();
+        foreach ($allaskeresoTanulmanyok as $tanulmany) {
+            $vegeDatum = $tanulmany->vegzes ? new DateTime($tanulmany->vegzes) : new DateTime();
+            $kezdesDatum = new DateTime($tanulmany->kezdes);
+            $datumKulonbseg = $vegeDatum->diff($kezdesDatum);
+            $datumKulonbsegHonapokban = $datumKulonbseg->y * 12 + $datumKulonbseg->m;
+            $vegzettseg = Vegzettseg::where('vegzettseg_id', $tanulmany->vegzettseg)->first();
+
+            $tanulmany_datas[] = [
+                'idotartam' => $datumKulonbsegHonapokban,
+                'kezdes' => $tanulmany->kezdes,
+                'vegzes'=> $tanulmany->vegzes,
+                'intezmeny' => $tanulmany->intezmeny,
+                'erintett_targytev' => $tanulmany->erintett_targytev,
+                'szak'=>$tanulmany->szak,
+                'vegzettseg'=>[
+                    'id' => $vegzettseg->vegzettseg_id,
+                    'megnevezes' => $vegzettseg->megnevezes
+                ]
+            ] ;
+        }
+
+        return $tanulmany_datas;
+    }
+
     public function store(Request $request){
         $aktan = new AllaskeresoTanulmany();
         $aktan->fill($request->all());
@@ -228,6 +264,8 @@ class AllaskeresoTanulmanyController extends Controller
         $signed = Auth::user()->user_id;
         $intezmeny = $request->query('intezmeny');
         $szak = $request->query('szak');
+        Log::error($request);
+        
         DB::table('allaskereso_tanulmanys')
         ->where('allaskereso', $signed)
         ->where('intezmeny','=', $intezmeny)

@@ -104,6 +104,22 @@ Route::middleware('auth')->group(function () {
     //allaskereso lista:
     Route::get('/seeker/all', [AllaskeresoController::class, 'index']);
 
+    //Allaskereso id alapján
+    Route::get('/seekers/{user_id}', [AllaskeresoController::class, 'showAllByUser'])
+        ->whereNumber('user_id');
+
+    //Allaskereso nyelvtudás id alapján
+    Route::get('/seekers/{user_id}/languages', [AllaskeresoNyelvtudasController::class, 'showAllByUser'])
+        ->whereNumber('user_id');
+
+    //Allaskereso tanulmány id alapján
+    Route::get('/seekers/{user_id}/edu-atts', [AllaskeresoTanulmanyController::class, 'showAllByUser'])
+        ->whereNumber('user_id');
+
+    //Allaskereso tapasztalat id alapján
+    Route::get('/seekers/{user_id}/exps', [AllaskeresoTapasztalatController::class, 'showAllByUser'])
+        ->whereNumber('user_id');
+
     Route::middleware(['admin'])->group(function () {
         //user
         Route::get('/users/all', [UserController::class, 'index']);
@@ -162,7 +178,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/headhunters/{user_id}/fields/delete', [FejvadaszTeruletController::class, 'destroy'])->whereNumber('user_id');
         //allaskereso
         Route::get('/jobseekers/all', [AllaskeresoController::class, 'index']);
-        Route::get('/jobseekers/{user_id}', [AllaskeresoController::class, 'show'])->whereNumber('user_id')->whereNumber('user_id');
+        //Route::get('/jobseekers/{user_id}', [AllaskeresoController::class, 'show'])->whereNumber('user_id')->whereNumber('user_id');
         Route::post('/jobseekers/new', [AllaskeresoController::class, 'store']);
         Route::put('/jobseekers/modification/{user_id}', [AllaskeresoController::class, 'update'])->whereNumber('user_id');
         Route::delete('/jobseekers/delete/{user_id}', [AllaskeresoController::class, 'destroy'])->whereNumber('user_id');

@@ -111,6 +111,42 @@ class AllaskeresoTapasztalatController extends Controller
         return $tapasztalat_datas;
     }
 
+    public function showAllByUser($user_id){
+        $allaskeresoTapasztalatok = AllaskeresoTapasztalat::where('allaskereso', $user_id)
+            ->get();
+
+        if (!$allaskeresoTapasztalatok) {
+            //TODO: 200 nem lesz jó hosszútávon.
+            //return response()->json(['message' => 'Még nem adtad meg, hol végezted a tanulmányaidat'], 404);
+            return response()->json(['message' => 'Még nem adtad meg, hol végezted a tanulmányaidat'], 404);
+        }
+
+        $tapasztalat_datas = array();
+        foreach ($allaskeresoTapasztalatok as $tapasztalat) {
+            $vegeDatum = $tapasztalat->vegzes ? new DateTime($tapasztalat->vegzes) : new DateTime();
+            $kezdesDatum = new DateTime($tapasztalat->kezdes);
+            $datumKulonbseg = $vegeDatum->diff($kezdesDatum);
+            $datumKulonbsegHonapokban = $datumKulonbseg->y * 12 + $datumKulonbseg->m;
+
+            Log::error("--------TAPASZTALAT LOG:");
+            Log::error($tapasztalat);
+            Log::error($tapasztalat->pozicioEntity);
+
+            $tapasztalat_datas[] = [
+                'idotartam' => $datumKulonbsegHonapokban,
+                'kezdes' => $tapasztalat->kezdes,
+                'vegzes'=> $tapasztalat->vegzes,
+                'cegnev' => $tapasztalat->cegnev,
+                'ceg_cim' => $tapasztalat->ceg_cim,
+                'teruletMegnevezes'=> $tapasztalat->pozicioEntity->teruletEntity->megnevezes,
+                'pozkod' => $tapasztalat->pozicio,
+                'pozicio' => $tapasztalat->pozicioEntity->pozicio
+            ] ;
+        }
+
+        return $tapasztalat_datas;
+    }
+
 
     public function store(Request $request){
         $aktap = new AllaskeresoTapasztalat();

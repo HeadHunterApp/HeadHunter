@@ -66,6 +66,11 @@ const OktatasKepzes = ({
         alert("Tanulmany elmenetve");
         setOrigIntezmeny(intezmeny);
         setOrigSzakkepesites(szakkepesites);
+        const vegzesDate = new Date(oktvegzes);
+        const kezdesDate = new Date(oktkezdes);
+        const yearDiff = vegzesDate.getFullYear() - kezdesDate.getFullYear();
+        const monthDiff = vegzesDate.getMonth() - kezdesDate.getMonth();
+        setOktIdotartam(yearDiff * 12 + monthDiff);
       } else {
         alert(`Hiba a Tanulmany mentésekor ${response.data.message}`);
       }
@@ -82,6 +87,10 @@ const OktatasKepzes = ({
         };
       });
     setTanulmany(tanulmanyok);
+
+    console.log(tanulmany);
+    console.log(id);
+    console.log(tanulmanyok);
 
     deleteAllaskerTanulmany(origIntezmeny, origSzakkepesites, config);
   };

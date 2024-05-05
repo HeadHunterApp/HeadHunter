@@ -42,10 +42,10 @@ export default function Allaskeresok() {
       fetchSeekers(); // Üres keresőmező esetén az összes állás lekérése
     } else {
       // Szűrés a keresett kifejezés alapján
-      const filteredJobs = searchedSeekers.filter(job =>
-        job.megnevezes.toLowerCase().includes(searchQuery.toLowerCase())
+      const filteredSeekers = searchedSeekers.filter(seeker =>
+        seeker.nev.toLowerCase().includes(searchQuery.toLowerCase())
       );
-      setSearchedSeekers(filteredJobs);
+      setSearchedSeekers(filteredSeekers);
     }
   };
 

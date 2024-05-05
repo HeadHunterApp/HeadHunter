@@ -1,0 +1,85 @@
+.seeker-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 20px 15px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.seeker-title h2 {
+  margin: 0;
+  text-align: left;
+  padding-bottom: 7px;
+}
+
+.seeker-description p {
+  margin: 0;
+  padding: 7px;
+}
+
+.seeker-status p {
+  margin: 0;
+  font-weight: bold;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.apply-button button {
+  background-color: teal;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 150px;
+  margin: 5px;
+}
+
+.apply-button button:hover {
+  background-color: #00b39b;
+}
+
+.allker-cim {
+  padding-left: 10px;
+  font-weight: bold;
+}
+
+.allker-card {
+  border: 1px solid #055046;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 10px;
+  margin: 10px;
+}
+
+.allker-name {
+  text-align: left;
+  font-weight: bold;
+  border-bottom: 1px solid teal;
+  padding-left: 10px;
+}
+
+.foto {
+  width: 110px;
+  height: 140px;
+  margin-left: 40px;
+  border-radius: 5px;
+  border: solid 1px teal;
+  box-shadow: 5px 5px 5px rgba(6, 143, 167, 0.5);
+} 
+
+.foto-name{
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 1px solid teal;
+    padding-left: 40px; 
+}
+
+
+  
+ 
