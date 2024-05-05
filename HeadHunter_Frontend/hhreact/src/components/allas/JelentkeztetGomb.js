@@ -79,7 +79,7 @@ export default function JelentkeztetGomb(props) {
           <Select
             options={allaskerOptions}
             onChange={(selectedOption) => setSelectedAllasker(selectedOption)}
-            value={selectedOption}
+            value={selectedAllasker} /* Módosítva: itt selectedAllasker selectedOptionrol*/
             placeholder="Válassz egy álláskeresőt..."
           />
           <button type="button" onClick={handleOtherApply}>

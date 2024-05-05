@@ -63,17 +63,24 @@ class MunkaltatoController extends Controller
         return response()->json(['message' => 'Munkáltató sikeresen hozzáadva', 'munkaltatos' => $munkaltato], 201);
     } */
 
+    /* public function update(Request $request, $id){
+        $munkaltato = Munkaltato::findOrFail($id);
+        $munkaltato->cegnev = $request->input('cegnev');
+         $munkaltato->szekhely = $request->input('szekhely');
+         $munkaltato->kapcsolattarto = $request->input('kapcsolattarto');
+         $munkaltato->telefonszam = $request->input('telefonszam');
+         $munkaltato->email = $request->input('email');
+        $munkaltato->fill($request->all());
+        $munkaltato->save();
+        return response()->json(['message' => 'Munkáltató adatai sikeresen frissítve'], 200); 
+    } */
     public function update(Request $request, $id){
         $munkaltato = Munkaltato::findOrFail($id);
-        // $munkaltato->cegnev = $request->input('cegnev');
-        // $munkaltato->szekhely = $request->input('szekhely');
-        // $munkaltato->kapcsolattarto = $request->input('kapcsolattarto');
-        // $munkaltato->telefonszam = $request->input('telefonszam');
-        // $munkaltato->email = $request->input('email');
         $munkaltato->fill($request->all());
         $munkaltato->save();
         return response()->json(['message' => 'Munkáltató adatai sikeresen frissítve'], 200); 
     }
+    
 
     public function destroy($munkaltato_id){
         try {

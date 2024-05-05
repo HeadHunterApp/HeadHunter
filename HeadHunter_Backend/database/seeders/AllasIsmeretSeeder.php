@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\AllasIsmeret;
 
 class AllasIsmeretSeeder extends Seeder
 {
@@ -12,6 +12,21 @@ class AllasIsmeretSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        // Példa adatok hozzáadása
+        AllasIsmeret::create([
+            'allas' => 4,
+            'szakmai_ismeret' => 1,
+            'elvaras_szint' => 'kezdo',
+        ]);
+
+        AllasIsmeret::create([
+            'allas' => 5,
+            'szakmai_ismeret' => 2,
+            'elvaras_szint' => 'kezdo',
+        ]);
+        
+
+        // További adatok hozzáadása szükség szerint
+
     }
 }
