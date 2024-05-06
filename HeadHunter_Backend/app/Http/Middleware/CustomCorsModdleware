@@ -1,0 +1,20 @@
+<?php
+namespace App\Http\Middleware;
+
+use Closure;
+
+class CustomCorsMiddleware
+{
+    public function handle($request, Closure $next)
+    {
+        // Ellenőrizd a beérkező kérés URI-ját
+        if ($request->is('api/munkaltatok/*') || $request->is('api/allasok/*')) {
+            // Ha a kérés a megadott URI-k közé esik, engedélyezd a CORS-t
+            return $next($request)
+                ->header('Access-Control-Allow-Origin', '*');
+        }
+
+        // Ha nem esik a megadott URI-k közé, folytassuk a következő middleware-vel
+        return $next($request);
+    }
+}

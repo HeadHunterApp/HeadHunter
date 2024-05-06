@@ -66,13 +66,16 @@ Route::get('/jobs/{allas_id}/exps', [AllasTapasztalatController::class, 'detaile
 Route::get('/munkaltatok/all', [MunkaltatoController::class, 'index']);
 Route::post('/munkaltatok/munkaltato', [MunkaltatoController::class, 'store']);
 Route::delete('/munkaltatok/{munkaltato_id}', [MunkaltatoController::class, 'destroy'])->whereNumber('munkaltato_id');
-Route::put('/munkaltatok/{munkaltato_id}', [MunkaltatoController::class, 'update'])->whereNumber('munkaltato_id');
+Route::put('/jobs/update/{allas_id}', [AllasController::class, 'update'])->where('allas_id', '[0-9]+');
 //munkaltato tesztek vége
-//allasok teszt rouetok
-Route::get('/jobs/all', [AllasController::class, 'index']);
-Route::post('/jobs/new', [AllasController::class, 'store']);
-Route::put('/jobs/modification/{allas_id}', [AllasController::class, 'update']);
-Route::delete('/jobs/delete/{allas_id}', [AllasController::class, 'destroy']);
+
+   //allasok teszt rouetok
+Route::get('/allasok/all', [AllasController::class, 'index']);
+Route::post('/allasok/new', [AllasController::class, 'store']);
+Route::put('/allasok/update/{allas_id}', [AllasController::class, 'update']);
+Route::delete('/allasok/delete/{allas_id}', [AllasController::class, 'destroy']); 
+// Itt vannak azok a route-ok, amelyekre alkalmazni szeretném a saját CORS middleware-t
+
 
 //allasok tesz rouetok vége
 Route::get('/jobs-basic/{allas_id}/skills', [AllasIsmeretController::class, 'detailedAllasIsm']);
@@ -219,7 +222,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/employers/modification/{munkaltato_id}', [MunkaltatoController::class, 'update'])->whereNumber('munkaltato_id');
         Route::delete('/employers/delete/{munkaltato_id}', [MunkaltatoController::class, 'destroy'])->whereNumber('munkaltato_id');
         //terulet
-        Route::post('/fields/new', [TeruletController::class, 'store]']);
+        Route::post('/fields/new', [TeruletController::class, 'store']);
         Route::put('/fields/modification/{terulet_id}', [TeruletController::class, 'update'])->whereNumber('terulet_id');
         Route::delete('/fields/delete/{terulet_id}', [TeruletController::class, 'destroy'])->whereNumber('terulet_id');
         //pozicio
