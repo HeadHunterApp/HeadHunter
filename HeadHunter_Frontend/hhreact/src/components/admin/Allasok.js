@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "../../api/axios";
 import "../../styles/Tables.css";
 import { getAllasAllRaw, postAllas, putAllas } from "../../contexts/AllasContext";
+import { deleteAllas } from "../../contexts/AllasAdminContext";
 
 const AllasokLista = () => {
   const [allasok, setAllasok] = useState([]);
@@ -61,7 +62,8 @@ const AllasokLista = () => {
 
   const handleDelete = async (allasId) => {
     try {
-      await axios.delete(`http://localhost:8000/api/allasok/delete/${allasId}`);
+      console.log('handleDelete')
+      await deleteAllas(allasId, config);
       setAllasok(allasok.filter((allas) => allas.allas_id !== allasId));
     } catch (error) {
       console.error("Hiba a törlés során:", error);
@@ -80,7 +82,7 @@ const AllasokLista = () => {
   const handleNewAllasSubmit = async (e) => {
     e.preventDefault();
     try {
-      await postAllas(newAllas,config); 
+      await postAllas(newAllas, config); 
       setNewAllas({
         munkaltato: "",
         megnevezes: "",
@@ -90,18 +92,24 @@ const AllasokLista = () => {
         fejvadasz: "",
       });
       setLastClickedButton(null);
-      const response = getAllasAllRaw();
-      setAllasok(response.data);
+      const response = await getAllasAllRaw(); // Vár a válaszra
+      setAllasok(response.data); // Állások beállítása a válasz alapján
     } catch (error) {
       console.error("Hiba az új állás hozzáadásakor:", error);
     }
   };
+  
 
   const handleUpdateAllasSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(config);
-      await putAllas(newAllas,config);
+      // Ellenőrizze, hogy minden kötelező mező kitöltve van-e
+      if (!selectedAllas.munkaltato || !selectedAllas.megnevezes || !selectedAllas.pozicio || !selectedAllas.statusz || !selectedAllas.leiras || !selectedAllas.fejvadasz) {
+        console.error("Minden kötelező mezőt ki kell tölteni.");
+        return;
+      }
+  
+      await putAllas(selectedAllas.allas_id, selectedAllas, config);
       setSelectedAllas(null);
       setLastClickedButton(null);
       const response = await getAllasAllRaw();
@@ -110,6 +118,8 @@ const AllasokLista = () => {
       console.error("Hiba az állás módosításakor:", error);
     }
   };
+  
+  
 
   return (
     <div className="munkaltatok-container">
