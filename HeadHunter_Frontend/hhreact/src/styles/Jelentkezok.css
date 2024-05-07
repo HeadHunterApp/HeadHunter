@@ -1,29 +1,8 @@
-/*.application-container {
-    display: flex;
-    flex-direction: row;
-    row-gap: 0.8em;
-    border: 1px solid #ccc;
-    padding: 2em 1.5em;
-    margin: 2em 4em;
-    background-color: white;
-    border-radius: 1.4em;
-}
 
-.application{
-    display: flex;
-    flex-direction: row;
-    padding: 2em 1.5em;
-}
-
-.app-job, .app-applicant {
-    display: flex;
-    flex-direction: column;
-    padding: 2em 1.5em;
-}*/
 
 .application-container {
     display: flex;
-    flex-direction: column; /* Use flexbox to create a row layout */
+    flex-direction: column;
     margin: 2em 4em;
     row-gap: 0.8em;
 
@@ -41,13 +20,13 @@
   .app-applicant {
     flex: 1;
     padding: 0 10px;
-    display: flex; /* Display as flex to create columns */
+    display: flex;
   }
   
   .app-job > *,
     .app-applicant > * {
-    flex: 1; /* Each child takes equal space */
-    padding: 0 10px; /* Optional: Add padding between columns */
+    flex: 1;
+    padding: 0 10px;
     }
 
   .jobid,
@@ -56,23 +35,21 @@
   .seekerid,
   .seekerdetail,
   .datedetail {
-    margin-bottom: 10px; /* Add margin between each section */
+    margin-bottom: 10px;
   }
   
   .jobid,
   .seekerid {
-    margin-right: 20px; /* Add margin between jobid and seekerid */
+    margin-right: 20px;
   }
   
-  /* Optional: Style headings */
   .jobid h2, .seekerid h2 {
-    margin: 0; /* Remove default margin for headings */
+    margin: 0;
   }
   
-  /* Optional: Style paragraphs */
   .jobdetail p,
   .posdetail p,
   .seekerdetail p,
   .datedetail p {
-    margin: 5px 0; /* Add margin to paragraphs */
+    margin: 5px 0;
   }
