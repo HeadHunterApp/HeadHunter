@@ -1,8 +1,8 @@
 import axios from "../api/axios";
 
 //allaskereso
-export const getAllaskeresoAll = ()=>
-    axios.get(`/api/jobseekers-all`);
+export const getAllaskeresoAll = (config)=>
+    axios.get(`/api/jobseekers-all`, config);
 
 export const getAllAllaskeresoforFejvadaszAdmin = () =>
     axios.get(`/api/seeker/all`);

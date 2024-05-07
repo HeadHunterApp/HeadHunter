@@ -51,6 +51,7 @@ export default function Navigacio() {
               <NavLink link="/hunter/jobs" title="Állások" />
               <NavLink link="/hunter/employers" title="Munkáltatók" />
               <NavLink link="/hunter/jobseekers" title="Álláskeresők" />
+              <NavLink link="/hunter/applicants" title="Jelentkezők" />
               <NavLink link="/hunter/hired" title="Felvett jelentkezők" />
             </>
           )}
@@ -59,6 +60,7 @@ export default function Navigacio() {
               <NavLink link="/admin/jobs" title="Állások" />
               <NavLink link="/admin/employers" title="Munkáltatók" />
               <NavLink link="/admin/jobseekers" title="Álláskeresők" />
+              <NavLink link="/admin/applicants" title="Jelentkezők" />
               <NavLink link="/admin/hired" title="Felvett jelentkezők" />
               <NavLink link="/admin/headhunters" title="Fejvadászok" />
               <NavLegordulo />

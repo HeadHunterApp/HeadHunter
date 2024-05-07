@@ -62,7 +62,6 @@ Route::get('/jobs-basic/{allas_id}/languages', [AllasNyelvtudasController::class
 Route::get('/jobs-basic/{allas_id}/edu-atts', [AllasVegzettsegController::class, 'detailedAllasVegz']);
 Route::get('/jobs-basic/{allas_id}/exps', [AllasTapasztalatController::class, 'detailedAllasTap']);
 
-
 Route::middleware('auth')->group(function () {
     // bejelentkezett felhasználók
     Route::post('/user/profile/image', [UserController::class, 'uploadImage']);
@@ -138,7 +137,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/jobs/{allas_id}/applicants', [AllasJelentkezoController::class, 'detailedAllasJelentkezok'])->whereNumber('allas_id');
         Route::get('/jobs/applicants/{user_id}', [AllasJelentkezoController::class, 'detailedAllaskerJelentkezesek'])->whereNumber('user_id');
         Route::post('/jobs/applicants/new', [AllasJelentkezoController::class, 'store']);
-        Route::put('/jobs/{allas_id}/applicants/modification', [AllasJelentkezoController::class, 'update'])->whereNumber('allas_id');
+        Route::put('/jobs/{allas_id}/applicants/{user_id}/modification', [AllasJelentkezoController::class, 'update'])->whereNumber('allas_id')->whereNumber('user_id');
         //allaskereso
         Route::get('/jobseekers-all', [AllaskeresoController::class, 'index']);
         Route::get('/jobseekers/{user_id}', [AllaskeresoController::class, 'show'])->whereNumber('user_id');

@@ -10,8 +10,8 @@ export default function JelentkeztetGomb(props) {
   const [kivalasztas, setKivalasztas] = useState(false);
   const [allaskerOptions, setAllaskerOptions] = useState([]);
   const [selectedAllasker, setSelectedAllasker] = useState(null);
-  const [allaskereso, setAllaskereso] = useState(null);
 
+  //token lekérés:
   useEffect(() => {
     const fetchData = async () => {
       let token = "";
@@ -35,9 +35,10 @@ export default function JelentkeztetGomb(props) {
     fetchData();
   }, []);
 
+  //ha rákattintott az Álláskereső kiválasztása gombra, csak akkor töltse be az álláskeresők listáját az adatbázisból:
   const handleKivalasztas = () => {
     setKivalasztas(true);
-    getAllaskeresoAll().then((response) => {
+    getAllaskeresoAll(config).then((response) => {
       const osszesAllasker = response.data.map((allasker) => {
         return {
           value: allasker.user_id,
@@ -51,14 +52,15 @@ export default function JelentkeztetGomb(props) {
   const handleOtherApply = async (e) => {
     e.preventDefault();
     try {
-      setAllaskereso(selectedAllasker.value);
+      console.log("allaskereso adatai:");
+      console.log(selectedAllasker);
       console.log("config: ");
       console.log(config);
       console.log("allas_id: ");
       console.log(allas_id);
       console.log("allaskereso user_id: ");
-      console.log(allaskereso);
-      await postAllasJelentkezo(allas_id, allaskereso, config);
+      console.log(selectedAllasker.value);
+      await postAllasJelentkezo(allas_id, selectedAllasker.value, config);
       alert("Sikeres jelentkeztetés!");
     } catch (error) {
       console.error(error);
@@ -75,7 +77,7 @@ export default function JelentkeztetGomb(props) {
         <>
           <Select
             options={allaskerOptions}
-            onChange={(selectedOption) => setSelectedAllasker(selectedOption)}
+            onChange={setSelectedAllasker}
             value={selectedAllasker}
             placeholder="Válassz egy álláskeresőt..."
           />
