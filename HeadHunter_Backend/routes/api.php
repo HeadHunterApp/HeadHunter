@@ -56,22 +56,13 @@ Route::get('/token', function () {
 Route::get('/jobs-basic/all', [AllasController::class, 'shortAllasAll']);
 Route::get('/jobs-basic/{allas_id}', [AllasController::class, 'detailedAllas'])->whereNumber('allas_id');
 //allas-kapcsolódók
-Route::get('/jobs/{allas_id}/skills', [AllasIsmeretController::class, 'detailedAllasIsm']);
-Route::get('/jobs/{allas_id}/languages', [AllasNyelvtudasController::class, 'detailedAllasNyelv']);
-Route::get('/jobs/{allas_id}/edu-atts', [AllasVegzettsegController::class, 'detailedAllasVegz']);
-Route::get('/jobs/{allas_id}/exps', [AllasTapasztalatController::class, 'detailedAllasTap']);
-//munkaltato teszt routeok:
 
-Route::get('/munkaltatok/all', [MunkaltatoController::class, 'index']);
+
+/* Route::get('/munkaltatok/all', [MunkaltatoController::class, 'index']);
 Route::post('/munkaltatok/munkaltato', [MunkaltatoController::class, 'store']);
 Route::delete('/munkaltatok/{munkaltato_id}', [MunkaltatoController::class, 'destroy'])->whereNumber('munkaltato_id');
-Route::put('/munkaltatok/{munkaltato_id}', [MunkaltatoController::class, 'update'])->whereNumber('munkaltato_id');
+Route::put('/munkaltatok/{munkaltato_id}', [MunkaltatoController::class, 'update'])->whereNumber('munkaltato_id'); */
 //munkaltato tesztek vége
-//allasok teszt rouetok
-Route::get('/jobs/all', [AllasController::class, 'index']);
-Route::post('/jobs/new', [AllasController::class, 'store']);
-Route::put('/jobs/modification/{allas_id}', [AllasController::class, 'update']);
-Route::delete('/jobs/delete/{allas_id}', [AllasController::class, 'destroy']);
 
 //allasok tesz rouetok vége
 Route::get('/jobs-basic/{allas_id}/skills', [AllasIsmeretController::class, 'detailedAllasIsm']);
@@ -126,6 +117,12 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware(['admin_or_headhunter'])->group(function () {
         //allas
+
+        //csak az alap táblaadatok megjelenítése, id-k által meghívott adatok nélkül:
+        Route::get('/jobs-all', [AllasController::class, 'index']);
+        Route::get('/jobs/{allas_id}', [AllasController::class, 'show'])->whereNumber('allas_id');
+
+
         Route::post('/jobs/new', [AllasController::class, 'store']);
         Route::put('/jobs/modification/{allas_id}', [AllasController::class, 'update']);
         //allas-ismeret
@@ -171,9 +168,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/users/{user_id}', [UserController::class, 'show'])->whereNumber('user_id');
         Route::delete('/users/delete/{user_id}', [UserController::class, 'destroy'])->whereNumber('user_id');
         //allas
+
+
         //csak az alap táblaadatok megjelenítése, id-k által meghívott adatok nélkül:
         Route::get('/jobs-all', [AllasController::class, 'index']);
         Route::get('/jobs/{allas_id}', [AllasController::class, 'show'])->whereNumber('allas_id');
+
         //törlés:
         Route::delete('/jobs/delete/{allas_id}', [AllasController::class, 'destroy']);
         //allas-ismeret
