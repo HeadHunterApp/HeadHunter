@@ -26,11 +26,11 @@ export const getAllasTapasztalat = (allas_id)=>
 //új és szerkesztés - fejvadász és admin
 
 //allas   
-export const postAllas = (params)=>
-    axios.post(`/api/jobs/new`, params);
+export const postAllas = (params,config)=>
+    axios.post(`/api/jobs/new`, params,config);
 
-export const putAllas = (allas_id, params)=>
-    axios.put(`/api/jobs/modification/${allas_id}`, params);
+export const putAllas = (allas_id, params,config)=>
+    axios.put(`/api/jobs/modification/${allas_id}`, params,config);
 
 //allas-ismeret    
 export const postAllaskerIsmeret = (params)=>
@@ -84,7 +84,7 @@ export const putAllasJelentkezo = (allas_id, params)=>
 //csak az alap táblaadatok megjelenítése, id-k által meghívott adatok nélkül:
 //index
 export const getAllasAllRaw = ()=>
-axios.get('/api/jobs/all');
+axios.get('/api/jobs-all');
 //show
 export const getAllasRaw = (allas_id)=>
 axios.get(`/api/jobs/${allas_id}`);

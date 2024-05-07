@@ -61,6 +61,7 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\IsAdmin::class,
         'jobseeker' => \App\Http\Middleware\IsJobSeeker::class,
         'headhunter' => \App\Http\Middleware\IsHeadhunter::class,
+        'admin_or_headhunter' => \App\Http\Middleware\AdminOrHeadhunter::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
@@ -69,6 +70,5 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'customCors' => \App\Http\Middleware\CustomCorsMiddleware::class,
-        ];
+    ];
 }

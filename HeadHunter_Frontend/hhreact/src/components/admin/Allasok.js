@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../../api/axios";
 import "../../styles/Tables.css";
+import { getAllasAllRaw, postAllas, putAllas } from "../../contexts/AllasContext";
 
 const AllasokLista = () => {
   const [allasok, setAllasok] = useState([]);
@@ -14,11 +15,33 @@ const AllasokLista = () => {
     fejvadasz: "",
   });
   const [lastClickedButton, setLastClickedButton] = useState(null);
-
+  const [config, setConfig] = useState("");
+  useEffect(() => {
+      const fetchData = async () => {
+        let token = "";
+  
+        await axios.get("/api/token").then((response) => {
+          console.log(response);
+          token = response.data;
+        });
+  
+        console.log("------------TOKEN--------------");
+        console.log(token);
+  
+        const config = {
+          headers: {
+            "X-CSRF-TOKEN": token,
+          },
+        };
+        setConfig(config);
+      };
+  
+      fetchData();
+    }, []);
   useEffect(() => {
     const fetchAllasok = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/allasok/all");
+        const response = await getAllasAllRaw();
         const sortedAllasok = response.data.sort((a, b) => a.allas_id - b.allas_id);
         setAllasok(sortedAllasok);
       } catch (error) {
@@ -57,7 +80,7 @@ const AllasokLista = () => {
   const handleNewAllasSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8000/api/allasok/new", newAllas);
+      await postAllas(newAllas,config); 
       setNewAllas({
         munkaltato: "",
         megnevezes: "",
@@ -67,7 +90,7 @@ const AllasokLista = () => {
         fejvadasz: "",
       });
       setLastClickedButton(null);
-      const response = await axios.get("http://localhost:8000/api/allasok/all");
+      const response = getAllasAllRaw();
       setAllasok(response.data);
     } catch (error) {
       console.error("Hiba az új állás hozzáadásakor:", error);
@@ -77,10 +100,11 @@ const AllasokLista = () => {
   const handleUpdateAllasSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:8000/api/allasok/update/${selectedAllas.allas_id}`, selectedAllas);
+      console.log(config);
+      await putAllas(newAllas,config);
       setSelectedAllas(null);
       setLastClickedButton(null);
-      const response = await axios.get("http://localhost:8000/api/allasok/all");
+      const response = await getAllasAllRaw();
       setAllasok(response.data);
     } catch (error) {
       console.error("Hiba az állás módosításakor:", error);
