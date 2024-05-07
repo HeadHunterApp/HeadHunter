@@ -56,10 +56,10 @@ Route::get('/token', function () {
 Route::get('/jobs-basic/all', [AllasController::class, 'shortAllasAll']);
 Route::get('/jobs-basic/{allas_id}', [AllasController::class, 'detailedAllas'])->whereNumber('allas_id');
 //allas-kapcsolódók
-Route::get('/jobs/{allas_id}/skills', [AllasIsmeretController::class, 'detailedAllasIsm']);
-Route::get('/jobs/{allas_id}/languages', [AllasNyelvtudasController::class, 'detailedAllasNyelv']);
-Route::get('/jobs/{allas_id}/edu-atts', [AllasVegzettsegController::class, 'detailedAllasVegz']);
-Route::get('/jobs/{allas_id}/exps', [AllasTapasztalatController::class, 'detailedAllasTap']);
+Route::get('/jobs-basic/{allas_id}/skills', [AllasIsmeretController::class, 'detailedAllasIsm']);
+Route::get('/jobs-basic/{allas_id}/languages', [AllasNyelvtudasController::class, 'detailedAllasNyelv']);
+Route::get('/jobs-basic/{allas_id}/edu-atts', [AllasVegzettsegController::class, 'detailedAllasVegz']);
+Route::get('/jobs-basic/{allas_id}/exps', [AllasTapasztalatController::class, 'detailedAllasTap']);
 //munkaltato teszt routeok:
 
 Route::get('/munkaltatok/all', [MunkaltatoController::class, 'index']);
@@ -67,18 +67,6 @@ Route::post('/munkaltatok/munkaltato', [MunkaltatoController::class, 'store']);
 Route::delete('/munkaltatok/{munkaltato_id}', [MunkaltatoController::class, 'destroy'])->whereNumber('munkaltato_id');
 Route::put('/munkaltatok/{munkaltato_id}', [MunkaltatoController::class, 'update'])->whereNumber('munkaltato_id');
 //munkaltato tesztek vége
-//allasok teszt rouetok
-Route::get('/jobs/all', [AllasController::class, 'index']);
-Route::post('/jobs/new', [AllasController::class, 'store']);
-Route::put('/jobs/modification/{allas_id}', [AllasController::class, 'update']);
-Route::delete('/jobs/delete/{allas_id}', [AllasController::class, 'destroy']);
-
-//allasok tesz rouetok vége
-Route::get('/jobs-basic/{allas_id}/skills', [AllasIsmeretController::class, 'detailedAllasIsm']);
-Route::get('/jobs-basic/{allas_id}/languages', [AllasNyelvtudasController::class, 'detailedAllasNyelv']);
-Route::get('/jobs-basic/{allas_id}/edu-atts', [AllasVegzettsegController::class, 'detailedAllasVegz']);
-Route::get('/jobs-basic/{allas_id}/exps', [AllasTapasztalatController::class, 'detailedAllasTap']);
-
 
 Route::middleware('auth')->group(function () {
     // bejelentkezett felhasználók
@@ -149,7 +137,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/jobs/{allas_id}/applicants', [AllasJelentkezoController::class, 'detailedAllasJelentkezok'])->whereNumber('allas_id');
         Route::get('/jobs/applicants/{user_id}', [AllasJelentkezoController::class, 'detailedAllaskerJelentkezesek'])->whereNumber('user_id');
         Route::post('/jobs/applicants/new', [AllasJelentkezoController::class, 'store']);
-        Route::put('/jobs/{allas_id}/applicants/modification', [AllasJelentkezoController::class, 'update'])->whereNumber('allas_id');
+        Route::put('/jobs/{allas_id}/applicants/{user_id}/modification', [AllasJelentkezoController::class, 'update'])->whereNumber('allas_id')->whereNumber('user_id');
         //allaskereso
         Route::get('/jobseekers-all', [AllaskeresoController::class, 'index']);
         Route::get('/jobseekers/{user_id}', [AllaskeresoController::class, 'show'])->whereNumber('user_id');
