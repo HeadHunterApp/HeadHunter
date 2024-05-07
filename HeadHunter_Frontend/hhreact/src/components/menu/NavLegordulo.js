@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Dropdown from 'react-dropdown';
 
+
 export default function NavLegordulo() {
     const navigate = useNavigate();
 
@@ -14,7 +15,11 @@ export default function NavLegordulo() {
     const menuNev = "Továbbiak ⮟";
 
     const valasztasKezeles = (valasztott) => {
+      if (valasztott.value === "/positions") {
+        navigate(`/admin${valasztott.value}`); // Itt navigálunk a /positions útvonalra
+    } else {
         navigate(valasztott.value);
+    }
     };
 
 
