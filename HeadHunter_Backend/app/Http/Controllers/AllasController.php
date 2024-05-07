@@ -85,11 +85,34 @@ class AllasController extends Controller
     public function detailedAllas($allas_id)
     {
         $query = DB::table('allass as al')
+
             ->join('munkaltatos as m', 'al.munkaltato', '=', 'm.munkaltato_id')
             ->join('pozicios as p', 'al.pozicio', '=', 'p.pozkod')
             ->join('terulets as t', 'p.terulet', '=', 't.terulet_id')
             ->join('users as u', 'al.fejvadasz', '=', 'u.user_id')
             ->select(
+
+            ->join('munkaltatos as m', 'al.munkaltato','=','m.munkaltato_id')
+            ->join('pozicios as p', 'al.pozicio','=','p.pozkod')
+            ->join('terulets as t', 'p.terulet','=','t.terulet_id')
+            ->join('users as u', 'al.fejvadasz','=','u.user_id')
+            ->where('al.allas_id',$allas_id);
+            if (Auth::check() && (Auth::user()->jogosultsag === 'admin' || Auth::user()->jogosultsag === 'fejvadász')) {
+                $query->select(
+                    'al.allas_id',
+                    'm.cegnev',
+                    'al.megnevezes',
+                    't.megnevezes as terulet',
+                    'p.pozicio',
+                    'al.leiras',
+                    'al.statusz',
+                    DB::raw('DATE_FORMAT(al.created_at, "%Y-%m-%d") as datum'),
+                    'al.fejvadasz as fejvadasz_id',
+                    'u.nev as fejvadasz'
+                );
+            } else {
+                $query->select(
+
                 'al.allas_id',
                 'm.cegnev',
                 'al.megnevezes',
@@ -98,6 +121,7 @@ class AllasController extends Controller
                 'al.leiras',
                 'al.statusz',
                 DB::raw('DATE_FORMAT(al.created_at, "%Y-%m-%d") as datum')
+
             )
             ->where('al.allas_id', $allas_id)
             ->first();
@@ -107,6 +131,12 @@ class AllasController extends Controller
         }
 
         return $query;
+
+                );
+            }
+        $result = $query->first();
+        return $result; 
+
     }
 
     public function shortAllasAll()

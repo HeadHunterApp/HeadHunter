@@ -63,7 +63,7 @@ export const putAllasTapasztalat = (allas_id, params)=>
 //allas-jelentkezo
 
 export const getAllasJelentkezoAll = ()=>
-    axios.get(`/api/jobs/applicants/all`);
+    axios.get(`/api/jobs/applicants-all`);
 
 export const getAllasJelentkezok = (allas_id)=>
     axios.get(`/api/jobs/${allas_id}/applicants`);

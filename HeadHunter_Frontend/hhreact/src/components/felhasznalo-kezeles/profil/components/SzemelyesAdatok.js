@@ -19,6 +19,7 @@ const SzemelyesAdatok = ({ id, config, token }) => {
 
   const [imageSrc, setImageSrc] = useState(null);
 
+  // álláskeresőnek betölti a személyes adatait szerkeszthető módban
   useEffect(() => {
     getProfilAllaskereso().then((response) => {
       let adat = response.data;
@@ -44,6 +45,7 @@ const SzemelyesAdatok = ({ id, config, token }) => {
   const onSubmit = (event) => {
     event.preventDefault();
 
+    //elmenti / frissíti az álláskereső adatait
     putProfilAllakereso(
       {
         nev,
@@ -68,6 +70,7 @@ const SzemelyesAdatok = ({ id, config, token }) => {
     });
   };
 
+  //feltölti az álláskereső fényképét, és lementi a szerverre
   const fenykepFeltoltes = async (event) => {
     event.preventDefault();
 

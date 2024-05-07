@@ -46,14 +46,14 @@ axios.delete(`/api/languages/delete/${nyelvkod}`);
 
 //userek
 export const getUser = ()=>
-    axios.post(`/api/users/all`);
+    axios.post(`/api/users-all`);
 
 export const deleteUser = (user_id)=>
     axios.delete(`/api/users/delete/${user_id}`);
 
 //fejvadasz
 export const getFejvadaszAll = ()=>
-    axios.get(`/api/headhunters/all`);
+    axios.get(`/api/headhunters-all`);
     
 export const getFejvadasz = (user_id)=>
     axios.get(`/api/headhunters/${user_id}`);

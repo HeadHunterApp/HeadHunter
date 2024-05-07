@@ -22,4 +22,8 @@ class AdminOrHeadhunter
         //hibaüzenetet küldünk
         return response('Nincs sem fejvadász, sem adminisztrátori hozzáférésed', 401);
     }
+
 }
+
+}
+

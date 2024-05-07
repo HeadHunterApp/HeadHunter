@@ -17,6 +17,7 @@ const Nyelvismeret = ({
   const [beszed, setBeszed] = useState("");
   const [selectedNyelv, setSelectedNyelv] = useState("");
 
+  // betölti az álláskereső nyelvismeretét/nyelvismereteit
   useEffect(() => {
     setOrigNyelvTudas(data.nyelvtudas);
     setNyelvvizsga(data.nyelvvizsga);
@@ -31,6 +32,7 @@ const Nyelvismeret = ({
     setSelectedNyelv(nyelvObject);
   }, []);
 
+  //menti és módosítja az álláskereső nyelvismeretét
   const onSubmit = (event) => {
     event.preventDefault();
 
@@ -47,6 +49,7 @@ const Nyelvismeret = ({
     });
   };
 
+  // törli az álláskereső nyelvismeretét
   const torles = () => {
     const nyelvtud = nyelvTudas
       .filter((item) => item.id !== id)

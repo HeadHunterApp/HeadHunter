@@ -117,9 +117,12 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware(['admin_or_headhunter'])->group(function () {
         //allas
+
         //csak az alap táblaadatok megjelenítése, id-k által meghívott adatok nélkül:
         Route::get('/jobs-all', [AllasController::class, 'index']);
         Route::get('/jobs/{allas_id}', [AllasController::class, 'show'])->whereNumber('allas_id');
+
+
         Route::post('/jobs/new', [AllasController::class, 'store']);
         Route::put('/jobs/modification/{allas_id}', [AllasController::class, 'update']);
         //allas-ismeret
@@ -165,7 +168,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/users/{user_id}', [UserController::class, 'show'])->whereNumber('user_id');
         Route::delete('/users/delete/{user_id}', [UserController::class, 'destroy'])->whereNumber('user_id');
         //allas
-        
+
+
+        //csak az alap táblaadatok megjelenítése, id-k által meghívott adatok nélkül:
+        Route::get('/jobs-all', [AllasController::class, 'index']);
+        Route::get('/jobs/{allas_id}', [AllasController::class, 'show'])->whereNumber('allas_id');
+
         //törlés:
         Route::delete('/jobs/delete/{allas_id}', [AllasController::class, 'destroy']);
         //allas-ismeret
