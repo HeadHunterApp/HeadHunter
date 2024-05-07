@@ -26,11 +26,13 @@ export const getAllasTapasztalat = (allas_id)=>
 //új és szerkesztés - fejvadász és admin
 
 //allas   
+
 export const postAllas = (params, config)=>
     axios.post(`/api/jobs/new`, params, config);
 
 export const putAllas = (allas_id, params, config)=>
     axios.put(`/api/jobs/modification/${allas_id}`, params, config);
+
 
 //allas-ismeret    
 export const postAllaskerIsmeret = (params)=>

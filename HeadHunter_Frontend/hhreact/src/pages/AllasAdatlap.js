@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import AllasAlap from "../components/allas/AllasAlap";
 import JelentkezesGomb from "../components/allas/JelentkezesGomb";
 import VisszaLink from "../components/menu/VisszaLink";

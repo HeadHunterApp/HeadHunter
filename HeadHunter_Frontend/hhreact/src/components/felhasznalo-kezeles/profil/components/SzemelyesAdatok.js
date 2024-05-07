@@ -89,7 +89,7 @@ const SzemelyesAdatok = ({ id, config, token }) => {
       <div>
         <label htmlFor="fenykep">Fénykép:</label>
         <div style={{ display: "flex" }}>
-          {imageSrc && <img className="photo" src={imageSrc} />}
+          {imageSrc && <img className="photo" src={imageSrc} alt=""/>}
           <div>
             <input type="file" id="fenykep" onChange={fenykepFeltoltes} />
           </div>

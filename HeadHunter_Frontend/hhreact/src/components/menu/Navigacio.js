@@ -5,7 +5,7 @@ import useAuthContext from "../../contexts/AuthContext";
 import NavLegordulo from "./NavLegordulo";
 
 export default function Navigacio() {
-  const { user, isAdmin, isHeadhunter  } = useAuthContext();
+  const { user, isAdmin, isHeadhunter } = useAuthContext();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuItemsRef = useRef(null);
 
@@ -40,7 +40,10 @@ export default function Navigacio() {
           <div className="bar"></div>
           <div className="bar"></div>
         </div>
-        <ul className={`menu-items ${isMenuOpen ? "open" : ""}`} ref={menuItemsRef}>
+        <ul
+          className={`menu-items ${isMenuOpen ? "open" : ""}`}
+          ref={menuItemsRef}
+        >
           <NavLink link="/" title="Kezdőlap" />
           <NavLink link="/jobs" title="Álláskeresés" />
           {user && isHeadhunter() && (
