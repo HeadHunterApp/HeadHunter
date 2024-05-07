@@ -1,0 +1,55 @@
+
+
+.application-container {
+    display: flex;
+    flex-direction: column;
+    margin: 2em 4em;
+    row-gap: 0.8em;
+
+  }
+  
+  .application {
+    display: flex;
+    border: 1px solid #ccc;
+    padding: 2em 1.5em;
+    background-color: white;
+    border-radius: 1.4em;
+  }
+  
+  .app-job,
+  .app-applicant {
+    flex: 1;
+    padding: 0 10px;
+    display: flex;
+  }
+  
+  .app-job > *,
+    .app-applicant > * {
+    flex: 1;
+    padding: 0 10px;
+    }
+
+  .jobid,
+  .jobdetail,
+  .posdetail,
+  .seekerid,
+  .seekerdetail,
+  .datedetail {
+    margin-bottom: 10px;
+  }
+  
+  .jobid,
+  .seekerid {
+    margin-right: 20px;
+  }
+  
+  .jobid h2, .seekerid h2 {
+    margin: 0;
+  }
+  
+  .jobdetail p,
+  .posdetail p,
+  .seekerdetail p,
+  .datedetail p {
+    margin: 5px 0;
+  }

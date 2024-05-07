@@ -18,11 +18,14 @@ export const getNyelvtudas = ()=>
 export const getTapasztalat = ()=>
     axios.get(`/api/experiences-all`);
 
-export const getMunkaltato = ()=>
-    axios.get(`/api/employers-all`);
+export const getMunkaltato = (params,config)=>
+    axios.get(`/api/employers-all`,params,config);
 
-export const postMunkaltato = ()=>
-axios.post(`/api/employers/new`);
+export const postMunkaltato = (params,config)=>
+axios.post(`/api/employers/new`,params,config);
 
-export const putMunkaltato = (munkaltato_id, params)=>
-    axios.put(`/api/employers/modification/${munkaltato_id}`, params);
+export const putMunkaltato = (munkaltato_id, params,config)=>
+    axios.put(`/api/employers/modification/${munkaltato_id}`, params,config);
+
+export const deleteMunkaltato = (munkaltato_id,params, config) =>
+    axios.delete(`/api/employers/${munkaltato_id}`,params, config);

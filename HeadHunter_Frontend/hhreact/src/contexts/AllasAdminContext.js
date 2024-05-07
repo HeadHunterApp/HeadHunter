@@ -9,8 +9,8 @@ export const getAllasAdminAll = ()=>
 export const getAllasAdmin = (allas_id)=>
     axios.get(`/api/jobs/${allas_id}`);
 
-export const deleteAllas = (allas_id)=>
-    axios.delete(`/api/jobs/delete/${allas_id}`);
+export const deleteAllas = (allas_id, params)=>
+    axios.delete(`/api/jobs/delete/${allas_id}`, params);
     
 //allas-ismeret
 export const getAllasIsmeretAll = ()=>
