@@ -26,3 +26,6 @@ axios.post(`/api/employers/new`,params,config);
 
 export const putMunkaltato = (munkaltato_id, params,config)=>
     axios.put(`/api/employers/modification/${munkaltato_id}`, params,config);
+
+export const deleteMunkaltato = (munkaltato_id,params, config) =>
+    axios.delete(`/api/employers/${munkaltato_id}`,params, config);

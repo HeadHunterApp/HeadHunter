@@ -91,4 +91,52 @@
     display: block;
     padding: 10px 0;
   }
+
+  /* CSS a Dropdown-hoz */
+  .Dropdown-root {
+    display: block;
+    padding: 10px 0;
+    background-color: teal;
+  }
+  .Dropdown-control {
+    position: relative;
+    overflow: hidden;
+    background-color: teal; /* Módosítva: háttérszín */
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    box-sizing: border-box;
+    cursor: default;
+    outline: none;
+    padding: 8px 52px 8px 10px;
+    transition: all 200ms ease;
+  }
+
+  .Dropdown-menu {
+    background-color: teal !important; /* Módosítva: háttérszín */
+    border: 1px solid #ccc;
+    color: white; /* Hozzáadva: fehér szöveg */
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+    box-sizing: border-box;
+    margin-top: -1px;
+    max-height: 200px;
+    overflow-y: auto;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    z-index: 1000;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .Dropdown-option {
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+
+  .Dropdown-option:hover {
+    background-color: #f0f0f0;
+  }
+}
+
+.teal-bg {
+  background-color: teal;
 }

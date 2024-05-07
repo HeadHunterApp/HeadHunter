@@ -1,32 +1,32 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../api/axios";
 import "../../styles/Tables.css";
-import { getMunkaltato, postMunkaltato, putMunkaltato } from "../../contexts/FotablaContext";
+import {
+  getMunkaltato,
+  postMunkaltato,
+  putMunkaltato,
+  deleteMunkaltato,
+} from "../../contexts/FotablaContext";
 
 const MunkaltatokLista = () => {
   const [config, setConfig] = useState("");
+
   useEffect(() => {
-      const fetchData = async () => {
-        let token = "";
-  
-        await axios.get("/api/token").then((response) => {
-          console.log(response);
-          token = response.data;
-        });
-  
-        console.log("------------TOKEN--------------");
-        console.log(token);
-  
-        const config = {
-          headers: {
-            "X-CSRF-TOKEN": token,
-          },
-        };
-        setConfig(config);
+    const fetchData = async () => {
+      let token = "";
+      await axios.get("/api/token").then((response) => {
+        token = response.data;
+      });
+      const config = {
+        headers: {
+          "X-CSRF-TOKEN": token,
+        },
       };
-  
-      fetchData();
-    }, []);
+      setConfig(config);
+    };
+    fetchData();
+  }, []);
+
   const [munkaltatok, setMunkaltatok] = useState([]);
   const [modositottMunkaltato, setModositottMunkaltato] = useState({
     cegnev: "",
@@ -34,10 +34,31 @@ const MunkaltatokLista = () => {
     kapcsolattarto: "",
     telefonszam: "",
     email: "",
-    munkaltato_id: null, // Hozzáadva: az aktuális munkáltató azonosítójának tárolása
+    munkaltato_id: null,
   });
-  
+
   const [lastClickedButton, setLastClickedButton] = useState(null);
+
+  useEffect(() => {
+    const munkaltatokLekerdezese = async () => {
+      try {
+        const valasz = await getMunkaltato();
+        setMunkaltatok(valasz.data);
+      } catch (error) {
+        console.error("Hiba a munkáltatók lekérdezésekor:", error);
+      }
+    };
+    munkaltatokLekerdezese();
+  }, []);
+
+  const frissitMunkaltatok = async () => {
+    try {
+      const valasz = await getMunkaltato();
+      setMunkaltatok(valasz.data);
+    } catch (error) {
+      console.error("Hiba a munkáltatók frissítésekor:", error);
+    }
+  };
 
   const handleModositottMunkaltatoChange = (esemeny) => {
     const { name, value } = esemeny.target;
@@ -55,56 +76,27 @@ const MunkaltatokLista = () => {
   const handleMunkaltatoModositas = async (esemeny, munkaltatoId) => {
     esemeny.preventDefault();
     try {
-      // Munkáltató módosítása, CSRF tokennal ellátva
-      const valasz = await putMunkaltato(munkaltatoId, modositottMunkaltato,config);
-  
-      // Módosított munkáltató frissítése a helyi állapothoz
-      const ujMunkaltatok = munkaltatok.map((m) =>
-        m.munkaltato_id === munkaltatoId ? valasz.data : m
+      const valasz = await putMunkaltato(
+        munkaltatoId,
+        modositottMunkaltato,
+        config
       );
-      setMunkaltatok(ujMunkaltatok);
-  
-      // Az űrlap mezőinek visszaállítása
-      setModositottMunkaltato({
-        cegnev: "",
-        szekhely: "",
-        kapcsolattarto: "",
-        telefonszam: "",
-        email: "",
-        munkaltato_id: null,
-      });
-      setLastClickedButton(null); // Utolsó gomb visszaállítása null-ra
+      await frissitMunkaltatok();
     } catch (error) {
       console.error("Hiba a munkáltató módosítása során:", error);
     }
-};
+  };
 
-  
-  
-
-  useEffect(() => {
-    const munkaltatokLekerdezese = async () => {
-      try {
-        const valasz = await getMunkaltato();
-        setMunkaltatok(valasz.data);
-      } catch (error) {
-        console.error("Hiba a munkáltatók lekérdezésekor:", error);
-      }
-    };
-
-    munkaltatokLekerdezese();
-  }, []);
-
-  const munkaltatoTorlese = async (munkaltatoId) => {
+  const munkaltatoTorlese = async (munkaltatoId, config) => {
     try {
-      await delete
-      setMunkaltatok(
-        munkaltatok.filter((m) => m.munkaltato_id !== munkaltatoId)
-      );
+      await axios.delete(`/api/employers/delete/${munkaltatoId}`, config);
+      await frissitMunkaltatok(); // Munkáltatók újra lekérése a frontend állapot frissítéséhez
+      // Sikeres törlés esetén a helyi állapot frissítése vagy más teendők
     } catch (error) {
       console.error("Hiba a munkáltató törlésekor:", error);
     }
   };
+  
 
   const adatokFrissitese = (esemeny) => {
     const { name, value } = esemeny.target;
@@ -114,27 +106,12 @@ const MunkaltatokLista = () => {
   const ujMunkaltatoFelvitele = async (esemeny) => {
     esemeny.preventDefault();
     try {
-      // Új munkáltató hozzáadása, CSRF tokennal ellátva
-      const valasz = await postMunkaltato(modositottMunkaltato, config); // Az axiosnak átadjuk a konfigurációt
-  
-      // Új munkáltató hozzáadása a helyi állapothoz
-      setMunkaltatok([...munkaltatok, valasz.data]);
-  
-      // Az űrlap mezőinek visszaállítása
-      setModositottMunkaltato({
-        cegnev: "",
-        szekhely: "",
-        kapcsolattarto: "",
-        telefonszam: "",
-        email: "",
-      });
+      const valasz = await postMunkaltato(modositottMunkaltato, config);
+      await frissitMunkaltatok();
     } catch (error) {
       console.error("Hiba az új munkáltató hozzáadásakor:", error);
     }
   };
-  
-  
-  
 
   const handleButtonClick = (buttonName) => {
     setLastClickedButton(buttonName);
@@ -176,10 +153,13 @@ const MunkaltatokLista = () => {
               <td>
                 <button
                   className="action-button torles-button"
-                  onClick={() => munkaltatoTorlese(munkaltato.munkaltato_id)}
+                  onClick={() =>
+                    munkaltatoTorlese(munkaltato.munkaltato_id, config)
+                  }
                 >
                   Törlés
                 </button>
+
                 <button
                   className="action-button modositas-button"
                   onClick={() => handleMunkaltatoModositasClick(munkaltato)}
@@ -245,10 +225,7 @@ const MunkaltatokLista = () => {
               onChange={handleModositottMunkaltatoChange}
               required
             />
-            <button
-              className="action-button modositas-button"
-              type="submit"
-            >
+            <button className="action-button modositas-button" type="submit">
               Módosítás
             </button>
           </form>
