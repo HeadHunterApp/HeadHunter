@@ -17,7 +17,9 @@ import MunkaltatokLista from "./components/admin/MunkaltatokLista";
 import Allaskeresok from "./components/felhasznalo-kezeles/profil/components/Allaskeresok";
 import AllaskeresoAdatlap from "./components/felhasznalo-kezeles/profil/AllaskeresoAdatlap";
 import Allasok from "./components/admin/Allasok";
+import Poziciok from "./components/admin/Poziciok";
 import Jelentkezok from "./pages/Jelentkezok";
+
 
 
 export default function App() {
@@ -70,7 +72,9 @@ export default function App() {
               <Route path="employers" element={<MunkaltatokLista />} />
               <Route path="jobseekers" element={<Allaskeresok />} />
               <Route path="jobs" element={<Allasok />} />
+              <Route path="positions" element={<Poziciok />} />
               <Route path="applicants" element={<Jelentkezok />} />
+
               {/* Jövőbeli route-ok:*/
               /* 
               <Route path="hired" element={<FelvettJelentkezok />} />
